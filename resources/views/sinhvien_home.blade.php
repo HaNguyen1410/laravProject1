@@ -80,9 +80,9 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?cn=dknl">Đăng ký</a></li>
+                                    <li><a href="{{asset('sinhvien/dangkydt/1111317')}}">Đăng ký</a></li>
                                     <li class="divider"></li>                                
-                                    <li><a href="?cn=kqdangky">Kết quả đăng ký</a></li>                              
+                                    <li><a href="">Kết quả đăng ký</a></li>                              
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -93,13 +93,13 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{asset('sinhvien/danhsachcv/1111317')}}">Danh sách các nhiệm vụ</a></li>
                                     <li class="divider"></li>                                
-                                    <li><a href="?cn=phancongcv">Phân công việc</a></li>
+                                    <li><a href="{{asset('sinhvien/phancv/1111317')}}">Phân công việc</a></li>
                                     <li class="divider"></li>                             
-                                    <li><a href="?cn=noptl">Nộp tài liệu</a></li>                               
+                                    <li><a href="">Nộp tài liệu</a></li>                               
                                 </ul>
                             </li>                        
                             <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
-                            <li><a href="?cn=diendan">Thảo luận</a></li>                          
+                            <li><a href="">Thảo luận</a></li>                          
                             <li class="dropdown active">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Họ và tên sinh viên (mssv)

@@ -30,8 +30,6 @@
                         </select>
                     </th>
                     <th width="10%">Giao cho</th>
-                    <th width="8%">Bắt đầu <br> (kế hoạch)</th>
-                    <th width="8%">Kết thúc <br> (kế hoạch)</th>
                     <th width="8%">Bắt đầu <br> (thực tế)</th>
                     <th width="8%">Kết thúc <br> (thực tế)</th>
                     <th width="7%">Số giờ <br> (thực tế)</th>
@@ -41,15 +39,23 @@
                 @foreach($dscv as $stt => $cv)
                     <tr>
                         <td>{{$cv->macv}}</td>
-                        <td>{{$cv->congviec}}</td>
+                        <td>
+                            <a href="?cn=kehoach" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
+                                {{$cv->congviec}}
+                            </a>
+                        </td>
                         <td>{{$cv->trangthai}}</td>
                         <td>{{$cv->giaocho}}</td>
-                        <td>{{$cv->ngaybatdau_kehoach}}</td>
-                        <td>{{$cv->ngayketthuc_kehoach}}</td>
                         <td>{{$cv->ngaybatdau_thucte}}</td>
                         <td>{{$cv->ngayketthuc_thucte}}</td>
                         <td>{{$cv->sogio_thucte}}</td>
-                        <td>{{$cv->tiendo}}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                </div>
+                            </div> 
+                        </td>
                         <td>{{$cv->noidungthuchien}}</td>
                     </tr>
                 @endforeach

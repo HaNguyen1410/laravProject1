@@ -14,7 +14,10 @@ use View,
     Mail,
     Session;
 
-class CongviecController extends Controller
+class DetaiController extends Controller
 {
-    
+    public function DsDeTai($macb){
+        
+        return view('giangvien.danh-sach-de-tai');
+    }
 }

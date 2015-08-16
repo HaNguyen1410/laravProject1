@@ -17,12 +17,16 @@ Route::get('/', function () {
 Route::get('/dangnhap', function(){
     return view('giaodienchung.dang-nhap');    
 });
-/*=========================== Trang quản trị ===========================================*/
+/*
+ * =========================== Trang quản trị ===========================================
+ */
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
 
-/*######## Giảng Viên ##################*/
+/*
+ * ######## Giảng Viên ##################
+ */
 Route::get('quantri/danhsachgv','QuantriController@DanhSachGV');
 Route::get('quantri/danhsachgv/themgv','QuantriController@ThemGV');
 /*======= Thêm giảng viên mới==========*/
@@ -32,7 +36,9 @@ Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
 Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
 Route::get('quantri/danhsachgv/xoagv/{macb}','QuantriController@XoaGV');
 
-/*######## Sinh Viên ##################*/
+/*
+ * ######## Sinh Viên ##################
+ */
 Route::get('quantri/danhsachsv','QuantriController@DanhSachSV');
 Route::get('quantri/danhsachsv/themsv','QuantriController@ThemSV');
 /*======= Trang thêm sinh viên mới==========*/
@@ -42,7 +48,9 @@ Route::get('quantri/danhsachsv/capnhatsv/{masv}','QuantriController@CapNhatSV');
 Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
 Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
 
-/*=========================== Trang giảng viên ===========================================*/
+/*
+ * =========================== Trang giảng viên ===========================================
+ */
 Route::get('vidu','GiangvienController@ViDu');
 /*======= Hiển thị trang thông tin giảng viên ==========*/
 Route::get('thongtingv','GiangvienController@ThongTin_gv');
@@ -50,8 +58,15 @@ Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang đổi mật khẩu giảng viên ==========*/
 Route::get('giangvien/doimatkhaugv/{masv}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
+/*======= Quản lý đề tài ==========*/
+Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
+/*  * Thêm đề tài mới */
 
-/*=========================== Trang sinh viên ===========================================*/
+/*  * Cập nhật đề tài */
+
+/*
+ * =========================== Trang sinh viên ===========================================
+ */
 /*======= Hiển thị trang thông tin sinh viên ==========*/
 Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
 Route::post('sinhvien/capnhatthongtin','SinhvienController@CapNhatThongTin');
@@ -64,3 +79,12 @@ Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 Route::get('sinhvien/danhsachcv/{mssv}','SinhvienController@DanhSachCV');
 /*======= Xem điểm ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
+/*======= Đăng ký đề tài niên luận ==========*/
+Route::get('sinhvien/dangkydt/{mssv}','DangkydtController@DangKyDT');
+
+/*======= Phân công nhiệm vụ ==========*/
+/*  * Công việc chính  */
+Route::get('sinhvien/phancv/{mssv}','PhancvController@DSPhanCV');
+
+/*   * Công việc chi tiết   */
+Route::get('sinhvien/phancongchitiet/{mssv}/{macv}','PhancvController@DSPhanChiTiet');

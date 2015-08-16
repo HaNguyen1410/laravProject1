@@ -30,19 +30,23 @@
                             <th width="5%">Trạng thái</th>
                             <th width="8%">Tiến độ</th>
                         </tr>                            
-                            @foreach($dscv as $cv)
+                            @foreach($dscv as $stt => $cv)
                                 <tr>
-                                    <td></td>
+                                    <td align="center">{{$stt + 1}}</td>
                                     <td>{{$cv->congviec}}</td>
                                     <td>{{$cv->giaocho}}</td>
-                                    <td>{{$cv->ngaybatdau_kehoach}}</td>
-                                    <td>{{$cv->ngayketthuc_kehoach}}</td>
-                                    <td>{{$cv->sogio_thucte}}</td>
-                                    <td>{{$cv->phuthuoc_cv}}</td>
-                                    <td>{{$cv->uutien}}</td>
-                                    <td>{{$cv->trangthai}}</td>
+                                    <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
+                                    <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
+                                    <td align="center">{{$cv->sogio_thucte}}</td>
+                                    <td align="center">{{$cv->phuthuoc_cv}}</td>
+                                    <td align="center">{{$cv->uutien}}</td>
+                                    <td align="center">{{$cv->trangthai}}</td>
                                     <td>
-                                        {{$cv->tiendo}}%  
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                                <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                            </div>
+                                        </div>                                          
                                     </td>
                                 </tr>
                             @endforeach
