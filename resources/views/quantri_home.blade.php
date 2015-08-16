@@ -57,9 +57,9 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('quantri/thongtinqt/2134')}}">Thông tin giảng viên</a></li>
+                                    <li><a href="{{asset('quantri/thongtinqt/9876')}}">Thông tin giảng viên</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('quantri/doimatkhauqt/2134')}}">Đổi mật khẩu</a></li>
+                                    <li><a href="{{asset('quantri/doimatkhauqt/9876')}}">Đổi mật khẩu</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{asset('dangnhap')}}">Đăng xuất</a></li> 
                                 </ul>

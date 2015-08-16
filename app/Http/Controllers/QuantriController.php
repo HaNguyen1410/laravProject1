@@ -16,24 +16,28 @@ class QuantriController extends Controller
 /*=========================== Thông tin quản trị viên ==============================================*/ 
     public function ThongTinQT($macb){
         $giangvien = Giangvien::find($macb);
-        
-        return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien);
+        $tennhomhp = DB::table('giang_vien as gv')
+                ->join('de_tai as dt','gv.macb','=','dt.macb')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->join('nhom_hocphan as hp','radt.manhomhp','=','hp.manhomhp')
+                ->value('tennhomhp');
+        return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien)->with('hp',$tennhomhp);
     }
+ /*=========================== Đổi mật khẩu ==============================================*/   
     public function DoiMatKhauQT($macb){
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('quantri.doi-mat-khau-qt')->with('gv', $row);
     } 
-    public function LuuDoiMatKhauQT(Request $req){
+    public function LuuDoiMatKhauQT(Request $req){        
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'txtMaCB'     => 'required',
-                    'txtHoTen'    => 'required',
-                    'rdGioiTinh'  => 'required',
-                    'rdGioiTinh'  => 'required',
-                    'txtEmail'    => 'required',
-                    'txtMatKhau1' => 'required',
-                    'txtMatKhau2' => 'required'
+//                    'txtMaCB'      => 'required',
+//                    'txtHoTen'     => 'required',
+//                    'txtEmail'     => 'required',
+                    'txtMatKhauCu' => 'required',
+                    'txtMatKhauMoi1'  => 'required',
+                    'txtMatKhauMoi2'  => 'required'
                 ]
              );
         if($v->fails()){
@@ -41,18 +45,15 @@ class QuantriController extends Controller
         }
         else
         {
+            $hinhdaidien = DB::table('giang_vien')->where('macb','$post([txaCB])')->value('hinhdaidien');
+            
             $data = array(
-                    'macb'     => $_POST['txtMaCB'],
-                    'hoten'    => $_POST['txtHoTen'],
-                    'gioitinh'  => $_POST['rdGioiTinh'],
-                    'ngaysinh' => $_POST['txtNgaySinh'],
-                    'email'    => $_POST['txtEmail'],
-                    'sdt'      => $_POST['txtSDT'],
-                    'matkhau' => $_POST['txtMatKhau1']
+                    'hinhdaidien'   => ($_POST['fHinh'] != "") ? $_POST['fHinh'] : $hinhdaidien,
+                    'matkhau'       => $_POST['txtMatKhau1']
             );
-            $ch = DB::table('giang_vien')->insert($data);
+            $ch = DB::table('giang_vien')->where('macb',$post(['txtMaCB']))->update($data);
             if($ch > 0){
-                //return redirect('quantri/thongtinqt/{macb}');
+                return redirect('quantri/thongtinqt/9876');
             }
         }
     }
@@ -141,7 +142,16 @@ class QuantriController extends Controller
             }
         }
     }
-
+/*=========================== Xóa thông tin Giảng viên ==============================================*/ 
+    public function XoaGV($macb){
+        $delete = DB::table('giang_vien')->where('macb',$macb)->delete();
+        $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
+        \Session::flash('ThongBao','Xóa '.$tencb.' thành công!');
+        if($delete){
+            //return $delete; $delete = 1 sau khi thuc hiện xóa
+            return redirect('quantri/danhsachgv');
+        }
+    }
 
     /*########## Quản trị Sinh Viên #############*/
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
@@ -174,7 +184,7 @@ class QuantriController extends Controller
         else
         {
             $data = array(
-                    'mssv'     => $_POST['txtMaCB'],
+                    'mssv'     => $_POST['txtMaSV'],
                     'hoten'    => $_POST['txtHoTen'],
                     'gioitinh'  => $_POST['rdGioiTinh'],
                     'ngaysinh' => $_POST['txtNgaySinh'],
@@ -228,6 +238,16 @@ class QuantriController extends Controller
             if($ch > 0){
                 return redirect('quantri/danhsachsv');
             }
+        }
+    }
+/*=========================== Xóa thông tin Giảng viên ==============================================*/ 
+    public function XoaSV($masv){
+        $delete = DB::table('sinh_vien')->where('mssv',$masv)->delete();
+        $tensv = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
+        \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
+        if($delete){
+            //return $delete; $delete = 1 sau khi thuc hiện xóa
+            return redirect('quantri/danhsachsv');
         }
     }
     

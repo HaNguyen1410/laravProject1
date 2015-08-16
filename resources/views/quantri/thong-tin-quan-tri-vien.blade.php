@@ -50,16 +50,16 @@
                         </tr>
                         <tr>
                             <td><label>Hướng dẫn nhóm học phần:</label></td>
-                            <td style="color:blue;"></td>
+                            <td style="color:blue;">{{$hp}}</td>
                         </tr>
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
-                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
+                    <table class="table table-bordered" width="500px" >
                         <tr>
                             <td align="center">
                                 @if($gv->hinhdaidien != "")
-                                    <img width='200px' src="../../hinhdaidien/{{$gv->hinhdaidien}}">
+                                    <img width='100px' src="../../hinhdaidien/{{$gv->hinhdaidien}}">
                                 @else
                                     <img src="{{asset('images/User-image.png')}}"/>
                                 @endif

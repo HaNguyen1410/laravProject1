@@ -24,17 +24,19 @@ Route::post('luudmkqt','QuantriController@LuuDoiMatKhauQT');
 
 /*######## Giảng Viên ##################*/
 Route::get('quantri/danhsachgv','QuantriController@DanhSachGV');
-Route::get('quantri/themgv','QuantriController@ThemGV');
+Route::get('quantri/danhsachgv/themgv','QuantriController@ThemGV');
 Route::post('luuthemgv','QuantriController@LuuThemGV');
-Route::get('quantri/capnhatgv/{id}','QuantriController@CapNhatGV');
+Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
 Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
+Route::get('quantri/danhsachgv/xoagv/{macb}','QuantriController@XoaGV');
 
 /*######## Sinh Viên ##################*/
 Route::get('quantri/danhsachsv','QuantriController@DanhSachSV');
-Route::get('quantri/themsv','QuantriController@ThemSV');
+Route::get('quantri/danhsachsv/themsv','QuantriController@ThemSV');
 Route::post('luuthemsv','QuantriController@LuuThemSV');
-Route::get('quantri/capnhatsv/{masv}','QuantriController@CapNhatSV');
+Route::get('quantri/danhsachsv/capnhatsv/{masv}','QuantriController@CapNhatSV');
 Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
+Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
 
 /*=========================== Trang giảng viên ===========================================*/
 Route::get('vidu','GiangvienController@ViDu');

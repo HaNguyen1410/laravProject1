@@ -43,7 +43,7 @@
                     <tr>
                         <td>Giới tính:</td>
                         <td>
-                            Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> ;&nbsp;
+                            Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> &nbsp &nbsp &nbsp
                             Nữ: <input type="radio" size="2" value="Nữ" name="rdGioiTinh"/> 
                             <p style='color:red;'>{{$errors->first('rdGioiTinh')}}</p>
                         </td>
@@ -72,14 +72,14 @@
                     <tr>
                         <td>Mật khẩu:</td>
                         <td>
-                            <input type="text" value="" name="txtMatKhau1" class="form-control">
+                            <input type="password" value="" name="txtMatKhau1" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu:</td>
                         <td>
-                            <input type="text" value="" name="txtMatKhau2" class="form-control">
+                            <input type="password" value="" name="txtMatKhau2" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau2')}}</p>
                         </td>
                     </tr>

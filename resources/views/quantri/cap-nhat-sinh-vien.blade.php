@@ -89,21 +89,21 @@
                     <tr>
                         <td>Mật khẩu hiện tại:</td>
                         <td colspan="2">
-                            <input type="text" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
+                            <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Mật khẩu mới:</td>
                         <td colspan="2">
-                            <input type="text" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
+                            <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu mới:</td>
                         <td colspan="2">
-                            <input type="text" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control">
+                            <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
                     </tr>

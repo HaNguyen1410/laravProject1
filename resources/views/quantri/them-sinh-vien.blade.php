@@ -18,14 +18,14 @@
                 <div align="center"><input type="file" name="fDanhSach" id="fDanhSach" /></div><br>
                 <div align="center">
                     <button  type="submit" class="btn btn-info">
-                        <img src="images/excel-icon.png"> Thêm
+                        <img src="{{asset('images/excel-icon.png')}}"> Thêm
                     </button>
                 </div>
             </form>                                    
         </div>
         <div class="col-md-8">
             <h3 style="color: darkblue; font-weight: bold;">THÊM SINH VIÊN</h3>
-            <form action="{{action('QuantriController@LuuSV')}}" method="post" name="frmThemSV" class="form-horizontal">
+            <form action="{{action('QuantriController@LuuThemSV')}}" method="post" name="frmThemSV" class="form-horizontal">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
@@ -45,7 +45,7 @@
                     <tr>
                         <td>Giới tính:</td>
                         <td>
-                            Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> ;&nbsp;
+                            Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> ;&nbsp;&nbsp;&nbsp
                             Nữ: <input type="radio" size="2" value="Nữ" name="rdGioiTinh"/> 
                             <p style='color:red;'>{{$errors->first('rdGioiTinh')}}</p>
                         </td>
@@ -74,14 +74,14 @@
                     <tr>
                         <td>Mật khẩu:</td>
                         <td>
-                            <input type="text" value="" name="txtMatKhau1" class="form-control">
+                            <input type="password" value="" name="txtMatKhau1" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu:</td>
                         <td>
-                            <input type="text" value="" name="txtMatKhau2" class="form-control">
+                            <input type="password" value="" name="txtMatKhau2" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau2')}}</p>
                         </td>
                     </tr>
@@ -89,10 +89,10 @@
                         <td></td>
                         <td>
                             <button  type="submit" name="btnThem" class="btn btn-primary" style="width:30%;">
-                                <img src="images/save-as-icon.png"> Thêm
+                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('danhsachsv')}}" class="btn btn-warning" style="width:30%;">
-                                <img src="images/delete-icon.png"> Hủy bỏ
+                            <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
+                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>
