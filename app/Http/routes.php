@@ -28,24 +28,26 @@ Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
  * ######## Giảng Viên ##################
  */
 Route::get('quantri/danhsachgv','QuantriController@DanhSachGV');
-Route::get('quantri/danhsachgv/themgv','QuantriController@ThemGV');
 /*======= Thêm giảng viên mới==========*/
+Route::get('quantri/danhsachgv/themgv','QuantriController@ThemGV');
 Route::post('luuthemgv','QuantriController@LuuThemGV');
-Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
 /*======= Cập nhật thông tin giảng viên ==========*/
+Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
 Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
+/*======= Xóa thông tin Giảng viên ==========*/
 Route::get('quantri/danhsachgv/xoagv/{macb}','QuantriController@XoaGV');
 
 /*
  * ######## Sinh Viên ##################
  */
 Route::get('quantri/danhsachsv','QuantriController@DanhSachSV');
-Route::get('quantri/danhsachsv/themsv','QuantriController@ThemSV');
 /*======= Trang thêm sinh viên mới==========*/
+Route::get('quantri/danhsachsv/themsv','QuantriController@ThemSV');
 Route::post('luuthemsv','QuantriController@LuuThemSV');
-Route::get('quantri/danhsachsv/capnhatsv/{masv}','QuantriController@CapNhatSV');
 /*======= Cập nhật thông tin sinh viên ==========*/
+Route::get('quantri/danhsachsv/capnhatsv/{masv}','QuantriController@CapNhatSV');
 Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
+/*======= Xóa thông tin sinh viên ==========*/
 Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
 
 /*
@@ -60,9 +62,21 @@ Route::get('giangvien/doimatkhaugv/{masv}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
 /*======= Quản lý đề tài ==========*/
 Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
-/*  * Thêm đề tài mới */
-
-/*  * Cập nhật đề tài */
+Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');
+          /*  * Thêm đề tài mới */
+Route::get('giangvien/danhsachdetai/{macb}/themdetai','DetaiController@ThemDeTai');
+Route::post('luuthemdt','DetaiController@LuuThemDeTai');
+         /*  * Cập nhật đề tài */
+Route::get('giangvien/danhsachdetai/{macb}/capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
+//Route::post('luuthemdt','DetaiController@LuuCapNhatDeTai');
+/*======= Quy định tiêu chí chấm điểm ==========*/
+route::get('giangvien/dstieuchi/{macb}','QdtieuchiController@DSTieuChi');
+        /*  * Thêm tiêu chí đánh giá  */
+route::get('giangvien/dstieuchi/{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
+route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
+        /*  * Cập nhật tiêu chí đánh giá  */
+route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
+route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
 
 /*
  * =========================== Trang sinh viên ===========================================
@@ -83,8 +97,8 @@ Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
 Route::get('sinhvien/dangkydt/{mssv}','DangkydtController@DangKyDT');
 
 /*======= Phân công nhiệm vụ ==========*/
-/*  * Công việc chính  */
+      /*  * Công việc chính  */
 Route::get('sinhvien/phancv/{mssv}','PhancvController@DSPhanCV');
 
-/*   * Công việc chi tiết   */
+     /*   * Công việc chi tiết   */
 Route::get('sinhvien/phancongchitiet/{mssv}/{macv}','PhancvController@DSPhanChiTiet');

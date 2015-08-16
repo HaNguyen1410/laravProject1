@@ -55,27 +55,27 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?cn=dsdt">Danh sách đề tài</a></li>
+                                    <li><a href="{{asset('giangvien/danhsachdetai/2134')}}">Danh sách đề tài</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="?cn=dsdangkydetai">Danh sách đăng ký đề tài</a></li>
+                                    <li><a href="">Danh sách đăng ký đề tài</a></li>
                                 </ul>
                             </li>
-                            <li><a href="?cn=khotl">Kho tài liệu</a></li>
+                            <li><a href="">Kho tài liệu</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Chấm điểm
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?cn=dstc">Tiêu chí</a></li>
+                                    <li><a href="{{asset('giangvien/dstieuchi/2134')}}">Tiêu chí</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="?cn=nhapdiem">Nhập điểm</a></li>
+                                    <li><a href="">Nhập điểm</a></li>
 
                                 </ul>
                             </li>
-                            <li><a href="?cn=qldiendan">Thảo luận</a></li>                                     
+                            <li><a href="">Thảo luận</a></li>                                     
                             <li class="dropdown">
-                                <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                    Họ và tên (macb)
                                     <span class="caret"></span>
                                 </a>

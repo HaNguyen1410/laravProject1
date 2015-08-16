@@ -50,7 +50,9 @@
                         </td>
                         <td align='center'>
                             <a href="danhsachsv/capnhatsv/{{$rw->mssv}}"><img src="{{asset('images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
-                            <a href='danhsachsv/xoasv/{{$rw->mssv}}'><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
+                            <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
+                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                            </a>
                         </td>
                     </tr>   
                 @endforeach

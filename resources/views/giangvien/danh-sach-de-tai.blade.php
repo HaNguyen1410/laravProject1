@@ -25,7 +25,11 @@
                         <td align="right">Giảng viên:</td>
                         <td colspan="5" style="color: darkblue; font-weight: bold;"></td>
                     </tr>
-                    <tr>                             
+                    <tr>  
+                        <td align="right">Năm học:</td>
+                        <td width="14%"></td>
+                        <td align="right">Học kỳ:</td>
+                        <td width="10%"></td>
                         <td align="right">Nhóm học phần:</td>
                         <td>
                             <select class="form-control">
@@ -44,28 +48,52 @@
                             </select>
                         </td>
                         <td>
-                            <a href="?cn=themdt">
+                            <a href="2134/themdetai">
                                 <button type="button" name="" class="btn btn-primary">
-                                <img src="images/add-icon.png">Thêm đề tài
+                                <img src="{{asset('images/add-icon.png')}}">Thêm đề tài
                             </button></a>
                         </td>
                     </tr>
                 </table> 
             </div> <!-- /bg-success -->
-
-            <table class="table table-bordered table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
+            
+            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+            <table class="table table-bordered table-hover" width="800px">
                 <tr>
                     <th width="2%">STT</th>
                     <th width="20%">Tên đề tài</th>
                     <th width="15%">Mô tả đề tài</th>
                     <th width="15%">Công nghệ</th>
-                    <th width="5%">Tối đa</th>
+                    <th width="4%">Tối đa</th>
                     <th width="15%">Lưu ý</th>
                     <th width="8%">Phân loại</th>
+                    <th width="10%">Trạng thái</th>
                     <th width="4%">Duyệt</th>
                     <th width="8%">Thao tác</th>
                 </tr>
-              
+                @foreach($dsdt as $stt => $dt)
+                    <tr>
+                        <td align='center'>{{$stt+1}}</td>
+                        <td width='20%'>{{$dt->tendt}}</td>
+                        <td>{{$dt->motadt}}</td>
+                        <td>{{$dt->congnghe}}</td>
+                        <td align='center'>{{$dt->songuoitoida}}</td>
+                        <td>{{$dt->ghichudt}}</td>
+                        <td align='center'>{{$dt->phanloai}}</td>
+                        <td align='center'>{{$dt->trangthai}}</td>
+                        <td align='center'>  
+<!--                            <a href=''><img src="{{asset('images/uncheck.png')}}"/></a>
+                            <a href=''><img src="{{asset('images/check.png')}}"/></a>-->
+                            {{$dt->duyet}}
+                        </td>
+                        <td align='center'>
+                            <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
+                            <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
+                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
             </table>
         </div>
     </div><!-- /row -->
