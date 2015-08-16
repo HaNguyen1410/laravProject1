@@ -66,6 +66,7 @@
                         <td>Số điện thoại:</td>
                         <td>
                             <input type="text" value="" name="txtSDT" class="form-control"> 
+                            <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                         </td>
                     </tr>
                     <tr></tr> 

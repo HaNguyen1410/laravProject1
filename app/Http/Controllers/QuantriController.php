@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Giangvien;
 use DB;
+use Input;
 
 class QuantriController extends Controller
 {
@@ -72,12 +73,13 @@ class QuantriController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtMaCB'     => 'required',
-                    'txtHoTen'    => 'required',
+                    'txtHoTen'    => 'required|max:255',
                     'rdGioiTinh'  => 'required',
                     'rdGioiTinh'  => 'required',
-                    'txtEmail'    => 'required',
-                    'txtMatKhau1' => 'required',
-                    'txtMatKhau2' => 'required'
+                    'txtEmail'    => 'required|email|max:255',
+                    'txtSDT'      => 'required|numeric|min:10',
+                    'txtMatKhau1' => 'required|min:6',
+                    'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'
                 ]
              );
         if($v->fails()){
@@ -92,7 +94,7 @@ class QuantriController extends Controller
                     'ngaysinh' => $_POST['txtNgaySinh'],
                     'email'    => $_POST['txtEmail'],
                     'sdt'      => $_POST['txtSDT'],
-                    'matkhau' => $_POST['txtMatKhau1']
+                    'matkhau' => md5($_POST['txtMatKhau1'])
             );
             $ch = DB::table('giang_vien')->insert($data);
             if($ch > 0){
@@ -107,17 +109,18 @@ class QuantriController extends Controller
     } 
     
     public function LuuCapNhatGV(Request $req){
-        $post = $req->all();
+        $post = $req->all();       
         $v = \Validator::make($req->all(),
                 [
-                    'txtMaCB'     => 'required',
-                    'txtHoTen'    => 'required',
-                    'txtNgaySinh' => 'required',
-                    'txtEmail'    => 'required',
-                    'txtSDT'      => 'required',
-                    'txtMatKhauCu' => 'required',
-                    'txtMatKhauMoi1' => 'required',
-                    'txtMatKhauMoi2' => 'required'
+                    'txtMaCB'           => 'required',
+                    'txtHoTen'          => 'required',
+                    'txtNgaySinh'       => 'required',
+                    'txtEmail'          => 'required|email',
+                    'txtSDT'            => 'required|numeric|min:10',
+                    //md5('txtMatKhauCu') => 'required|confirmed',
+                    'txtMatKhauCu'      => 'required',
+                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
+                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1'
                 ]
              );
         if($v->fails()){
@@ -132,7 +135,7 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'sdt'       => $_POST['txtSDT'],
-                    'matkhau'   => $_POST['txtMatKhauMoi1'],
+                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1 ,
                     'quantri'   => isset($_POST['ckbQuanTri']) ? 1 : 0
             );
@@ -172,10 +175,10 @@ class QuantriController extends Controller
                     'txtHoTen'    => 'required',
                     'rdGioiTinh'  => 'required',
                     'txtNgaySinh' => 'required',
-                    'txtEmail'    => 'required',
+                    'txtEmail'    => 'required|email',
                     'txtKhoaHoc'  => 'required',
-                    'txtMatKhau1' => 'required',
-                    'txtMatKhau2' => 'required'
+                    'txtMatKhau1' => 'required|min:6',
+                    'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'
                 ]
              );
         if($v->fails()){
@@ -190,7 +193,7 @@ class QuantriController extends Controller
                     'ngaysinh' => $_POST['txtNgaySinh'],
                     'email'    => $_POST['txtEmail'],
                     'khoahoc'  => $_POST['txtKhoaHoc'],
-                    'matkhau' => $_POST['txtMatKhau1']
+                    'matkhau' => md5($_POST['txtMatKhau1'])
             );
             $ch = DB::table('sinh_vien')->insert($data);
             if($ch > 0){
@@ -208,15 +211,15 @@ class QuantriController extends Controller
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'txtMaSV'     => 'required',
-                    'txtHoTen'    => 'required',
-                    'txtNgaySinh' => 'required',
-                    'txtEmail'    => 'required',
-                    'txtKhoaHoc'  => 'required',
-                    'txtSDT'      => 'required',
-                    'txtMatKhauCu' => 'required',
-                    'txtMatKhauMoi1' => 'required',
-                    'txtMatKhauMoi2' => 'required'
+                    'txtMaSV'           => 'required',
+                    'txtHoTen'          => 'required',
+                    'txtNgaySinh'       => 'required',
+                    'txtEmail'          => 'required|email',
+                    'txtKhoaHoc'        => 'required',
+                    'txtSDT'            => 'required|numeric',
+                    'txtMatKhauCu'      => 'required',
+                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
+                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1'
                 ]
              );
         if($v->fails()){
@@ -231,7 +234,7 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'khoahoc'   => $_POST['txtKhoaHoc'],
-                    'matkhau'   => $_POST['txtMatKhauMoi1'],
+                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1
             );
             $ch = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
@@ -251,4 +254,4 @@ class QuantriController extends Controller
         }
     }
     
-}
+}// END Class QuantriController

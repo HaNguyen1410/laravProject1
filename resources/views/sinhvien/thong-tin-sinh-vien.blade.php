@@ -134,13 +134,16 @@
                                     <td colspan='3'></td>
                                 </tr>
                             </table>
-                            <form action="" method="post">
+                            <form action="{{action('SinhvienController@CapNhatThongTin')}}" method="post">
+                                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                                 <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center' id="bang2">
                                     <tr><th colspan="2" style="text-align: center">Xác nhận thông tin</th></tr>
                                     <tr>
                                         <td>Số điện thoại:</td>
                                         <td>
+                                            <input type="hidden" name="MaSV" value="<?php echo $sv['mssv'];?>" />
                                             <input type="text" name="txtDienThoai" value="<?php echo $sv['sdt'];?>" class="form-control">
+                                            <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -171,7 +174,7 @@
                                         <td></td>
                                         <td align="center">
                                             <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 20%;">
-                                                <img src="../images/save-as-icon.png"> Lưu 
+                                                <img src="{{asset('images/save-as-icon.png')}}"> Lưu 
                                             </button>
                                         </td>                                  
                                     </tr>
@@ -179,13 +182,14 @@
                             </form>                            
                         </div> <!-- /class="col-md-9 col-md-pull-3" -->
                         <div class="col-md-3 col-md-pull-9">
+                            <br><br><br>
                             <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
                                 <tr>
                                     <td align="center">
                                          @if($sv->hinhdaidien != "")
-                                                <img width='200px' src='../hinhdaidien/{{$sv->hinhdaidien}}'>
+                                                <img width='100px' src='../../hinhdaidien/{{$sv->hinhdaidien}}'>
                                          @else
-                                                <img src='../images/User-image.png'>
+                                                <img src="{{asset('images/User-image.png')}}">
                                          @endif                                        
                                     </td>
                                 </tr>

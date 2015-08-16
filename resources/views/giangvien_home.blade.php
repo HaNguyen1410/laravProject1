@@ -80,11 +80,11 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?cn=ttgv">Thông tin giảng viên</a></li>
+                                    <li><a href="{{asset('giangvien/thongtingv/2134')}}">Thông tin giảng viên</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="?cn=dmk">Đổi mật khẩu</a></li>
+                                    <li><a href="{{asset('giangvien/doimatkhaugv/2134')}}">Đổi mật khẩu</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="giaodienchung/dang-nhap.php?cn=dangxuat">Đăng xuất</a></li> 
+                                    <li><a href="{{asset('/dangnhap')}}">Đăng xuất</a></li> 
                                 </ul>
                             </li>
                             

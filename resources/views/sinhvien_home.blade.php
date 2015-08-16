@@ -91,14 +91,14 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="?cn=dscv">Danh sách các nhiệm vụ</a></li>
+                                    <li><a href="{{asset('sinhvien/danhsachcv/1111317')}}">Danh sách các nhiệm vụ</a></li>
                                     <li class="divider"></li>                                
                                     <li><a href="?cn=phancongcv">Phân công việc</a></li>
                                     <li class="divider"></li>                             
                                     <li><a href="?cn=noptl">Nộp tài liệu</a></li>                               
                                 </ul>
                             </li>                        
-                            <li><a href="?cn=xemdiem">Xem điểm</a></li>
+                            <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
                             <li><a href="?cn=diendan">Thảo luận</a></li>                          
                             <li class="dropdown active">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -106,13 +106,13 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role='menu'>
-                                    <li><a href='?cn=ttsv'>Thông tin sinh viên</a></li>
+                                    <li><a href="{{asset('sinhvien/thongtinsv/1111317')}}">Thông tin sinh viên</a></li>
                                     <li class="divider"></li>                                    
-                                    <li><a href="xemviecduocgiao">Xem công việc</a></li>
+                                    <li><a href="{{asset('sinhvien/xemviecduocgiao/1111317/Phạm Thúy Ngọc/NTH02')}}">Xem công việc</a></li>
                                     <li class="divider"></li>
-                                    <li><a href='?cn=dmk'>Đổi mật khẩu</a></li>
+                                    <li><a href="{{asset('sinhvien/doimatkhausv/1111317')}}">Đổi mật khẩu</a></li>
                                     <li class="divider"></li>
-                                    <li><a href='giaodienchung/dang-nhap.php?cn=dangxuat'>Đăng xuất</a></li>
+                                    <li><a href="{{asset('/dangnhap')}}">Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </ul>

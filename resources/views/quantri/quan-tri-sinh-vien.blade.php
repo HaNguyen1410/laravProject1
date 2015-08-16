@@ -31,17 +31,10 @@
                     <th>Khóa</th>
                     <th width=8%>Chức năng</th>
                 </tr>
-                
-                @foreach($dssv as $rw)
+                @foreach($dssv as $stt => $rw)
                     <tr>
                         <td align='center'>
-                            <?php
-                                $n = count($dssv); $stt = 1;
-                                if($n>0){
-                                    echo $stt; 
-                                    $stt++;
-                                }
-                            ?>
+                            {{$stt = $stt + 1}}
                         </td>
                         <td align='center'>{{$rw->mssv}}</td>
                         <td>{{$rw->hoten}}</td>

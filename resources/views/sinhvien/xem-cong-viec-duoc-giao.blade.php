@@ -41,12 +41,11 @@
                                     <td>{{$cv->phuthuoc_cv}}</td>
                                     <td>{{$cv->uutien}}</td>
                                     <td>{{$cv->trangthai}}</td>
-                                    <td>{{$cv->tiendo}}</td>
+                                    <td>
+                                        {{$cv->tiendo}}%  
+                                    </td>
                                 </tr>
                             @endforeach
-                        <tr>
-                            <td colspan="10">{!! $dscv->setPath('xemviecduocgiao')->render() !!}</td>
-                        </tr>
                     </table>
         </div>  <!-- /class="col-md-12" -->                     
     </div> <!-- /row -->

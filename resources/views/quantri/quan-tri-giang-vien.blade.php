@@ -30,36 +30,30 @@
                     <th>Ngày tạo</th>
                     <th>Khóa</th>
                     <th width=8%>Chức năng</th>
-                </tr>            
-                    <?php $n = count($dsgv); $stt = 1; ?>
-                    @foreach($dsgv as $rw)
-                        <tr>
-                            <td align='center'>
-                                <?php 
-                                     if($n>0){
-                                         echo $stt; 
-                                         $stt++;
-                                     }
-                                ?>
-                            </td>
-                            <td align='center'>{{$rw->macb}}</td>
-                            <td>{{$rw->hoten}}</td>
-                            <td>{{$rw->email}}</td>
-                            <td>...</td>
-                            <td align='center'>{{$rw->ngaytao}}</td>
-                            <td align='center'>
-                                @if($rw->khoa == 1)
-                                    <img src="{{asset('images/Lock.png')}}"/>
-                                @elseif($rw->khoa == 0)
-                                    <img src="{{asset('images/Unlock.png')}}"/>
-                                @endif
-                            </td>
-                            <td align='center'>
-                                <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
-                                <a href='danhsachgv/xoagv/{{$rw->macb}}'><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
-                            </td>
-                        </tr>
-                    @endforeach
+                </tr>                        
+                @foreach($dsgv as $stt => $rw)
+                    <tr>
+                        <td align='center'>
+                            {{$stt = $stt + 1}}
+                        </td>
+                        <td align='center'>{{$rw->macb}}</td>
+                        <td>{{$rw->hoten}}</td>
+                        <td>{{$rw->email}}</td>
+                        <td>...</td>
+                        <td align='center'>{{$rw->ngaytao}}</td>
+                        <td align='center'>
+                            @if($rw->khoa == 1)
+                                <img src="{{asset('images/Lock.png')}}"/>
+                            @elseif($rw->khoa == 0)
+                                <img src="{{asset('images/Unlock.png')}}"/>
+                            @endif
+                        </td>
+                        <td align='center'>
+                            <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
+                            <a href='danhsachgv/xoagv/{{$rw->macb}}'><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
+                        </td>
+                    </tr>
+                @endforeach
                 <tr>
                     <td colspan="8" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
                 </tr>                     
