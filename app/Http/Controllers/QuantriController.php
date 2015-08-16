@@ -13,17 +13,17 @@ use DB;
 class QuantriController extends Controller
 {
 /*######## Quản trị Giảng Viên  ###########*/
-/*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
-    public function DanhSachGV(){
-        $ds = DB::table('giang_vien')->paginate(5);
-        return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds);
+/*=========================== Thông tin quản trị viên ==============================================*/ 
+    public function ThongTinQT($macb){
+        $giangvien = Giangvien::find($macb);
+        
+        return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien);
     }
-/*=========================== Thêm giảng viên ==============================================*/ 
-    public function ThemGV(){
-        return view('quantri.them-giang-vien');
-    }   
-
-    public function LuuGV(Request $req){
+    public function DoiMatKhauQT($macb){
+        $row = DB::table('giang_vien')->where('macb',$macb)->first();
+        return view('quantri.doi-mat-khau-qt')->with('gv', $row);
+    } 
+    public function LuuDoiMatKhauQT(Request $req){
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -52,13 +52,56 @@ class QuantriController extends Controller
             );
             $ch = DB::table('giang_vien')->insert($data);
             if($ch > 0){
-                return redirect('danhsachgv');
+                //return redirect('quantri/thongtinqt/{macb}');
+            }
+        }
+    }
+/*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
+    public function DanhSachGV(){
+        $ds = DB::table('giang_vien')->paginate(5);
+        return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds);
+    }
+/*=========================== Thêm giảng viên ==============================================*/ 
+    public function ThemGV(){
+        return view('quantri.them-giang-vien');
+    }   
+
+    public function LuuThemGV(Request $req){
+        $post = $req->all();
+        $v = \Validator::make($req->all(),
+                [
+                    'txtMaCB'     => 'required',
+                    'txtHoTen'    => 'required',
+                    'rdGioiTinh'  => 'required',
+                    'rdGioiTinh'  => 'required',
+                    'txtEmail'    => 'required',
+                    'txtMatKhau1' => 'required',
+                    'txtMatKhau2' => 'required'
+                ]
+             );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else
+        {
+            $data = array(
+                    'macb'     => $_POST['txtMaCB'],
+                    'hoten'    => $_POST['txtHoTen'],
+                    'gioitinh'  => $_POST['rdGioiTinh'],
+                    'ngaysinh' => $_POST['txtNgaySinh'],
+                    'email'    => $_POST['txtEmail'],
+                    'sdt'      => $_POST['txtSDT'],
+                    'matkhau' => $_POST['txtMatKhau1']
+            );
+            $ch = DB::table('giang_vien')->insert($data);
+            if($ch > 0){
+                return redirect('quantri/danhsachgv');
             }
         }
     }
 /*=========================== Sửa thông tin Giảng viên ==============================================*/ 
-    public function CapNhatGV($id){
-        $row = DB::table('giang_vien')->where('id',$id)->first();
+    public function CapNhatGV($macb){
+        $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('quantri.cap-nhat-giang-vien')->with('gv',$row);
     } 
     
@@ -92,9 +135,9 @@ class QuantriController extends Controller
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1 ,
                     'quantri'   => isset($_POST['ckbQuanTri']) ? 1 : 0
             );
-            $ch = DB::table('giang_vien')->where('id',$post['ID'])->update($data);
+            $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])->update($data);
             if($ch > 0){
-                return redirect('danhsachgv');
+                return redirect('quantri/danhsachgv');
             }
         }
     }
@@ -111,7 +154,7 @@ class QuantriController extends Controller
         return view('quantri.them-sinh-vien');
     } 
     
-    public function LuuSV(Request $req){
+    public function LuuThemSV(Request $req){
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -141,13 +184,13 @@ class QuantriController extends Controller
             );
             $ch = DB::table('sinh_vien')->insert($data);
             if($ch > 0){
-                return redirect('danhsachsv');
+                return redirect('quantri/danhsachsv');
             }
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
-    public function CapNhatSV($id){
-        $row = DB::table('sinh_vien')->where('id',$id)->first();
+    public function CapNhatSV($masv){
+        $row = DB::table('sinh_vien')->where('mssv',$masv)->first();
         return view('quantri.cap-nhat-sinh-vien')->with('sv',$row);
     } 
     
@@ -181,9 +224,9 @@ class QuantriController extends Controller
                     'matkhau'   => $_POST['txtMatKhauMoi1'],
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1
             );
-            $ch = DB::table('sinh_vien')->where('id',$post['txtID'])->update($data);
+            $ch = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
             if($ch > 0){
-                //return redirect('danhsachsv');
+                return redirect('quantri/danhsachsv');
             }
         }
     }

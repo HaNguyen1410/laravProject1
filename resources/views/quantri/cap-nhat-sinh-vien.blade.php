@@ -17,7 +17,7 @@
             <div align="center"><input type="file"  />Chọn hình</div><br>
             <div align="center">
                 <button  type="submit" name="" class="btn btn-info">
-                    <img src="../images/excel-icon.png"> Cập nhật
+                    <img src="{{asset('images/excel-icon.png')}}"> Cập nhật
                 </button>
             </div>
         </div>
@@ -29,7 +29,6 @@
                     <tr>
                         <td width="30%">Mã số sinh viên:</td>
                         <td colspan="2">
-                            <input type="text" name="txtID" value="<?= $sv->id ?>"/>
                             <input type="text" name="txtMaSV" value="<?= $sv->mssv ?>" class="form-control" readonly="true"/>
                             <p style='color:red;'>{{$errors->first('txtMaSV')}}</p>
                         </td>
@@ -125,10 +124,10 @@
                         <td></td>
                         <td colspan="2">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:30%;">
-                                <img src="../images/save-as-icon.png"> Cập nhật
+                                <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('danhsachsv')}}" class="btn btn-warning" style="width:30%;">
-                                <img src="../images/delete-icon.png"> Hủy bỏ
+                            <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
+                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>

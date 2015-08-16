@@ -17,7 +17,7 @@
             <div align="center"><input type="file"  />Chọn hình</div><br>
             <div align="center">
                 <button  type="submit" name="" class="btn btn-info">
-                    <img src="../images/excel-icon.png"> Cập nhật
+                    <img src="{{asset('images/excel-icon.png')}}"> Cập nhật
                 </button>
             </div>
         </div>
@@ -29,7 +29,6 @@
                     <tr>
                         <td width="30%">Mã cán bộ:</td>
                         <td>
-                            <input type="hidden" name="ID" value="{{$gv->id}}"/>
                             <input type="text" name="txtMaCB" size="2" value="{{$gv->macb}}" class="form-control" readonly="true"/> 
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
@@ -131,10 +130,10 @@
                         <td></td>
                         <td colspan="2">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
-                                <img src="../images/save-as-icon.png"> Cập nhật
+                                <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('danhsachgv')}}" class="btn btn-warning" style="width:20%;">
-                                <img src="../images/delete-icon.png"> Hủy bỏ
+                            <a href="{{Asset('quantri/danhsachgv')}}" class="btn btn-warning" style="width:20%;">
+                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>

@@ -9,8 +9,8 @@ class Dangkynhom extends Model
 {
     public $timestamps = false;
     public $table = "dangky_nhom";  
-    $table->primary(array('mssv', 'manhomhp'));
-    protected $primaryKey = 'mssv';
+    //$table->primary(array('mssv', 'manhomhp'));
+    protected $primaryKey = array('mssv', 'manhomhp');
     protected $fillable = [       
         'mssv',
         'manhomhp',

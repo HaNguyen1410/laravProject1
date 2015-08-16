@@ -14,25 +14,32 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/dangnhap', function(){
+    return view('giaodienchung.dang-nhap');    
+});
 /*=========================== Trang quản trị ===========================================*/
+Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
+Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
+Route::post('luudmkqt','QuantriController@LuuDoiMatKhauQT');
+
 /*######## Giảng Viên ##################*/
-Route::get('danhsachgv','QuantriController@DanhSachGV');
-Route::get('themgv','QuantriController@ThemGV');
-Route::post('luugv','QuantriController@LuuGV');
-Route::get('capnhatgv/{id}','QuantriController@CapNhatGV');
+Route::get('quantri/danhsachgv','QuantriController@DanhSachGV');
+Route::get('quantri/themgv','QuantriController@ThemGV');
+Route::post('luuthemgv','QuantriController@LuuThemGV');
+Route::get('quantri/capnhatgv/{id}','QuantriController@CapNhatGV');
 Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
 
 /*######## Sinh Viên ##################*/
-Route::get('danhsachsv','QuantriController@DanhSachSV');
-Route::get('themsv','QuantriController@ThemSV');
-Route::post('luusv','QuantriController@LuuSV');
-Route::get('capnhatsv/{id}','QuantriController@CapNhatSV');
+Route::get('quantri/danhsachsv','QuantriController@DanhSachSV');
+Route::get('quantri/themsv','QuantriController@ThemSV');
+Route::post('luuthemsv','QuantriController@LuuThemSV');
+Route::get('quantri/capnhatsv/{masv}','QuantriController@CapNhatSV');
 Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
 
 /*=========================== Trang giảng viên ===========================================*/
-Route::get('thongtin','GiangvienController@ThongTin');
-Route::get('thongtingv','GiangvienController@ThongTinGV');
-Route::get('thongtingv/{id}','GiangvienController@HienThiGV');
+Route::get('vidu','GiangvienController@ViDu');
+Route::get('thongtingv','GiangvienController@ThongTin_gv');
+Route::get('thongtingv/{macb}','GiangvienController@ThongTinGV');
 
 /*=========================== Trang sinh viên ===========================================*/
 Route::get('thongtinsv/{mssv}','SinhvienController@HienThiSV');

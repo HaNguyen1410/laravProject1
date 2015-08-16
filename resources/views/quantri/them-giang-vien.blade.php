@@ -17,13 +17,13 @@
             <div align="center"><input type="file"  />Chọn hình</div><br>
             <div align="center">
                 <button  type="submit" name="" class="btn btn-info">
-                    <img src="images/excel-icon.png"> Thêm
+                    <img src="{{asset('images/excel-icon.png')}}"> Thêm
                 </button>
             </div>
         </div>
         <div class="col-md-8">
             <h3 style="color: darkblue; font-weight: bold;">THÊM NGƯỜI DÙNG</h3>      
-            <form action="{{action('QuantriController@LuuGV')}}" method="post" name="frmThemGV" class="form-horizontal">
+            <form action="{{action('QuantriController@LuuThemGV')}}" method="post" name="frmThemGV" class="form-horizontal">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
@@ -87,10 +87,10 @@
                         <td></td>
                         <td>
                             <button  type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
-                                <img src="images/save-as-icon.png"> Thêm
+                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm
                             </button> &nbsp;&nbsp;
-                            <a href="{{Asset('danhsachgv')}}" class="btn btn-warning" style="width:20%;">
-                                <img src="images/delete-icon.png"> Hủy bỏ
+                            <a href="{{Asset('quantri/danhsachgv')}}" class="btn btn-warning" style="width:20%;">
+                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>
