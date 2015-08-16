@@ -94,13 +94,5 @@ class SinhvienController extends Controller
         
         return view('sinhvien.danh-sach-cong-viec')->with('dscv',$dscvnhom);
     }
- /*=========================== Danh sách công việc nhóm ==============================================*/
-    public function XemDiem($mssv){
-        $manth = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomthuchien');
-        $tieuchi = DB::table();
-       
-        
-        return view('sinhvien.danh-sach-cong-viec')->with('dscv',$dscvnhom);
-    }
-    
+     
 }// END Class SinhvienController

@@ -63,4 +63,4 @@ Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= Xem danh sách công việc của cả nhóm ==========*/
 Route::get('sinhvien/danhsachcv/{mssv}','SinhvienController@DanhSachCV');
 /*======= Xem điểm ==========*/
-Route::get('sinhvien/xemdiem/{mssv}','SinhvienController@XemDiem');
+Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
