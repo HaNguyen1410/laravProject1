@@ -44,15 +44,15 @@ class QdtieuchiController extends Controller
             $data1 = array(
                     'matc'       => $_POST['txtMaTC'],
                     'noidungtc'  => $_POST['txtNoiDungTC'],
-                    'heso'       => $_POST['txtMucDiem'],
-                    'ngaytao'    => now()   
+                    'heso'       => $_POST['txtMucDiem']
+                    //'ngaytao'    => today()   
             );
             $data2 = array(
                     'macb'   => $_POST['txtMaCB'],
                     'matc'   => $_POST['txtMaTC']
             );
             $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
-            $ch1 = DB::table('quy_dinh')->insert($data2);
+            $ch2 = DB::table('quy_dinh')->insert($data2);
             if($ch1 > 0 && $ch2 > 0){
                 return redirect('giangvien/dstieuchi/2134');
             }
@@ -77,6 +77,18 @@ class QdtieuchiController extends Controller
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
+        }
+        else
+        {            
+            $data = array(
+                    'noidungtc'  => $_POST['txtNoiDungTC'],
+                    'heso'       => $_POST['txtMucDiem']
+                    //'ngaytao'    => today()   
+            );
+            $ch = DB::table('tieu_chi_danh_gia')->where('matc', $post['txtMaTC'])->update($data);
+            if($ch > 0){
+                return redirect('giangvien/dstieuchi/2134');
+            }
         }
     }
 }

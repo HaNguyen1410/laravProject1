@@ -65,7 +65,7 @@ class DetaiController extends Controller
             );
             $ch1 = DB::table('de_tai')->insert($data1);
             $ch2 = DB::table('ra_de_tai')->insert($data2);
-            if($ch1 > 0){
+            if($ch1 > 0 && $ch2 > 0){
                 return redirect('giangvien/danhsachdetai/2134');
             }
         }

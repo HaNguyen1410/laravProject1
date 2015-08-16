@@ -68,7 +68,7 @@ Route::get('giangvien/danhsachdetai/{macb}/themdetai','DetaiController@ThemDeTai
 Route::post('luuthemdt','DetaiController@LuuThemDeTai');
          /*  * Cập nhật đề tài */
 Route::get('giangvien/danhsachdetai/{macb}/capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
-//Route::post('luuthemdt','DetaiController@LuuCapNhatDeTai');
+Route::post('luuthemdt','DetaiController@LuuCapNhatDeTai');
 /*======= Quy định tiêu chí chấm điểm ==========*/
 route::get('giangvien/dstieuchi/{macb}','QdtieuchiController@DSTieuChi');
         /*  * Thêm tiêu chí đánh giá  */
@@ -77,6 +77,10 @@ route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
         /*  * Cập nhật tiêu chí đánh giá  */
 route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
 route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
+/*======= Theo Dõi kế hoạch làm niên luận của sinh viên ==========*/
+route::get('giangvien/theodoikehoach/{macb}', 'TheodoikehoachController@TheoDoiKH');
+route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
+route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
 
 /*
  * =========================== Trang sinh viên ===========================================

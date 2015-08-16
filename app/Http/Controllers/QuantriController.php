@@ -9,7 +9,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Giangvien;
 use DB;
-use Input;
+use View,
+    Response,
+    Validator,
+    Input,
+    Mail,
+    Session;
 
 class QuantriController extends Controller
 {
@@ -75,7 +80,7 @@ class QuantriController extends Controller
                     'txtMaCB'     => 'required',
                     'txtHoTen'    => 'required|max:255',
                     'rdGioiTinh'  => 'required',
-                    'rdGioiTinh'  => 'required',
+                    'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email|max:255',
                     'txtSDT'      => 'required|numeric|min:10',
                     'txtMatKhau1' => 'required|min:6',
@@ -114,7 +119,7 @@ class QuantriController extends Controller
                 [
                     'txtMaCB'           => 'required',
                     'txtHoTen'          => 'required',
-                    'txtNgaySinh'       => 'required',
+                    'txtNgaySinh'       => 'required|date',
                     'txtEmail'          => 'required|email',
                     'txtSDT'            => 'required|numeric|min:10',
                     //md5('txtMatKhauCu') => 'required|confirmed',
@@ -174,7 +179,7 @@ class QuantriController extends Controller
                     'txtMaSV'     => 'required',
                     'txtHoTen'    => 'required',
                     'rdGioiTinh'  => 'required',
-                    'txtNgaySinh' => 'required',
+                    'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email',
                     'txtKhoaHoc'  => 'required',
                     'txtMatKhau1' => 'required|min:6',
@@ -213,7 +218,7 @@ class QuantriController extends Controller
                 [
                     'txtMaSV'           => 'required',
                     'txtHoTen'          => 'required',
-                    'txtNgaySinh'       => 'required',
+                    'txtNgaySinh'       => 'required|date',
                     'txtEmail'          => 'required|email',
                     'txtKhoaHoc'        => 'required',
                     'txtSDT'            => 'required|numeric',

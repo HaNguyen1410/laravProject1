@@ -47,7 +47,7 @@
                     <div class="navbar-collapse collapse">                        
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="?cn=kehoach" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">Kế hoạch</a>
+                                <a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">Kế hoạch</a>
                             </li>                            
                             <li class="dropdown">
                                 <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >

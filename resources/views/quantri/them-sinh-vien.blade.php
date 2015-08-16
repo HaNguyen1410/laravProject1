@@ -64,7 +64,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Khóa:</td>
+                        <td>Khóa học:</td>
                         <td>
                             <input type="text" value="" name="txtKhoaHoc" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtKhoaHoc')}}</p>
