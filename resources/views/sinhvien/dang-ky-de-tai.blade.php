@@ -17,7 +17,7 @@
                 $macb = document.getElementById('txtMaCB').value;
                 //prompt($macb);
                 //alert($macb);
-                var _window = window.open("http://localhost/phpProject/sinhvien/chon-de-tai.php?id_macb="+$macb, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=800, height=400");
+                var _window = window.open("http://localhost/laravProject1/resources/views/sinhvien/chon-de-tai.php?id_macb="+$macb, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=800, height=400");
                 _window.onbeforeunload = function()
                 {
                     location.reload();

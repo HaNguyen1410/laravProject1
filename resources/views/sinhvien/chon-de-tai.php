@@ -8,10 +8,9 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Chọn đề tài</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link type="text/css" rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-        <script src="../public/js/login-bootstrap.js"></script>
-        <script src="../bootstrap/js/jquery-1.11.3.min.js"></script>
-        <script src="../bootstrap/js/bootstrap.min.js"></script> 
+        <link type="text/css" rel="stylesheet" href="../../../bootstrap/css/bootstrap.min.css">
+        <script src="../../../bootstrap/js/jquery-1.11.3.min.js"></script>
+        <script src="../../../bootstrap/js/bootstrap.min.js"></script> 
         
         <style type="text/css">
             th{
@@ -38,20 +37,28 @@ and open the template in the editor.
                                 <th>Công nghệ sử dụng</th>
                                 <th>Trạng thái</th>
                             </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                             <?php
-                                $stt = 1;
-                                while($rw = mysql_fetch_array($thongtindt)){
-                                    $chon = isset($_POST['btnDangKy']) ? $rw['madt'] : "Đăng ký";
-                                    echo   "<tr>".
-                                               "<td>$stt</td>".
-                                               "<td>".$rw['tendt']."</td>".
-                                               "<td>".$rw['songuoitoida']."</td>".
-                                               "<td>".$rw['motadt']."</td>".
-                                               "<td>".$rw['congnghe']."</td>".
-                                               "<td><button type='submit' id='btnDangKy' name='' value='$chon' ></button></td>".
-                                           "</tr>";
-                                    $stt++;
-                                }
+//                                $stt = 1;
+//                                while($rw = mysql_fetch_array($thongtindt)){
+//                                    $chon = isset($_POST['btnDangKy']) ? $rw['madt'] : "Đăng ký";
+//                                    echo   "<tr>".
+//                                               "<td>$stt</td>".
+//                                               "<td>".$rw['tendt']."</td>".
+//                                               "<td>".$rw['songuoitoida']."</td>".
+//                                               "<td>".$rw['motadt']."</td>".
+//                                               "<td>".$rw['congnghe']."</td>".
+//                                               "<td><button type='submit' id='btnDangKy' name='' value='$chon' ></button></td>".
+//                                           "</tr>";
+//                                    $stt++;
+//                                }
                             ?>
                         </table>
                     </form>

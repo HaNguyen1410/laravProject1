@@ -49,7 +49,7 @@
                         <input type="text" name="txtTenDT" value="{{$tendt->tendt}}" readonly="" class="form-control">
                     </th>
                     <th width="10%" style="text-align: right;">
-                        <a href="">
+                        <a href="{{asset('sinhvien/phancv/1111317/themcvchinh')}}">
                             <button type="button" name="btnThem" class="btn btn-primary">
                             <img src="{{asset('images/add-icon.png')}}">Thêm công việc
                             </button>
@@ -78,7 +78,7 @@
                     <tr>
                         <td>{{$stt+1}}</td>
                         <td>
-                            <a href="sinhvien/phancongchitiet/1111317/{{$cv->macv}}" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
+                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
                                 {{$cv->macv}}
                             </a>
                             
@@ -102,8 +102,12 @@
                             </div> 
                         </td>
                         <td align='center'>
-                            <a href=""><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
-                            <a href=""><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
+                            <a href="1111317/capnhatcvchinh/{{$cv->macv}}">
+                                <img src="{{asset('images/edit-icon.png')}}"/>
+                            </a>&nbsp &nbsp &nbsp
+                            <a href="">
+                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

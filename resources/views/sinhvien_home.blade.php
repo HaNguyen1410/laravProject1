@@ -95,7 +95,7 @@
                                     <li class="divider"></li>                                
                                     <li><a href="{{asset('sinhvien/phancv/1111317')}}">Phân công việc</a></li>
                                     <li class="divider"></li>                             
-                                    <li><a href="">Nộp tài liệu</a></li>                               
+                                    <li><a href="{{asset('sinhvien/noptailieu')}}">Nộp tài liệu</a></li>                               
                                 </ul>
                             </li>                        
                             <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
