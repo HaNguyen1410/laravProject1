@@ -57,7 +57,7 @@
                         <td align='center'>                            
                            <?php
                                 $b = "";
-                                $buoi = substr($dtn->sogio_thucte, 0,1);
+                                $buoi = substr($dtn->lichhop, 0,1);
                                 $bs = strcasecmp($buoi, 'S');
                                 $bc = strcasecmp($buoi, 'C');
 
@@ -67,7 +67,7 @@
                                 else if($bc == 0){
                                     echo $b="Chiều thứ "; 
                                 }
-                                echo " ". $so = substr($dtn->sogio_thucte,1,1);
+                                echo " ". $so = substr($dtn->lichhop,1,1);
                             ?>
                         </td>
                         <td align='center'>{{$dtn->sogio_thucte}}</td>

@@ -69,7 +69,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="{{asset('giangvien/dstieuchi/2134')}}">Tiêu chí</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="">Nhập điểm</a></li>
+                                    <li><a href="{{asset('giangvien/nhapdiem/2134')}}">Nhập điểm</a></li>
 
                                 </ul>
                             </li>

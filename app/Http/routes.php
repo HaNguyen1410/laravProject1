@@ -60,6 +60,9 @@ Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang đổi mật khẩu giảng viên ==========*/
 Route::get('giangvien/doimatkhaugv/{masv}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
+/*======= Nhập điểm ==========*/
+Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
+        
 /*======= Quản lý đề tài ==========*/
 Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
 Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');

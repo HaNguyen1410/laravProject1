@@ -20,8 +20,23 @@ class SinhvienController extends Controller
 /*============================= Hiển thị thông tin của 1 sinh viên ========================================*/
     public function HienThiSV($masv){
         $sinhvien = Sinhvien::find($masv);
-        
-        return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien);
+        $manth = DB::table('dangky_nhom')->where('mssv','=',$masv)->value('manhomthuchien');
+        $dstv = DB::table('sinh_vien as sv')
+                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
+                ->where('dk.manhomthuchien',$manth)
+                ->get();
+        $ttgv = DB::table('ra_de_tai as radt')->select('gv.macb','gv.hoten','gv.email','gv.sdt','radt.manhomthuchien')                
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->join('giang_vien as gv','dt.macb','=','gv.macb')
+                ->where('radt.manhomthuchien',$manth)
+                ->first();
+        $hp = DB::table('dangky_nhom as dk')->select('hp.tennhomhp')
+                ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
+                ->where('dk.mssv',$masv)
+                ->first();
+        $nhomth = DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->first();
+        return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien)->with('dstv',$dstv)
+            ->with('ttgv',$ttgv)->with('hp',$hp)->with('nhomth',$nhomth);
     }
 /*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
     public function CapNhatThongTin(Requests $request){

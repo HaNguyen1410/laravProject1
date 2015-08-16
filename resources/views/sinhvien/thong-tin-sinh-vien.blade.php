@@ -49,19 +49,19 @@
                                             <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
                                                 <tr>
                                                     <th width="40%">MSCB:</th>
-                                                    <td>sadfdf</td>                                    
+                                                    <td>{{$ttgv->macb}}</td>                                    
                                                 </tr>
                                                 <tr>
                                                     <th>Họ và tên:</th>
-                                                    <td></td>
+                                                    <td>{{$ttgv->hoten}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Email:</th>
-                                                    <td></td>
+                                                    <td>{{$ttgv->email}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th>Điện thoại:</th>
-                                                    <td></td>
+                                                    <td>{{$ttgv->sdt}}</td>
                                                 </tr>
                                             </table>
                                         </a>
@@ -88,7 +88,7 @@
                                     <td><label>Khóa:</label></td>
                                     <td style="color:blue;">{{$sv->khoahoc}}</td>
                                     <td width="10%"><label>Nhóm học phần:</label></td>
-                                    <td style="color:blue;"></td>
+                                    <td style="color:blue;">{{$hp->tennhomhp}}</td>
                                 </tr>
                                 <tr>
                                     <td><label>Tên đề tài:</label></td>
@@ -96,7 +96,7 @@
                                 </tr>
                                 <tr>
                                     <td><label>Mã nhóm niên luận: </label></td>
-                                    <td style="color:blue;"></td>
+                                    <td style="color:blue;">{{$ttgv->manhomthuchien}}</td>
                                     <td colspan="2" align="center">
                                         <div class="dropdown">
                                             <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
@@ -112,12 +112,20 @@
                                                                 <th width="20%">Họ và tên</th>
                                                                 <th width="5%">Trưởng nhóm</th>
                                                             </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                            </tr>              
+                                                            @foreach($dstv as $stt => $tv)
+                                                                <tr>
+                                                                    <td align='center'>{{$stt+1}}</td>
+                                                                    <td align='center'>{{$tv->mssv}}</td>
+                                                                    <td>{{$tv->hoten}}</td>
+                                                                    <td align='center'>
+                                                                        @if($tv->nhomtruong == 1)
+                                                                            <img src="{{asset('images/check.png')}}"/>
+                                                                        @elseif($tv->nhomtruong == 0)
+                                                                            <img src="{{asset('images/uncheck.png')}}"/>
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach              
                                                         </table>
                                                     </a>
                                                 </li>
@@ -127,11 +135,26 @@
                                 </tr>
                                 <tr>
                                     <td><label>Tổ chức nhóm:</label></td>                                   
-                                    <td colspan='3'></td>
+                                    <td colspan='3' style="color:blue;">{{$nhomth->tochucnhom}}</td>
                                 </tr>
                                 <tr>
                                     <td><label>Lịch họp nhóm:</label></td>
-                                    <td colspan='3'></td>
+                                    <td colspan='3' style="color:blue;">
+                                        <?php
+                                            $b = "";
+                                            $buoi = substr($nhomth->lichhop, 0,1);
+                                            $bs = strcasecmp($buoi, 'S');
+                                            $bc = strcasecmp($buoi, 'C');
+
+                                            if($bs == 0){
+                                                echo $b="Sáng thứ "; 
+                                            }
+                                            else if($bc == 0){
+                                                echo $b="Chiều thứ "; 
+                                            }
+                                            echo " ". $so = substr($nhomth->lichhop,1,1);
+                                        ?>
+                                    </td>
                                 </tr>
                             </table>
                             <form action="{{action('SinhvienController@CapNhatThongTin')}}" method="post">
@@ -187,7 +210,7 @@
                                 <tr>
                                     <td align="center">
                                          @if($sv->hinhdaidien != "")
-                                                <img width='100px' src='../../hinhdaidien/{{$sv->hinhdaidien}}'>
+                                                <img width='200px' src='../../hinhdaidien/{{$sv->hinhdaidien}}'>
                                          @else
                                                 <img src="{{asset('images/User-image.png')}}">
                                          @endif                                        
