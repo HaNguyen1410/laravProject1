@@ -40,11 +40,13 @@ class SinhvienController extends Controller
             ->with('ttgv',$ttgv)->with('hp',$hp)->with('nhomth',$nhomth);
     }
 /*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
-    public function LuuCapNhatThongTin(Requests $request){
+    public function LuuCapNhatThongTin(Request $request){
         $post = $request->all();
         $v = \Validator::make($request->all(),
                 [
-                    'txtSDT' => 'required|numeric'
+                    'txtDienThoai'        => 'required|numeric',
+                    'txtLapTrinh'   => 'required',
+                    'txtKinhNghiem' => 'required'
                 ]
            );
         if($v->fails()){
@@ -52,13 +54,13 @@ class SinhvienController extends Controller
         }
         else{
             $data = array(
-                'sdt'              => $_post['txtDienThoai'],
-                'kynangcongnghe'   => $_post['txtCongNghe'],
-                'kienthuclaptrinh' => $_post['txtLapTrinh'],
-                'kinhnghiem'       => $_post['txtKinhNghiem'],
+                'sdt'              => $_POST['txtDienThoai'],
+                'kynangcongnghe'   => $_POST['txtCongNghe'],
+                'kienthuclaptrinh' => $_POST['txtLapTrinh'],
+                'kinhnghiem'       => $_POST['txtKinhNghiem'],
             );
             $capnhat = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
-            if($ch){
+            if($capnhat > 0){
                 return redirect('sinhvien/thongtinsv/1111317');
             }
         }       

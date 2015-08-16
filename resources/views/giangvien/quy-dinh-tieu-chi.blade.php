@@ -19,6 +19,7 @@
                     <img src="{{asset('images/add-icon.png')}}"> Thêm
                </button>
             </a><br>
+            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="5%">STT</th>
@@ -35,7 +36,7 @@
                         <td align='center'>{{$tc->ngaytao}}</td>
                         <td align='center'>
                             <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('images/edit-icon.png')}}"></a>&nbsp
-                            <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="">
+                            <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="2134/xoatieuchi/{{$tc->matc}}">
                                 <img src="{{asset('images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>    

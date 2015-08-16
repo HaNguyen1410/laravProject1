@@ -33,6 +33,7 @@
                     </button>
                  </a>
             </div>
+            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="2%">STT</th>
@@ -71,8 +72,12 @@
                             </div> 
                         </td>
                         <td align='center'>
-                            <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
-                            <a href=""><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
+                            <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
+                                <img src="{{asset('images/edit-icon.png')}}"/>
+                            </a>&nbsp
+                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="../1111317/{{$cvchinh->macv}}/{{$cvphu->macv}}">
+                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

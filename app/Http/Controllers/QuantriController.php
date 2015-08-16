@@ -38,7 +38,10 @@ class QuantriController extends Controller
             return $so = (int)$ma + 1;
         }     
     }      
-/*######## Quản trị Giảng Viên  ###########*/
+/******************
+ * ######## Quản trị Giảng Viên  ###########
+ * *****************
+ */
 /*=========================== Thông tin quản trị viên ==============================================*/ 
     public function ThongTinQT($macb){
         $giangvien = Giangvien::find($macb);
@@ -184,7 +187,10 @@ class QuantriController extends Controller
         }
     }
 
-    /*########## Quản trị Sinh Viên #############*/
+/*********************
+ * ########## Quản trị Sinh Viên #############
+ * *******************
+ */
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachSV(){
         $ds = DB::table('sinh_vien')->paginate(5);

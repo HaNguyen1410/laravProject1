@@ -34,6 +34,18 @@ class QdtieuchiController extends Controller
                 ->get();
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc);
     }
+/*========= Xóa Tiêu chí đánh giá ==============*/    
+    public function XoaTieuChi($macb,$matc){
+        $Xoaqd = DB::table('quy_dinh')->where('matc',$matc)->delete();
+        $Xoatc = DB::table('tieu_chi_danh_gia')->where('matc',$matc)->delete();
+        $Xoad = DB::table('chitiet_diem')->where('matc',$matc)->delete();
+        
+        \Session::flash('ThongBao','Xóa thành công!');
+        if($Xoaqd && $Xoatc && $Xoad){
+            //return $delete; $delete = 1 sau khi thuc hiện xóa
+            return redirect('giangvien/dstieuchi/2134');
+        }
+    }
 /*========================= Thêm tiêu chí đánh giá ========================*/
     public function ThemTieuChi($macb){ 
         $ma = $this->matc_tutang();

@@ -38,7 +38,7 @@
                     @for($j=1; $j<=4; $j++) <!-- @endforeachTạo 4 ô trên 1 hàng -->
                         <td width='20%'>
                             @for($i=1; $i<6; $i++) <!-- Mỗi ô có 6 sinh viên -->
-                                
+                                 
                                   @foreach($dstensv as $sv)
                                         <a href="" data-toggle="tooltip" data-placement="top" title="">
                                             {{$sv->mssv}}

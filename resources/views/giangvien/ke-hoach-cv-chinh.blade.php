@@ -154,7 +154,7 @@
                 </tr>         
                 @foreach($dstv as $stt => $tv)
                 <tr>
-                    <td align='center'>{{$stt+1}}</td>
+                    <td style="vertical-align: middle; text-align: center;" rowspan="2">{{$stt+1}}</td>
                     <td align='center'>{{$tv->manhomthuchien}}</td>
                     <td align='center'>{{$tv->mssv}}</td>
                     <td>{{$tv->hoten}}</td>
@@ -164,6 +164,13 @@
                         @elseif($tv->nhomtruong == 0)
                             <img src="{{asset('images/uncheck.png')}}"/>
                         @endif
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <lable style="font-weight: bold;">Kỹ năng công nghệ:</lable> {{$tv->kynangcongnghe}} <br>
+                        <lable style="font-weight: bold;">Kiến thức lập trình:</lable> {{$tv->kienthuclaptrinh}} <br>
+                        <lable style="font-weight: bold;">Kinh nghiệm:</lable> {{$tv->kinhnghiem}} <br>
                     </td>
                 </tr>
                 @endforeach

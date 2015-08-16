@@ -159,14 +159,14 @@
                             </table>
                             <form action="{{action('SinhvienController@LuuCapNhatThongTin')}}" method="post">
                                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                                <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center' id="bang2">
+                                <table class="table table-bordered" border="0" width="800px" id="bang2">
                                     <tr><th colspan="2" style="text-align: center">Xác nhận thông tin</th></tr>
                                     <tr>
                                         <td>Số điện thoại:</td>
                                         <td>
                                             <input type="hidden" name="txtMaSV" value="<?php echo $sv['mssv'];?>" />
                                             <input type="text" name="txtDienThoai" value="<?php echo $sv['sdt'];?>" class="form-control">
-                                            <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
+                                            <p style='color:red;'>{{$errors->first('txtDienThoai')}}</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -174,7 +174,7 @@
                                         <td>
                                             <textarea class="form-control" name="txtCongNghe" rows="3">
                                                 <?php echo $sv['kynangcongnghe'];?>
-                                            </textarea>
+                                            </textarea>                                            
                                         </td>
                                     </tr>
                                     <tr>
@@ -183,6 +183,7 @@
                                             <textarea class="form-control" name="txtLapTrinh" rows="3" style="text-align: left;">
                                                 <?php echo $sv['kienthuclaptrinh'];?>
                                             </textarea>
+                                            <p style='color:red;'>{{$errors->first('txtLapTrinh')}}</p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -191,6 +192,7 @@
                                             <textarea class="form-control" name="txtKinhNghiem" rows="3">
                                                 <?php echo $sv['kinhnghiem'];?>
                                             </textarea>
+                                            <p style='color:red;'>{{$errors->first('txtKinhNghiem')}}</p>
                                         </td>
                                     </tr>
                                     <tr>
