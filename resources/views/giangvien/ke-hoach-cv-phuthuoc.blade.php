@@ -24,7 +24,9 @@
             <div class="col-md-12">
                 <label style="color: darkblue;">Thuộc công việc:</label>
                 <label style="color: #F65D20;">
-                    <?php echo "<a href='?cn=kehoachcvchinh&id_nth=$manth'>".$macv; ?> -  <?php echo $khchinh['congviec']."</a>"; ?> 
+                    <a href="../../cvchinh/{{$tencvchinh->manhomthuchien}}">
+                        {{$tencvchinh->macv}} - {{$tencvchinh->congviec}}
+                    </a>                     
                 </label>
             </div>
             <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
@@ -42,7 +44,29 @@
                     <th>Kết thúc</th>
                     <th>Số giờ</th>
                 </tr>
-                
+                @foreach($dscvphu as $stt => $cvphu)
+                    <tr>
+                        <td>{{$stt+1}}</td>
+                        <td>{{$cvphu->macv}}</td>
+                        <td>
+                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cvphu->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cvphu->ngayketthuc_kehoach}}">                                
+                                {{$cvphu->congviec}}
+                            </a>
+                        </td>
+                        <td>{{$cvphu->giaocho}}</td>
+                        <td>{{$cvphu->ngaybatdau_thucte}}</td>
+                        <td>{{$cvphu->ngayketthuc_thucte}}</td>
+                        <td>{{$cvphu->sogio_thucte}}</td>
+                        <td>{{$cvphu->noidungthuchien}}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cvphu->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cvphu->tiendo; ?>%">
+                                    <span style="color:brown;">{{$cvphu->tiendo}}%</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
             </table>     
         </div>
     </div> <!-- /row -->
