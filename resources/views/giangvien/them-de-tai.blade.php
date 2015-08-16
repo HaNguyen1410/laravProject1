@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold;">THÊM ĐỀ TÀI MỚI</h3>                
-            <form name="formThemDeTai" action="{{action('DetaiController@LuuThemDeTai')}}" method="post">  
+            <form action="{{action('DetaiController@LuuThemDeTai')}}" method="post"  name="formThemDeTai" >  
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" id="bang1">
                     <tr>
@@ -35,14 +35,15 @@
                     <tr>
                         <td width="25%">Mã đề tài:</td>
                         <td>
-                            <input style="width:30%; text-align: center;" type="text" id="txtMaDeTai" name="txtMaDeTai" value="" class="form-control" /> 
+                            <input style="width:30%; text-align: center;" type="text" id="txtMaDeTai" name="txtMaDeTai" value="{{$ma}}" class="form-control" readonly=""/> 
+                            <input type='text' name='txtMaCB' value='{{$macb}}'/>
                         </td>
                         <th align="right" width="10%">Nhóm học phần:</th>
                         <td width="10%">
                             <select class="form-control" name="cbNhomHP">
-                                <option value="">01</option>
-                                <option value="">03</option>
-                                <option value="">03</option> 
+                                @foreach($nhomhp as $hp)
+                                    <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
+                                @endforeach
                             </select>
                         </td>
                     </tr>
@@ -62,8 +63,8 @@
                         <th>Phân loại:</th>
                         <td>
                             <select class="form-control" name="cbmPhanLoai">
-                                <option value="Đề tài gợi ý">Đề tài gợi ý</option>
-                                <option value="Được đề xuất">Được đề xuất</option>                                       
+                                <option value="Gợi ý">Đề tài gợi ý</option>
+                                <option value="Đề xuất">Được đề xuất</option>                                       
                             </select> 
                         </td>
                     </tr>                                            

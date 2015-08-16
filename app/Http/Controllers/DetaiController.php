@@ -16,6 +16,17 @@ use View,
 
 class DetaiController extends Controller
 {
+/*====================== Mã đề tài tự tăng ====================================*/
+    function madt_tutang(){
+        $macuoi = DB::table('de_tai')->orderby('madt','desc')->first();
+        
+        if(count($macuoi) > 0)
+        {
+            $ma = $macuoi->madt;  //Lấy mã cuối cùng của nhóm thưc hiện
+            return $so = (int)$ma + 1;
+        }      
+    }
+/*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/
     public function DsDeTai($macb){
         $dsdt = DB::table('de_tai')->where('macb',$macb)->get();
         return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt);
@@ -32,7 +43,16 @@ class DetaiController extends Controller
     }
 /*=========================== Thêm đề tài ==============================================*/ 
     public function ThemDeTai($macb){
-        return view('giangvien.them-de-tai');
+        $ma = $this->madt_tutang();
+        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+                ->select('hp.manhomhp','hp.tennhomhp')
+                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->where('dt.macb',$macb)
+                ->get();
+        
+        return view('giangvien.them-de-tai')->with('ma',$ma)->with('nhomhp',$nhomhp)
+            ->with('macb',$macb);
     } 
     
     public function LuuThemDeTai(Request $req){
@@ -50,6 +70,7 @@ class DetaiController extends Controller
         {
             $data1 = array(
                     'madt'          => $_POST['txtMaDeTai'],
+                    'macb'          => $_POST['txtMaCB'],
                     'tendt'         => $_POST['txtTenDeTai'],
                     'songuoitoida'  => $_POST['txtSoNguoi'],
                     'motadt'        => $_POST['txtMoTa'],
@@ -58,22 +79,22 @@ class DetaiController extends Controller
                     'phanloai'      => $_POST['cbmPhanLoai'],
                     'trangthai'     => $_POST['cbmTrangThai'],
                     //'taptindinhkem' => $_POST['ftTapTinKem']
-            );
-            $data2 = array(
+                );  
+            $ch1 = DB::table('de_tai')->insert($data1);
+            if($ch1 > 0){
+                $data2 = array(
                     'madt'          => $_POST['txtMaDeTai'],
                     'manhomhp'      => $_POST['cbNhomHP']
-            );
-            $ch1 = DB::table('de_tai')->insert($data1);
-            $ch2 = DB::table('ra_de_tai')->insert($data2);
-            if($ch1 > 0 && $ch2 > 0){
+                );          
+                $ch2 = DB::table('ra_de_tai')->insert($data2);
                 return redirect('giangvien/danhsachdetai/2134');
-            }
+            }                 
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
     public function CapNhatDeTai($macb,$madt){
         $row = DB::table('de_tai')->where('madt',$madt)->first();
-        return view('giangvien.cap-nhat-de-tai')->with('dt',$row);
+        return view('giangvien.cap-nhat-de-tai')->with('dt',$row)->with('macb',$macb);
     } 
     
     public function LuuCapNhatDeTai(Request $req){
@@ -91,6 +112,7 @@ class DetaiController extends Controller
         {
             $data = array(
                     'madt'          => $_POST['txtMaDeTai'],
+                    'macb'          => $_POST['txtMaCB'],
                     'tendt'         => $_POST['txtTenDeTai'],
                     'songuoitoida'  => $_POST['txtSoNguoi'],
                     'motadt'        => $_POST['txtMoTa'],
@@ -98,7 +120,7 @@ class DetaiController extends Controller
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'phanloai'      => $_POST['rdPhanLoai'],
                     'trangthai'     => $_POST['rdTrangThai'],
-                    'taptindinhkem' => $_POST['txtTapTinKem']
+                    //'taptindinhkem' => $_POST['txtTapTinKem']
             );
             $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);
             if($ch > 0){

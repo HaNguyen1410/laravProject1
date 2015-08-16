@@ -34,15 +34,19 @@
         <form name="frmThemTV" action="" method="post">
             <table class="table table-bordered" id="tblChonTV">
                 <tr> 
-                    <?php $stt = 1; ?>
-                    @for($j=1; $j<=4; $j++)
+                    <?php echo $n = count($dstensv);?>
+                    @for($j=1; $j<=4; $j++) <!-- @endforeachTạo 4 ô trên 1 hàng -->
                         <td width='20%'>
-                            @for($i=1; $i<6; $i++)
-                                <a href="" data-toggle="tooltip" data-placement="top" title="Họ và tên sinh viên">mssv</a>
-                                : <input type="checkbox" name="chk[]" value=""/>&nbsp&nbsp&nbsp&nbsp
-                                Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=''/><br>                          
-
-                                <?php $stt++; ?>
+                            @for($i=1; $i<6; $i++) <!-- Mỗi ô có 6 sinh viên -->
+                                
+                                  @foreach($dstensv as $sv)
+                                        <a href="" data-toggle="tooltip" data-placement="top" title="">
+                                            {{$sv->mssv}}
+                                        </a>
+                                        : <input type="checkbox" name="chk[]" value=""/>&nbsp&nbsp&nbsp&nbsp
+                                        Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=''/><br> 
+                                  @endforeach   
+                                
                             @endfor
                         </td>                  
                     @endfor

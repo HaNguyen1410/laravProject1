@@ -18,6 +18,26 @@ use View,
 
 class QuantriController extends Controller
 {
+ /*====================== Mã Giảng viên tự tăng ====================================*/
+    public function macb_tutang(){
+//Lấy mã cuối cùng của nhóm thưc hiện
+        $macuoi = DB::table('giang_vien')->orderby('macb','desc')->first();
+        
+        if(count($macuoi)>0){
+            $ma = $macuoi->macb;  
+            return $so = (int)$ma + 1;
+        }     
+    }   
+ /*====================== Mã Sinh viên tự tăng ====================================*/
+    public function masv_tutang(){
+//Lấy mã cuối cùng của nhóm thưc hiện
+        $macuoi = DB::table('sinh_vien')->orderby('mssv','desc')->first();
+        
+        if(count($macuoi)>0){
+            $ma = $macuoi->mssv;  
+            return $so = (int)$ma + 1;
+        }     
+    }      
 /*######## Quản trị Giảng Viên  ###########*/
 /*=========================== Thông tin quản trị viên ==============================================*/ 
     public function ThongTinQT($macb){
@@ -65,12 +85,15 @@ class QuantriController extends Controller
     }
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachGV(){
-        $ds = DB::table('giang_vien')->paginate(5);
+        $gv = DB::table('giang_vien')->get();
+        $n = count($gv);
+        $ds = DB::table('giang_vien')->skip($n)->take(5)->paginate(5);
         return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds);
     }
 /*=========================== Thêm giảng viên ==============================================*/ 
     public function ThemGV(){
-        return view('quantri.them-giang-vien');
+        $ma = $this->macb_tutang();
+        return view('quantri.them-giang-vien',['ma' => $ma]);
     }   
 
     public function LuuThemGV(Request $req){
@@ -169,7 +192,8 @@ class QuantriController extends Controller
     }  
 /*=========================== Thêm sinh viên ==============================================*/ 
     public function ThemSV(){
-        return view('quantri.them-sinh-vien');
+        $ma = $this->masv_tutang();
+        return view('quantri.them-sinh-vien')->with('ma',$ma);
     } 
     
     public function LuuThemSV(Request $req){

@@ -30,8 +30,14 @@ class GiangvienController extends Controller
 /*=========================== Xem thông tin giảng viên theo mã cán bộ ==============================================*/     
     public function ThongTinGV($macb){
         $giangvien = Giangvien::find($macb);
+        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+                ->select('hp.manhomhp','hp.tennhomhp','dt.macb')
+                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->where('dt.macb',$macb)
+                ->get();
         
-        return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien);
+        return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien)->with('nhomhp',$nhomhp);
     }
 /*=========================== Đổi mật khẩu Giảng Viên ==============================================*/   
     public function DoiMatKhauGV($macb){

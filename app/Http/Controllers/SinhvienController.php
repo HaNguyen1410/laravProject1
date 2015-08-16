@@ -35,28 +35,35 @@ class SinhvienController extends Controller
                 ->where('dk.mssv',$masv)
                 ->first();
         $nhomth = DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->first();
+        
         return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien)->with('dstv',$dstv)
             ->with('ttgv',$ttgv)->with('hp',$hp)->with('nhomth',$nhomth);
     }
 /*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
-    public function CapNhatThongTin(Requests $request){
+    public function LuuCapNhatThongTin(Requests $request){
         $post = $request->all();
         $v = \Validator::make($request->all(),
                 [
                     'txtSDT' => 'required|numeric'
-                ]);
-        $data = array(
-             'sdt'              => $_post['txtDienThoai'],
-             'kynangcongnghe'   => $_post['txtCongNghe'],
-             'kienthuclaptrinh' => $_post['txtLapTrinh'],
-             'kinhnghiem'       => $_post['txtKinhNghiem'],
-        );
-        $capnhat = DB::table('sinh_vien')->where('mssv',$post(''))->update($data);
-        if($ch){
-            return redirect(sinhvien/thongtinsv/1111317);
+                ]
+           );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
         }
-        
+        else{
+            $data = array(
+                'sdt'              => $_post['txtDienThoai'],
+                'kynangcongnghe'   => $_post['txtCongNghe'],
+                'kienthuclaptrinh' => $_post['txtLapTrinh'],
+                'kinhnghiem'       => $_post['txtKinhNghiem'],
+            );
+            $capnhat = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
+            if($ch){
+                return redirect('sinhvien/thongtinsv/1111317');
+            }
+        }       
     }
+    
 /*============================= Công việc được giao của 1 sinh viên ========================================*/
     public function CongViecSV($masv,$hoten,$manth)
     {

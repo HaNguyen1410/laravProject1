@@ -21,7 +21,7 @@
                             <th width="20%">Mã tiêu chí:</th>
                             <td width="50%">
                                 <input type="text" name="txtMaCB" value="2134"/> 
-                                <input style="width:35%; text-align: center;" type="text" name="txtMaTC" value="" class="form-control"/> 
+                                <input style="width:35%; text-align: center;" type="text" name="txtMaTC" value="{{$ma}}" class="form-control" readonly=""/> 
                             </td>
                         </tr>
                         <tr>

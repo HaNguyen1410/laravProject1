@@ -16,6 +16,11 @@ use View,
 
 class QltailieuController extends Controller
 {
+/*========================= Giảng viên quản lý tài liệu =============================*/
+    public function KhoTaiLieu($macb){
+        return view('giangvien.kho-tai-lieu');
+    }
+/*========================= Sinh viên nộp tài liệu =============================*/
     public function NopTaiLieu(){
         
         return view('sinhvien.nop-tai-lieu');

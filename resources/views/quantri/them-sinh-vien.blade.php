@@ -31,7 +31,7 @@
                     <tr>
                         <td>Mã số sinh viên:</td>
                         <td>
-                            <input type="text" size="2" value="" name="txtMaSV" class="form-control">
+                            <input type="text" size="2" value="{{$ma}}" name="txtMaSV" class="form-control" readonly=""/>
                             <p style='color:red;'>{{$errors->first('txtMaSV')}}</p>
                         </td>
                     </tr>

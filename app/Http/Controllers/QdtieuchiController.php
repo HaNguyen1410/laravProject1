@@ -16,6 +16,17 @@ use View,
 
 class QdtieuchiController extends Controller
 {
+/*====================== Mã tiêu chí tự tăng ====================================*/
+    public function matc_tutang(){
+//Lấy mã cuối cùng của nhóm thưc hiện
+        $matc = DB::table('tieu_chi_danh_gia')->orderby('matc','desc')->first();
+        
+        if(count($matc)>0){
+            $ma = $matc->matc;  
+            return $so = (int)$ma + 1;
+        }     
+    }
+/*====================== Lấy danh sách các tiêu chí đánh giá của 1 cán bộ ====================================*/
     public function DSTieuChi($macb){
         $dstc = DB::table('tieu_chi_danh_gia as dg')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
@@ -24,8 +35,9 @@ class QdtieuchiController extends Controller
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc);
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
-    public function ThemTieuChi($macb){        
-        return view('giangvien.them-tieu-chi');
+    public function ThemTieuChi($macb){ 
+        $ma = $this->matc_tutang();
+        return view('giangvien.them-tieu-chi')->with('ma',$ma);
     }
     public function LuuThemTieuChi(Request $req){
         $post = $req->all();

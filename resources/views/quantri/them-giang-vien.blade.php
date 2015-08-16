@@ -29,7 +29,7 @@
                     <tr>
                         <td>Mã cán bộ:</td>
                         <td>
-                            <input type="text" size="2" value="" name="txtMaCB" class="form-control">
+                            <input type="text" size="2" value="{{$ma}}" name="txtMaCB" class="form-control" readonly=""/>
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
                     </tr>

@@ -157,14 +157,14 @@
                                     </td>
                                 </tr>
                             </table>
-                            <form action="{{action('SinhvienController@CapNhatThongTin')}}" method="post">
+                            <form action="{{action('SinhvienController@LuuCapNhatThongTin')}}" method="post">
                                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                                 <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center' id="bang2">
                                     <tr><th colspan="2" style="text-align: center">Xác nhận thông tin</th></tr>
                                     <tr>
                                         <td>Số điện thoại:</td>
                                         <td>
-                                            <input type="hidden" name="MaSV" value="<?php echo $sv['mssv'];?>" />
+                                            <input type="hidden" name="txtMaSV" value="<?php echo $sv['mssv'];?>" />
                                             <input type="text" name="txtDienThoai" value="<?php echo $sv['sdt'];?>" class="form-control">
                                             <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                                         </td>

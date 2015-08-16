@@ -60,7 +60,7 @@
                                     <li><a href="">Danh sách đăng ký đề tài</a></li>
                                 </ul>
                             </li>
-                            <li><a href="">Kho tài liệu</a></li>
+                            <li><a href="{{asset('giangvien/khotailieu/2134')}}">Kho tài liệu</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Chấm điểm

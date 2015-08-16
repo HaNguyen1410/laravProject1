@@ -27,7 +27,7 @@
                         <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
                     </a>
                 </label>
-                 <a href="" style="margin-left: 40%;">
+                 <a href="{{$cvchinh->macv}}/themcvphu" style="margin-left: 40%;">
                     <button type="button" name="btnThem" class="btn btn-primary" style="width:20%;">
                     <img src="{{asset('images/add-icon.png')}}">Thêm công việc
                     </button>
@@ -42,7 +42,7 @@
                     <th colspan="3" width="20%">Thực tế</th>
                     <th rowspan="2" width="20%">Chi tiết công việc</th>
                     <th rowspan="2" width="8%">Tiến độ</th>
-                    <th rowspan="2" width="5%">Thao tác</th>
+                    <th rowspan="2" width="6%">Thao tác</th>
                 </tr>
                 <tr>
                     <th>Bắt đầu</th>
@@ -71,7 +71,7 @@
                             </div> 
                         </td>
                         <td align='center'>
-                            <a href=""><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
+                            <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
                             <a href=""><img src="{{asset('images/Document-Delete-icon.png')}}"/></a>
                         </td>
                     </tr>

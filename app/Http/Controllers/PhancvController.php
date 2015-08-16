@@ -19,14 +19,26 @@ class PhancvController extends Controller
 /*====================== Mã công việc tự tăng ====================================*/
     function macv_tutang(){
         $pre = "CV";
-        $macuoi = DB::table('cong_viec')->orderBy('macv', 'desc')->value('macv'); 
+        $macuoi = DB::table('cong_viec')->orderBy('macv', 'desc')->first(); 
         if(count($macuoi)>0){
-            $ma = $macuoi['macv'];  //Lấy mã cuối cùng của nhóm thưc hiện
+            $ma = $macuoi->macv;  //Lấy mã cuối cùng của nhóm thưc hiện
             $so = (int)substr($ma, 2) + 1;
         }
             return  $mamoi = $pre .=$so;     
     }
-
+/*====================== Mã công việc phụ thuộc tự tăng ====================================*/
+    function macvphuthuoc_tutang($macvchinh){
+        $pre = $macvchinh;        
+        $macuoi = DB::table('cong_viec')->where('phuthuoc_cv','=',$macvchinh)
+                ->orderBy('macv', 'desc')->first();
+        
+        if(count($macuoi) > 0){
+            $ma = $macuoi->macv;  //Lấy mã cuối cùng của nhóm thưc hiện
+            $so = (int)substr($ma, 4) + 1;
+        }
+            $pre .=".";
+            return  $mamoi = $pre .= $so;     
+    }
 /*========= Danh sách phân công ==============*/   
    public function DSPhanCV($mssv){
        $manth = DB::table('dangky_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
@@ -52,10 +64,55 @@ class PhancvController extends Controller
                 ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
                 ->where('dk.manhomthuchien',$manth)
                 ->get();
-         return view('sinhvien.them-cong-viec')->with('dstv',$dstv);
+         $ma = $this->macv_tutang();
+         return view('sinhvien.them-cong-viec')->with('dstv',$dstv)->with('manth',$manth)
+             ->with('ma',$ma);
      }
-     public function LuuThemcvChinh(){
-         
+     public function LuuThemcvChinh(Request $req){
+         $post = $req->all();
+         $v = \Validator::make($req->all(),
+            [
+                'txtTenCV'          => 'required',
+                'txtNgayBatDauKH'   => 'required|date',
+                'txtNgayKetThucKH'  => 'required|date',
+                'cbGiaoCho'         => 'required',
+                'txtNoiDungViec'    => 'required',
+                'txtGioThucTe'      => 'required|numeric',
+                'txtTienDo'         => 'required|numeric',
+                'cbTrangThai'       => 'required',
+                'cbUuTien'          => 'required'
+            ]
+         );
+         if($v->fails()){
+             return redirect()->back()->withErrors($v->errors());
+         }
+         else{
+             $data1 = array(
+                    'macv'                 => $_POST['txtMaCV'],
+                    'congviec'             => $_POST['txtTenCV'],
+                    'giaocho'              => $_POST['cbGiaoCho'],
+                    'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
+                    'ngayketthuc_kehoach'   => $_POST['txtNgayKetThucKH'],
+                    //'ngaybatdau_thucte',
+                    //'ngayketthuc_thucte',
+                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'phuthuoc_cv'          => 0,
+                    'uutien'               => $_POST['cbUuTien'],
+                    'trangthai'            => $_POST['cbTrangThai'],
+                    'tiendo'               => $_POST['txtTienDo'],
+                    'noidungthuchien'      => $_POST['txtNoiDungViec'],
+                    //'ngaytao'
+             );
+             $data2 = array(
+                 'manhomthuchien' => $_POST['txtMaNhomNL'],
+                 'macv'           => $_POST['txtMaCV']
+             );
+             $ch1 = DB::table('cong_viec')->insert($data1);
+             $ch2 = DB::table('thuc_hien')->insert($data2);
+             if($ch1 >0 && $ch2 > 0){
+                 return redirect('sinhvien/phancv/1111317');
+             }
+         }
      }
 /*========= Cập nhật công việc chính ==============*/ 
      public function CapNhatcvChinh($masv,$macv){
@@ -67,19 +124,66 @@ class PhancvController extends Controller
          $ndcv = DB::table('cong_viec')->where('macv',$macv)->first();
          return view('sinhvien.cap-nhat-cong-viec')->with('dstv',$dstv)->with('ndcv',$ndcv);
      }
-     public function LuuCapNhatcvChinh(){
-         
+     public function LuuCapNhatcvChinh(Request $req){
+         $post = $req->all();
+         $v = \Validator::make($req->all(),
+                 [
+                    'txtTenCV'              => 'required',
+                    'txtNgayBatDauKH'       => 'required|date',
+                    'txtNgayKetThucKH'      => 'required|date',
+                    'txtNgayBatDauThucTe'   => 'required|date',
+                    'txtNgayKTThucTe'       => 'required|date',                     
+                    'cbGiaoCho'             => 'required',
+                    'txtNoiDungViec'        => 'required',
+                    'txtGioThucTe'          => 'required|numeric',
+                    'txtTienDo'             => 'required|numeric',
+                    'cbTrangThai'           => 'required',
+                    'cbUuTien'              => 'required'
+                 ]
+          );
+         if($v->fails()){
+             return redirect()->back()->withErrors($v->errors());
+         }
+         else{
+             $data = array(
+                    'macv'                 => $_POST['txtMaCV'],
+                    'congviec'             => $_POST['txtTenCV'],
+                    'giaocho'              => $_POST['cbGiaoCho'],
+                    'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
+                    'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
+                    'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
+                    'ngayketthuc_thucte'    => $_POST['txtNgayKTThucTe'],
+                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'phuthuoc_cv'          => 0,
+                    'uutien'               => $_POST['cbUuTien'],
+                    'trangthai'            => $_POST['cbTrangThai'],
+                    'tiendo'               => $_POST['txtTienDo'],
+                    'noidungthuchien'      => $_POST['txtNoiDungViec'],
+                    //'ngaytao'
+             );
+             $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
+             if($ch >0){
+                 return redirect('sinhvien/phancv/1111317');
+             }
+         }
      }
 /*========= Danh sách phân công chi tiết (công việc phụ thuộc) ==============*/ 
     public function DSPhanChiTiet($mssv,$macv){
         $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv','=',$macv)->get();
-        $cvchinh = DB::table('cong_viec')->where('macv','=',$macv)->first();
+        $cvchinh = DB::table('cong_viec')->where('macv','=',$macv)
+                ->first();
         return view('sinhvien.phan-cong-chi-tiet-cv')->with('dscvphu', $dscvphu)
-            ->with('cvchinh',$cvchinh);
+            ->with('cvchinh',$cvchinh);        
     }
 /*========= Thêm công việc chi tiết (cv phụ) ==============*/ 
-     public function ThemcvPhu(){
-         //return view('sinhvien.them-cong-viec');
+     public function ThemcvPhu($mssv,$macv){
+         
+         return view('sinhvien.them-cong-viec-phuthuoc');
+     }
+/*========= Cập nhật công việc chi tiết (cv phụ) ==============*/ 
+     public function CapNhatcvPhu($masv,$macv,$macvphu){
+         
+         return view('sinhvien.cap-nhat-cong-viec-phuthuoc');
      }
     
 }// End Class PhancvController

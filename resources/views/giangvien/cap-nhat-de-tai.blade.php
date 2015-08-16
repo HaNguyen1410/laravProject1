@@ -22,8 +22,9 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold;">SỬA ĐỀ TÀI</h3>  
-             <form id="formSuaDeTai" name="formSuaDeTai" action="" method="post"> 
-                <table class="table table-bordered" id="bang1">
+             <form action="{{action('DetaiController@LuuCapNhatDeTai')}}" method="post" id="formSuaDeTai" name="formSuaDeTai" > 
+                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+                 <table class="table table-bordered" id="bang1">
                     <tr>
                         <td align="right" width='10%'>Năm học:</td>
                         <td></td>
@@ -34,6 +35,7 @@
                         <td>Mã đề tài:</td>
                         <td>
                             <input style="width:30%; text-align: center;" type="text" id="txtMaDeTai" name="txtMaDeTai" value="{{$dt->madt}}" class="form-control" readonly=""/> 
+                            <input type='text' name='txtMaCB' value='{{$macb}}'/>
                         </td>
                         <th align="right" width="10%">Nhóm học phần:</th>
                         <td width="10%">
@@ -48,14 +50,16 @@
                         <td>Tên đề tài:</td>
                         <td colspan="3">
                             <input type="text" name="txtTenDeTai" value="{{$dt->tendt}}" class="form-control"> 
+                            <p style='color:red;'>{{$errors->first('txtTenDeTai')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Số sinh viên tối đa</td>
                         <td width="10%">
-                            <input type="text" name="txtSoNguoi" value="{{$dt->songuoitoida}}" class="form-control"> 
+                            <input type="text" name="txtSoNguoi" value="{{$dt->songuoitoida}}" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
                         </td>
-                        <th>Phân loại:</th>
+                        <th width="10%">Phân loại:</th>
                         <td colspan="3">
                             <?php
                                 $goiy = strcasecmp($dt->phanloai, 'Gợi ý');
@@ -67,7 +71,7 @@
                                     echo "Gợi ý: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Gợi ý'/> &nbsp&nbsp&nbsp&nbsp";
                                     echo "Đề xuất: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Đề xuất' checked='true'/>";
                                 }
-                            ?>
+                            ?>                            
                         </td>
                     </tr>                                           
                     <tr>

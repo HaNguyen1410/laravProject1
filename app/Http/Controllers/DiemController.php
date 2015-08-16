@@ -41,7 +41,7 @@ class DiemController extends Controller
                 ->where('dk.manhomthuchien',$manth)
                 ->get();
         foreach($dssv as $sv)
-            $dsdiem = DB::table('chitiet_diem')->where('mssv',$sv->mssv)->first();
+            $dsdiem = DB::table('chitiet_diem')->select('diem')->where('mssv',$sv->mssv)->first();
         
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
             ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);

@@ -50,7 +50,11 @@
                         </tr>
                         <tr>
                             <td><label>Hướng dẫn nhóm học phần:</label></td>
-                            <td style="color:blue;"></td>
+                            <td style="color:blue;">
+                                @foreach($nhomhp as $hp)
+                                    {{$hp->tennhomhp}} &nbsp;&nbsp;&nbsp;
+                                @endforeach
+                            </td>
                         </tr>
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
