@@ -48,7 +48,7 @@ class DiemController extends Controller
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem($macb){       
-        $hk_nk = DB::table('nien_khoa as nk')
+        $hk_nk = DB::table('nien_khoa as nk')->distinct()
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
@@ -63,7 +63,7 @@ class DiemController extends Controller
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
                 ->get();
-        
+                
         return view('giangvien.nhap-diem')->with('hk_nk',$hk_nk)->with('dsdt',$dsdt)
                 ->with('tieuchi',$tieuchi);
     }  

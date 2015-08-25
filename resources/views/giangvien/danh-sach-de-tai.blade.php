@@ -17,25 +17,29 @@
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">Danh sách các đề tài</h3> 
             <div class="bg-success">
                 <table class="table table-bordered" cellpadding="15px" cellspacing="10px">
-                    <tr> 
-                        <td align="right">Mã cán bộ:</td>
-                        <td style="color: darkblue; font-weight: bold;">
-                            
-                        </td>
-                        <td align="right">Giảng viên:</td>
-                        <td colspan="5" style="color: darkblue; font-weight: bold;"></td>
-                    </tr>
                     <tr>  
                         <td align="right">Năm học:</td>
-                        <td width="14%"></td>
+                        <td width="14%">
+                            <select class="form-control" name='cbNamHoc'>
+                                @foreach($namhoc as $nk)
+                                <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                                @endforeach
+                            </select>
+                        </td>
                         <td align="right">Học kỳ:</td>
-                        <td width="10%"></td>
+                        <td width="10%">
+                            <select class="form-control" name='cbHocKy'>
+                                @foreach($hocky as $nk)
+                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                @endforeach
+                            </select>
+                        </td>
                         <td align="right">Nhóm học phần:</td>
                         <td>
-                            <select class="form-control">
-                                <option value="">01</option>
-                                <option value="">03</option>
-                                <option value="">03</option>  
+                            <select class="form-control" name='cbNhomHP'>
+                                @foreach($nhomhp as $hp)
+                                <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
+                                @endforeach
                             </select>
                         </td>
                         <td align="right">Trạng thái:</td>
@@ -74,9 +78,12 @@
                 @foreach($dsdt as $stt => $dt)
                     <tr>
                         <td align='center'>{{$stt+1}}</td>
-                        <td width='20%'>{{$dt->tendt}}</td>
-                        <td>{{$dt->motadt}}</td>
-                        <td>{{$dt->congnghe}}</td>
+                        <td width='15%'>
+                            {{$dt->tendt}}
+                            <a href='$taptin'  align='center'><img src="{{asset('images/Filetype-PDF-icon.png')}}"/></a>
+                        </td>
+                        <td width='15%'>{{$dt->motadt}}</td>
+                        <td width='15%'>{{$dt->congnghe}}</td>
                         <td align='center'>{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>
                         <td align='center'>{{$dt->phanloai}}</td>

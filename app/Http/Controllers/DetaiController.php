@@ -29,7 +29,17 @@ class DetaiController extends Controller
 /*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/
     public function DsDeTai($macb){
         $dsdt = DB::table('de_tai')->where('macb',$macb)->get();
-        return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt);
+        $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
+                ->get();
+        $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
+                ->get();
+        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+                ->select('hp.manhomhp','hp.tennhomhp')
+                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
+                ->join('de_tai as dt','dt.madt','=','radt.madt')
+                ->where('macb',$macb)->get();
+        return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt)->with('nhomhp',$nhomhp)
+                    ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaDeTai($madt){

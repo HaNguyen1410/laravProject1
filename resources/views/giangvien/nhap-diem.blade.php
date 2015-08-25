@@ -29,6 +29,7 @@
                     <th>Mã nhóm niên luận:</th>
                     <td>
                         <select name="cbNhomNL" class="form-control">
+                            <option value="">Tất cả</option>
                             @foreach($dsdt as $dt)
                             <option value="{{$dt->manhomthuchien}}">{{$dt->manhomthuchien}}</option>
                             @endforeach

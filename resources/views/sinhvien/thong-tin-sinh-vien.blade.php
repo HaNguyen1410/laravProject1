@@ -92,7 +92,7 @@
                                 </tr>
                                 <tr>
                                     <td><label>Tên đề tài:</label></td>
-                                    <td style="color:blue;" colspan="3"></td>
+                                    <td style="color:blue;" colspan="3">{{$detainhom->tendt}}</td>
                                 </tr>
                                 <tr>
                                     <td><label>Mã nhóm niên luận: </label></td>

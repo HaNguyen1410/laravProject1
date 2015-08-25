@@ -34,10 +34,14 @@ class SinhvienController extends Controller
                 ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
                 ->where('dk.mssv',$masv)
                 ->first();
+        $detainhom = DB::table('ra_de_tai as radt')->select('radt.manhomthuchien','dt.madt','dt.tendt')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->where('radt.manhomthuchien',$manth)
+                ->first();
         $nhomth = DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->first();
         
         return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien)->with('dstv',$dstv)
-            ->with('ttgv',$ttgv)->with('hp',$hp)->with('nhomth',$nhomth);
+            ->with('ttgv',$ttgv)->with('hp',$hp)->with('nhomth',$nhomth)->with('detainhom',$detainhom);
     }
 /*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
     public function LuuCapNhatThongTin(Request $request){
