@@ -16,6 +16,21 @@ use View,
 
 class TheodoikehoachController extends Controller
 {
+/*================== Số thời gian thực hiện dự án của mỗi sinh viên ======================*/ 
+    function GioLam($hoten){
+        $sogio = DB::table('nhom_thuc_hien as nth')->select('cv.sogio_thucte')
+                ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
+                ->join('thuc_hien as th','th.manhomthuchien','=','dk.manhomthuchien')
+                ->join('cong_viec as cv','th.macv','=','cv.macv')
+                ->where('cv.giaocho','like',$hoten)
+                ->get();
+        foreach($sogio as $gio){
+            $h = $gio->sogio_thucte;
+            $tonggio = $h++;
+        }
+        return $tonggio;
+    }
+/*================== Danh sách đề tài thực hiện ======================*/   
     public function TheoDoiKH($macb){
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
@@ -32,7 +47,7 @@ class TheodoikehoachController extends Controller
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){
         $dstv = DB::table('sinh_vien as sv')
-                ->select('dk.manhomthuchien','sv.mssv','sv.hoten','dk.nhomtruong',
+                ->select('dk.manhomthuchien','sv.mssv','sv.hoten','nth.sogio_thucte','dk.nhomtruong',
                         'sv.kynangcongnghe','sv.kienthuclaptrinh','sv.kinhnghiem')
                 ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
                 ->join('nhom_thuc_hien as nth','dk.manhomthuchien','=','nth.manhomthuchien')
@@ -44,7 +59,14 @@ class TheodoikehoachController extends Controller
                 ->where('nth.manhomthuchien',$manth)
                 ->where('cv.phuthuoc_cv','=',0)
                 ->get();
-        return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dscvchinh',$dscvchinh);
+        $tendt = DB::table('ra_de_tai as radt')->select('dt.tendt')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->first(); 
+//        foreach($dstv as $tv){
+//            $giolam = $this->GioLam($tv->hoten);
+//        }
+        return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dscvchinh',$dscvchinh)
+            ->with('manth',$manth)->with('tendt',$tendt);
     }
 /*======================= Theo dõi các công việc phụ thuộc của 1 công việc chính ==========================*/
     public function CVPhuThuoc($manth,$macv){ 

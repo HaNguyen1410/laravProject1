@@ -142,22 +142,27 @@
 <div class="container">
     <div class="row">
         <h3 style="color: darkblue;font-weight: bold; margin-left: 2%">KẾ HOẠCH CHI TIẾT</h3>
-        <h4 style='color: #398439; margin-left: 10%'> Đề tài thực hiện: <label>Tên đề tài</label></h4>            
+        <h4 style='color: #398439; margin-left: 10%'>
+            Mã nhóm niên luận: <label>{{$manth}}</label>
+        </h4>  
+        <h4 style='color: #398439; margin-left: 10%'>
+            Đề tài thực hiện: <label>{{$tendt->tendt}}</label>
+        </h4>            
         <div class="col-md-6">
             <table class="table table-hover" width="500px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="2%">STT</th>
-                    <th width="10%">Mã nhóm</th>
                     <th width="10%">MSSV</th>
                     <th width="20%">Các thành viên</th>
+                    <th width="10%">Số giờ thực hiện dự án</th>
                     <th width="5%">Trưởng nhóm</th>
                 </tr>         
                 @foreach($dstv as $stt => $tv)
                 <tr>
                     <td style="vertical-align: middle; text-align: center;" rowspan="2">{{$stt+1}}</td>
-                    <td align='center'>{{$tv->manhomthuchien}}</td>
                     <td align='center'>{{$tv->mssv}}</td>
-                    <td>{{$tv->hoten}}</td>
+                    <td align='center'>{{$tv->hoten}}</td>
+                    <td align='center'></td>
                     <td align='center'>
                         @if($tv->nhomtruong == 1)
                             <img src="{{asset('images/check.png')}}"/>
