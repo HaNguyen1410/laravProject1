@@ -16,6 +16,46 @@ use View,
 
 class DiemController extends Controller
 {
+/*========================== Tính tổng điểm của 1 sv =====================================*/
+    function tongdiem($mssv){
+        $dstongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->where('mssv','=',$mssv)
+                ->groupBy('mssv')
+                ->get();
+        
+        if(count($dstongdiem) > 0){           
+            return $dstongdiem->tongdiem;
+        } 
+        else 
+            return null;
+    }
+ /*========================== Quy điểm số ra điểm chữ =====================================*/ 
+    function diemchu($mssv){
+       $d = tongdiem($mssv);
+        if($d<=0 && $d<4){
+            return F;
+        }
+        else if($d<=4 || $d<=4.4){
+            return 'D';
+        }
+        else if($d<=4.5 || $d<=4.9){
+            return 'D+';
+        }
+        else if($d<=5.0 || $d<=5.9){
+            return 'C';
+        }
+        else if($d<=6 || $d<=6.9){
+            return 'C+';
+        }
+        else if($d<=7 || $d<=7.9){
+            return 'B';
+        }
+        else if($d<=8 || $d<=8.9){
+            return 'B+';
+        }
+        else     
+            return 'A';
+    }    
 /*=========================== Danh sách điểm nhóm ==============================================*/
     public function XemDiem($mssv){
         $manth = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomthuchien');
