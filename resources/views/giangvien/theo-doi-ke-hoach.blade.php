@@ -21,16 +21,28 @@
             <h3 style="color: darkblue; font-weight: bold;">Theo dõi kế hoạch thực hiện đề tài</h3> 
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
-                    <th width='10%'>Năm học:</th>
-                    <th width='15%'></th>
-                    <th width='10%'>Học kỳ:</th>
-                    <th width='15%'></th>
-                    <th align='right' width="12%">Nhóm học phần:</th>
-                    <th width="8%">
-                        <select class="form-control">
-                            <option value="1">01</option>
-                            <option value="2">02</option>
-                            <option value="3">03</option>
+                    <th align="right">Năm học:</th>
+                    <th width="20%">
+                        <select class="form-control" name='cbNamHoc'>
+                            @foreach($namhoc as $nk)
+                            <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                            @endforeach
+                        </select>
+                    </th>
+                    <th align="right">Học kỳ:</th>
+                    <th width="10%">
+                        <select class="form-control" name='cbHocKy'>
+                            @foreach($hocky as $nk)
+                            <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                            @endforeach
+                        </select>
+                    </th>
+                    <th align="right">Nhóm học phần:</th>
+                    <th>
+                        <select class="form-control" name='cbNhomHP'>
+                            @foreach($nhomhp as $hp)
+                            <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
+                            @endforeach
                         </select>
                     </th>
                 </tr>

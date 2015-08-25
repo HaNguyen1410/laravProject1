@@ -103,6 +103,7 @@ class DiemController extends Controller
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
                 ->get();
+        
                 
         return view('giangvien.nhap-diem')->with('hk_nk',$hk_nk)->with('dsdt',$dsdt)
                 ->with('tieuchi',$tieuchi);

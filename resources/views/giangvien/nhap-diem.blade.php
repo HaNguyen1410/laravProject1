@@ -60,7 +60,23 @@
                     @endforeach                                   
                 </tr>
                 <tr>
-                    
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td align="center">
+                        <input style="text-align:center;" type="text" size='1' value=""/>
+                    </td>
+                    <td align="center">
+                        <input style="text-align:center;" type="text" size='1' value=""/>
+                    </td>
+                    <td align="center">
+                        <input style="text-align:center;" type="text" size='1' value=""/>
+                    </td>
+                    <td align="center">
+                        <input style="text-align:center;" type="text" size='1' value=""/>
+                    </td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </table>
 

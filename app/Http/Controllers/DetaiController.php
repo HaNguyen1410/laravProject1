@@ -28,7 +28,7 @@ class DetaiController extends Controller
     }
 /*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/
     public function DsDeTai($macb){
-        $dsdt = DB::table('de_tai')->where('macb',$macb)->get();
+        $dsdt = DB::table('de_tai')->where('macb',$macb)->paginate(5);
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')

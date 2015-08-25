@@ -42,7 +42,17 @@ class TheodoikehoachController extends Controller
                 ->where('dt.macb',$macb)
                 ->where('dk.nhomtruong','=',1)
                 ->get();
-        return view('giangvien.theo-doi-ke-hoach')->with('dsdtnhom',$dsdtnhom);
+        $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
+                ->get();
+        $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
+                ->get();
+        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+                ->select('hp.manhomhp','hp.tennhomhp')
+                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
+                ->join('de_tai as dt','dt.madt','=','radt.madt')
+                ->where('macb',$macb)->get();
+        return view('giangvien.theo-doi-ke-hoach')->with('dsdtnhom',$dsdtnhom)->with('nhomhp',$nhomhp)
+                    ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){

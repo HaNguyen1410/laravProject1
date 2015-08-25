@@ -43,6 +43,18 @@ class DangkydtController extends Controller
         $dssv = DB::table('dangky_nhom')->distinct()->where('manhomhp',$mahp)->get();
         return view('sinhvien.dang-ky-de-tai')->with('dssv',$dssv)->with('dstensv',$dstensv);           
     }
+/*==================== Lấy danh sách đề tài của 1 nhóm học phân ======================*/
+    public function ChonDeTai($mssv){
+        $mahp = DB::table('dangky_nhom as dk')
+                ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
+                ->where('dk.mssv',$mssv)
+                ->value('hp.manhomhp');
+        $dsdtHocPhan = DB::table('ra_de_tai as radt')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->where('radt.manhomhp',$mahp)
+                ->get();
+        return view('sinhvien.chon-de-tai')->with('dsdtHocPhan',$dsdtHocPhan);
+    }
 }
 /*
  * 

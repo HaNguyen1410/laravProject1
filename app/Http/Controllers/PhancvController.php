@@ -16,6 +16,27 @@ use View,
 
 class PhancvController extends Controller
 {
+/*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
+    public function DanhSachCV($mssv){
+        $manth = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $dscvnhom = DB::table('cong_viec as cv')->distinct()
+               ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
+                                ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sogio_thucte'
+                                 ,'cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
+               ->join('thuc_hien as th','cv.macv','=','th.macv')
+               ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
+               ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
+               ->where('dk.mssv','=',$mssv)
+               ->where('nth.manhomthuchien','=',$manth)
+               ->paginate(5);
+               //->get();
+        
+        return view('sinhvien.danh-sach-cong-viec')->with('dscv',$dscvnhom);
+    }
+/**********
+ * ########## CÔNG VIỆC CHÍNH #############
+ * *********
+ */ 
 /*====================== Mã công việc tự tăng ====================================*/
     function macv_tutang(){
         $pre = "CV";
@@ -42,11 +63,7 @@ class PhancvController extends Controller
             return $mamoi = $pre .= 1;
         }       
     }
-/*****
- * ########## CÔNG VIỆC CHÍNH #############
- * ***
- */
-/*========= Danh sách phân công ==============*/   
+/*========= Danh sách quản lý phân công nhiệm vụ ==============*/   
    public function DSPhanCV($mssv){
        $manth = DB::table('dangky_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
        $tiendonhom = DB::table('nhom_thuc_hien')->where('manhomthuchien','=',$manth)->first();
@@ -133,7 +150,7 @@ class PhancvController extends Controller
              );
              $ch1 = DB::table('cong_viec')->insert($data1);
              $ch2 = DB::table('thuc_hien')->insert($data2);
-             if($ch1 >0 && $ch2 > 0){
+             if($ch1 > 0 && $ch2 > 0){
                  return redirect('sinhvien/phancv/1111317');
              }
          }

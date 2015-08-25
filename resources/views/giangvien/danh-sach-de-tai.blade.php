@@ -101,6 +101,9 @@
                         </td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="10" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
+                </tr>
             </table>
         </div>
     </div><!-- /row -->

@@ -37,14 +37,19 @@ and open the template in the editor.
                                 <th>Công nghệ sử dụng</th>
                                 <th>Trạng thái</th>
                             </tr>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach($dsdtHocPhan as $stt => $dt)
+                                 <tr>
+                                    <td align="center">{{$stt+1}}</td>
+                                    <td>{{$dt->tendt}}</td>
+                                    <td align="center">{{$dt->songuoitoida}}</td>
+                                    <td>{{$dt->motadt}}</td>
+                                    <td>{{$dt->congnghe}}</td>
+                                    <td align="center">
+                                        <button type="submit" id="btnDangKy" name="btnDangKy" value="Đăng ký" />
+                                        </td>
+                                </tr>
+                            @endforeach
+                           
                             <?php
 //                                $stt = 1;
 //                                while($rw = mysql_fetch_array($thongtindt)){
