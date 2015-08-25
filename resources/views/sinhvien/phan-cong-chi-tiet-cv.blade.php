@@ -75,7 +75,7 @@
                             <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
                                 <img src="{{asset('images/edit-icon.png')}}"/>
                             </a>&nbsp
-                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="../1111317/{{$cvchinh->macv}}/{{$cvphu->macv}}">
+                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="../1111317/{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
                                 <img src="{{asset('images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

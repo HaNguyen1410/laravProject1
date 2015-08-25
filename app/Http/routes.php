@@ -120,7 +120,8 @@ Route::post('luuthemcvchinh','PhancvController@LuuThemcvChinh');
     /* ++ * Cập nhật Công việc chính  */
 Route::get('sinhvien/phancv/{mssv}/capnhatcvchinh/{macv}','PhancvController@CapNhatcvChinh');
 Route::post('luucapnhatcvchinh','PhancvController@LuuCapNhatcvChinh');
-
+/* ------ Xóa công việc chính -------- */
+Route::get('sinhvien/phancv/{mssv}/xoacvchinh/{macv}','PhancvController@XoacvChinh');
      /* ++  * CÔNG VIỆC CHI TIẾT   */
 Route::get('sinhvien/phancongchitiet/{mssv}/{macv}','PhancvController@DSPhanChiTiet');
     /* ++ * Thêm công việc chi tiết (công việc phụ thuộc)  */

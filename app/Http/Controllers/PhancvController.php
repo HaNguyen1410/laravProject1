@@ -63,7 +63,24 @@ class PhancvController extends Controller
       // 
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
                ->with('dscvchinh',$dscvchinh);
-   } 
+   }
+/*========= Xóa công việc chính ==============*/    
+    public function XoacvChinh($mssv,$macv){
+        $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv',$macv)->get();
+        if(count($dscvphu) > 0){
+            \Session::flash('ThongBao','Phải xóa công việc phụ thuộc trước!');
+        }
+        else{
+            $Xoath = DB::table('thuc_hien')->where('macv',$macv)->delete();
+            $Xoacv = DB::table('cong_viec')->where('macv',$macv)->delete();
+
+            \Session::flash('ThongBao','Xóa thành công!');
+            if($Xoath && $Xoacv){
+                //return $delete; $delete = 1 sau khi thuc hiện xóa
+                return redirect('sinhvien/phancv/1111317/');
+            } 
+        }        
+    }
 /*========= Thêm công việc chính ==============*/ 
      public function ThemcvChinh($masv){
          $manth = DB::table('dangky_nhom')->where('mssv',$masv)->value('manhomthuchien');
@@ -187,12 +204,12 @@ class PhancvController extends Controller
             ->with('cvchinh',$cvchinh);        
     }
 /*========= Xóa chi tiết (công việc phụ thuộc) ==============*/    
-    public function XoacvPhu($macv,$macvphu){
-        $Xoacv = DB::table('cong_viec')->where('macv',$macvphu)->delete();
+    public function XoacvPhu($mssv,$macv,$macvphu){
         $Xoath = DB::table('thuc_hien')->where('macv',$macvphu)->delete();
+        $Xoacv = DB::table('cong_viec')->where('macv',$macvphu)->delete();
         
         \Session::flash('ThongBao','Xóa thành công!');
-        if($Xoacv && $Xoath){
+        if($Xoath && $Xoacv){
             //return $delete; $delete = 1 sau khi thuc hiện xóa
             return redirect('sinhvien/phancongchitiet/1111317/'.$macv);
         }

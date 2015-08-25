@@ -42,6 +42,7 @@
                     </div>
                 </div>
             </div>
+            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table" width="800px" cellpadding="0px" cellspacing="0px" id="bang1">
                 <tr>
                     <th width="8%">Tên đề tài:</th>
