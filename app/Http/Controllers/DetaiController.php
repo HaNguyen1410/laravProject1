@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 
 class DetaiController extends Controller
 {
@@ -88,6 +89,7 @@ class DetaiController extends Controller
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'phanloai'      => $_POST['cbmPhanLoai'],
                     'trangthai'     => $_POST['cbmTrangThai'],
+                    'ngaytao'       => Carbon::now(),
                     //'taptindinhkem' => $_POST['ftTapTinKem']
                 );  
             $ch1 = DB::table('de_tai')->insert($data1);
@@ -130,6 +132,7 @@ class DetaiController extends Controller
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'phanloai'      => $_POST['rdPhanLoai'],
                     'trangthai'     => $_POST['rdTrangThai'],
+                    'ngaytao'       => Carbon::now(),
                     //'taptindinhkem' => $_POST['txtTapTinKem']
             );
             $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);

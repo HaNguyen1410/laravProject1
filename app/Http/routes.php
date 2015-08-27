@@ -77,7 +77,7 @@ Route::post('luuthemdetai','DetaiController@LuuThemDeTai');
          /*  * Cập nhật đề tài */
 Route::get('giangvien/danhsachdetai/{macb}/capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
 Route::post('luucapnhatdetai','DetaiController@LuuCapNhatDeTai');
-/*======= QUY ĐỊNH TIÊU CHÍ Chấm điểm ==========*/
+/*======= QUY ĐỊNH TIÊU CHÍ CHẤM ĐIỂM ==========*/
 route::get('giangvien/dstieuchi/{macb}','QdtieuchiController@DSTieuChi');
         /*  * Thêm tiêu chí đánh giá  */
 route::get('giangvien/dstieuchi/{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');

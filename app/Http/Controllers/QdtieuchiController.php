@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 
 class QdtieuchiController extends Controller
 {
@@ -68,8 +69,8 @@ class QdtieuchiController extends Controller
             $data1 = array(
                     'matc'       => $_POST['txtMaTC'],
                     'noidungtc'  => $_POST['txtNoiDungTC'],
-                    'heso'       => $_POST['txtMucDiem']
-                    //'ngaytao'    => today()   
+                    'heso'       => $_POST['txtMucDiem'],
+                    'ngaytao'    => Carbon::now()   
             );
             $data2 = array(
                     'macb'   => $_POST['txtMaCB'],
@@ -106,8 +107,8 @@ class QdtieuchiController extends Controller
         {            
             $data = array(
                     'noidungtc'  => $_POST['txtNoiDungTC'],
-                    'heso'       => $_POST['txtMucDiem']
-                    //'ngaytao'    => today()   
+                    'heso'       => $_POST['txtMucDiem'],
+                    'ngaytao'    => Carbon::now()   
             );
             $ch = DB::table('tieu_chi_danh_gia')->where('matc', $post['txtMaTC'])->update($data);
             if($ch > 0){
