@@ -80,12 +80,12 @@ class DiemController extends Controller
                 ->join('dangky_nhom as dk','sv.mssv','=','dk.mssv')
                 ->where('dk.manhomthuchien',$manth)
                 ->get();
-        $data['mssv'] = DB::table('sinh_vien as sv')->select('sv.mssv')
+        $masv = DB::table('sinh_vien as sv')
                 ->join('dangky_nhom as dk','sv.mssv','=','dk.mssv')
                 ->where('dk.manhomthuchien',$manth)
-                ->get();
-        
-            $dsdiem = DB::table('chitiet_diem')->select('diem')->whereIn('mssv', $data)->get();
+                ->lists('dk.mssv');
+               
+             $dsdiem = DB::table('chitiet_diem')->select('diem')->whereIn('mssv', $masv)->get();              
         
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
             ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);

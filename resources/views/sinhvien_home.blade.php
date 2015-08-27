@@ -79,10 +79,10 @@
                                     Đăng ký niên luận
                                     <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('sinhvien/dangkydt/1111317')}}">Đăng ký</a></li>
+                                <ul class="dropdown-menu" role="menu">                              
+                                    <li><a href="{{asset('sinhvien/dangkydt/1111317')}}">Đăng ký</a></li>   
                                     <li class="divider"></li>                                
-                                    <li><a href="">Kết quả đăng ký</a></li>                              
+                                    <li><a href="">Kết quả đăng ký</a></li> 
                                 </ul>
                             </li>
                             <li class="dropdown">

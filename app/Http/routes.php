@@ -56,7 +56,7 @@ Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
 Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
 
 /**********************
- * =========================== Trang giảng viên ===========================================
+ * =========================== TRANG GIẢNG VIÊN ===========================================
  * ***********************
  */
 Route::get('vidu','GiangvienController@ViDu');
@@ -99,7 +99,7 @@ route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'Theodoike
 route::post('giangvien/danhsachdetai/{macb}/luuduyetdetai','TheodoikehoachController@LuuDuyetDeTai');
 
 /*********************
- * =========================== Trang sinh viên ===========================================
+ * =========================== TRANG SINH VIÊN ===========================================
  * *************************
  */
 /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
@@ -114,6 +114,9 @@ Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
 /*======= ĐĂNG KÝ ĐỀ TÀI niên luận ==========*/
 Route::get('sinhvien/dangkydt/{mssv}','DangkydtController@DangKyDT');
+/*======= Đăng ký thành viên Thành Viên ==========*/
+route::get('sinhvien/dangkythanhvien/{mssv}','DangkydtController@ThemThanhVien');
+route::post('luuthemthanhvien','DangkydtController@LuuThemThanhVien');
 /*======= Danh sách đề tài để chọn ==========*/
 Route::get('sinhvien/chondetai/{mssv}','DangkydtController@ChonDeTai');
 

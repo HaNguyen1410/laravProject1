@@ -27,44 +27,34 @@ and open the template in the editor.
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <h3 style="color: darkblue; font-weight: bold;" align='center'>
+                        Danh sách đề tài niên luận 
+                    </h3> 
                     <form action="" method="post">
                         <table class="table table-bordered table-hover" style="margin-top: 5%;">
                             <tr>
                                 <th>STT</th>
-                                <th>Tên đề tài</th>
+                                <th width="15%">Tên đề tài</th>
                                 <th>Số người tối đa</th>
-                                <th>Môt tả</th>
+                                <th width="25%">Môt tả</th>
                                 <th>Công nghệ sử dụng</th>
                                 <th>Trạng thái</th>
                             </tr>
                             @foreach($dsdtHocPhan as $stt => $dt)
                                  <tr>
                                     <td align="center">{{$stt+1}}</td>
-                                    <td>{{$dt->tendt}}</td>
+                                    <td>
+                                        {{$dt->tendt}}<br>
+                                        <input type="text" size="5" name="txtMaDeTai" value="{{$dt->madt}}"/>
+                                    </td>
                                     <td align="center">{{$dt->songuoitoida}}</td>
                                     <td>{{$dt->motadt}}</td>
                                     <td>{{$dt->congnghe}}</td>
                                     <td align="center">
-                                        <button type="submit" id="btnDangKy" name="btnDangKy" value="Đăng ký" />
-                                        </td>
+                                        <input type="submit" id="btnDangKy" name="btnDangKy" value="Đăng ký" class="btn btn-success"/>
+                                    </td>
                                 </tr>
                             @endforeach
-                           
-                            <?php
-//                                $stt = 1;
-//                                while($rw = mysql_fetch_array($thongtindt)){
-//                                    $chon = isset($_POST['btnDangKy']) ? $rw['madt'] : "Đăng ký";
-//                                    echo   "<tr>".
-//                                               "<td>$stt</td>".
-//                                               "<td>".$rw['tendt']."</td>".
-//                                               "<td>".$rw['songuoitoida']."</td>".
-//                                               "<td>".$rw['motadt']."</td>".
-//                                               "<td>".$rw['congnghe']."</td>".
-//                                               "<td><button type='submit' id='btnDangKy' name='' value='$chon' ></button></td>".
-//                                           "</tr>";
-//                                    $stt++;
-//                                }
-                            ?>
                         </table>
                     </form>
                 </div>
