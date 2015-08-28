@@ -34,22 +34,24 @@
         <form name="frmThemTV" action="" method="post">
             <table class="table table-bordered" id="tblChonTV">
                 <tr> 
-                    <?php echo $n = count($dstensv);?>
-                    @for($j=1; $j<=4; $j++) <!-- @endforeachTạo 4 ô trên 1 hàng -->
-                        <td width='20%'>
-                            @for($i=1; $i<6; $i++) <!-- Mỗi ô có 6 sinh viên -->
-                                 
-                                  @foreach($dstensv as $sv)
-                                        <a href="" data-toggle="tooltip" data-placement="top" title="">
-                                            {{$sv->mssv}}
-                                        </a>
-                                        : <input type="checkbox" name="chk[]" value=""/>&nbsp&nbsp&nbsp&nbsp
-                                        Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=''/><br> 
-                                  @endforeach   
-                                
-                            @endfor
-                        </td>                  
-                    @endfor
+                    <?php echo $n = count($dstensv); ?>                    
+                    <td>
+                        <div style="border: 1px solid black; padding: 2px 2px; width: 220px;display: block; float: left;">
+                            <?php $stt=1; ?>
+                            @foreach($dstensv as $sv)
+                                 <a href="" data-toggle="tooltip" data-placement="top" title="">
+                                       {{$sv->mssv}}
+                                   </a>
+                                   : <input type="checkbox" name="chk[]" value=""/>&nbsp&nbsp&nbsp&nbsp
+                                   Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=''/><br>                                     
+
+                                 <?php $stt++; ?>                                      
+                                  @if($stt == 6)
+                                      <?php break; continue; ?>
+                                  @endif  
+                            @endforeach
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="4" align='center'>

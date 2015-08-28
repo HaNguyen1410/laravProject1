@@ -42,10 +42,10 @@ class QdtieuchiController extends Controller
         $Xoad = DB::table('chitiet_diem')->where('matc',$matc)->delete();
         
         \Session::flash('ThongBao','Xóa thành công!');
-        if($Xoaqd && $Xoatc && $Xoad){
+        
             //return $delete; $delete = 1 sau khi thuc hiện xóa
             return redirect('giangvien/dstieuchi/2134');
-        }
+        
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
     public function ThemTieuChi($macb){ 

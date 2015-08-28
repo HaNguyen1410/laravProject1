@@ -30,11 +30,12 @@
                     <th>Ngày tạo</th>
                     <th>Khóa</th>
                     <th width=8%>Chức năng</th>
-                </tr>                        
-                @foreach($dsgv as $stt => $rw)
+                </tr>   
+                <?php $stt=1; ?>
+                @foreach($dsgv as $tt => $rw)                
                     <tr>
                         <td align='center'>
-                            {{$stt = $stt + 1}}
+                            {{$stt}}
                         </td>
                         <td align='center'>{{$rw->macb}}</td>
                         <td>{{$rw->hoten}}</td>
@@ -55,7 +56,11 @@
                             </a>
                         </td>
                     </tr>
+                    <?php 
+                        $stt++; 
+                    ?>
                 @endforeach
+               
                 <tr>
                     <td colspan="8" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
                 </tr>                     

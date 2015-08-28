@@ -47,18 +47,13 @@
                     <div class="navbar-collapse collapse">                        
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">Kế hoạch</a>
-                            </li>                            
-                            <li class="dropdown">
-                                <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >
-                                    Đề tài
-                                    <span class="caret"></span>
+                                <a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">
+                                    Kế hoạch
                                 </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/danhsachdetai/2134')}}">Danh sách đề tài</a></li>
-                                    <li class="divider"></li>                           
-                                    <li><a href="">Danh sách đăng ký đề tài</a></li>
-                                </ul>
+                            </li>                            
+                            <li><a href="{{asset('giangvien/danhsachdetai/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Danh sách đề tài">
+                                    Đề tài
+                                </a>
                             </li>
                             <li><a href="{{asset('giangvien/khotailieu/2134')}}">Kho tài liệu</a></li>
                             <li class="dropdown">

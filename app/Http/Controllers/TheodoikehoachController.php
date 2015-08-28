@@ -33,7 +33,7 @@ class TheodoikehoachController extends Controller
 /*================== Danh sách đề tài thực hiện ======================*/   
     public function TheoDoiKH($macb){
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
-                ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
+                ->select('nth.manhomthuchien','dt.tendt','radt.chapnhan','radt.ghichu','sv.hoten','nth.tochucnhom',
                         'nth.lichhop','nth.sogio_thucte','nth.tiendo')
                 ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
                 ->join('sinh_vien as sv', 'dk.mssv','=','sv.mssv')
@@ -89,5 +89,8 @@ class TheodoikehoachController extends Controller
                 ->get();
         return view('giangvien.ke-hoach-cv-phuthuoc')->with('dscvphu',$dscvphu)->with('tencvchinh',$tencvchinh);
     }
-    
+/*============================ DUYỆT ĐỀ TÀI =====================================*/   
+    public function LuuDuyetDeTai(){
+        
+    }
 }

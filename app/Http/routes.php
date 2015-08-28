@@ -14,9 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dangnhap', function(){
-    return view('giaodienchung.dang-nhap');    
-});
+/***********************
+ * =========================== ĐĂN NHẬP ===========================================
+ * ************************
+ */
+Route::get('dangnhap', 'DangNhapController@DangNhap');
+Route::get('dangxuat', 'DangNhapController@DangXuat');
+//Route::resource('sessions','SessionsController');
 /***********************
  * =========================== Trang quản trị ===========================================
  * ************************
@@ -91,6 +95,8 @@ Route::get('giangvien/dstieuchi/{macb}/xoatieuchi/{matc}','QdtieuchiController@X
 route::get('giangvien/theodoikehoach/{macb}', 'TheodoikehoachController@TheoDoiKH');
 route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
 route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
+/*--------------------- DUYỆT ĐỀ TÀI -----------------*/
+route::post('giangvien/danhsachdetai/{macb}/luuduyetdetai','TheodoikehoachController@LuuDuyetDeTai');
 
 /*********************
  * =========================== Trang sinh viên ===========================================

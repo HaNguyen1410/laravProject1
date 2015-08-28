@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 
 class PhancvController extends Controller
 {
@@ -133,7 +134,7 @@ class PhancvController extends Controller
                     'congviec'             => $_POST['txtTenCV'],
                     'giaocho'              => $_POST['cbGiaoCho'],
                     'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
-                    'ngayketthuc_kehoach'   => $_POST['txtNgayKetThucKH'],
+                    'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     //'ngaybatdau_thucte',
                     //'ngayketthuc_thucte',
                     'sogio_thucte'         => $_POST['txtGioThucTe'],
@@ -142,7 +143,7 @@ class PhancvController extends Controller
                     'trangthai'            => $_POST['cbTrangThai'],
                     'tiendo'               => $_POST['txtTienDo'],
                     'noidungthuchien'      => $_POST['txtNoiDungViec'],
-                    //'ngaytao'
+                    'ngaytao'              => Carbon::now()
              );
              $data2 = array(
                  'manhomthuchien' => $_POST['txtMaNhomNL'],
@@ -193,14 +194,14 @@ class PhancvController extends Controller
                     'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
-                    'ngayketthuc_thucte'    => $_POST['txtNgayKTThucTe'],
+                    'ngayketthuc_thucte'   => $_POST['txtNgayKTThucTe'],
                     'sogio_thucte'         => $_POST['txtGioThucTe'],
                     'phuthuoc_cv'          => 0,
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
                     'tiendo'               => $_POST['txtTienDo'],
                     'noidungthuchien'      => $_POST['txtNoiDungViec'],
-                    //'ngaytao'
+                    'ngaytao'              => Carbon::now()
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
              if($ch >0){
@@ -276,7 +277,7 @@ class PhancvController extends Controller
                     'trangthai'            => $_POST['cbTrangThai'],
                     'tiendo'               => $_POST['txtTienDo'],
                     'noidungthuchien'      => $_POST['txtNoiDungViec'],
-                    //'ngaytao'
+                    'ngaytao'              => Carbon::now()
              );
              $data2 = array(
                  'manhomthuchien' => $_POST['txtMaNhomNL'],
@@ -335,7 +336,7 @@ class PhancvController extends Controller
                     'trangthai'            => $_POST['cbTrangThai'],
                     'tiendo'               => $_POST['txtTienDo'],
                     'noidungthuchien'      => $_POST['txtNoiDungViec'],
-                    //'ngaytao'
+                    'ngaytao'              => Carbon::now(),
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
              if($ch >0){

@@ -72,14 +72,15 @@
                     <th width="15%">Lưu ý</th>
                     <th width="8%">Phân loại</th>
                     <th width="10%">Trạng thái</th>
-                    <th width="4%">Duyệt</th>
                     <th width="8%">Thao tác</th>
                 </tr>
                 @foreach($dsdt as $stt => $dt)
                     <tr>
                         <td align='center'>{{$stt+1}}</td>
                         <td width='15%'>
-                            {{$dt->tendt}}
+                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}}">
+                                {{$dt->tendt}}                                
+                            </a>
                             <a href='$taptin'  align='center'><img src="{{asset('images/Filetype-PDF-icon.png')}}"/></a>
                         </td>
                         <td width='15%'>{{$dt->motadt}}</td>
@@ -88,11 +89,6 @@
                         <td>{{$dt->ghichudt}}</td>
                         <td align='center'>{{$dt->phanloai}}</td>
                         <td align='center'>{{$dt->trangthai}}</td>
-                        <td align='center'>  
-<!--                            <a href=''><img src="{{asset('images/uncheck.png')}}"/></a>
-                            <a href=''><img src="{{asset('images/check.png')}}"/></a>-->
-                            {{$dt->duyet}}
-                        </td>
                         <td align='center'>
                             <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
                             <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
@@ -102,7 +98,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="10" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
+                    <td colspan="9" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
                 </tr>
             </table>
         </div>
