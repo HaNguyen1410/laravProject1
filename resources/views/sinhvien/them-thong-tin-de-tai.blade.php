@@ -10,20 +10,7 @@
                 vertical-align: middle;
             }
 
-        </style>
-        
-        <script>
-            function dschon_detai() {
-                $macb = document.getElementById('txtMaCB').value;
-                //prompt($macb);
-                //alert($macb);
-                var _window = window.open("{{asset('sinhvien/chondetai/1111317')}}", "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=90, left=90, width=1200, height=400");
-                _window.onbeforeunload = function()
-                {
-                    location.reload();
-                }
-            }
-        </script>
+        </style>       
 
 <div class="container">
 
@@ -35,17 +22,17 @@
                     <tr>
                         <th>Mã cán bộ:</th>
                         <td width="15%">
-                            <input type="text" id="txtMaCB" name="txtMaCB" value="" class="form-control" readonly="true"/>
+                            <input type="text" id="txtMaCB" name="txtMaCB" value="{{$thongtindt->macb}}" class="form-control" readonly="true"/>
                         </td>
                         <th width="20%">Họ và tên cán bộ hướng dẫn:</th>
                         <td>
-                            <input type="text" name="txtTen" value="" class="form-control" readonly="true"/>
+                            <input type="text" name="txtTen" value="{{$thongtindt->hoten}}" class="form-control" readonly="true"/>
                         </td>
                     </tr>
                     <tr>
                         <th width='15%' valign='middle'>Đề tài được giao:</th>
                         <td align='center' colspan="3">
-                            <input type="text" name="" value="" class="form-control" readonly=""/>
+                            <input type="text" name="" value="{{$thongtindt->tendt}}" class="form-control" readonly=""/>
                         </td>
 
                     </tr>
@@ -158,8 +145,9 @@
                     </tr>
                     <tr>
                         <td colspan="4" align='center'>
-                            <button type="submit" name="btnDangKy" class="btn btn-success" style="width: 20%;">
-                                Đăng ký 
+                            <button type="submit" name="btnLuu" class="btn btn-success" style="width: 20%;">
+                                <img src="{{asset('images/save-as-icon.png')}}">&nbsp;
+                                Lưu thông tin
                             </button>
                         </td>
                     </tr>

@@ -31,10 +31,9 @@ class GiangvienController extends Controller
     public function ThongTinGV($macb){
         $giangvien = Giangvien::find($macb);
         $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
-                ->select('hp.manhomhp','hp.tennhomhp','dt.macb')
-                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
-                ->join('de_tai as dt','radt.madt','=','dt.madt')
-                ->where('dt.macb',$macb)
+                ->select('hp.manhomhp','hp.tennhomhp','gv.macb')
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('gv.macb',$macb)
                 ->get();
         
         return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien)->with('nhomhp',$nhomhp);

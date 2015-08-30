@@ -14,7 +14,7 @@ use View,
     Mail,
     Session;
 
-class ThongtindetaiController extends Controller
+class SVthongtindetaiController extends Controller
 {
  /*====================== Mã nhóm thực hiện tự tăng ====================================*/
     function manth_tutang(){
@@ -34,14 +34,12 @@ class ThongtindetaiController extends Controller
     }   
 /*====================  ======================*/
     public function ThemThongTinDeTai($mssv){
-        $mahp = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomhp');
-        $dstensv = DB::table('chia_nhom as chn')->distinct()
-                ->select('chn.mssv','sv.hoten')
-                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
-                ->where('chn.manhomhp','=',$mahp)
-                ->get();
-        $dssv = DB::table('chia_nhom')->distinct()->where('manhomhp',$mahp)->get();
-        return view('sinhvien.them-thong-tin-de-tai')->with('dssv',$dssv)->with('dstensv',$dstensv);           
+        $thongtindt = DB::table('chia_nhom as chn')->select('gv.macb','gv.hoten','dt.tendt')
+                ->join('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->join('giang_vien as gv','dt.macb','=','gv.macb')
+                ->where('chn.mssv',$mssv)->first();
+        return view('sinhvien.them-thong-tin-de-tai')->with('thongtindt',$thongtindt);           
     }
 
 }//END Class DangkydtController

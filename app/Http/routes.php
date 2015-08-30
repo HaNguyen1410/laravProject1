@@ -113,9 +113,7 @@ Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= XEM ĐIỂM ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
 /*======= THÔNG TIN ĐỀ TÀI niên luận ==========*/
-Route::get('sinhvien/themthongtindetai/{mssv}','ThongtindetaiController@ThemThongTinDeTai');
-/*======= Danh sách đề tài để chọn ==========*/
-Route::get('sinhvien/chondetai/{mssv}','DangkydtController@ChonDeTai');
+Route::get('sinhvien/themthongtindetai/{mssv}','SVthongtindetaiController@ThemThongTinDeTai');
 
 /*======= PHÂN CÔNG NHIỆM VỤ ==========*/
 /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/

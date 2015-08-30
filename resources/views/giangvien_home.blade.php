@@ -56,7 +56,7 @@
                                             Theo dõi kế hoạch</a>
                                     </li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('')}}" data-toggle="tooltip" data-placement="bottom" title="Thông báo thời hạn nộp tài liệu, ngày báo cáo tiến độ với giảng viên hướng dẫn">
+                                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="Thông báo thời hạn nộp tài liệu, ngày báo cáo tiến độ với giảng viên hướng dẫn">
                                             Ghi chú</a>
                                     </li>
                                 </ul>

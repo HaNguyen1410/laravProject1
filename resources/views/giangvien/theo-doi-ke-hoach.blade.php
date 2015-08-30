@@ -57,7 +57,6 @@
                     <th width="4%">Lịch họp</th>
                     <th width="6%">Thời gian làm dự án</th>
                     <th width="10%">Trạng thái(%)</th>
-                    <th width="4%">Duyệt</th>
                 </tr>
                 
                 @foreach($dsdtnhom as $stt => $dtn)                
@@ -94,14 +93,7 @@
                                     <span style='color:brown;'>{{$dtn->tiendo}}%</span>
                                 </div>
                             </div>
-                        </td>                        
-                        <td align='center'>
-                            @if($dtn->chapnhan == 0)                            
-                                <a href=""><input type="image" src="{{asset('images/uncheck.png')}}" /></a>
-                            @else
-                                <a href=""><input type="image" src="{{asset('images/check.png')}}"/></a>
-                            @endif
-                        </td>
+                        </td>                                           
                     </tr>
                 @endforeach
             </table>                    
