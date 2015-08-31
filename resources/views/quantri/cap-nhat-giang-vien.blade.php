@@ -28,21 +28,21 @@
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
                         <td width="30%">Mã cán bộ:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" name="txtMaCB" size="2" value="{{$gv->macb}}" class="form-control" readonly="true"/> 
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Họ và tên:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" name="txtHoTen" size="2" value="{{$gv->hoten}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtHoTen')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td>
+                        <td colspan="3">
                             <?php
                             $gtNam = strcasecmp($gv->gioitinh, 'Nam');
                             $gtNu = strcasecmp($gv->gioitinh, 'Nữ');
@@ -58,62 +58,60 @@
                     </tr>
                     <tr>
                         <td>Ngày sinh:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" id="txtNgaySinh" name="txtNgaySinh" value="{{$gv->ngaysinh}}" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" name="txtEmail" value="{{$gv->email}}" class="form-control"/> 
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Số điện thoại:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" name="txtSDT" value="{{$gv->sdt}}" class="form-control"/> 
                             <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Hướng dẫn nhóm:</td>
-                        <td><input type="text" name=" " value="" class="form-control"/></td>
+                        <td>Nhóm học phần:</td>
+                        <td colspan="3">
+                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" /> &nbsp;&nbsp;&nbsp;
+                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" />
+                        </td>
                     </tr> 
                     <tr>
-                        <td>Mật khẩu hiện tại:</td>
+                        <td>Năm học:</td>
                         <td>
-                            <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
+                            <select class="form-control" name="cbNamHoc">
+                                <option value="">2013-2014</option>
+                            </select>
                         </td>
-                    </tr>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <select class="form-control" name="cbHocKys">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr> 
                     <tr>
                         <td>Mật khẩu mới:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu mới:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
-                    </tr>
-                    <tr>
-                        <td width="20%"><label>Quản trị:</label></td>
-                        <td>
-                            <?php
-                            if ($gv->quantri == 1) {
-                                echo "<input type='checkbox' name='ckbQuanTri' id='ckbQuanTri' value='1' checked='true'/>";
-                            } elseif ($gv->quantri == 0) {
-                                echo "<input type='checkbox' name='ckbQuanTri' id='ckbQuanTri' value='0' />";
-                            }
-                            ?>
-                        </td>                              
-                    </tr>
+                    </tr>                    
                     <tr>
                         <td><label>Mở tài khoản:</label></td>
                         <td>
@@ -128,7 +126,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td colspan="2">
+                        <td colspan="4">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;

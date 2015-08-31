@@ -14,7 +14,7 @@ use View,
     Mail,
     Session;
 
-class DangkydtController extends Controller
+class ChianhomController extends Controller
 {
  /*====================== Mã nhóm thực hiện tự tăng ====================================*/
     function manth_tutang(){
@@ -33,15 +33,20 @@ class DangkydtController extends Controller
             return  $mamoi = $pre .=$so;        
     }   
 /*====================  ======================*/
-    public function DangKyDT($mssv){
-        $mahp = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomhp');
-        $dstensv = DB::table('dangky_nhom as dk')->distinct()
-                ->select('dk.mssv','sv.hoten')
-                ->join('sinh_vien as sv','dk.mssv','=','sv.mssv')
-                ->where('dk.manhomhp','=',$mahp)
+    public function ChiaNhomNL($macb){
+        $mahp = DB::table('nhom_hocphan as hp')
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('hp.macb',$macb)->value('manhomhp');
+        $dstensv = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.mssv','sv.hoten')
+                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->where('chn.manhomhp','=',$mahp)
                 ->get();
-        $dssv = DB::table('dangky_nhom')->distinct()->where('manhomhp',$mahp)->get();
-        return view('sinhvien.dang-ky-de-tai')->with('dssv',$dssv)->with('dstensv',$dstensv);           
+        $dssv = DB::table('chia_nhom')->distinct()->where('manhomhp',$mahp)->get();
+        //Lấy madt, tendt
+        $dsdetai = DB::table('de_tai')->where('macb',$macb)->get();
+        return view('giangvien.chia-nhom-nien-luan')->with('dstensv',$dstensv)->with('dssv',$dssv)
+            ->with('dsdetai',$dsdetai);           
     }
 
 /*==================== Lấy danh sách đề tài của 1 nhóm học phân ======================*/

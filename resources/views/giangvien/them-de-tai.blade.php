@@ -60,12 +60,11 @@
                             <input type="text" id="txtSoNguoi" name="txtSoNguoi" value="" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
                         </td>
-                        <th>Phân loại:</th>
-                        <td>
-                            <select class="form-control" name="cbmPhanLoai">
-                                <option value="Gợi ý">Đề tài gợi ý</option>
-                                <option value="Đề xuất">Được đề xuất</option>                                       
-                            </select> 
+                        <th>Nhóm thực hiện:</th>
+                        <td>                            
+                            <select class="form-control" name="cbNhomNL">
+                                <option value=""></option>
+                            </select>
                         </td>
                     </tr>                                            
                     <tr>

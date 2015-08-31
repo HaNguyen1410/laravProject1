@@ -19,15 +19,15 @@ class PhancvController extends Controller
 {
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCV($mssv){
-        $manth = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                                 ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sogio_thucte'
                                  ,'cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
-               ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
-               ->where('dk.mssv','=',$mssv)
+               ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+               ->where('chn.mssv','=',$mssv)
                ->where('nth.manhomthuchien','=',$manth)
                ->paginate(5);
                //->get();
@@ -66,12 +66,12 @@ class PhancvController extends Controller
     }
 /*========= Danh sách quản lý phân công nhiệm vụ ==============*/   
    public function DSPhanCV($mssv){
-       $manth = DB::table('dangky_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
+       $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
        $tiendonhom = DB::table('nhom_thuc_hien')->where('manhomthuchien','=',$manth)->first();
-       $tendt = DB::table('dangky_nhom as dk')
-               ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
-               ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
-               ->join('de_tai as dt','radt.madt','=','dt.madt')
+       //Lấy tên đề tài của 1 nhóm
+       $tendt = DB::table('de_tai as dt')
+               ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+               ->join('nhom_thuc_hien as nth','radt.manhomthuchien','=','radt.manhomthuchien')
                ->where('radt.manhomthuchien','=',$manth)
                ->first();
        $dscvchinh = DB::table('cong_viec as cv')
@@ -101,10 +101,10 @@ class PhancvController extends Controller
     }
 /*========= Thêm công việc chính ==============*/ 
      public function ThemcvChinh($masv){
-         $manth = DB::table('dangky_nhom')->where('mssv',$masv)->value('manhomthuchien');
+         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
-                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-                ->where('dk.manhomthuchien',$manth)
+                ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manth)
                 ->get();
          $ma = $this->macv_tutang();
          return view('sinhvien.them-cong-viec')->with('dstv',$dstv)->with('manth',$manth)
@@ -158,10 +158,10 @@ class PhancvController extends Controller
      }
 /*========= Cập nhật công việc chính ==============*/ 
      public function CapNhatcvChinh($masv,$macv){
-         $manth = DB::table('dangky_nhom')->where('mssv',$masv)->value('manhomthuchien');
+         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
-                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-                ->where('dk.manhomthuchien',$manth)
+                ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manth)
                 ->get();
          $ndcv = DB::table('cong_viec')->where('macv',$macv)->first();
          return view('sinhvien.cap-nhat-cong-viec')->with('dstv',$dstv)->with('ndcv',$ndcv);
@@ -235,10 +235,10 @@ class PhancvController extends Controller
 /*========= Thêm công việc chi tiết (cv phụ) ==============*/ 
      public function ThemcvPhu($mssv,$macv){
          $ma = $this->macvphuthuoc_tutang($macv);
-         $manth = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
-                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-                ->where('dk.manhomthuchien',$manth)
+                ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manth)
                 ->get();
          return view('sinhvien.them-cong-viec-phuthuoc')->with('macvchinh',$macv)
                  ->with('manth',$manth)->with('ma',$ma)->with('dstv',$dstv);
@@ -293,10 +293,10 @@ class PhancvController extends Controller
 /*========= Cập nhật công việc chi tiết (cv phụ) ==============*/ 
      public function CapNhatcvPhu($masv,$macv,$macvphu){
          $cv = DB::table('cong_viec')->where('macv',$macvphu)->first();
-         $manth = DB::table('dangky_nhom')->where('mssv',$masv)->value('manhomthuchien');
+         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
-                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-                ->where('dk.manhomthuchien',$manth)
+                ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manth)
                 ->get();
          return view('sinhvien.cap-nhat-cong-viec-phuthuoc')->with('macvchinh',$macv)
                  ->with('cv',$cv)->with('dstv',$dstv);

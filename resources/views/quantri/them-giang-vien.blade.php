@@ -27,22 +27,22 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
-                        <td>Mã cán bộ:</td>
-                        <td>
+                        <td width="30%">Mã cán bộ:</td>
+                        <td colspan="3">
                             <input type="text" size="2" value="{{$ma}}" name="txtMaCB" class="form-control" readonly=""/>
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Họ và tên:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" size="2" value="" name="txtHoTen" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtHoTen')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td>
+                        <td colspan="3">
                             Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> &nbsp &nbsp &nbsp
                             Nữ: <input type="radio" size="2" value="Nữ" name="rdGioiTinh"/> 
                             <p style='color:red;'>{{$errors->first('rdGioiTinh')}}</p>
@@ -50,43 +50,63 @@
                     </tr>
                     <tr>
                         <td>Ngày sinh:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" size="2" value="" id="txtNgaySinh" name="txtNgaySinh" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" value="" name="txtEmail" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Số điện thoại:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="text" value="" name="txtSDT" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                         </td>
                     </tr>
-                    <tr></tr> 
+                    <tr>
+                        <td>Nhóm học phần:</td>
+                        <td colspan="3">
+                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" /> &nbsp;&nbsp;&nbsp;
+                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" />
+                        </td>
+                    </tr> 
+                    <tr>
+                        <td>Năm học:</td>
+                        <td>
+                            <select class="form-control" name="cbNamHoc">
+                                <option value="">2013-2014</option>
+                            </select>
+                        </td>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <select class="form-control" name="cbHocKy">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr> 
                     <tr>
                         <td>Mật khẩu:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="password" value="" name="txtMatKhau1" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu:</td>
-                        <td>
+                        <td colspan="3">
                             <input type="password" value="" name="txtMatKhau2" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhau2')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td>
+                        <td colspan="4">
                             <button  type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('images/save-as-icon.png')}}"> Thêm
                             </button> &nbsp;&nbsp;

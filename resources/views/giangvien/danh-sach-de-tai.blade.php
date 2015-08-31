@@ -54,8 +54,9 @@
                         <td>
                             <a href="2134/themdetai">
                                 <button type="button" name="" class="btn btn-primary">
-                                <img src="{{asset('images/add-icon.png')}}">Thêm đề tài
-                            </button></a>
+                                    <img src="{{asset('images/add-icon.png')}}">Thêm đề tài
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 </table> 
@@ -66,11 +67,12 @@
                 <tr>
                     <th width="2%">STT</th>
                     <th width="20%">Tên đề tài</th>
+                    <th width="5%">Chi tiết</th>
                     <th width="15%">Mô tả đề tài</th>
                     <th width="15%">Công nghệ</th>
                     <th width="4%">Tối đa</th>
                     <th width="15%">Lưu ý</th>
-                    <th width="8%">Phân loại</th>
+                    <th width="8%">Nhóm thực hiện</th>
                     <th width="10%">Trạng thái</th>
                     <th width="8%">Thao tác</th>
                 </tr>
@@ -81,13 +83,17 @@
                             <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}}">
                                 {{$dt->tendt}}                                
                             </a>
-                            <a href='$taptin'  align='center'><img src="{{asset('images/Filetype-PDF-icon.png')}}"/></a>
+                        </td>
+                        <td>
+                            <a href='$taptin' align='center'><img src="{{asset('images/Filetype-PDF-icon.png')}}"/></a>                            
                         </td>
                         <td width='15%'>{{$dt->motadt}}</td>
                         <td width='15%'>{{$dt->congnghe}}</td>
                         <td align='center'>{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>
-                        <td align='center'>{{$dt->phanloai}}</td>
+                        <td align='center'>
+                            
+                        </td>
                         <td align='center'>{{$dt->trangthai}}</td>
                         <td align='center'>
                             <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
@@ -98,7 +104,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="9" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
+                    <td colspan="10" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
                 </tr>
             </table>
         </div>

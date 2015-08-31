@@ -41,8 +41,9 @@
                     <tr>
                         <th width="1%">STT</th>
                         <th width="8%">Tên tập tin</th>
-                        <th width="5%">Dung lượng</th>
-                        <th width="6%">Ngày đăng</th> 
+                        <th width="4%">Cỡ</th>
+                        <th width="6%">Ngày đăng</th>
+                        <th width="10%">Tác giả</th>
                         <th width="20%">Nhận xét GV</th>
                         <th width="6%">Ngày nhận xét</th>
                         <th width="5%">Thao tác</th>
@@ -51,10 +52,10 @@
                         <td>1</td>
                         <td><label>Đặc tả sơ bộ</label></td>
                         <td>3Mb</td>
-                        <td></td>
-                        <td></td>
                         <td>02/03/2014</td>
-
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td align="center">
                             <a href="?cn=noptl"><img src="{{asset('images/Document-Delete-icon.png')}}"></a>
                         </td>

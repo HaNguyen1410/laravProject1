@@ -28,28 +28,28 @@
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
                         <td width="30%">Mã số sinh viên:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" name="txtMaSV" value="<?= $sv->mssv ?>" class="form-control" readonly="true"/>
                             <p style='color:red;'>{{$errors->first('txtMaSV')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Họ và tên:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" name="txtHoTen" value="<?= $sv->hoten ?>" class="form-control"/> 
                             <p style='color:red;'>{{$errors->first('txtHoTen')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Ngày sinh:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" id="txtNgaySinh" name="txtNgaySinh" value="<?= $sv->ngaysinh ?>" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                              <?php
                                 $gtNam = strcasecmp($sv->gioitinh, 'Nam');
                                 $gtNu = strcasecmp($sv->gioitinh, 'Nữ');
@@ -66,50 +66,62 @@
                     </tr>
                     <tr>
                         <td>Khóa học:</td>
-                        <td colspan="2">
+                        <td width="30%">
                             <input type="text" name="txtKhoaHoc" value="<?= $sv->khoahoc ?>" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtKhoaHoc')}}</p>
+                        </td>
+                        <td width="18%" align="right" style="color:darkblue;">Nhóm học phần:</td>
+                        <td>
+                             <select class="form-control" name="cbNhomHP">
+                                <option value=""></option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td>Email:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="text" name="txtEmail" value="<?= $sv->email ?>" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Số điện thoại:</td>
-                        <td colspan="2">
-                            <input type="text" name="txtSDT" value="<?= $sv->sdt ?>" class="form-control"> 
-                            <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
+                        <td>Năm học:</td>
+                        <td>
+                            <select class="form-control" name="cbNamHoc">
+                                <option value="">2013-2014</option>
+                            </select>
                         </td>
-                    </tr>
-                    <tr></tr> 
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <select class="form-control" name="cbHocKy">
+                                <option value=""></option>
+                            </select>
+                        </td>
+                    </tr> 
                     <tr>
                         <td>Mật khẩu hiện tại:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Mật khẩu mới:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td>Nhập lại mật khẩu mới:</td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <td><label>Mở tài khoản:</label></td>
-                        <td>
+                        <td colspan="3">
                             <?php
                                 if($sv->khoa == 0){
                                     echo "<input type='checkbox' name='ckbKhoa' value='0' checked='true'/>";
@@ -122,7 +134,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td colspan="2">
+                        <td colspan="3">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:30%;">
                                 <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;

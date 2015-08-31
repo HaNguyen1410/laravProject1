@@ -36,9 +36,8 @@ class DetaiController extends Controller
                 ->get();
         $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
                 ->select('hp.manhomhp','hp.tennhomhp')
-                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
-                ->join('de_tai as dt','dt.madt','=','radt.madt')
-                ->where('macb',$macb)->get();
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('hp.macb',$macb)->get();
         return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt)->with('nhomhp',$nhomhp)
                     ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
@@ -57,9 +56,8 @@ class DetaiController extends Controller
         $ma = $this->madt_tutang();
         $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
                 ->select('hp.manhomhp','hp.tennhomhp')
-                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
-                ->join('de_tai as dt','radt.madt','=','dt.madt')
-                ->where('dt.macb',$macb)
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('hp.macb',$macb)
                 ->get();
         
         return view('giangvien.them-de-tai')->with('ma',$ma)->with('nhomhp',$nhomhp)

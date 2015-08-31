@@ -20,19 +20,19 @@ class SinhvienController extends Controller
 /*============================= Hiển thị thông tin của 1 sinh viên ========================================*/
     public function HienThiSV($masv){
         $sinhvien = Sinhvien::find($masv);
-        $hp = DB::table('dangky_nhom as dk')->select('hp.tennhomhp')
-                ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
-                ->where('dk.mssv',$masv)
+        $hp = DB::table('chia_nhom as chn')->select('hp.tennhomhp')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.mssv',$masv)
                 ->first();
-        $manth = DB::table('dangky_nhom')->where('mssv','=',$masv)->value('manhomthuchien');        
+        $manth = DB::table('chia_nhom')->where('mssv','=',$masv)->value('manhomthuchien');        
         $dstv = DB::table('sinh_vien as sv')
-            ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-            ->where('dk.manhomthuchien',$manth)
+            ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+            ->where('chn.manhomthuchien',$manth)
             ->get();
-        $ttgv = DB::table('ra_de_tai as radt')->select('gv.macb','gv.hoten','gv.email','gv.sdt','radt.manhomthuchien')                
-                ->join('de_tai as dt','radt.madt','=','dt.madt')
-                ->join('giang_vien as gv','dt.macb','=','gv.macb')
-                ->where('radt.manhomthuchien',$manth)
+        $ttgv = DB::table('chia_nhom as chn')->select('gv.macb','gv.hoten','gv.email','gv.sdt','chn.manhomthuchien')                
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('chn.manhomthuchien',$manth)
                 ->first();        
         $detainhom = DB::table('ra_de_tai as radt')->select('radt.manhomthuchien','dt.madt','dt.tendt')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
@@ -50,7 +50,7 @@ class SinhvienController extends Controller
         $post = $request->all();
         $v = \Validator::make($request->all(),
                 [
-                    'txtDienThoai'        => 'required|numeric',
+                    'txtDienThoai'  => 'required|numeric',
                     'txtLapTrinh'   => 'required',
                     'txtKinhNghiem' => 'required'
                 ]
@@ -66,9 +66,9 @@ class SinhvienController extends Controller
                 'kinhnghiem'       => $_POST['txtKinhNghiem'],
             );
             $capnhat = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
-            if($capnhat > 0){
+            //if($capnhat > 0){
                 return redirect('sinhvien/thongtinsv/1111317');
-            }
+            //}
         }       
     }
     

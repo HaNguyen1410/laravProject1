@@ -51,6 +51,11 @@
                                     <li><a href="{{asset('quantri/danhsachsv')}}">Sinh viên</a></li>
                                 </ul>
                             </li> 
+                           
+                            <li><a href="{{asset('quantri/saoluucsdl')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
+                                    Sao lưu
+                                </a>
+                            </li>
                             <li class="dropdown">
                                 <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Họ và tên (macb)

@@ -164,7 +164,7 @@
                                     <tr>
                                         <td>Số điện thoại:</td>
                                         <td>
-                                            <input type="hidden" name="txtMaSV" value="<?php echo $sv['mssv'];?>" />
+                                            <input type="text" name="txtMaSV" value="<?php echo $sv['mssv'];?>" />
                                             <input type="text" name="txtDienThoai" value="<?php echo $sv['sdt'];?>" class="form-control">
                                             <p style='color:red;'>{{$errors->first('txtDienThoai')}}</p>
                                         </td>

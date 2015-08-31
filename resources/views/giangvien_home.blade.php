@@ -45,15 +45,37 @@
                         </button>
                     </div>
                     <div class="navbar-collapse collapse">                        
-                        <ul class="nav navbar-nav">
-                            <li>
-                                <a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">
-                                    Kế hoạch
+                        <ul class="nav navbar-nav">  
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Quản lý nhóm niên luận
+                                    <span class="caret"></span>
                                 </a>
-                            </li>                            
-                            <li><a href="{{asset('giangvien/danhsachdetai/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Danh sách đề tài">
-                                    Đề tài
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{asset('giangvien/theodoikehoach/2134')}}" data-placement="bottom" title="Theo dõi thực hiện dự án">
+                                            Theo dõi kế hoạch</a>
+                                    </li>
+                                    <li class="divider"></li>                           
+                                    <li><a href="{{asset('')}}" data-toggle="tooltip" data-placement="bottom" title="Thông báo thời hạn nộp tài liệu, ngày báo cáo tiến độ với giảng viên hướng dẫn">
+                                            Ghi chú</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Quản lý đề tài
+                                    <span class="caret"></span>
                                 </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{asset('giangvien/danhsachdetai/2134')}}" >
+                                            Đề tài</a>
+                                    </li>
+                                    <li class="divider"></li>                           
+                                    <li><a href="{{asset('giangvien/chianhom/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Chia đề tài vào mỗi nhóm sinh viên">
+                                            Chia nhóm thực hiện
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                             <li><a href="{{asset('giangvien/khotailieu/2134')}}">Kho tài liệu</a></li>
                             <li class="dropdown">
@@ -67,8 +89,7 @@
                                     <li><a href="{{asset('giangvien/nhapdiem/2134')}}">Nhập điểm</a></li>
 
                                 </ul>
-                            </li>
-                            <li><a href="">Thảo luận</a></li>                                     
+                            </li>                                 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                    Họ và tên (macb)

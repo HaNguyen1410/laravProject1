@@ -38,8 +38,13 @@ class QuantriController extends Controller
             $ma = $macuoi->mssv;  
             return $so = (int)$ma + 1;
         }     
-    }      
-/******************
+    }   
+ /*====================== Sao lưu phục hồi CSDL ====================================*/
+    public function SaoLuuCSDL(){
+        
+        return view('quantri.sao-luu-phuc-hoi-du-lieu');
+    }
+    /******************
  * ######## Quản trị Giảng Viên  ###########
  * *****************
  */
@@ -47,9 +52,7 @@ class QuantriController extends Controller
     public function ThongTinQT($macb){
         $giangvien = Giangvien::find($macb);
         $tennhomhp = DB::table('giang_vien as gv')
-                ->join('de_tai as dt','gv.macb','=','dt.macb')
-                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
-                ->join('nhom_hocphan as hp','radt.manhomhp','=','hp.manhomhp')
+                ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
                 ->value('tennhomhp');
         return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien)->with('hp',$tennhomhp);
     }
@@ -92,7 +95,10 @@ class QuantriController extends Controller
         $gv = DB::table('giang_vien')->get();
         $n = count($gv);
         $ds = DB::table('giang_vien')->skip($n)->take(5)->paginate(5);
-        return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds);
+        $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
+        $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get();        
+        return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds)
+            ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
 /*=========================== Thêm giảng viên ==============================================*/ 
     public function ThemGV(){
@@ -197,7 +203,10 @@ class QuantriController extends Controller
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachSV(){
         $ds = DB::table('sinh_vien')->paginate(5);
-        return view('quantri.quan-tri-sinh-vien')->with('dssv',$ds);
+        $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
+        $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get();   
+        return view('quantri.quan-tri-sinh-vien')->with('dssv',$ds)
+            ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }  
 /*=========================== Thêm sinh viên ==============================================*/ 
     public function ThemSV(){

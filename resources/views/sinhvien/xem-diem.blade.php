@@ -56,9 +56,7 @@
                     <td align="center">{{$stt+1}}</td>
                     <td align="center">{{$sv->mssv}}</td>
                     <td>{{$sv->hoten}}</td>
-                    @foreach($dsdiem as $diem)
-                        <td>{{$diem->diem}}</td>                    
-                    @endforeach
+                    
                 </tr>
             @endforeach             
         </table>

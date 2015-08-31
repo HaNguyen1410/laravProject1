@@ -29,36 +29,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align='center'>ĐĂNG KÝ NHÓM LÀM NIÊN LUẬN</h3> 
-            <h4 style="color: darkblue; font-weight: bold;">Đăng ký thành viên</h4>
-            <form name="frmThemTV" action="{{action('DangkydtController@LuuThemThanhVien')}}" method="post">
-                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                <table class="table table-bordered" id="tblChonTV">
-                    <tr>                   
-                        <td align="center">                                                  
-                                @foreach($dstensv as $sv)
-                                <div style="padding: 2px 2px 2px 60px; display: block; float: left;">  
-                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
-                                           {{$sv->mssv}}
-                                       </a>
-                                       : <input type="checkbox" name="chk[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp
-                                       Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=""/><br>   
-                                </div>                                                                
-                                @endforeach                                
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" align='center'>
-                            <div style="display: block;">                                    
-                                <p style='color:red;'>{{$errors->first('chk')}}</p>
-                                <p style='color:red;'>{{$errors->first('rdNhomTruong')}}</p>
-                            </div>
-                            <input type="submit" name="btnThem" value="Thêm thành viên" class="btn btn-primary">
-                        </td>
-                    </tr>                
-                </table> 
-            </form>
-            <h4 style="color: darkblue; font-weight: bold;">Đăng ký đề tài</h4>    
+            <h3 style="color: darkblue; font-weight: bold;" align='center'>THÊM THÔNG TIN ĐỀ TÀI NIÊN LUẬN</h3>   
             <form name="frmDangKyNL" action="" method="post">
                 <table class="table table-bordered" border="1" width="800px" cellpadding="15px" cellspacing="0px" align='center' id="dangky">
                     <tr>
@@ -72,12 +43,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width='15%' valign='middle'>Chọn đề tài:</th>
-                        <td align="center">
-                                <input onclick="dschon_detai()" type="radio" id="rdMaDT" name="rdMaDT" value="" title="Nhấp chuột vào để chọn đề tài"/>
-                        </td>
+                        <th width='15%' valign='middle'>Đề tài được giao:</th>
                         <td align='center' colspan="3">
-                            <input type="text" name="" value="Tên đề tài được chọn" class="form-control" readonly=""/>
+                            <input type="text" name="" value="" class="form-control" readonly=""/>
                         </td>
 
                     </tr>

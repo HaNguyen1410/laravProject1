@@ -14,13 +14,37 @@
     <div class="row">
         <div class="col-md-12">
             <h4 style="display:block; float: left; color: darkblue; font-weight: bold;">DANH SÁCH SINH VIÊN</h4>
-            <a href="danhsachsv/themsv" style="margin-left: 71%;">
-                <button type="button" name="" class="btn btn-primary" style="width: 10%;">
-                    <img src="{{asset('images/add-icon.png')}}"> Thêm
-                </button>
-            </a><br>
+            <div class="col-md-12" style="display:block; float:left;">
+                <table class="table table-bordered" style="width: 800px" align="center">
+                    <tr>
+                        <th align="right">Năm học:</th>
+                        <th>
+                            <select class="form-control" name='cbNamHoc'>
+                                @foreach($namhoc as $nk)
+                                <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                                @endforeach
+                            </select>
+                        </th>
+                        <th align="right">Học kỳ:</th>
+                        <th>
+                            <select class="form-control" name='cbHocKy'>
+                                @foreach($hocky as $nk)
+                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                @endforeach
+                            </select>
+                        </th>
+                        <th>
+                            <a href="danhsachsv/themsv">
+                                <button type="button" class="btn btn-primary" style="width:60%">
+                                    <img src="{{asset('images/add-icon.png')}}"> Thêm
+                               </button>
+                            </a>
+                        </th>
+                    </tr>
+                </table>            
+            </div>    
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
+            <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
                     <th>STT</th>
                     <th>MSSV</th>
@@ -28,6 +52,7 @@
                     <th width="15%">Email</th>
                     <th>Người tạo</th> 
                     <th>Ngày tạo</th>
+                    <th>Nhóm trưởng</th>
                     <th>Khóa</th>
                     <th width=8%>Chức năng</th>
                 </tr>
@@ -40,8 +65,9 @@
                         <td>{{$rw->hoten}}</td>
                         <td>{{$rw->email}}</td>
                         <td align='center'>...</td>
-                        <td align='center'>{{$rw->ngaytao}}</td>
-                        <td align='center'>
+                        <td align='center' width="8%">{{$rw->ngaytao}}</td>
+                        <td width="5%"></td>
+                        <td align='center' width="5%">
                             @if($rw->khoa == 1)
                                 <img src="{{asset('images/Lock.png')}}"/>
                             @elseif($rw->khoa == 0)
@@ -57,7 +83,7 @@
                     </tr>   
                 @endforeach
                 <tr>
-                    <td colspan="8" align="center">{!! $dssv->setPath('danhsachsv')->render() !!}</td>
+                    <td colspan="9" align="center">{!! $dssv->setPath('danhsachsv')->render() !!}</td>
                 </tr>      
            </table>
 

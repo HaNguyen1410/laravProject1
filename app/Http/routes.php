@@ -28,7 +28,7 @@ Route::get('dangxuat', 'DangNhapController@DangXuat');
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-
+Route::get('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
 /*
  * ######## Giảng Viên ##################
  */
@@ -95,8 +95,8 @@ Route::get('giangvien/dstieuchi/{macb}/xoatieuchi/{matc}','QdtieuchiController@X
 route::get('giangvien/theodoikehoach/{macb}', 'TheodoikehoachController@TheoDoiKH');
 route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
 route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
-/*--------------------- DUYỆT ĐỀ TÀI -----------------*/
-route::post('giangvien/danhsachdetai/{macb}/luuduyetdetai','TheodoikehoachController@LuuDuyetDeTai');
+/*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
+route::get('giangvien/chianhom/{macb}','ChianhomController@ChiaNhomNL');
 
 /*********************
  * =========================== TRANG SINH VIÊN ===========================================
@@ -112,11 +112,8 @@ Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
 Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= XEM ĐIỂM ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
-/*======= ĐĂNG KÝ ĐỀ TÀI niên luận ==========*/
-Route::get('sinhvien/dangkydt/{mssv}','DangkydtController@DangKyDT');
-/*======= Đăng ký thành viên Thành Viên ==========*/
-route::get('sinhvien/dangkythanhvien/{mssv}','DangkydtController@ThemThanhVien');
-route::post('luuthemthanhvien','DangkydtController@LuuThemThanhVien');
+/*======= THÔNG TIN ĐỀ TÀI niên luận ==========*/
+Route::get('sinhvien/themthongtindetai/{mssv}','ThongtindetaiController@ThemThongTinDeTai');
 /*======= Danh sách đề tài để chọn ==========*/
 Route::get('sinhvien/chondetai/{mssv}','DangkydtController@ChonDeTai');
 

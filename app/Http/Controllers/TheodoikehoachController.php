@@ -18,29 +18,29 @@ class TheodoikehoachController extends Controller
 {
 /*================== Số thời gian thực hiện dự án của mỗi sinh viên ======================*/ 
     function GioLam($hoten){
-        $sogio = DB::table('nhom_thuc_hien as nth')->select('cv.sogio_thucte')
-                ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
-                ->join('thuc_hien as th','th.manhomthuchien','=','dk.manhomthuchien')
-                ->join('cong_viec as cv','th.macv','=','cv.macv')
-                ->where('cv.giaocho','like',$hoten)
-                ->get();
-        foreach($sogio as $gio){
-            $h = $gio->sogio_thucte;
-            $tonggio = $h++;
-        }
-        return $tonggio;
+//        $sogio = DB::table('nhom_thuc_hien as nth')->select('cv.sogio_thucte')
+//                ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
+//                ->join('thuc_hien as th','th.manhomthuchien','=','dk.manhomthuchien')
+//                ->join('cong_viec as cv','th.macv','=','cv.macv')
+//                ->where('cv.giaocho','like',$hoten)
+//                ->get();
+//        foreach($sogio as $gio){
+//            $h = $gio->sogio_thucte;
+//            $tonggio = $h++;
+//        }
+//        return $tonggio;
     }
 /*================== Danh sách đề tài thực hiện ======================*/   
     public function TheoDoiKH($macb){
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','radt.chapnhan','radt.ghichu','sv.hoten','nth.tochucnhom',
                         'nth.lichhop','nth.sogio_thucte','nth.tiendo')
-                ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
-                ->join('sinh_vien as sv', 'dk.mssv','=','sv.mssv')
+                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+                ->join('sinh_vien as sv', 'chn.mssv','=','sv.mssv')
                 ->join('ra_de_tai as radt','nth.manhomthuchien','=','radt.manhomthuchien')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->where('dt.macb',$macb)
-                ->where('dk.nhomtruong','=',1)
+                ->where('chn.nhomtruong','=',1)
                 ->get();
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
@@ -48,20 +48,19 @@ class TheodoikehoachController extends Controller
                 ->get();
         $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
                 ->select('hp.manhomhp','hp.tennhomhp')
-                ->join('ra_de_tai as radt','hp.manhomhp','=','radt.manhomhp')
-                ->join('de_tai as dt','dt.madt','=','radt.madt')
-                ->where('macb',$macb)->get();
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('hp.macb',$macb)->get();
         return view('giangvien.theo-doi-ke-hoach')->with('dsdtnhom',$dsdtnhom)->with('nhomhp',$nhomhp)
                     ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){
         $dstv = DB::table('sinh_vien as sv')
-                ->select('dk.manhomthuchien','sv.mssv','sv.hoten','nth.sogio_thucte','dk.nhomtruong',
+                ->select('chn.manhomthuchien','sv.mssv','sv.hoten','nth.sogio_thucte','chn.nhomtruong',
                         'sv.kynangcongnghe','sv.kienthuclaptrinh','sv.kinhnghiem')
-                ->join('dangky_nhom as dk', 'sv.mssv','=','dk.mssv')
-                ->join('nhom_thuc_hien as nth','dk.manhomthuchien','=','nth.manhomthuchien')
-                ->where('dk.manhomthuchien',$manth)
+                ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
+                ->join('nhom_thuc_hien as nth','chn.manhomthuchien','=','nth.manhomthuchien')
+                ->where('chn.manhomthuchien',$manth)
                 ->get();
         $dscvchinh = DB::table('nhom_thuc_hien as nth')
                 ->join('thuc_hien as th','nth.manhomthuchien','=','th.manhomthuchien')

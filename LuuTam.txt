@@ -1,29 +1,4 @@
-           <table class="table table-bordered" id="tblChonTV">
-                <tr> 
-                    <?php echo $n = count($dstensv); ?>
-                    
-                    <td>
-                        <div style="border: 2px solid black; padding: 2px 2px; width: 220px;display: block; float: left;">
-                            <?php $stt=0; ?>
-                            @foreach($dstensv as $sv)
-                                 <a href="" data-toggle="tooltip" data-placement="top" title="">
-                                       {{$sv->mssv}}
-                                   </a>
-                                   : <input type="checkbox" name="chk[]" value=""/>&nbsp&nbsp&nbsp&nbsp
-                                   Nhóm trưởng: <input type="radio" name="rdNhomTruong" value=''/><br>
 
-
-                             <?php $stt++; ?>                                      
-                                  @if($stt == 6)
-                                      <?php break; continue; ?>
-                                  @endif                                  
-                            @endforeach
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" align='center'>
-                        <input type="submit" name="btnThem" value="Thêm thành viên" class="btn btn-primary">
-                    </td>
-                </tr>                
-            </table> 
+                    @foreach($dsdiem as $diem)
+                        <td>{{$diem->diem}}</td>                    
+                    @endforeach

@@ -80,7 +80,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">                              
-                                    <li><a href="{{asset('sinhvien/dangkydt/1111317')}}">Đăng ký</a></li>   
+                                    <li><a href="{{asset('sinhvien/themthongtindetai/1111317')}}">Thêm thông tin đề tài niên luận</a></li>   
                                     <li class="divider"></li>                                
                                     <li><a href="">Kết quả đăng ký</a></li> 
                                 </ul>
@@ -91,7 +91,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('sinhvien/danhsachcv/1111317')}}">Danh sách các nhiệm vụ</a></li>
+                                    <li><a href="{{asset('sinhvien/danhsachcv/1111317')}}">Danh sách các công việc</a></li>
                                     <li class="divider"></li>                                
                                     <li><a href="{{asset('sinhvien/phancv/1111317')}}">Phân công việc</a></li>
                                     <li class="divider"></li>                             
@@ -99,7 +99,6 @@
                                 </ul>
                             </li>                        
                             <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
-                            <li><a href="">Thảo luận</a></li>                          
                             <li class="dropdown active">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Họ và tên sinh viên (mssv)

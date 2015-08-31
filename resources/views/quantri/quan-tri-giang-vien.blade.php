@@ -14,13 +14,37 @@
     <div class="row">
         <div class="col-md-12">
             <h4 style="display:block; float: left; color: darkblue; font-weight: bold;">DANH SÁCH GIẢNG VIÊN</h4>
-            <a href="danhsachgv/themgv" style="margin-left: 70%;">
-                <button type="button" name="" class="btn btn-primary" style="width: 10%;">
-                    <img src="{{asset('images/add-icon.png')}}"> Thêm
-                </button>
-            </a><br>
+            <div class="col-md-12" style="display:block; float:left;">
+                <table class="table table-bordered" style="width: 800px" align="center">
+                    <tr>
+                        <th align="right">Năm học:</th>
+                        <th>
+                            <select class="form-control" name='cbNamHoc'>
+                                @foreach($namhoc as $nk)
+                                <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                                @endforeach
+                            </select>
+                        </th>
+                        <th align="right">Học kỳ:</th>
+                        <th>
+                            <select class="form-control" name='cbHocKy'>
+                                @foreach($hocky as $nk)
+                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                @endforeach
+                            </select>
+                        </th>
+                        <th>
+                            <a href="danhsachgv/themgv">
+                                <button type="button" class="btn btn-primary" style="width:60%">
+                                    <img src="{{asset('images/add-icon.png')}}"> Thêm
+                               </button>
+                            </a>
+                        </th>
+                    </tr>
+                </table>            
+            </div>        
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
+            <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
                     <th>STT</th>
                     <th>Mã cán bộ</th>

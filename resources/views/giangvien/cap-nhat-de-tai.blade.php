@@ -59,19 +59,11 @@
                             <input type="text" name="txtSoNguoi" value="{{$dt->songuoitoida}}" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
                         </td>
-                        <th width="10%">Phân loại:</th>
-                        <td colspan="3">
-                            <?php
-                                $goiy = strcasecmp($dt->phanloai, 'Gợi ý');
-                                $dexuat = strcasecmp($dt->phanloai, 'Đề xuất');
-                                if ($goiy == 0 && $dexuat != 0) {
-                                    echo "Gợi ý: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Gợi ý' checked='true'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đề xuất: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Đề xuất'/>";
-                                } elseif ($goiy != 0 && $dexuat == 0) {
-                                    echo "Gợi ý: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Gợi ý'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đề xuất: <input type='radio' name='rdPhanLoai' id='rdPhanLoai' value='Đề xuất' checked='true'/>";
-                                }
-                            ?>                            
+                        <th>Nhóm thực hiện:</th>
+                        <td>                            
+                            <select class="form-control" name="cbNhomNL">
+                                <option value=""></option>
+                            </select>
                         </td>
                     </tr>                                           
                     <tr>
