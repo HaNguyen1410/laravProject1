@@ -64,7 +64,7 @@
                         <td align='center'>{{$stt+1}}</td>
                         <td align='center'>{{$dtn->manhomthuchien}}</td>
                         <td>
-                           <a href='cvchinh/{{$dtn->manhomthuchien}}' data-toggle="tooltip" data-placement="bottom" title='Ghi chú: {{$dtn->ghichu}}'>
+                           <a href='cvchinh/{{$dtn->manhomthuchien}}'>
                                 {{$dtn->tendt}}
                             </a>  
                         </td>

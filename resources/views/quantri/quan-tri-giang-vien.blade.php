@@ -90,6 +90,7 @@
                 </tr>                     
             </table>
             <div class="col-md-12">
+                <p style="color:red;"><?php echo Session::get('ThongBaoRut'); ?></p>
                 <table class="table table-bordered table-striped" style="width: 700px" align="center">
                     <tr>
                         <th width="3%">STT</th>
@@ -97,6 +98,7 @@
                         <th width="15%">Nhóm HP phụ trách</th>
                         <th>Năm học</th>
                         <th>Học kỳ</th>
+                        <th width="15%">Chức năng</th>
                     </tr>
                     @foreach($gv_hp as $stt => $gvhp)
                     <tr>
@@ -105,6 +107,11 @@
                         <td align="center">{{$gvhp->tennhomhp}}</td>
                         <td align="center">{{$gvhp->nam}}</td>
                         <td align="center">{{$gvhp->hocky}}</td>
+                        <td align='center'>
+                            <a onclick="return confirm('Rút giảng viên **{{$rw->hoten}}** khỏi nhóm HP **{{$gvhp->tennhomhp}}?');" href='danhsachgv/xoagvkhoihocphan/{{$gvhp->manhomhp}}'>
+                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

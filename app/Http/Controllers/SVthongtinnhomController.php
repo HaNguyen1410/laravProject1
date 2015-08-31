@@ -14,7 +14,7 @@ use View,
     Mail,
     Session;
 
-class SVthongtindetaiController extends Controller
+class SVthongtinnhomController extends Controller
 {
  /*====================== Mã nhóm thực hiện tự tăng ====================================*/
     function manth_tutang(){
@@ -33,13 +33,33 @@ class SVthongtindetaiController extends Controller
             return  $mamoi = $pre .=$so;        
     }   
 /*====================  ======================*/
-    public function ThemThongTinDeTai($mssv){
+    public function ThemThongTinNhom($mssv){
         $thongtindt = DB::table('chia_nhom as chn')->select('gv.macb','gv.hoten','dt.tendt')
                 ->join('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->join('giang_vien as gv','dt.macb','=','gv.macb')
                 ->where('chn.mssv',$mssv)->first();
-        return view('sinhvien.them-thong-tin-de-tai')->with('thongtindt',$thongtindt);           
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $thongtinNhom = DB::table('nhom_thuc_hien')
+                ->select('lichhop','tochucnhom','phamvi_detai','congnghethuchien')
+                ->where('manhomthuchien',$manth)
+                ->first();
+        return view('sinhvien.them-thong-tin-nhom-nien-luan')->with('thongtindt',$thongtindt)
+            ->with('manth',$manth)->with('nhom',$thongtinNhom);           
+    }
+    public function LuuThemThongTinNhom(Request $req){
+        $post = $req->all();
+        //Lấy 1 mảng các ngày được check
+        $ngay_checked = Input::get('chkBuoiHop');  
+        $data = array(
+            'lichhop'          => $ngay_checked,
+            'tochucnhom'       => $_POST['txtToChucNhom'],
+            'phamvi_detai'     => $_POST['txtPhamVi'],
+            'congnghethuchien' => $_POST['txtCongNgheThucHien']        
+        );
+        $ch = DB::table('nhom_thuc_hien')->where('manhomthuchien',$_POST['txtMaNhomNL'])
+                ->update($data);
+        return redirect('sinhvien/themthongtinnhom/1111317');
     }
 
 }//END Class DangkydtController

@@ -97,9 +97,13 @@
                         <td>Nhóm học phần:</td>
                         <td colspan="3">
                             @foreach($dshp as $hp)
-                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                                @if($sv_hp == $hp->manhomhp)
+                                    {{$hp->tennhomhp}}: <input type="radio" name="rdNhomHP" value="{{$hp->manhomhp}}" checked=""/> &nbsp;&nbsp;&nbsp;
+                                @else
+                                    {{$hp->tennhomhp}}: <input type="radio" name="rdNhomHP" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                                @endif                                
                             @endforeach
-                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
+                             <p style='color:red;'>{{$errors->first('rdNhomHP')}}</p>
                         </td>  
                     </tr>
                     <tr>

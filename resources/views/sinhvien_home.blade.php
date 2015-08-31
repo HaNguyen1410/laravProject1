@@ -74,8 +74,8 @@
                     </div>               
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="{{asset('sinhvien/themthongtindetai/1111317')}}" data-placement="bottom" title="Thêm các thông tin để thực hiện đề tài niên luận">
-                                    Thêm thông tin
+                            <li><a href="{{asset('sinhvien/themthongtinnhom/1111317')}}" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
+                                    Thêm thông tin nhóm
                                 </a>
                             </li>                           
                             <li class="dropdown">
@@ -88,7 +88,7 @@
                                     <li class="divider"></li>                                
                                     <li><a href="{{asset('sinhvien/phancv/1111317')}}">Phân công việc</a></li>
                                     <li class="divider"></li>                             
-                                    <li><a href="{{asset('sinhvien/noptailieu')}}">Nộp tài liệu</a></li>                               
+                                    <li><a href="{{asset('sinhvien/noptailieu/1111317')}}">Nộp tài liệu</a></li>                               
                                 </ul>
                             </li>                        
                             <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>

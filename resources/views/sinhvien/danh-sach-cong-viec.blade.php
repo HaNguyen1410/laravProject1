@@ -272,7 +272,10 @@
 <div class="container">         
 
     <div class="row">
-        <h3 style="color: darkblue; font-weight: bold;" align="center">DANH SÁCH CÔNG VIỆC TRONG NHÓM</h3><br>
+        <h3 style="color: darkblue; font-weight: bold;" align="center">DANH SÁCH CÔNG VIỆC TRONG NHÓM</h3><br> 
+        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
+            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
         <div class="col-md-12">
             <table class="table table-bordered" border="0" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
@@ -322,10 +325,7 @@
                     <td colspan="9" align="center">{!! $dscv->setPath('danhsachcv/1111317')->render() !!}</td>
                 </tr> 
             </table> 
-        </div>  <!-- /class="col-md-12" -->   
-        <div class="col-md-12">
-            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-        </div>
+        </div>  <!-- /class="col-md-12" -->  
     </div> <!-- /row -->
 
 </div> <!-- /container -->

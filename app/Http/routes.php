@@ -41,6 +41,7 @@ Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
 Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
 /*======= Xóa thông tin Giảng viên ==========*/
 Route::get('quantri/danhsachgv/xoagv/{macb}','QuantriController@XoaGV');
+Route::get('quantri/danhsachgv/xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
 
 /*
  * ######## Sinh Viên ##################
@@ -97,6 +98,7 @@ route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController
 route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
 /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
 route::get('giangvien/chianhom/{macb}','ChianhomController@ChiaNhomNL');
+route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
 
 /*======= QUẢN LÝ THÔNG BÁO ==========*/
 route::get('giangvien/quanlythongbao/{macb}','QlthongbaoController@QuanLyThongBao');
@@ -115,8 +117,9 @@ Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
 Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= XEM ĐIỂM ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
-/*======= THÔNG TIN ĐỀ TÀI niên luận ==========*/
-Route::get('sinhvien/themthongtindetai/{mssv}','SVthongtindetaiController@ThemThongTinDeTai');
+/*======= THÔNG TIN NHÓM NIÊN LUẬN ==========*/
+Route::get('sinhvien/themthongtinnhom/{mssv}','SVthongtinnhomController@ThemThongTinNhom');
+Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
 
 /*======= PHÂN CÔNG NHIỆM VỤ ==========*/
 /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
@@ -142,4 +145,4 @@ Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
 /* ------ Xóa công việc chi tiết (công việc phụ thuộc) -------- */
 Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
 /*======= NỘP TÀI LIỆU ==========*/
-route::get('sinhvien/noptailieu','QltailieuController@NopTaiLieu');
+route::get('sinhvien/noptailieu/{mssv}','QltailieuController@NopTaiLieu');

@@ -9,10 +9,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{Asset('../bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{Asset('scripts/jquery-ui-1.11.4/style.css')}}">
-        <link rel="stylesheet" href="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.css')}}">     
+        <link rel="stylesheet" href="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.css')}}"> 
+        <link rel="stylesheet" href="{{Asset('scripts/datetimepicker/jquery.datetimepicker.css')}}"/>     
         <script src="{{Asset('../bootstrap/js/jquery-1.11.3.min.js')}}"></script>
         <script src="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.js')}}"></script>
         <script src="{{Asset('../bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{Asset('scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
         <script src="{{Asset('scripts/ckeditor/ckeditor.js')}}"></script>
                 
         <script type="text/javascript">
@@ -24,6 +26,19 @@
         <script type="text/javascript">
             $(function() {
               $( "#txtNgaySinh" ).datepicker();
+            });
+        </script>
+        
+        <script type="text/javascript">
+            $(function() {
+              $( "#txtNgayBatDauKH" ).datepicker({
+                  dateFormat: "yy-mm-dd"
+              });
+            });
+            $(function() {
+              $( "#txtNgayKetThucKH" ).datepicker({
+                  dateFormat: "yy-mm-dd"
+              });
             });
         </script>
     </head>

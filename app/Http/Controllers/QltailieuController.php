@@ -21,8 +21,17 @@ class QltailieuController extends Controller
         return view('giangvien.kho-tai-lieu');
     }
 /*========================= Sinh viên nộp tài liệu =============================*/
-    public function NopTaiLieu(){
-        
-        return view('sinhvien.nop-tai-lieu');
+    public function NopTaiLieu($mssv){
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $tendt = DB::table('de_tai as dt')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->where('radt.manhomthuchien',$manth)
+                ->value('dt.tendt');
+        $dscvchinh = DB::table('cong_viec as cv')->select('cv.macv','cv.congviec')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('th.manhomthuchien',$manth)
+                ->where('cv.phuthuoc_cv','=',0)
+                ->get();
+        return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh);
     }
 }

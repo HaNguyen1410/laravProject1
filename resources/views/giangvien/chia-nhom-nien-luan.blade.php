@@ -23,12 +23,13 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold;" align='center'>CHIA NHÓM LÀM NIÊN LUẬN</h3> 
-            <h4 style="color: darkblue; font-weight: bold;">Phân chia thành viên</h4>            
-            <form name="frmThemTV" action="" method="post">
+            <h4 style="color: darkblue; font-weight: bold;">Phân chia thành viên</h4> 
+
+            <form action="{{action('ChianhomController@LuuChiaNhomNL')}}" method="post">
                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" id="tblChonTV">
                     <tr>
-                        <th align="right">Năm học:</th>
+                        <th align="right" width="20%">Năm học:</th>
                         <th width="15%">
                             <input type="text" name="txtNamHoc" value="{{$namcb}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
@@ -49,12 +50,26 @@
                         <th width='15%' valign='middle'>Chọn đề tài:</th>
                         <td align="center" colspan='5'>
                             <select class="form-control" name="cbDeTai">
+                                <option value="">Chọn tên đề tài</option>
                                 @foreach($dsdetai as $dt)
                                 <option value="{{$dt->madt}}">{{$dt->tendt}}</option>
                                 @endforeach
                             </select>
+                            <p style='color:red;'>{{$errors->first('cbDeTai')}}</p>
                         </td>                        
                     </tr>  
+                    <tr>
+                        <th>Ngày bắt đầu (kế hoạch):</th>
+                        <td width="30%" colspan='2'>
+                           <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
+                           <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
+                        </td>
+                        <th width="18%">Ngày kết thúc (kế hoạch):</th>
+                        <td width="30%" colspan='3'>
+                            <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
+                        </td>
+                    </tr>
                     <tr>                   
                         <td align="center" colspan="6">                                                  
                             @foreach($dstensv as $sv)
@@ -104,7 +119,7 @@
                         </td>
                     </tr>                        
                 @endforeach
-            </table>
+            </table>           
              <h4 style="color: darkblue; font-weight: bold; text-align: center;">Danh sách các nhóm đã chia</h4>
             <table class="table table-bordered" style="max-width:900px" align='center' id="bang2">
                 <tr>

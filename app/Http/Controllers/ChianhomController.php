@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 
 class ChianhomController extends Controller
 {
@@ -68,7 +69,7 @@ class ChianhomController extends Controller
                 ->where('nk.hocky',$hkcb)
                 ->get();      
         //Lấy tên đề tài của các nhóm trong hoc kỳ niên khóa hiện tại
-        $detainhom = DB::table('de_tai as dt')->distinct()
+        $detainhom = DB::table('de_tai as dt')->distinct()->orderBy('chn.manhomthuchien','asc')
                 ->select('dt.tendt','chn.manhomthuchien')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
@@ -79,18 +80,17 @@ class ChianhomController extends Controller
                 ->where('nk.hocky',$hkcb)
                 ->where('chn.manhomthuchien','<>',"")
                 ->get();
-        //Lấy madt, tendt của 1 cán bộ
-        $dsdetai = DB::table('de_tai as dt')->distinct()
-                ->select('dt.madt','dt.tendt')
-                ->join('nhom_hocphan as hp','dt.macb','=','hp.macb')
-                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
-                ->where('dt.macb',$macb)
-                ->where('nk.nam',$namcb)
-                ->where('nk.hocky',$hkcb)
+        //Lấy mã đề tài trong bảng ra_de_tai
+        $madt = DB::table('ra_de_tai')->select('madt')->lists('madt');     
+        //Lấy madt, tendt của 1 cán bộ mà chưa có nhóm nào thực hiện, ở bất cứ năm học, học kỳ nào
+        $dsdetai = DB::table('de_tai')->distinct()
+                ->select('madt','tendt')
+                ->where('macb',$macb)
+                ->whereNotIn('madt',$madt)
                 ->get();
         return view('giangvien.chia-nhom-nien-luan')->with('dstensv',$dstensv)->with('dsmahp',$dsmahp)
             ->with('dsdetai',$dsdetai)->with('dsNhom',$dsNhom)->with('detainhom',$detainhom)
-                ->with('namcb',$namcb)->with('hkcb',$hkcb);           
+                ->with('namcb',$namcb)->with('hkcb',$hkcb)->with('macb',$macb);           
     }
 /*==================== Lưu chia nhóm thành viên ======================*/
     public function LuuChiaNhomNL(Request $req){
@@ -98,7 +98,10 @@ class ChianhomController extends Controller
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'chk'           =>'required',
+                    'cbDeTai'          =>'required',
+                    'txtNgayBatDauKH'  =>'required|date',
+                    'txtNgayKetThucKH' =>'required|date',
+                    'chk'              =>'required',
                     //'rdNhomTruong'  =>'required'
                 ]
         );
@@ -108,30 +111,46 @@ class ChianhomController extends Controller
         else{
             $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng
-            $nhomtruong = Input::has('rdNhomTruong')==TRUE ? 0 : 1; 
-            //return $masv_checked.$nhomtruong;
-            //return count($masv_checked);
-            if(array_key_exists('chk', $masv_checked)){                    
-                for($i=1; $i <= count($masv_checked['chk']); $i++){ 
-                    return $masv_checked["chk.[$i]"];
-//                    $ch = DB::table('dangky_nhom')->whereIn('mssv')
-//                            ->update([                        
-//                                    'manhomthuchien'=>$manth,
-//                                    'nhomtruong'=>$nhomtruong
-//                               ]);
-                }
-            }
-                
-             //return redirect('sinhvien/dangkydt/1111317');
-        }      
+            $nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
+//            return $masv_checked.$nhomtruong;
+//              return count($masv_checked);                                             
+            $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
+                            ->update([                        
+                                    'manhomthuchien'=>$manth,
+                                    'nhomtruong'=>$nhomtruong
+                               ]);
+            $ch2 = DB::table('ra_de_tai')->insert(
+                    [
+                        'madt'           => $_POST['cbDeTai'],
+                        'manhomthuchien' => $manth
+                    ]
+                );
+            $ch3 = DB::table('nhom_thuc_hien')->insert(
+                        [                            
+                            'manhomthuchien'      => $manth,
+                            'ngaybatdau_kehoach'  => $_POST['txtNgayBatDauKH'],
+                            'ngayketthuc_kehoach' => $_POST['txtNgayKetThucKH'],
+                            'ngaytao'             => Carbon::now()
+                        ]
+                    );
+               
+             return redirect('giangvien/chianhom/2134');            
+        }
     }
-
+    
 }//END Class DangkydtController
  
 /*
  * 
- * select DISTINCT dangky_nhom.mssv, sinh_vien.hoten 
- * from dangky_nhom join sinh_vien on dangky_nhom.mssv = sinh_vien.mssv 
- * WHERE dangky_nhom.manhomhp = 1
+ * //Lấy madt, tendt của 1 cán bộ
+        $dsdetai = DB::table('de_tai as dt')->distinct()
+                ->select('dt.madt','dt.tendt')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->join('nhom_hocphan as hp','dt.macb','=','hp.macb')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('dt.macb',$macb)
+                ->where('nk.nam',$namcb)->where('nk.hocky',$hkcb)
+                ->whereNotIn('dt.madt',$madt)
+                ->get();
  * 
  */

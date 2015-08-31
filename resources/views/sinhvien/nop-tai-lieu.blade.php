@@ -18,21 +18,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <label style="margin-left: 15px;">Tên đề tài: </label><br>
-                    <label style="margin-left: 15px;color: darkblue; font-weight: bold;">
-                        <select class="form-control">
-                            <option value="1">Game trên Android</option>
-                            <option value="2">Website bán đồ điện tử</option>
-                            <option value="3">Phần mềm quản lý hóa đơn</option>
-                        </select>
+                    <label style="margin-left: 15px;color: darkblue; font-weight: bold;">                         
+                        <textarea class="form-control" cols='80' rows='3' style="padding-left: 1px" readonly="">
+                            {{$tendt}}
+                        </textarea>
                     </label>
                 </div>
                 <div class="col-md-6">
                     <label style="display: block; float: left;">Công việc: </label>
                     <select class="form-control">
-                        <option value="1">Phân tích yêu cầu</option>
-                        <option value="2">Đặc tả yêu cầu</option>
-                        <option value="3">Thiết kế chức năng</option>
-                        <option value="3">Thiết kế giao diện</option>
+                        @foreach($dscvchinh as $cv)
+                        <option value="{{$cv->macv}}">{{$cv->congviec}}</option>  
+                        @endforeach
                     </select>
                 </div>                                          
              </div><br>
