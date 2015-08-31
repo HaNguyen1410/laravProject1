@@ -44,7 +44,7 @@
                 </table>            
             </div>        
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
+            <table class="table table-bordered table-striped" >
                 <tr>
                     <th>STT</th>
                     <th>Mã cán bộ</th>
@@ -86,9 +86,29 @@
                 @endforeach
                
                 <tr>
-                    <td colspan="8" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
+                    <td colspan="9" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
                 </tr>                     
             </table>
+            <div class="col-md-12">
+                <table class="table table-bordered table-striped" style="width: 700px" align="center">
+                    <tr>
+                        <th width="3%">STT</th>
+                        <th>MACB</th>
+                        <th width="15%">Nhóm HP phụ trách</th>
+                        <th>Năm học</th>
+                        <th>Học kỳ</th>
+                    </tr>
+                    @foreach($gv_hp as $stt => $gvhp)
+                    <tr>
+                        <td align="center">{{$stt+1}}</td>
+                        <td align="center">{{$gvhp->macb}}</td>
+                        <td align="center">{{$gvhp->tennhomhp}}</td>
+                        <td align="center">{{$gvhp->nam}}</td>
+                        <td align="center">{{$gvhp->hocky}}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>                
         </div>
     </div>
 </div>

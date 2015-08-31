@@ -27,11 +27,34 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
+                        <td>Năm học:</td>
+                        <td>
+<!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
+                            <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                    </tr> 
+                    <tr>
                         <td width="30%">Mã cán bộ:</td>
-                        <td colspan="3">
+                        <td>
                             <input type="text" name="txtMaCB" size="2" value="{{$gv->macb}}" class="form-control" readonly="true"/> 
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
+                        <td width='20%' align='right' style="color:darkblue;">
+                            <label>Mở tài khoản:</label>
+                        </td>
+                        <td>
+                            <?php
+                            if ($gv->khoa == 0) {
+                                echo "<input type='checkbox' name='ckbKhoa' value='0' checked='true'/>";
+                            } elseif ($gv->khoa == 1) {
+                                echo "<input type='checkbox' name='ckbKhoa' value='1' />";
+                            }
+                            ?>
+                        </td>    
                     </tr>
                     <tr>
                         <td>Họ và tên:</td>
@@ -80,24 +103,12 @@
                     <tr>
                         <td>Nhóm học phần:</td>
                         <td colspan="3">
-                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" /> &nbsp;&nbsp;&nbsp;
-                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" />
+                            @foreach($dshp as $hp)
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                            @endforeach
+                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
                         </td>
-                    </tr> 
-                    <tr>
-                        <td>Năm học:</td>
-                        <td>
-                            <select class="form-control" name="cbNamHoc">
-                                <option value="">2013-2014</option>
-                            </select>
-                        </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
-                        <td>
-                            <select class="form-control" name="cbHocKys">
-                                <option value=""></option>
-                            </select>
-                        </td>
-                    </tr> 
+                    </tr>                    
                     <tr>
                         <td>Mật khẩu mới:</td>
                         <td colspan="3">
@@ -111,19 +122,7 @@
                             <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
-                    </tr>                    
-                    <tr>
-                        <td><label>Mở tài khoản:</label></td>
-                        <td>
-                            <?php
-                            if ($gv->khoa == 0) {
-                                echo "<input type='checkbox' name='ckbKhoa' value='0' checked='true'/>";
-                            } elseif ($gv->khoa == 1) {
-                                echo "<input type='checkbox' name='ckbKhoa' value='1' />";
-                            }
-                            ?>
-                        </td>                             
-                    </tr>
+                    </tr> 
                     <tr>
                         <td></td>
                         <td colspan="4">

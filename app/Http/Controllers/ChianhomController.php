@@ -92,6 +92,39 @@ class ChianhomController extends Controller
             ->with('dsdetai',$dsdetai)->with('dsNhom',$dsNhom)->with('detainhom',$detainhom)
                 ->with('namcb',$namcb)->with('hkcb',$hkcb);           
     }
+/*==================== Lưu chia nhóm thành viên ======================*/
+    public function LuuChiaNhomNL(Request $req){
+        $manth = $this->manth_tutang();
+        $post = $req->all();
+        $v = \Validator::make($req->all(),
+                [
+                    'chk'           =>'required',
+                    //'rdNhomTruong'  =>'required'
+                ]
+        );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+            $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
+                // has -> true nếu giá trị hiện tại có giá trị và không rỗng
+            $nhomtruong = Input::has('rdNhomTruong')==TRUE ? 0 : 1; 
+            //return $masv_checked.$nhomtruong;
+            //return count($masv_checked);
+            if(array_key_exists('chk', $masv_checked)){                    
+                for($i=1; $i <= count($masv_checked['chk']); $i++){ 
+                    return $masv_checked["chk.[$i]"];
+//                    $ch = DB::table('dangky_nhom')->whereIn('mssv')
+//                            ->update([                        
+//                                    'manhomthuchien'=>$manth,
+//                                    'nhomtruong'=>$nhomtruong
+//                               ]);
+                }
+            }
+                
+             //return redirect('sinhvien/dangkydt/1111317');
+        }      
+    }
 
 }//END Class DangkydtController
  

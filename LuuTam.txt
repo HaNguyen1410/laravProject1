@@ -32,50 +32,7 @@
     public function LuuChonDeTai(){
         
     }
-/*==================== Đăng ký thành viên Nhóm ======================*/
-    public function ThemThanhVien($mssv){
-        $mahp = DB::table('dangky_nhom')->where('mssv',$mssv)->value('manhomhp');
-        $dstensv = DB::table('dangky_nhom as dk')->distinct()
-                ->select('dk.mssv','sv.hoten')
-                ->join('sinh_vien as sv','dk.mssv','=','sv.mssv')
-                ->where('dk.manhomhp','=',$mahp)
-                ->get();
-        $dssv = DB::table('dangky_nhom')->distinct()->where('manhomhp',$mahp)->get();
-        return view('sinhvien.dang-ky-thanh-vien')->with('dssv',$dssv)->with('dstensv',$dstensv); 
-    }
 
-    public function LuuThemThanhVien(Request $req){
-        $manth = $this->manth_tutang();
-        $post = $req->all();
-        $v = \Validator::make($req->all(),
-                [
-                    'chk'           =>'required',
-                    //'rdNhomTruong'  =>'required'
-                ]
-        );
-        if($v->fails()){
-            return redirect()->back()->withErrors($v->errors());
-        }
-        else{
-            $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
-                // has -> true nếu giá trị hiện tại có giá trị và không rỗng
-            $nhomtruong = Input::has('rdNhomTruong')==TRUE ? 0 : 1; 
-            //return $masv_checked.$nhomtruong;
-            //return count($masv_checked);
-            if(array_key_exists('chk', $masv_checked)){                    
-                for($i=1; $i <= count($masv_checked['chk']); $i++){ 
-                    return $masv_checked["chk.[$i]"];
-//                    $ch = DB::table('dangky_nhom')->where('mssv')
-//                            ->update([                        
-//                                    'manhomthuchien'=>$manth,
-//                                    'nhomtruong'=>$nhomtruong
-//                               ]);
-                }
-            }
-                
-             //return redirect('sinhvien/dangkydt/1111317');
-        }      
-    }
     
 
 ===============================================================================

@@ -27,6 +27,17 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
+                        <td>Năm học:</td>
+                        <td>
+<!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
+                            <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                    </tr> 
+                    <tr>
                         <td width="30%">Mã cán bộ:</td>
                         <td colspan="3">
                             <input type="text" size="2" value="{{$ma}}" name="txtMaCB" class="form-control" readonly=""/>
@@ -72,24 +83,12 @@
                     <tr>
                         <td>Nhóm học phần:</td>
                         <td colspan="3">
-                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" /> &nbsp;&nbsp;&nbsp;
-                            Tên nhóm HP: <input type="checkbox" name="chkNhomHP" value="" />
+                            @foreach($dshp as $hp)
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                            @endforeach
+                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
                         </td>
-                    </tr> 
-                    <tr>
-                        <td>Năm học:</td>
-                        <td>
-                            <select class="form-control" name="cbNamHoc">
-                                <option value="">2013-2014</option>
-                            </select>
-                        </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
-                        <td>
-                            <select class="form-control" name="cbHocKy">
-                                <option value=""></option>
-                            </select>
-                        </td>
-                    </tr> 
+                    </tr>                     
                     <tr>
                         <td>Mật khẩu:</td>
                         <td colspan="3">

@@ -94,16 +94,39 @@ class QuantriController extends Controller
     public function DanhSachGV(){
         $gv = DB::table('giang_vien')->get();
         $n = count($gv);
-        $ds = DB::table('giang_vien')->skip($n)->take(5)->paginate(5);
-        $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
-        $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get();        
+        $ds = DB::table('giang_vien as gv')->skip($n)->take(5)->paginate(5);
+        //Lấy danh sách năm học năm lớn nhất ở trên cùng
+        $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get(); 
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hocky = DB::table('nien_khoa')->select('hocky')->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->get();        
+        //Lấy danh sách nhóm học phần mà mỗi giảng viên phụ trách
+        $gv_hp = DB::table('nhom_hocphan as hp')->select('hp.tennhomhp','hp.macb','nk.nam','nk.hocky')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->get();
         return view('quantri.quan-tri-giang-vien')->with('dsgv',$ds)
-            ->with('namhoc',$namhoc)->with('hocky',$hocky);
+            ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('gv_hp',$gv_hp);
     }
 /*=========================== Thêm giảng viên ==============================================*/ 
     public function ThemGV(){
         $ma = $this->macb_tutang();
-        return view('quantri.them-giang-vien',['ma' => $ma]);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
+                ->get();       
+        return view('quantri.them-giang-vien',['ma' => $ma])->with('dshp',$dshp)
+                ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank);
     }   
 
     public function LuuThemGV(Request $req){
@@ -116,6 +139,9 @@ class QuantriController extends Controller
                     'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email|max:255',
                     'txtSDT'      => 'required|numeric|min:10',
+                    'chkNhomHP'   => 'required',
+                    'txtNamHoc'   => 'required',
+                    'cbHocKy'     => 'required',
                     'txtMatKhau1' => 'required|min:6',
                     'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'                    
                 ]
@@ -125,7 +151,7 @@ class QuantriController extends Controller
         }
         else
         {
-            $data = array(
+            $data1 = array(
                     'macb'      => $_POST['txtMaCB'],
                     'hoten'     => $_POST['txtHoTen'],
                     'gioitinh'  => $_POST['rdGioiTinh'],
@@ -134,9 +160,11 @@ class QuantriController extends Controller
                     'sdt'       => $_POST['txtSDT'],
                     'matkhau'   => md5($_POST['txtMatKhau1']),
                     'ngaytao'   => Carbon::now() 
-            );
-            $ch = DB::table('giang_vien')->insert($data);
-            if($ch > 0){
+            );            
+            $ch1 = DB::table('giang_vien')->insert($data1);
+            $ch2 = DB::table('nhom_hocphan')->where('manhomhp',$post['chkNhomHP'])
+                    ->update(['macb'=>$_POST['txtMaCB']]);
+            if($ch1 > 0){
                 return redirect('quantri/danhsachgv');
             }
         }
@@ -144,7 +172,21 @@ class QuantriController extends Controller
 /*=========================== Sửa thông tin Giảng viên ==============================================*/ 
     public function CapNhatGV($macb){
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
-        return view('quantri.cap-nhat-giang-vien')->with('gv',$row);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
+                ->get();   
+        return view('quantri.cap-nhat-giang-vien')->with('gv',$row)->with('dshp',$dshp)
+                ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank);
     } 
     
     public function LuuCapNhatGV(Request $req){
@@ -202,16 +244,48 @@ class QuantriController extends Controller
  */
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachSV(){
-        $ds = DB::table('sinh_vien')->paginate(5);
+        $ds = DB::table('sinh_vien as sv')
+                ->select('sv.mssv','sv.hoten','sv.ngaytao','sv.email','sv.khoa','hp.tennhomhp',
+                        'chn.manhomthuchien','chn.nhomtruong')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->paginate(5);
         $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
-        $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get();   
-        return view('quantri.quan-tri-sinh-vien')->with('dssv',$ds)
-            ->with('namhoc',$namhoc)->with('hocky',$hocky);
+        $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get(); 
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
+                ->get();   
+        return view('quantri.quan-tri-sinh-vien')->with('dssv',$ds)->with('namhoc',$namhoc)
+                ->with('hocky',$hocky)->with('dshp',$dshp);
     }  
 /*=========================== Thêm sinh viên ==============================================*/ 
     public function ThemSV(){
         $ma = $this->masv_tutang();
-        return view('quantri.them-sinh-vien')->with('ma',$ma);
+        //Lấy năm học và học kỳ hiện tại
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
+                ->get();  
+        return view('quantri.them-sinh-vien')->with('ma',$ma)->with('dshp',$dshp)
+            ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank);
     } 
     
     public function LuuThemSV(Request $req){
@@ -252,7 +326,21 @@ class QuantriController extends Controller
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
     public function CapNhatSV($masv){
         $row = DB::table('sinh_vien')->where('mssv',$masv)->first();
-        return view('quantri.cap-nhat-sinh-vien')->with('sv',$row);
+        //Lấy năm học và học kỳ hiện tại
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
+                ->get();  
+        return view('quantri.cap-nhat-sinh-vien')->with('sv',$row)->with('dshp',$dshp)
+            ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank);
     } 
     
     public function LuuCapNhatSV(Request $req){

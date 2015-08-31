@@ -98,6 +98,9 @@ route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'Theodoike
 /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
 route::get('giangvien/chianhom/{macb}','ChianhomController@ChiaNhomNL');
 
+/*======= QUẢN LÝ THÔNG BÁO ==========*/
+route::get('giangvien/quanlythongbao/{macb}','QlthongbaoController@QuanLyThongBao');
+
 /*********************
  * =========================== TRANG SINH VIÊN ===========================================
  * *************************

@@ -27,11 +27,35 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
+                        <td>Năm học:</td>
+                        <td>
+<!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
+                            <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                    </tr> 
+                    <tr>
                         <td width="30%">Mã số sinh viên:</td>
-                        <td colspan="3">
+                        <td>
                             <input type="text" name="txtMaSV" value="<?= $sv->mssv ?>" class="form-control" readonly="true"/>
                             <p style='color:red;'>{{$errors->first('txtMaSV')}}</p>
                         </td>
+                        <td width='20%' align='right' style="color:darkblue;">
+                            <label>Mở tài khoản:</label>
+                        </td>
+                        <td>
+                            <?php
+                                if($sv->khoa == 0){
+                                    echo "<input type='checkbox' name='ckbKhoa' value='0' checked='true'/>";
+                                }
+                                elseif ($sv->khoa == 1) {
+                                    echo "<input type='checkbox' name='ckbKhoa' value='1' />";
+                                }
+                            ?> 
+                        </td>  
                     </tr>
                     <tr>
                         <td>Họ và tên:</td>
@@ -49,7 +73,7 @@
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td colspan="3">
+                        <td>
                              <?php
                                 $gtNam = strcasecmp($sv->gioitinh, 'Nam');
                                 $gtNu = strcasecmp($sv->gioitinh, 'Nữ');
@@ -63,39 +87,26 @@
                                 }
                             ?>  
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Khóa học:</td>
+                        <td width="8%" align="right" style="color:darkblue;">Khóa học:</td>
                         <td width="30%">
                             <input type="text" name="txtKhoaHoc" value="<?= $sv->khoahoc ?>" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtKhoaHoc')}}</p>
                         </td>
-                        <td width="18%" align="right" style="color:darkblue;">Nhóm học phần:</td>
-                        <td>
-                             <select class="form-control" name="cbNhomHP">
-                                <option value=""></option>
-                            </select>
-                        </td>
+                    </tr>
+                    <tr>
+                        <td>Nhóm học phần:</td>
+                        <td colspan="3">
+                            @foreach($dshp as $hp)
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                            @endforeach
+                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
+                        </td>  
                     </tr>
                     <tr>
                         <td>Email:</td>
                         <td colspan="3">
                             <input type="text" name="txtEmail" value="<?= $sv->email ?>" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Năm học:</td>
-                        <td>
-                            <select class="form-control" name="cbNamHoc">
-                                <option value="">2013-2014</option>
-                            </select>
-                        </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
-                        <td>
-                            <select class="form-control" name="cbHocKy">
-                                <option value=""></option>
-                            </select>
                         </td>
                     </tr> 
                     <tr>
@@ -118,19 +129,6 @@
                             <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
-                    </tr>
-                    <tr>
-                        <td><label>Mở tài khoản:</label></td>
-                        <td colspan="3">
-                            <?php
-                                if($sv->khoa == 0){
-                                    echo "<input type='checkbox' name='ckbKhoa' value='0' checked='true'/>";
-                                }
-                                elseif ($sv->khoa == 1) {
-                                    echo "<input type='checkbox' name='ckbKhoa' value='1' />";
-                                }
-                            ?> 
-                        </td>                             
                     </tr>
                     <tr>
                         <td></td>

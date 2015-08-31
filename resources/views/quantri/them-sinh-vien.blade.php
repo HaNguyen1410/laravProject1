@@ -29,10 +29,26 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
                     <tr>
+                        <td>Năm học:</td>
+                        <td>
+<!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
+                            <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td>
+                            <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
+                        </td>
+                    </tr> 
+                    <tr>
                         <td width="30%">Mã số sinh viên:</td>
-                        <td colspan="3">
+                        <td>
                             <input type="text" size="2" value="{{$ma}}" name="txtMaSV" class="form-control" readonly=""/>
                             <p style='color:red;'>{{$errors->first('txtMaSV')}}</p>
+                        </td>                        
+                        <td width="12%" align="right" style="color:darkblue;">Khóa học:</td>
+                        <td width="30%">
+                            <input type="text" value="" name="txtKhoaHoc" class="form-control"> 
+                            <p style='color:red;'>{{$errors->first('txtKhoaHoc')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -44,15 +60,13 @@
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td colspan="3">
+                        <td>
                             Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> ;&nbsp;&nbsp;&nbsp
                             Nữ: <input type="radio" size="2" value="Nữ" name="rdGioiTinh"/> 
                             <p style='color:red;'>{{$errors->first('rdGioiTinh')}}</p>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Ngày sinh:</td>
-                        <td colspan="3">
+                        <td width="8%" align="right" style="color:darkblue;">Ngày sinh:</td>
+                        <td>
                             <input type="text" size="2" value="" id="txtNgaySinh" name="txtNgaySinh" class="form-control"> 
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>
                         </td>
@@ -64,32 +78,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Khóa học:</td>
-                        <td width="30%">
-                            <input type="text" value="" name="txtKhoaHoc" class="form-control"> 
-                            <p style='color:red;'>{{$errors->first('txtKhoaHoc')}}</p>
-                        </td>
-                        <td width="18%" align="right" style="color:darkblue;">Nhóm học phần:</td>
+                        <td>Nhóm học phần:</td>
                         <td colspan="3">
-                             <select class="form-control" name="cbNhomHP">
-                                <option value=""></option>
-                            </select>
-                        </td>
+                            @foreach($dshp as $hp)
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                            @endforeach
+                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
+                        </td>  
                     </tr>
-                    <tr>
-                        <td>Năm học:</td>
-                        <td>
-                            <select class="form-control" name="cbNamHoc">
-                                <option value="">2013-2014</option>
-                            </select>
-                        </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
-                        <td>
-                            <select class="form-control" name="cbHocKy">
-                                <option value=""></option>
-                            </select>
-                        </td>
-                    </tr> 
                     <tr>
                         <td>Mật khẩu:</td>
                         <td colspan="3">

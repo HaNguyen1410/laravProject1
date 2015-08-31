@@ -74,17 +74,10 @@
                     </div>               
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Đăng ký niên luận
-                                    <span class="caret"></span>
+                            <li><a href="{{asset('sinhvien/themthongtindetai/1111317')}}" data-placement="bottom" title="Thêm các thông tin để thực hiện đề tài niên luận">
+                                    Thêm thông tin
                                 </a>
-                                <ul class="dropdown-menu" role="menu">                              
-                                    <li><a href="{{asset('sinhvien/themthongtindetai/1111317')}}">Thêm thông tin đề tài niên luận</a></li>   
-                                    <li class="divider"></li>                                
-                                    <li><a href="">Kết quả đăng ký</a></li> 
-                                </ul>
-                            </li>
+                            </li>                           
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Quản lý công việc
