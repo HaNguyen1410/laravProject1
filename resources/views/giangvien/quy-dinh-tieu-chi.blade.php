@@ -41,7 +41,43 @@
                     </th>
                 </tr>
             </table>            
-        </div>        
+        </div>   
+        <div class="col-md-12" style="margin-bottom: 20px; display:block; float:left;" align="center">
+            <form action="{{action('QdtieuchiController@LuuThemTieuChi')}}" method="post" name="frmDoiMatKhau" class="form-horizontal"> 
+                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+                    <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">Thêm tiêu chí đánh giá</h3>
+                    <table class="table table-bordered" align="center" style="width:600px;">
+                        <tr>
+                            <th width="20%">Mã tiêu chí:</th>
+                            <td width="50%">
+                                <input type="text" name="txtMaCB" value="2134"/> 
+                                <input style="width:35%; text-align: center;" type="text" name="txtMaTC" value="{{$ma}}" class="form-control" readonly=""/> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Nội dung đánh giá:</th>
+                            <td>
+                                 <textarea class="form-control" rows="4" name="txtNoiDungTC"></textarea>
+                                 <p style='color:red;'>{{$errors->first('txtNoiDungTC')}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Mức điểm:</th>
+                            <td>
+                                <input type="text" name="txtMucDiem" value="" class="form-control" /> 
+                                <p style='color:red;'>{{$errors->first('txtMucDiem')}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <button type="submit" name="btnThem" class="btn btn-primary" style="width: 20%;">
+                                    <img src="{{asset('images/save-as-icon.png')}}"> Thêm
+                                </button>                                                              
+                            </td>
+                        </tr>
+                    </table>       
+            </form>
+        </div>
         <div class="col-md-12">            
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>

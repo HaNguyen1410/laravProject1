@@ -51,6 +51,7 @@ class SVthongtinnhomController extends Controller
         $post = $req->all();
         //Lấy 1 mảng các ngày được check
         $ngay_checked = Input::get('chkBuoiHop');  
+//        return $ngay_checked;
         $data = array(
             'lichhop'          => $ngay_checked,
             'tochucnhom'       => $_POST['txtToChucNhom'],

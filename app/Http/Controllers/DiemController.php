@@ -80,15 +80,18 @@ class DiemController extends Controller
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
                 ->get();
-//        $masv = DB::table('sinh_vien as sv')
-//                ->join('dangky_nhom as dk','sv.mssv','=','dk.mssv')
-//                ->where('dk.manhomthuchien',$manth)
-//                ->lists('dk.mssv');->with('dsdiem',$dsdiem)
+        $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manth)
+                ->lists('chn.mssv');
                
-//             $dsdiem = DB::table('chitiet_diem')->select('diem')->whereIn('mssv', $masv)->get();              
+        $dsdiem = DB::table('chitiet_diem')
+                ->select('diem')->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->lists('diem');              
         
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
-            ->with('dsdt',$dsdt)->with('dssv',$dssv);
+            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem($macb){       
@@ -111,4 +114,10 @@ class DiemController extends Controller
                 ->with('tieuchi',$tieuchi);
     }  
     
-}
+}//END Clas DiemController
+/*
+    SELECT mssv, diem
+    from chitiet_diem
+    WHERE mssv in (1111317, 1111308,1111324)
+    ORDER BY mssv ASC
+ */

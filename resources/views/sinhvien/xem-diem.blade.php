@@ -58,7 +58,13 @@
                     <td>{{$sv->hoten}}</td>
                     
                 </tr>
-            @endforeach             
+            @endforeach    
+              
+            <tr>
+                @foreach($dsdiem as $diem)         
+                    <td>{{$diem->diem}}</td>                                                                      
+                @endforeach
+            </tr>      
         </table>
         <div class="col-md-12" style="text-align: right;">
             <input type="button" value="In bảng điểm" class="btn btn-primary"><hr>

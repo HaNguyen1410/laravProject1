@@ -29,7 +29,7 @@ class QdtieuchiController extends Controller
     }
 /*====================== Lấy danh sách các tiêu chí đánh giá của 1 cán bộ ====================================*/
     public function DSTieuChi($macb){
-        //$ma = $this->matc_tutang();
+        $ma = $this->matc_tutang();
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
@@ -39,8 +39,7 @@ class QdtieuchiController extends Controller
                 ->where('qd.macb','=',$macb)
                 ->get();
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)
-                ->with('namhoc',$namhoc)->with('hocky',$hocky);
-                //->with('ma',$ma);
+                ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('ma',$ma);
     }
 /*========= Xóa Tiêu chí đánh giá ==============*/    
     public function XoaTieuChi($macb,$matc){
@@ -53,10 +52,10 @@ class QdtieuchiController extends Controller
         return redirect('giangvien/dstieuchi/2134');      
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
-    public function ThemTieuChi($macb){ 
-        $ma = $this->matc_tutang();
-        return view('giangvien.them-tieu-chi')->with('ma',$ma);
-    }
+//    public function ThemTieuChi($macb){ 
+//        $ma = $this->matc_tutang();
+//        return view('giangvien.them-tieu-chi')->with('ma',$ma);
+//    }
     
     public function LuuThemTieuChi(Request $req){
         $post = $req->all();
@@ -84,9 +83,9 @@ class QdtieuchiController extends Controller
             );
             $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
             $ch2 = DB::table('quy_dinh')->insert($data2);
-            if($ch1 > 0 && $ch2 > 0){
-                return redirect('giangvien/dstieuchi/2134');
-            }
+            
+            return redirect('giangvien/dstieuchi/2134');
+           
         }
     }
 /*========================= Cập nhật tiêu chí đánh giá ========================*/

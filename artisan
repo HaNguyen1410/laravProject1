@@ -1,6 +1,9 @@
 #!/usr/bin/env php
 <?php
 
+//Artisan::add(new ExportTables);
+	
+//Artisan::add(new DatabaseBackup);
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

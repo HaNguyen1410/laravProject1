@@ -6,7 +6,9 @@
     "type": "project",
     "require": {
         "nesbot/carbon": "~1.14",
-        "nesbot/carbon": "dev-master"
+        "nesbot/carbon": "dev-master",
+        "schickling/backup": "dev-master",
+        "spatie/laravel-backup": "dev-master"
     },
     "require": {
         "php": ">=5.5.9",
