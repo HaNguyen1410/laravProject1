@@ -65,7 +65,11 @@
             @endforeach         
         </table>
         <div class="col-md-12" style="text-align: right;">
-            <input type="button" value="In bảng điểm" class="btn btn-primary"><hr>
+            <a href="1111317/inbangdiemsv">
+                <button type="button" name="" class="btn btn-success" style="width: 15%;">
+                    <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
+                </button>
+            </a><hr>
         </div>
         <table class="table table-bordered" style="width: 600px;">
             <tr>

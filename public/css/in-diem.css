@@ -1,0 +1,27 @@
+/* 
+    Document   : in-diem
+    Created on : Sep 4, 2015, 3:33:33 PM
+    Author     : Admin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+@font-face {
+  font-family: 'times-roman';
+  src: url('{{public_path()}}/fonts/times-roman.ttf')  format('truetype')
+}
+html, body {
+    outline: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 12px;
+    font-family: inherit;
+    vertical-align: baseline;
+    line-height: 1;
+    color: #111;
+    background: white;
+    font-family: "times-roman", serif;
+}

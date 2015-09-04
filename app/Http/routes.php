@@ -118,6 +118,7 @@ Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
 Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= XEM ĐIỂM ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
+route::get('sinhvien/xemdiem/{mssv}/inbangdiemsv','IntrangController@InBangDiemSV');
 /*======= THÔNG TIN NHÓM NIÊN LUẬN ==========*/
 Route::get('sinhvien/themthongtinnhom/{mssv}','SVthongtinnhomController@ThemThongTinNhom');
 Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
