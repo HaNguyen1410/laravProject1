@@ -89,8 +89,8 @@ route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
 //route::get('giangvien/dstieuchi/{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
 //route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
         /*  * Cập nhật tiêu chí đánh giá  */
-route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
-route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
+//route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
+//route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
     /*======= Xóa thông tiêu chí đánh giá ==========*/
 Route::get('giangvien/dstieuchi/{macb}/xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
 /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/

@@ -80,18 +80,18 @@ class DiemController extends Controller
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
                 ->get();
+         //Lấy 1 mảng mssv của 1 nhóm thực hiện
         $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
                 ->lists('chn.mssv');
-               
+        //Lấy điểm của mỗi sv trong mảng mssv trên       
         $dsdiem = DB::table('chitiet_diem')
-                ->select('diem')->orderBy('mssv','asc')
+                ->select('mssv','diem')->orderBy('mssv','asc')
                 ->whereIn('mssv', $masv)
-                ->lists('diem');              
-        
+                ->get();              
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
-            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);
+            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);            
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem($macb){       
@@ -108,10 +108,29 @@ class DiemController extends Controller
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
                 ->get();
-        
-                
-        return view('giangvien.nhap-diem')->with('hk_nk',$hk_nk)->with('dsdt',$dsdt)
-                ->with('tieuchi',$tieuchi);
+        $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.manhomthuchien')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.macb',$macb)
+                ->lists('chn.manhomthuchien');
+        $dssv = DB::table('sinh_vien as sv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->get();
+        //Lấy 1 mảng mssv của 1 nhóm thực hiện
+        $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->lists('chn.mssv');
+        //Lấy điểm của mỗi sv trong mảng mssv trên       
+        $dsdiem = DB::table('chitiet_diem')
+                ->select('mssv','diem')->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->get(); 
+//         $tongdiem = $this->tongdiem($mssv);
+//         $diemchu = $this->diemchu($mssv);
+        return view('giangvien.nhap-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
+                ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);
     }  
     
 }//END Clas DiemController

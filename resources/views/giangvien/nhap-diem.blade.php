@@ -59,25 +59,20 @@
                         <th width="2%">{{$tc->heso}}</th>
                     @endforeach                                   
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td align="center">
-                        <input style="text-align:center;" type="text" size='1' value=""/>
-                    </td>
-                    <td align="center">
-                        <input style="text-align:center;" type="text" size='1' value=""/>
-                    </td>
-                    <td align="center">
-                        <input style="text-align:center;" type="text" size='1' value=""/>
-                    </td>
-                    <td align="center">
-                        <input style="text-align:center;" type="text" size='1' value=""/>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach($dssv as $stt => $sv)
+                    <tr>
+                        <td align="center">{{$stt+1}}</td>
+                        <td align="center">{{$sv->mssv}}</td>
+                        <td>{{$sv->hoten}}</td>
+                        @foreach($dsdiem as $diem) 
+                            @if($diem->mssv == $sv->mssv)
+                                <td align="center">
+                                    <input type="text" value="{{$diem->diem}}" style="text-align:center;" size='1' />
+                                </td>
+                            @endif
+                        @endforeach
+                    </tr>
+                @endforeach                  
             </table>
 
             <table class="table" cellpadding="15px" cellspacing="0px" align='center'>

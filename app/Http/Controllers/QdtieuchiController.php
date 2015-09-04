@@ -38,8 +38,9 @@ class QdtieuchiController extends Controller
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
                 ->where('qd.macb','=',$macb)
                 ->get();
-        return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)
-                ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('ma',$ma);
+         
+        return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)->with('namhoc',$namhoc)
+        ->with('hocky',$hocky)->with('ma',$ma);
     }
 /*========= Xóa Tiêu chí đánh giá ==============*/    
     public function XoaTieuChi($macb,$matc){
@@ -90,6 +91,7 @@ class QdtieuchiController extends Controller
     }
 /*========================= Cập nhật tiêu chí đánh giá ========================*/
     public function CapNhatTieuChi($macb,$matc){
+      //Hiển thị thông tin của 1 tiêu chí nào đó     
         $tc = DB::table('tieu_chi_danh_gia as dg')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
                 ->where('dg.matc','=',$matc)

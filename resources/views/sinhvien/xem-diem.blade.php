@@ -56,15 +56,13 @@
                     <td align="center">{{$stt+1}}</td>
                     <td align="center">{{$sv->mssv}}</td>
                     <td>{{$sv->hoten}}</td>
-                    
+                    @foreach($dsdiem as $diem) 
+                        @if($diem->mssv == $sv->mssv)
+                            <td>{{$diem->diem}}</td>
+                        @endif
+                    @endforeach        
                 </tr>
-            @endforeach    
-              
-            <tr>
-                @foreach($dsdiem as $diem)         
-                    <td>{{$diem->diem}}</td>                                                                      
-                @endforeach
-            </tr>      
+            @endforeach         
         </table>
         <div class="col-md-12" style="text-align: right;">
             <input type="button" value="In bảng điểm" class="btn btn-primary"><hr>
