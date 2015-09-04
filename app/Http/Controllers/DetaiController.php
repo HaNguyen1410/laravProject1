@@ -38,8 +38,10 @@ class DetaiController extends Controller
                 ->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
+        $nhomth = DB::table('ra_de_tai')->select('madt','manhomthuchien')
+                    ->get();
         return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt)->with('nhomhp',$nhomhp)
-                    ->with('namhoc',$namhoc)->with('hocky',$hocky);
+                    ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('nhomth',$nhomth);
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaDeTai($madt){
@@ -59,9 +61,17 @@ class DetaiController extends Controller
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)
                 ->get();
-        
+         //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
+        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.nam');
+        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.hocky');
         return view('giangvien.them-de-tai')->with('ma',$ma)->with('nhomhp',$nhomhp)
-            ->with('macb',$macb);
+            ->with('macb',$macb)->with('namcb',$namcb)->with('hkcb',$hkcb);
     } 
     
     public function LuuThemDeTai(Request $req){
@@ -85,26 +95,30 @@ class DetaiController extends Controller
                     'motadt'        => $_POST['txtMoTa'],
                     'congnghe'      => $_POST['txtCongNghe'],
                     'ghichudt'      => $_POST['txtGhiChu'],
-                    'phanloai'      => $_POST['cbmPhanLoai'],
                     'trangthai'     => $_POST['cbmTrangThai'],
                     'ngaytao'       => Carbon::now(),
                     //'taptindinhkem' => $_POST['ftTapTinKem']
                 );  
             $ch1 = DB::table('de_tai')->insert($data1);
             if($ch1 > 0){
-                $data2 = array(
-                    'madt'          => $_POST['txtMaDeTai'],
-                    'manhomhp'      => $_POST['cbNhomHP']
-                );          
-                $ch2 = DB::table('ra_de_tai')->insert($data2);
-                return redirect('giangvien/danhsachdetai/2134');
-            }                 
+                return redirect('giangvien/danhsachdetai/2134');                
+            }                      
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
     public function CapNhatDeTai($macb,$madt){
         $row = DB::table('de_tai')->where('madt',$madt)->first();
-        return view('giangvien.cap-nhat-de-tai')->with('dt',$row)->with('macb',$macb);
+        //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
+        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.nam');
+        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.hocky');
+        return view('giangvien.cap-nhat-de-tai')->with('dt',$row)->with('macb',$macb)
+                    ->with('namcb',$namcb)->with('hkcb',$hkcb);
     } 
     
     public function LuuCapNhatDeTai(Request $req){
@@ -128,7 +142,6 @@ class DetaiController extends Controller
                     'motadt'        => $_POST['txtMoTa'],
                     'congnghe'      => $_POST['txtCongNghe'],
                     'ghichudt'      => $_POST['txtGhiChu'],
-                    'phanloai'      => $_POST['rdPhanLoai'],
                     'trangthai'     => $_POST['rdTrangThai'],
                     'ngaytao'       => Carbon::now(),
                     //'taptindinhkem' => $_POST['txtTapTinKem']

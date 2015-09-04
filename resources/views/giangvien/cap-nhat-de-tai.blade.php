@@ -27,9 +27,9 @@
                  <table class="table table-bordered" id="bang1">
                     <tr>
                         <td align="right" width='10%'>Năm học:</td>
-                        <td></td>
+                        <td align="center"><input type="text" value="{{$namcb}}" style="width:80%;text-align: center" readonly="" class="form-control"/></td>
                         <th align="right">Học kỳ:</th>
-                        <td></td>                        
+                        <td align="center"><input type="text" value="{{$hkcb}}" style="width:30%;text-align: center" readonly="" class="form-control"/></td>                        
                     </tr>
                     <tr>
                         <td>Mã đề tài:</td>
@@ -38,8 +38,8 @@
                             <input type='text' name='txtMaCB' value='{{$macb}}'/>
                         </td>
                         <th align="right" width="10%">Nhóm học phần:</th>
-                        <td width="10%">
-                            <select class="form-control" name="cbNhomHP">
+                        <td width="20%">
+                            <select class="form-control" name="cbNhomHP" style="width:30%">
                                 <option value="">01</option>
                                 <option value="">03</option>
                                 <option value="">03</option> 
@@ -58,12 +58,27 @@
                         <td width="10%">
                             <input type="text" name="txtSoNguoi" value="{{$dt->songuoitoida}}" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
-                        </td>
-                        <th>Nhóm thực hiện:</th>
-                        <td>                            
-                            <select class="form-control" name="cbNhomNL">
-                                <option value=""></option>
-                            </select>
+                        </td> 
+                        <th width="8%">Trạng thái</th>
+                        <td>
+                            <?php
+                                $chuath = strcasecmp($dt->trangthai, 'Chưa làm');
+                                $dangth = strcasecmp($dt->trangthai, 'Đang làm');
+                                $ht = strcasecmp($dt->trangthai, 'Hoàn thành');
+                                if ($chuath == 0 && $dangth != 0 && $ht != 0) {
+                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện' checked='true'/> &nbsp&nbsp&nbsp&nbsp";
+                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
+                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
+                                } elseif ($chuath != 0 && $dangth == 0 && $ht != 0) {
+                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
+                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện' checked='true'/>&nbsp&nbsp&nbsp&nbsp";
+                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
+                                }elseif ($chuath != 0 && $dangth != 0 && $ht == 0) {
+                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
+                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
+                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành' checked='true'/>";
+                                }
+                            ?>
                         </td>
                     </tr>                                           
                     <tr>
@@ -130,29 +145,6 @@
                                     ['Style', 'FontFormat', 'FontName', 'FontSize']]
                                 });
                             </script>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Trạng thái</td>
-                        <td colspan="3">
-                            <?php
-                                $chuath = strcasecmp($dt->trangthai, 'Chưa làm');
-                                $dangth = strcasecmp($dt->trangthai, 'Đang làm');
-                                $ht = strcasecmp($dt->trangthai, 'Hoàn thành');
-                                if ($chuath == 0 && $dangth != 0 && $ht != 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện' checked='true'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
-                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
-                                } elseif ($chuath != 0 && $dangth == 0 && $ht != 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện' checked='true'/>&nbsp&nbsp&nbsp&nbsp";
-                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
-                                }elseif ($chuath != 0 && $dangth != 0 && $ht == 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
-                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành' checked='true'/>";
-                                }
-                            ?>
                         </td>
                     </tr>
                     <tr>

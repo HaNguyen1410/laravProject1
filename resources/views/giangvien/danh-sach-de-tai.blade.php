@@ -91,9 +91,15 @@
                         <td width='15%'>{{$dt->congnghe}}</td>
                         <td align='center'>{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>
-                        <td align='center'>
-                            
-                        </td>
+                        @foreach($nhomth as $nhom)
+                            @if($nhom->madt == $dt->madt)                                
+                                <td align='center'>
+                                    {{$nhom->manhomthuchien}}
+                                </td>  
+                            @elseif(count($nhom->manhomthuchien) <= 0)
+                                <td align='center'></td>
+                            @endif
+                        @endforeach 
                         <td align='center'>{{$dt->trangthai}}</td>
                         <td align='center'>
                             <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp

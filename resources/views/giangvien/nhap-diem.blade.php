@@ -31,7 +31,7 @@
                         <select name="cbNhomNL" class="form-control">
                             <option value="">Tất cả</option>
                             @foreach($dsdt as $dt)
-                            <option value="{{$dt->manhomthuchien}}">{{$dt->manhomthuchien}}</option>
+                                <option value="{{$dt->manhomthuchien}}">{{$dt->manhomthuchien}}</option>
                             @endforeach
                         </select>
                     </td>
@@ -47,7 +47,8 @@
              </table>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
-                    <th rowspan="2" width="1%">STT</th>           
+                    <th rowspan="2" width="1%">STT</th> 
+                    <th rowspan="2" width="4%">Mã nhóm</th>
                     <th rowspan="2" width="8%">MSSV</th>
                     <th rowspan="2" width="15%">Họ và tên</th>
                     <th colspan="{{$n=count($tieuchi)}}" width="30%">Tiêu chí</th>
@@ -62,12 +63,17 @@
                 @foreach($dssv as $stt => $sv)
                     <tr>
                         <td align="center">{{$stt+1}}</td>
+                        <td align="center">{{$sv->manhomthuchien}}</td>
                         <td align="center">{{$sv->mssv}}</td>
                         <td>{{$sv->hoten}}</td>
                         @foreach($dsdiem as $diem) 
-                            @if($diem->mssv == $sv->mssv)
+                            @if($diem->mssv == $sv->mssv && $diem->diem != NULL)
                                 <td align="center">
                                     <input type="text" value="{{$diem->diem}}" style="text-align:center;" size='1' />
+                                </td>
+                            @elseif(($diem->mssv == $sv->mssv) && ($diem->diem == ""))
+                                <td align="center">
+                                    <input type="text" value="" style="text-align:center;" size='1' />
                                 </td>
                             @endif
                         @endforeach

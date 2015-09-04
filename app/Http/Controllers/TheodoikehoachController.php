@@ -18,17 +18,13 @@ class TheodoikehoachController extends Controller
 {
 /*================== Số thời gian thực hiện dự án của mỗi sinh viên ======================*/ 
     function GioLam($hoten){
-//        $sogio = DB::table('nhom_thuc_hien as nth')->select('cv.sogio_thucte')
-//                ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
-//                ->join('thuc_hien as th','th.manhomthuchien','=','dk.manhomthuchien')
-//                ->join('cong_viec as cv','th.macv','=','cv.macv')
-//                ->where('cv.giaocho','like',$hoten)
-//                ->get();
-//        foreach($sogio as $gio){
-//            $h = $gio->sogio_thucte;
-//            $tonggio = $h++;
-//        }
-//        return $tonggio;
+        $tonggio = DB::table('cong_viec as cv')->select('chn.mssv',DB::raw('SUM(cv.sogio_thucte) as tonggio'))
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->join('chia_nhom as chn','th.manhomthuchien','=','chn.manhomthuchien')
+                ->where('cv.giaocho','like',$hoten)
+                ->first();
+        
+        return $tonggio;
     }
 /*================== Danh sách đề tài thực hiện ======================*/   
     public function TheoDoiKH($macb){
@@ -71,11 +67,15 @@ class TheodoikehoachController extends Controller
         $tendt = DB::table('ra_de_tai as radt')->select('dt.tendt')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->first(); 
-//        foreach($dstv as $tv){
-//            $giolam = $this->GioLam($tv->hoten);
-//        }
+        $dsmanhom = DB::table('chia_nhom')->select('manhomthuchien')->lists('manhomthuchien');
+        $tensv = DB::table('sinh_vien as sv')->select('sv.hoten')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsmanhom)
+                ->value('sv.hoten');
+        $giolam = $this->GioLam($tensv);
+ 
         return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dscvchinh',$dscvchinh)
-            ->with('manth',$manth)->with('tendt',$tendt);
+            ->with('manth',$manth)->with('tendt',$tendt)->with('giolam',$giolam);
     }
 /*======================= Theo dõi các công việc phụ thuộc của 1 công việc chính ==========================*/
     public function CVPhuThuoc($manth,$macv){ 

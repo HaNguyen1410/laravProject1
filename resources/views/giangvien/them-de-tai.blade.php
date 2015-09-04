@@ -39,7 +39,7 @@
                             <input type='text' name='txtMaCB' value='{{$macb}}'/>
                         </td>
                         <th align="right" width="10%">Nhóm học phần:</th>
-                        <td width="10%">
+                        <td width="30%">
                             <select class="form-control" name="cbNhomHP">
                                 @foreach($nhomhp as $hp)
                                     <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
@@ -60,11 +60,13 @@
                             <input type="text" id="txtSoNguoi" name="txtSoNguoi" value="" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
                         </td>
-                        <th>Nhóm thực hiện:</th>
-                        <td>                            
-                            <select class="form-control" name="cbNhomNL">
-                                <option value=""></option>
-                            </select>
+                        <th>Trạng thái</th>
+                        <td>
+                            <select class="form-control" name="cbmTrangThai">
+                                <option value="Chưa làm">Chưa làm</option>
+                                <option value="Đang làm">Đang làm</option>
+                                <option value="Đã hoàn thành">Đã hoàn thành</option>                                        
+                            </select> 
                         </td>
                     </tr>                                            
                     <tr>
@@ -133,17 +135,9 @@
                             </script>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Trạng thái</td>
-                        <td>
-                            <select class="form-control" name="cbmTrangThai">
-                                <option value="Chưa làm">Chưa làm</option>
-                                <option value="Đang làm">Đang làm</option>
-                                <option value="Đã hoàn thành">Đã hoàn thành</option>                                        
-                            </select> 
-                        </td>
-                        <th width="15%">Tập tin đính kèm:</th>
-                        <td><input type="file" name="fTapTinKem"/></td>
+                    <tr>                        
+                        <th>Tập tin đính kèm:</th>
+                        <td colspan="3"><input type="file" name="fTapTinKem"/></td>
                     </tr>                    
                     <tr>
                         <td></td>

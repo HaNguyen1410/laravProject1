@@ -138,6 +138,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 //        Illuminate\Html\HtmlServiceProvider::class,
 //        Collective\Html\HtmlServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -197,6 +198,7 @@ return [
 //        'Html'      => Illuminate\Html\HtmlFacade::class,
 //         'Form' => 'Collective\Html\FormFacade::class',
 //         'Html' => 'Collective\Html\HtmlFacade::class',
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

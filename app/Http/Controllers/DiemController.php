@@ -113,9 +113,10 @@ class DiemController extends Controller
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
-        $dssv = DB::table('sinh_vien as sv')
+        $dssv = DB::table('sinh_vien as sv')->orderBy('chn.manhomthuchien','asc')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->where('chn.manhomthuchien','<>',"")
                 ->get();
         //Lấy 1 mảng mssv của 1 nhóm thực hiện
         $masv = DB::table('sinh_vien as sv')->select('chn.mssv')

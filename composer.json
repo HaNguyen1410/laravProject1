@@ -3,17 +3,13 @@
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
-    "type": "project",
-    "require": {
-        "nesbot/carbon": "~1.14",
-        "nesbot/carbon": "dev-master",
-        "schickling/backup": "dev-master",
-        "spatie/laravel-backup": "dev-master"
-    },
+    "type": "project",    
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
-        "illuminate/html": "^5.0@dev"
+        "laravel/framework": "5.1.*",
+        "illuminate/html": "^5.0@dev",
+        "nesbot/carbon": "~1.14",
+        "barryvdh/laravel-dompdf": "0.6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
