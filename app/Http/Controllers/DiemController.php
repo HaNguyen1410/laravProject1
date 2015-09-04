@@ -94,16 +94,22 @@ class DiemController extends Controller
             ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);            
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
-    public function NhapDiem($macb){       
-        $hk_nk = DB::table('nien_khoa as nk')->distinct()->orderby('nam','desc')
+    public function NhapDiem($macb){   
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+        //Lấy ds nhóm học phần mà GV đang phụ trách giảng dạy
+        $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('nk.mank',$mank)
                 ->where('hp.macb',$macb)
-                ->first();
-        $dsdt = DB::table('ra_de_tai as radt')->select('dt.madt','dt.tendt','radt.manhomthuchien')
-                ->join('de_tai as dt','radt.madt','=','dt.madt')
-                ->where('dt.macb',$macb)
-                ->orderby('radt.manhomthuchien','asc')
-                ->get();
+                ->get(); 
         $tieuchi = DB::table('tieu_chi_danh_gia as tc')
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
@@ -117,6 +123,12 @@ class DiemController extends Controller
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->where('chn.manhomthuchien','<>',"")
+                ->get();        
+        $tendt = DB::table('chia_nhom as chn')->distinct()
+                ->select('dt.tendt','chn.manhomthuchien')
+                ->join('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
+                ->join('de_tai as dt','radt.madt','=','dt.madt')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->get();
         //Lấy 1 mảng mssv của 1 nhóm thực hiện
         $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
@@ -130,8 +142,9 @@ class DiemController extends Controller
                 ->get(); 
 //         $tongdiem = $this->tongdiem($mssv);
 //         $diemchu = $this->diemchu($mssv);
-        return view('giangvien.nhap-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
-                ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);
+        return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
+                ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
+                ->with('hk',$hk)->with('tendt',$tendt);
     }  
     
 }//END Clas DiemController

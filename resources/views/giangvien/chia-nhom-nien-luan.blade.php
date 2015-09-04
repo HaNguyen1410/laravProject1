@@ -105,22 +105,17 @@
                     <th width="4%">STT</th>
                     <th width="8%">Mã nhóm</th>
                     <th>Tên đề tài</th>
-                    <th width="6%">Thao tác</th>
                 </tr>
                 @foreach($detainhom as $stt => $dt)
                     <tr>
                         <td>{{$stt+1}}</td>
                         <td>{{$dt->manhomthuchien}}</td>
                         <td>{{$dt->tendt}}</td>
-                        <td align="center">
-                            <a onclick="return confirm('Xóa đề tài **{{$dt->tendt}}** ra khỏi nhóm {{$dt->manhomthuchien}}?');" href="">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
-                            </a>
-                        </td>
                     </tr>                        
                 @endforeach
             </table>           
              <h4 style="color: darkblue; font-weight: bold; text-align: center;">Danh sách các nhóm đã chia</h4>
+             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered" style="max-width:900px" align='center' id="bang2">
                 <tr>
                     <th width="4%">STT</th>
@@ -146,7 +141,7 @@
                             @endif
                         </td>
                         <td align="center" >
-                            <a onclick="return confirm('Xóa sinh viên **{{$svnhom->hoten}}** ra khỏi nhóm {{$svnhom->manhomthuchien}}?');" href="">
+                            <a onclick="return confirm('Xóa sinh viên **{{$svnhom->hoten}}** ra khỏi nhóm {{$svnhom->manhomthuchien}}?');" href="2134/xoasvtrongnhom/{{$svnhom->mssv}}">
                                 <img src="{{asset('images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

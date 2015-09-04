@@ -74,7 +74,7 @@
                     </div>               
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="{{asset('sinhvien/themthongtinnhom/1111317')}}" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
+                            <li><a href="{{asset('sinhvien/themthongtinnhom/1111317')}}" data-toggle="tooltip" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
                                     Thêm thông tin nhóm
                                 </a>
                             </li>                           

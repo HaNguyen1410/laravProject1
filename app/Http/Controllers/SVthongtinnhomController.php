@@ -34,7 +34,8 @@ class SVthongtinnhomController extends Controller
     }   
 /*====================  ======================*/
     public function ThemThongTinNhom($mssv){
-        $thongtindt = DB::table('chia_nhom as chn')->select('gv.macb','gv.hoten','dt.tendt')
+        $thongtindt = DB::table('chia_nhom as chn')
+                ->select('gv.macb','gv.hoten','dt.tendt')
                 ->join('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->join('giang_vien as gv','dt.macb','=','gv.macb')
@@ -50,10 +51,13 @@ class SVthongtinnhomController extends Controller
     public function LuuThemThongTinNhom(Request $req){
         $post = $req->all();
         //Lấy 1 mảng các ngày được check
-        $ngay_checked = Input::get('chkBuoiHop');  
+        $ngay_checked = Input::get('chkBuoiHop');
 //        return $ngay_checked;
+        //Đưa mảng các phần tử thành 1 chuỗi
+        $ngaychon = implode(', ', $ngay_checked);
+        
         $data = array(
-            'lichhop'          => $ngay_checked,
+            'lichhop'          => $ngaychon,
             'tochucnhom'       => $_POST['txtToChucNhom'],
             'phamvi_detai'     => $_POST['txtPhamVi'],
             'congnghethuchien' => $_POST['txtCongNgheThucHien']        

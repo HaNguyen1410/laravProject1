@@ -111,6 +111,7 @@ class ChianhomController extends Controller
         else{
             $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng
+            /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check*/
             $nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
 //            return $masv_checked.$nhomtruong;
 //              return count($masv_checked);                                             
@@ -137,6 +138,21 @@ class ChianhomController extends Controller
              return redirect('giangvien/chianhom/2134');            
         }
     }
+/*====================== Xóa sinh viên ra khỏi nhóm =======================*/
+    public function XoaSVTrongNhom($macb,$mssv){
+        DB::table('chia_nhom')->where('mssv',$mssv)->update(
+                    [
+                        'manhomthuchien' => " ",
+                        'nhomtruong' => 0
+                    ]
+                );
+        
+        $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
+        \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
+        
+        return redirect('giangvien/chianhom/2134');         
+    }
+
     
 }//END Class DangkydtController
  

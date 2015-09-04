@@ -141,19 +141,28 @@
                                     <td><label>Lịch họp nhóm:</label></td>
                                     <td colspan='3' style="color:blue;">
                                         <?php
-                                            $b = "";
-                                            $buoi = substr($nhomth->lichhop, 0,1);
-                                            $bs = strcasecmp($buoi, 'S');
-                                            $bc = strcasecmp($buoi, 'C');
-
-                                            if($bs == 0){
-                                                echo $b="Sáng thứ "; 
-                                            }
-                                            else if($bc == 0){
-                                                echo $b="Chiều thứ "; 
-                                            }
-                                            echo " ". $so = substr($nhomth->lichhop,1,1);
-                                        ?>
+                                            //Chuyển chuổi thành các phần tử trong 1 mảng 
+                                             $ngay = explode(', ', $nhomth->lichhop);
+                                             //var_dump($ngay); //Xem kết quả của mảng vừa tách được từ chuỗi ban đầu 
+                                             for($i = 0; $i < count($ngay); $i++){                                    
+                                                 //Cắt số trong chuỗi ngày
+                                                 $ngay_so = substr($ngay[$i],1); 
+                                                 $kytu = substr($ngay[$i], 0, 1);
+                                                 //So sánh ký tự đầu tiên
+                                                 $bs = strcasecmp($kytu, 'S');
+                                                 $bc = strcasecmp($kytu, 'C');
+                                                 if($bs == 0){
+                                                     echo "<div style='padding: 2px 2px 2px 40px; display: block; float: left;'>".  
+                                                         "<label style='color:green;'>Sáng thứ ".$ngay_so."</label> &nbsp;&nbsp;&nbsp;".                           
+                                                      "</div>";
+                                                 }
+                                                 else if($bc == 0){
+                                                     echo "<div style='padding: 2px 2px 2px 40px; display: block; float: left;'>".  
+                                                             "<label style='color:green;'>Chiều thứ ".$ngay_so."</label> &nbsp;&nbsp;&nbsp;".                           
+                                                          "</div>";                                        
+                                                 }
+                                             }                                    
+                                         ?>      
                                     </td>
                                 </tr>
                             </table>

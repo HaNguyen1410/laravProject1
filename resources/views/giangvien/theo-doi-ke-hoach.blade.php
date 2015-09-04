@@ -71,20 +71,29 @@
                         <td>{{$dtn->hoten}}</td>
                         <td>{{$dtn->tochucnhom}}</td>
                         <td align='center'>                            
-                           <?php
-                                $b = "";
-                                $buoi = substr($dtn->lichhop, 0,1);
-                                $bs = strcasecmp($buoi, 'S');
-                                $bc = strcasecmp($buoi, 'C');
-
-                                if($bs == 0){
-                                    echo $b="Sáng thứ "; 
-                                }
-                                else if($bc == 0){
-                                    echo $b="Chiều thứ "; 
-                                }
-                                echo " ". $so = substr($dtn->lichhop,1,1);
-                            ?>
+                            <?php
+                              //Chuyển chuổi thành các phần tử trong 1 mảng 
+                               $ngay = explode(', ', $dtn->lichhop);
+                               //var_dump($ngay); //Xem kết quả của mảng vừa tách được từ chuỗi ban đầu 
+                               for($i = 0; $i < count($ngay); $i++){                                    
+                                   //Cắt số trong chuỗi ngày
+                                   $ngay_so = substr($ngay[$i],1); 
+                                   $kytu = substr($ngay[$i], 0, 1);
+                                   //So sánh ký tự đầu tiên
+                                   $bs = strcasecmp($kytu, 'S');
+                                   $bc = strcasecmp($kytu, 'C');
+                                   if($bs == 0){
+                                       echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
+                                           "<label style='color:green;'>Sáng thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                        "</div>";
+                                   }
+                                   else if($bc == 0){
+                                       echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
+                                               "<label style='color:green;'>Chiều thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                            "</div>";                                        
+                                   }
+                               }                                    
+                           ?>    
                         </td>
                         <td align='center'>{{$dtn->sogio_thucte}}</td>
                         <td>

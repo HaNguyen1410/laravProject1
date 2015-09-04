@@ -16,30 +16,22 @@
     <div class="col-md-12">
         <h3 style="color: darkblue; font-weight: bold;">BẢNG GHI ĐIỂM NIÊN LUẬN</h3>        
         <form id="" name="frmNhapDiem" action="" method="post">
-            <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
+            <table class="table table-bordered" style="width:900px" align='center'>
                 <tr>
                     <th width='8%'>Năm học:</th>                
                     <td width='15%'>
-                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk_nk->nam}}' class='form-control' readonly=""/>
+                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$nam}}' class='form-control' readonly=""/>
                     </td>
                     <th width='8%'>Học kỳ:</th>
                     <td width='10%'>
-                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk_nk->hocky}}' class='form-control' readonly=""/>
+                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk}}' class='form-control' readonly=""/>
                     </td>              
-                    <th>Mã nhóm niên luận:</th>
-                    <td>
-                        <select name="cbNhomNL" class="form-control">
+                    <th width='12%'>Tên học phần:</th>
+                    <th width="10%">
+                        <select name="cbNhomNL" class="form-control" style="width:90%">
                             <option value="">Tất cả</option>
-                            @foreach($dsdt as $dt)
-                                <option value="{{$dt->manhomthuchien}}">{{$dt->manhomthuchien}}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <th>Đề tài:</th>
-                    <td>
-                        <select name="cbDeTai" class="form-control">
-                            @foreach($dsdt as $dt)
-                            <option value="{{$dt->madt}}">{{$dt->tendt}}</option>
+                            @foreach($dshp as $hp)
+                            <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
                             @endforeach
                         </select>
                     </td>
@@ -63,7 +55,15 @@
                 @foreach($dssv as $stt => $sv)
                     <tr>
                         <td align="center">{{$stt+1}}</td>
-                        <td align="center">{{$sv->manhomthuchien}}</td>
+                        <td align="center">
+                            @foreach($tendt as $dt)
+                                @if($dt->manhomthuchien == $sv->manhomthuchien)
+                                    <a href="" data-toggle="tooltip" data-placement="bottom" title="{{$dt->tendt}}">
+                                         {{$sv->manhomthuchien}}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </td>
                         <td align="center">{{$sv->mssv}}</td>
                         <td>{{$sv->hoten}}</td>
                         @foreach($dsdiem as $diem) 
@@ -89,9 +89,12 @@
                         </button> 
                     </td>
                     <td>
-                        <button type="button" name="" class="btn btn-success" style="width: 50%;">
-                            <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
-                        </button>
+                        <a href="2134/inbangdiemgv">
+                            <button type="button" name="" class="btn btn-success" style="width: 50%;">
+                                <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
+                            </button>
+                        </a>
+                        
                     </td>
                     <td align="right">
                         <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 55%;">

@@ -9,10 +9,7 @@
 root { 
     display: block;
 }
-@font-face {
-  font-family: 'times-roman';
-  src: url('{{public_path()}}/fonts/times-roman.ttf')  format('truetype')
-}
+
 html, body {
     outline: 0;
     font-weight: inherit;
@@ -23,5 +20,5 @@ html, body {
     line-height: 1;
     color: #111;
     background: white;
-    font-family: "times-roman", serif;
+    font-family: "dejavu sans", sans-serif;
 }

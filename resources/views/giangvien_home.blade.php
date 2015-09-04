@@ -67,7 +67,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/theodoikehoach/2134')}}" data-placement="bottom" title="Theo dõi thực hiện dự án">
+                                    <li><a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">
                                             Theo dõi kế hoạch</a>
                                     </li>
                                     <li class="divider"></li>                           

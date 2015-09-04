@@ -69,7 +69,8 @@ Route::get('giangvien/doimatkhaugv/{masv}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
 /*======= NHẬP ĐIỂM ==========*/
 Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
-    
+
+route::get('giangvien/nhapdiem/{macb}/inbangdiemgv','IntrangController@InBangDiemGV');
 /*======= Quản lý TÀI LIỆU ==========*/
 route::get('giangvien/khotailieu/{macb}','QltailieuController@KhoTaiLieu');
         
@@ -100,6 +101,7 @@ route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'Theodoike
 /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
 route::get('giangvien/chianhom/{macb}','ChianhomController@ChiaNhomNL');
 route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
+route::get('giangvien/chianhom/{macb}/xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
 
 /*======= QUẢN LÝ THÔNG BÁO ==========*/
 route::get('giangvien/quanlythongbao/{macb}','QlthongbaoController@QuanLyThongBao');
