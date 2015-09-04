@@ -32,7 +32,7 @@
 <!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
                             <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
                         </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <td width="15%" align="right" style="color:darkblue;">Học kỳ:</td>
                         <td>
                             <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
                         </td>
@@ -53,14 +53,12 @@
                     </tr>
                     <tr>
                         <td>Giới tính:</td>
-                        <td colspan="3">
+                        <td>
                             Nam: <input type="radio" size="2" value="Nam" name="rdGioiTinh"/> &nbsp &nbsp &nbsp
                             Nữ: <input type="radio" size="2" value="Nữ" name="rdGioiTinh"/> 
                             <p style='color:red;'>{{$errors->first('rdGioiTinh')}}</p>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Ngày sinh:</td>
+                        <td align="right" style="color:darkblue;">Ngày sinh:</td>
                         <td colspan="3">
                             <input type="text" size="2" value="" id="txtNgaySinh" name="txtNgaySinh" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>

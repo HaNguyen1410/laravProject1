@@ -71,8 +71,16 @@
                         <td align='center'>
                             {{$stt = $stt + 1}}
                         </td>
-                        <td align='center'>{{$rw->mssv}}</td>
-                        <td>{{$rw->hoten}}</td>
+                        <td align='center'>
+                            <a href="" style="color: seagreen; font-weight: bold;" data-toggle="tooltip" data-placement="top" title="Ngày sinh: {{$rw->ngaysinh}}">
+                                {{$rw->mssv}}                            
+                            </a>                            
+                        </td>
+                        <td>
+                            <a href="" data-toggle="tooltip" data-placement="top" title="Khóa Học: K{{$rw->khoahoc}}">
+                                {{$rw->hoten}}                                
+                            </a>
+                        </td>
                         <td>{{$rw->email}}</td>
                         <td align='center'>{{$rw->tennhomhp}}</td>
                         <td align='center'>{{$rw->manhomthuchien}}</td>

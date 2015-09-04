@@ -50,8 +50,8 @@ and open the template in the editor.
                 <td colspan="2"><label>Tên đề tài: </label></td>
             </tr>
             <tr>
-                <td>Mã nhóm thực hiện:</td>
-                <td>Nhóm HP:</td>
+                <td>Mã nhóm thực hiện: </td>
+                <td>Nhóm HP: </td>
             </tr>
         </table><br>
         <h3 align="center">Danh sách điểm</h3>

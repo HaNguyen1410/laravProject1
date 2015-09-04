@@ -12,7 +12,14 @@
         <script src="{{Asset('../bootstrap/js/jquery-1.11.3.min.js')}}"></script>
         <script src="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.js')}}"></script>
         <script src="{{Asset('../bootstrap/js/bootstrap.min.js')}}"></script>
-        <script src="{{Asset('scripts/ckeditor/ckeditor.js')}}"></script>                
+        <script src="{{Asset('scripts/ckeditor/ckeditor.js')}}"></script>  
+        
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();   
+            });
+        </script>
+        
         <script>
             $(function() {
               $( "#txtNgaySinh" ).datepicker({
@@ -20,7 +27,7 @@
               });
             });
         </script>
-              
+                    
     </head>
     
     <body>

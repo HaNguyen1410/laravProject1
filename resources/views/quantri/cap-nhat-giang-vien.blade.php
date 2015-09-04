@@ -108,7 +108,14 @@
                             @endforeach
                              <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
                         </td>
-                    </tr>                    
+                    </tr>  
+                    <tr>
+                        <td>Mật khẩu hiện tại:</td>
+                        <td colspan="3">
+                            <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Mật khẩu mới:</td>
                         <td colspan="3">

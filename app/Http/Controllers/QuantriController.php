@@ -142,8 +142,6 @@ class QuantriController extends Controller
                     'txtEmail'    => 'required|email|max:255',
                     'txtSDT'      => 'required|numeric|min:10',
                     'chkNhomHP'   => 'required',
-                    'txtNamHoc'   => 'required',
-                    'cbHocKy'     => 'required',
                     'txtMatKhau1' => 'required|min:6',
                     'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'                    
                 ]
@@ -166,11 +164,13 @@ class QuantriController extends Controller
             $ch1 = DB::table('giang_vien')->insert($data1);
             //Lấy mảng manhomhp khi đã chon checkbox
             $nhomhp_checked = Input::get('chkNhomHP');
-            $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)
-                    ->update(['macb' => $_POST['txtMaCB']]);
+            $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)->update(
+                        [
+                           'macb' => $_POST['txtMaCB']
+                        ]
+                   );
             
-            return redirect('quantri/danhsachgv');
-           
+            return redirect('quantri/danhsachgv');           
         }
     }
 /*=========================== Sửa thông tin Giảng viên ==============================================*/ 
@@ -261,7 +261,7 @@ class QuantriController extends Controller
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachSV(){
         $ds = DB::table('sinh_vien as sv')
-                ->select('sv.mssv','sv.hoten','sv.ngaytao','sv.email','sv.khoa','hp.tennhomhp',
+                ->select('sv.mssv','sv.hoten','sv.ngaysinh','sv.khoahoc','sv.ngaytao','sv.email','sv.khoa','hp.tennhomhp',
                         'chn.manhomthuchien','chn.nhomtruong')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
@@ -377,7 +377,7 @@ class QuantriController extends Controller
                     'txtNgaySinh'       => 'required|date',
                     'txtEmail'          => 'required|email',
                     'txtKhoaHoc'        => 'required',
-                    'txtSDT'            => 'required|numeric',
+                    'rdNhomHP'          => 'required',
                     'txtMatKhauCu'      => 'required',
                     'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
                     'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1'
@@ -403,7 +403,7 @@ class QuantriController extends Controller
             $nhomhp = Input::has('rdNhomHP') == TRUE ? : $_POST['rdNhomHP']; 
             $ch2 = DB::table('chia_nhom')->where('mssv',$post['txtMaSV'])->update(
                         [
-                            'manhomhp'=>$nhomhp,
+                            'manhomhp' => $nhomhp,
                         ]
                     );
             return redirect('quantri/danhsachsv');

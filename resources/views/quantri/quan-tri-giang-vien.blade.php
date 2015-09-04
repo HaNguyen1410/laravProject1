@@ -42,53 +42,55 @@
                         </th>
                     </tr>
                 </table>            
-            </div>        
-            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered table-striped" >
-                <tr>
-                    <th>STT</th>
-                    <th>Mã cán bộ</th>
-                    <th>Họ và tên</th>
-                    <th>Email</th>
-                    <th>Người tạo</th> 
-                    <th>Ngày tạo</th>
-                    <th>Khóa</th>
-                    <th width=8%>Chức năng</th>
-                </tr>   
-                <?php $stt=1; ?>
-                @foreach($dsgv as $tt => $rw)                
+            </div>
+            <div class="col-md-12">
+                <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+                <table class="table table-bordered table-striped" >
                     <tr>
-                        <td align='center'>
-                            {{$stt}}
-                        </td>
-                        <td align='center'>{{$rw->macb}}</td>
-                        <td>{{$rw->hoten}}</td>
-                        <td>{{$rw->email}}</td>
-                        <td>...</td>
-                        <td align='center'>{{$rw->ngaytao}}</td>
-                        <td align='center'>
-                            @if($rw->khoa == 1)
-                                <img src="{{asset('images/Lock.png')}}"/>
-                            @elseif($rw->khoa == 0)
-                                <img src="{{asset('images/Unlock.png')}}"/>
-                            @endif
-                        </td>
-                        <td align='center'>
-                            <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
-                            <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachgv/xoagv/{{$rw->macb}}'>
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
-                            </a>
-                        </td>
-                    </tr>
-                    <?php 
-                        $stt++; 
-                    ?>
-                @endforeach
-               
-                <tr>
-                    <td colspan="9" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
-                </tr>                     
-            </table>
+                        <th>STT</th>
+                        <th>Mã cán bộ</th>
+                        <th>Họ và tên</th>
+                        <th>Email</th>
+                        <th>Người tạo</th> 
+                        <th>Ngày tạo</th>
+                        <th>Khóa</th>
+                        <th width=8%>Chức năng</th>
+                    </tr>   
+                    <?php $stt=1; ?>
+                    @foreach($dsgv as $tt => $rw)                
+                        <tr>
+                            <td align='center'>
+                                {{$stt}}
+                            </td>
+                            <td align='center'>{{$rw->macb}}</td>
+                            <td>{{$rw->hoten}}</td>
+                            <td>{{$rw->email}}</td>
+                            <td>...</td>
+                            <td align='center'>{{$rw->ngaytao}}</td>
+                            <td align='center'>
+                                @if($rw->khoa == 1)
+                                    <img src="{{asset('images/Lock.png')}}"/>
+                                @elseif($rw->khoa == 0)
+                                    <img src="{{asset('images/Unlock.png')}}"/>
+                                @endif
+                            </td>
+                            <td align='center'>
+                                <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
+                                <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachgv/xoagv/{{$rw->macb}}'>
+                                    <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                </a>
+                            </td>
+                        </tr>
+                        <?php 
+                            $stt++; 
+                        ?>
+                    @endforeach
+
+                    <tr>
+                        <td colspan="9" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
+                    </tr>                     
+                </table>
+            </div>            
             <div class="col-md-12">
                 <p style="color:red;"><?php echo Session::get('ThongBaoRut'); ?></p>
                 <table class="table table-bordered table-striped" style="width: 700px" align="center">
