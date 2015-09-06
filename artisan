@@ -1,9 +1,9 @@
 #!/usr/bin/env php
 <?php
 
-//Artisan::add(new ExportTables);
+//$artisan->Add(new KetxuatCSDL);
 	
-//Artisan::add(new DatabaseBackup);
+//Artisan::add(new KetxuatCSDL);
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

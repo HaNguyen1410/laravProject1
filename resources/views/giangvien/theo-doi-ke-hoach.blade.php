@@ -50,13 +50,13 @@
             <table class="table table-bordered table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="1%">STT</th>
-                    <th width="5%">Mã nhóm</th>
-                    <th width="20%">Tên đề tài</th>
+                    <th width="4%">Mã nhóm</th>
+                    <th width="15%">Tên đề tài</th>
                     <th width="10%">Trưởng nhóm</th>
-                    <th width="15%">Tổ chức nhóm</th>
-                    <th width="4%">Lịch họp</th>
-                    <th width="6%">Thời gian làm dự án</th>
-                    <th width="10%">Trạng thái(%)</th>
+                    <th width="18%">Tổ chức nhóm</th>
+                    <th width="8%">Lịch họp</th>
+                    <th width="6%">Số giờ làm dự án</th>
+                    <th width="8%">Trạng thái(%)</th>
                 </tr>
                 
                 @foreach($dsdtnhom as $stt => $dtn)                

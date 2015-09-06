@@ -16,6 +16,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Commands\Command;
 
 class QuantriController extends Controller
 {
@@ -41,7 +42,8 @@ class QuantriController extends Controller
     }   
  /*====================== Sao lưu phục hồi CSDL ====================================*/
     public function SaoLuuCSDL(){
-        
+        $dump = new KetxuatCSDL();
+//        $dump::SaoLuuCSDL();
         return view('quantri.sao-luu-phuc-hoi-du-lieu');
     }
     /******************

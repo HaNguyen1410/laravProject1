@@ -86,7 +86,9 @@
                                             Đề tài</a>
                                     </li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('giangvien/chianhom/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Chia đề tài vào mỗi nhóm sinh viên">
+                                    <li>
+                                        <!--   -->
+                                        <a href="{{asset('giangvien/chianhom/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Chia đề tài vào mỗi nhóm sinh viên">
                                             Chia nhóm thực hiện
                                         </a>
                                     </li>

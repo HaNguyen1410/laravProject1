@@ -10,10 +10,37 @@
             background-color: #dff0d8;
         }
     </style>
-
+    
+    <?php 
+        /*========================== Quy điểm số ra điểm chữ ====================*/ 
+                function diemchu($d){
+                    if($d<=0 && $d<4){
+                        return F;
+                    }
+                    else if($d<=4 || $d<=4.4){
+                        return 'D';
+                    }
+                    else if($d<=4.5 || $d<=4.9){
+                        return 'D+';
+                    }
+                    else if($d<=5.0 || $d<=5.9){
+                        return 'C';
+                    }
+                    else if($d<=6 || $d<=6.9){
+                        return 'C+';
+                    }
+                    else if($d<=7 || $d<=7.9){
+                        return 'B';
+                    }
+                    else if($d<=8 || $d<=8.9){
+                        return 'B+';
+                    }
+                    else     
+                        return 'A';
+                }    
+    ?>
 <div class="container">
-    <div class="row">
-       
+    <div class="row">       
     <div class="col-md-12">
         <h3 style="color: darkblue; font-weight: bold; text-align: center;">XEM ĐIỂM NIÊN LUẬN</h3>
         <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
@@ -64,8 +91,10 @@
                     @foreach($tongdiem as $tong) 
                         @if($tong->mssv == $sv->mssv)
                             <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                            <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
                         @endif                        
                     @endforeach
+                    
                 </tr>
             @endforeach         
         </table>

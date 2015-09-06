@@ -10,7 +10,34 @@
             background-color: #dff0d8;
         }
     </style>    
-   
+    <?php 
+        /*========================== Quy điểm số ra điểm chữ ====================*/ 
+                function diemchu($d){
+                    if($d<=0 && $d<4){
+                        return F;
+                    }
+                    else if($d<=4 || $d<=4.4){
+                        return 'D';
+                    }
+                    else if($d<=4.5 || $d<=4.9){
+                        return 'D+';
+                    }
+                    else if($d<=5.0 || $d<=5.9){
+                        return 'C';
+                    }
+                    else if($d<=6 || $d<=6.9){
+                        return 'C+';
+                    }
+                    else if($d<=7 || $d<=7.9){
+                        return 'B';
+                    }
+                    else if($d<=8 || $d<=8.9){
+                        return 'B+';
+                    }
+                    else     
+                        return 'A';
+                }    
+    ?>
 <div class="container">
     <div class="row">
     <div class="col-md-12">
@@ -68,19 +95,21 @@
                         <td>{{$sv->hoten}}</td>
                         @foreach($dsdiem as $diem) 
                             <?php
-                                if($diem->mssv == $sv->mssv && isset($diem->diem))
+                                if($diem->mssv == $sv->mssv && $diem->diem != null)
                                     echo "<td align='center'>".
                                               "<input type='text' value='$diem->diem' style='text-align:center;' size='1' />".
                                          "</td>";
-                                else if(!isset($diem->diem))
-                                    echo "<td align='center'>".
-                                              "<input type='text' value='' style='text-align:center;' size='1' />".
-                                         "</td>";
+                                else if($diem->mssv == $sv->mssv && $diem->diem == null)
+                                    for($i=0; $i < count($tieuchi); $i++)
+                                        echo "<td align='center'>".
+                                                  "<input type='text' value='' style='text-align:center;' size='1' />".
+                                             "</td>";
                             ?>
                         @endforeach
-                        @foreach($tongdiem as $tong) 
-                            @if($tong->mssv == $sv->mssv)
+                        @foreach($tongdiem as $tong)                            
+                            @if($tong->mssv == $sv->mssv)                            
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
                             @endif                        
                         @endforeach
                     </tr>

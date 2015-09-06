@@ -15,12 +15,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 /***********************
- * =========================== ĐĂN NHẬP ===========================================
+ * =========================== ĐĂNG NHẬP ===========================================
  * ************************
  */
 Route::get('dangnhap', 'DangNhapController@DangNhap');
 Route::get('dangxuat', 'DangNhapController@DangXuat');
 //Route::resource('sessions','SessionsController');
+/*######### Góibestmomo/scafold": "dev-master" đăng nhập ################*/
+Route::controllers([
+    'auth' => 'Auth\AuthController',
+    'password' => 'Auth\PasswordController',
+]);
+//Đường Link: http://localhost/laravProject1/public/auth/login
+
 /***********************
  * =========================== Trang quản trị ===========================================
  * ************************
@@ -98,6 +105,7 @@ route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
 Route::get('giangvien/dstieuchi/{macb}/xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
 /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/
 route::get('giangvien/theodoikehoach/{macb}', 'TheodoikehoachController@TheoDoiKH');
+//route::post('giangvien/theodoikehoach/{macb}/{mahp}', 'TheodoikehoachController@TheoDoiKH');
 route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
 route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
 /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/

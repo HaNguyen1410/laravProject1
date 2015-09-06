@@ -146,7 +146,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,		
         Barryvdh\DomPDF\ServiceProvider::class,
-		Witty\LaravelDbBackup\DBBackupServiceProvider::class,
+	Witty\LaravelDbBackup\DBBackupServiceProvider::class,
+        Bestmomo\Scafold\ScafoldServiceProvider::class,
 
     ],
 

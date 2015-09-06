@@ -24,6 +24,34 @@ and open the template in the editor.
             }
         </style>
     </head>
+     <?php 
+        /*========================== Quy điểm số ra điểm chữ ====================*/ 
+                function diemchu($d){
+                    if($d<=0 && $d<4){
+                        return F;
+                    }
+                    else if($d<=4 || $d<=4.4){
+                        return 'D';
+                    }
+                    else if($d<=4.5 || $d<=4.9){
+                        return 'D+';
+                    }
+                    else if($d<=5.0 || $d<=5.9){
+                        return 'C';
+                    }
+                    else if($d<=6 || $d<=6.9){
+                        return 'C+';
+                    }
+                    else if($d<=7 || $d<=7.9){
+                        return 'B';
+                    }
+                    else if($d<=8 || $d<=8.9){
+                        return 'B+';
+                    }
+                    else     
+                        return 'A';
+                }    
+    ?>
     <body>
         <table style="width:100%">
             <tr>
@@ -98,6 +126,7 @@ and open the template in the editor.
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
                             @endif                        
                         @endforeach 
                     </tr>

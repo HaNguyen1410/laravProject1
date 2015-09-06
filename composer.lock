@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32cef3c671f8e0eacbf7f666e138b7e8",
+    "hash": "a9d6a132582b1bcb82536c157d0cbcf6",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -53,6 +53,48 @@
                 "pdf"
             ],
             "time": "2015-06-11 12:54:07"
+        },
+        {
+            "name": "bestmomo/scafold",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bestmomo/scafold.git",
+                "reference": "681cf9b6a398359d8c6eeea900e1c9d9a293c914"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bestmomo/scafold/zipball/681cf9b6a398359d8c6eeea900e1c9d9a293c914",
+                "reference": "681cf9b6a398359d8c6eeea900e1c9d9a293c914",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.1",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bestmomo\\Scafold\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                },
+                {
+                    "name": "Bestmomo",
+                    "email": "grandheretique@free.fr"
+                }
+            ],
+            "description": "To add scafold to Laravel 5.1",
+            "homepage": "http://github.com/bestmomo/scafold",
+            "time": "2015-07-30 14:38:43"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -3020,7 +3062,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "illuminate/html": 20,
-        "witty/laravel-db-backup": 20
+        "witty/laravel-db-backup": 20,
+        "bestmomo/scafold": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

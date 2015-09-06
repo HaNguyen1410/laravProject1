@@ -35,12 +35,14 @@ class ChianhomController extends Controller
     }   
 /*====================  ======================*/
     public function ChiaNhomNL($macb){
+        //$get = $req::all(); ,$mahp, Request $req
+        $mahp = '6';
         $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
-        $mahp = DB::table('nhom_hocphan as hp')
-                ->join('giang_vien as gv','hp.macb','=','gv.macb')
-                ->where('hp.macb',$macb)->value('manhomhp');
+//        $mahp = DB::table('nhom_hocphan as hp')
+//                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+//                ->where('hp.macb',$macb)->value('manhomhp');
         //Lấy những sinh viên chưa có nhóm thực hiện niên luận
         $dstensv = DB::table('chia_nhom as chn')->distinct()
                 ->select('chn.mssv','sv.hoten')
@@ -65,6 +67,7 @@ class ChianhomController extends Controller
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('chn.manhomthuchien','<>',"")
+                ->where('hp.manhomhp',$mahp)
                 ->where('nk.nam',$namcb)
                 ->where('nk.hocky',$hkcb)
                 ->get();      
@@ -76,6 +79,7 @@ class ChianhomController extends Controller
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('dt.macb',$macb)
+                ->where('hp.manhomhp',$mahp)
                 ->where('nk.nam',$namcb)
                 ->where('nk.hocky',$hkcb)
                 ->where('chn.manhomthuchien','<>',"")
@@ -88,27 +92,30 @@ class ChianhomController extends Controller
                 ->where('macb',$macb)
                 ->whereNotIn('madt',$madt)
                 ->get();
+        $manth = $this->manth_tutang();
         return view('giangvien.chia-nhom-nien-luan')->with('dstensv',$dstensv)->with('dsmahp',$dsmahp)
             ->with('dsdetai',$dsdetai)->with('dsNhom',$dsNhom)->with('detainhom',$detainhom)
-                ->with('namcb',$namcb)->with('hkcb',$hkcb)->with('macb',$macb);           
+                ->with('namcb',$namcb)->with('hkcb',$hkcb)->with('macb',$macb)
+            ->with('manth',$manth);           
     }
 /*==================== Lưu chia nhóm thành viên ======================*/
     public function LuuChiaNhomNL(Request $req){
         $manth = $this->manth_tutang();
         $post = $req->all();
-        $v = \Validator::make($req->all(),
-                [
-                    'cbDeTai'          =>'required',
-                    'txtNgayBatDauKH'  =>'required|date',
-                    'txtNgayKetThucKH' =>'required|date',
-                    'chk'              =>'required',
-                    //'rdNhomTruong'  =>'required'
-                ]
-        );
-        if($v->fails()){
-            return redirect()->back()->withErrors($v->errors());
-        }
-        else{
+//        $v = \Validator::make($req->all(),
+//                [
+//                    'cbDeTai'          =>'required',
+//                    'txtNgayBatDauKH'  =>'required|date',
+//                    'txtNgayKetThucKH' =>'required|date',
+//                    'chk'              =>'required',
+//                    //'rdNhomTruong'  =>'required'
+//                ]
+//        );
+//        if($v->fails()){
+//            return redirect()->back()->withErrors($v->errors());
+//        }
+//        else
+        {
             $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng
             /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check*/
@@ -147,8 +154,21 @@ class ChianhomController extends Controller
                     ]
                 );
         
+        $manth = DB::Table('nhom_thuc_hien as nth')
+                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+                ->where('chn.mssv',$mssv)
+                ->value('chn.manhomthuchien');
+        $nhomsv = DB::Table('chia_nhom')->select('mssv')                
+                ->where('manhomthuchien',$manth)
+                ->get();
+        return count($nhomsv);
+//        if(count($nhomsv) == 0){
+//            DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->delete();
+//            DB::table('ra_de_tai')->where('manhomthuchien',$manth)->delete();
+//        }
+        
         $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
-        \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
+        \Session::flash('ThongBao','Xóa --'.$tensv.'-- thành công!');
         
         return redirect('giangvien/chianhom/2134');         
     }

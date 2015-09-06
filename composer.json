@@ -10,7 +10,8 @@
         "illuminate/html": "^5.0@dev",
         "nesbot/carbon": "~1.14",
         "barryvdh/laravel-dompdf": "0.6.*",
-		"witty/laravel-db-backup": "dev-master"
+        "witty/laravel-db-backup": "dev-master",
+        "bestmomo/scafold": "dev-master"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

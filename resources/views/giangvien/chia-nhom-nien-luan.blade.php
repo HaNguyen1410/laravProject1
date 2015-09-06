@@ -17,6 +17,16 @@
             }
 
         </style>
+        <script>
+            function kt(){
+                if(document.getElementById('cbDeTai').value == '')
+                    return false;
+                document.getElementById('frChiaNhom').method = 'post';
+                document.getElementById('frChiaNhom').action = "{{action('ChianhomController@LuuChiaNhomNL')}}";
+                return true;
+                
+            }
+        </script>
        
 <div class="container">
 
@@ -25,21 +35,25 @@
             <h3 style="color: darkblue; font-weight: bold;" align='center'>CHIA NHÓM LÀM NIÊN LUẬN</h3> 
             <h4 style="color: darkblue; font-weight: bold;">Phân chia thành viên</h4> 
 
-            <form action="{{action('ChianhomController@LuuChiaNhomNL')}}" method="post">
-               <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+            <form action="" method="get" id="frChiaNhom" name="frChiaNhom">
+               <input type='hidden' name='_token' value='<?= csrf_token();?>'/>               
                 <table class="table table-bordered" id="tblChonTV">
                     <tr>
                         <th align="right" width="20%">Năm học:</th>
                         <th width="15%">
                             <input type="text" name="txtNamHoc" value="{{$namcb}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
-                        <th align="right">Học kỳ:</th>
-                        <th width="15%">
+                        <th align="right" width="6%">Học kỳ:</th>
+                        <th width="7%">
                             <input type="text" name="txtHocKy" value="{{$hkcb}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
-                        <th align="right" width="15%">Nhóm học phần:</th>
-                        <th>
-                            <select class="form-control" name="cbNhomHP">
+                        <th align="right" width="10%">Mã nhóm:</th>
+                        <th width="10%">
+                            <input type="text" name="txtHocKy" value="{{$manth}}" style="text-align: center;" class="form-control" readonly=""/>
+                        </th>
+                        <th align="right" width="12%">Nhóm học phần:</th>
+                        <th width="10%">
+                            <select onchange="document.frChiaNhom.submit()" class="form-control" name="cbNhomHP">
                                 @foreach($dsmahp as $hp)
                                     <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
                                 @endforeach
@@ -48,8 +62,8 @@
                     </tr>
                     <tr>
                         <th width='15%' valign='middle'>Chọn đề tài:</th>
-                        <td align="center" colspan='5'>
-                            <select class="form-control" name="cbDeTai">
+                        <td align="center" colspan='7'>
+                            <select class="form-control" id="cbDeTai" name="cbDeTai">
                                 <option value="">Chọn tên đề tài</option>
                                 @foreach($dsdetai as $dt)
                                 <option value="{{$dt->madt}}">{{$dt->tendt}}</option>
@@ -60,18 +74,18 @@
                     </tr>  
                     <tr>
                         <th>Ngày bắt đầu (kế hoạch):</th>
-                        <td width="30%" colspan='2'>
+                        <td width="30%" colspan='3'>
                            <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
                         </td>
-                        <th width="18%">Ngày kết thúc (kế hoạch):</th>
-                        <td width="30%" colspan='3'>
+                        <th width="18%" colspan='2'>Ngày kết thúc (kế hoạch):</th>
+                        <td width="30%" colspan='2'>
                             <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
                     </tr>
                     <tr>                   
-                        <td align="center" colspan="6">                                                  
+                        <td align="center" colspan="8">                                                  
                             @foreach($dstensv as $sv)
                                 <div style="padding: 2px 2px 2px 60px; display: block; float: left;">  
                                      <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
@@ -84,12 +98,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6" align='center'>
+                        <td colspan="8" align='center'>
                             <div style="display: block;">                                    
                                 <p style='color:red;'>{{$errors->first('chk')}}</p>
                                 <p style='color:red;'>{{$errors->first('rdNhomTruong')}}</p>
                             </div>
-                            <button type="submit" name="btnLưu" class="btn btn-success" style="width: 20%;">
+                            <button onclick="return kt();" type="submit" name="btnLưu" class="btn btn-success" style="width: 20%;">
                                 <img src="{{asset('images/save-as-icon.png')}}">&nbsp;
                                 Lưu 
                             </button>

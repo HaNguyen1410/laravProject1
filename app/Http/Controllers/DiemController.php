@@ -141,9 +141,10 @@ class DiemController extends Controller
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->lists('chn.mssv');
         //Lấy điểm của mỗi sv trong mảng mssv trên       
-        $dsdiem = DB::table('chitiet_diem')
-                ->select('mssv','diem')->orderBy('mssv','asc')
-                ->whereIn('mssv', $masv)
+        $dsdiem = DB::table('chitiet_diem as diem')
+                ->select('chn.mssv','diem.diem')->orderBy('mssv','asc')
+                ->rightjoin('chia_nhom as chn','chn.mssv','=','diem.mssv')
+                ->whereIn('chn.mssv', $masv)
                 ->get(); 
         $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
                 ->orderBy('mssv','asc')
@@ -154,6 +155,10 @@ class DiemController extends Controller
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
                 ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem);
     }  
+/*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
+    public function LuuNhapDiem(Request $req){
+        
+    }
     
 }//END Clas DiemController
 /*
