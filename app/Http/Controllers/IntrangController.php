@@ -20,20 +20,132 @@ class IntrangController extends Controller
  /*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
     public function InBangDiemSV($mssv){
         $manhom = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien'); 
-        //$manhom = DB::table('chia_nhom')->where('mssv',$mssv)->get();
-//        $data = array(
-//            'manhom' => "NTH01"
-//        );
-        $pdf = \PDF::loadView('sinhvien.in-bang-diem-sv');
+        $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','hp.tennhomhp')
+                ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.manhomthuchien',$manhom)
+                ->first();
+        $tendt = DB::table('de_tai as dt')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->where('radt.manhomthuchien',$manhom)
+                ->value('dt.tendt');
+        $macb = DB::table('giang_vien as gv')
+                ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.manhomthuchien',$manhom)
+                ->value('gv.macb');
+        $tieuchi = $this->LayDSTieuChi($macb);
+        $dssv = $this->LayDSNhomSV($macb);
+        $dsdiem = $this->LayDSDiem($macb);
+        $tongdiem = $this->LayTongDiem($macb);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $date = date('Y-m-d');//Carbon::now();
+        $view =  \View::make('sinhvien.in-bang-diem-sv', 
+                compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'tieuchi', 'dssv', 'dsdiem', 'tongdiem'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        
+        //$pdf = \PDF::loadView('giangvien.in-bang-diem-gv');
+        
+        //return $pdf->download('Nhom_'.$manhom.'.pdf'); //this code is used for the name pdf        
+        //$pdf = \PDF::loadView('sinhvien.in-bang-diem-sv');
         
         //return $pdf->download('Nhom_'.$manhom.'.pdf'); //this code is used for the name pdf
         return $pdf->stream("Nhom_".$manhom.".pdf");
     }
-/*====================== Giảng viên in bảng điểm của 1 nhóm hp hoặc tất cả các hp mà gv dạy =============================*/    
+
+/*====================== Giảng viên in bảng điểm của 1 nhóm hp hoặc tất cả các hp mà gv dạy =====================*/    
     public function InBangDiemGV($macb){
-        $pdf = \PDF::loadView('giangvien.in-bang-diem-gv');
+        $tencb = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
+        $tieuchi = $this->LayDSTieuChi($macb);
+        $dssv = $this->LayDSNhomSV($macb);
+        $dsdiem = $this->LayDSDiem($macb);
+        $tongdiem = $this->LayTongDiem($macb);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $date = date('Y-m-d');//Carbon::now();
+        $view =  \View::make('giangvien.in-bang-diem-gv', 
+                compact('nam', 'hk','tencb','tieuchi', 'dssv', 'dsdiem', 'tongdiem', 'date', 'macb'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        
+        //$pdf = \PDF::loadView('giangvien.in-bang-diem-gv');
         
         //return $pdf->download('Nhom_'.$manhom.'.pdf'); //this code is used for the name pdf
         return $pdf->stream("Bangdiem".$macb.".pdf");
+    }
+/*====================== Lấy dữ danh sách tiêu chí =============================*/   
+    public function LayDSTieuChi($macb){
+        $tieuchi = DB::table('tieu_chi_danh_gia as tc')
+                ->join('quy_dinh as qd','tc.matc','=','qd.matc')
+                ->where('qd.macb',$macb)
+                ->get();        
+        return $tieuchi;
+    }
+/*====================== Lấy dữ danh sách nhóm thực hiện =============================*/   
+    public function LayDSNhomSV($macb){
+        $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.manhomthuchien')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.macb',$macb)
+                ->lists('chn.manhomthuchien');
+        $dssv = DB::table('sinh_vien as sv')->orderBy('chn.manhomthuchien','asc')
+                ->select('chn.manhomthuchien', 'sv.mssv','sv.hoten')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->where('chn.manhomthuchien','<>',"")
+                ->get(); 
+        
+        return $dssv;
+    } 
+/*====================== Lấy dữ danh sách điểm của mỗi sinh viên =============================*/  
+    public function LayDSDiem($macb){
+        $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.manhomthuchien')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.macb',$macb)
+                ->lists('chn.manhomthuchien');
+        //Lấy 1 mảng mssv của 1 nhóm thực hiện
+        $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->lists('chn.mssv');
+        //Lấy điểm của mỗi sv trong mảng mssv trên       
+        $dsdiem = DB::table('chitiet_diem')
+                ->select('mssv','diem')->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->get(); 
+        $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->groupBy('mssv')
+                ->get();
+        return $dsdiem;
+    }
+/*====================== Tổng điểm =============================*/  
+    public function LayTongDiem($macb){
+        $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.manhomthuchien')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.macb',$macb)
+                ->lists('chn.manhomthuchien');
+        //Lấy 1 mảng mssv của 1 nhóm thực hiện
+        $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->whereIn('chn.manhomthuchien',$dsNhomth)
+                ->lists('chn.mssv');
+        $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->groupBy('mssv')
+                ->get();
+        return $tongdiem;
     }
 }

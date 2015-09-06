@@ -8,14 +8,16 @@ and open the template in the editor.
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <link rel="Shortcut Icon" href="{{asset('public/images/logo.ico')}}" type="image/x-icon" />  
         <title>In Bảng Điểm Nhóm Niên Luận</title>
-        <style>
+        <style type="text/css">
             body { 
                 font-family: DejaVu Sans, sans-serif;
                 font-size: 10;
                 margin-left: 50px;
                 margin-right: 50px;            
             }
-            @page rotated { size: landscape }
+            @page {
+                size: landscape; 
+            }
             th{
                 background-color: #9acfea;
             }
@@ -33,18 +35,20 @@ and open the template in the editor.
                 <td align="right" width="30%">                    
                     <div style="text-align: left;">
                         <label>Mẫu in M01</label><br>
-                        <label>Ngày in</label>
+                        <label>Ngày in: {{$date}}</label>
                     </div>
                 </td>
             </tr>
         </table>
         
         <h2 align="center" style="margin-bottom: 1px;">KẾT QUẢ NIÊN LUẬN</h2>
-        <div align="center"><lable>(Học kỳ: - Năm học: )</lable></div>
+        <div align="center">
+            (Học kỳ: <lable style="color: #00c;">{{$hk}}</lable> - Năm học: <lable style="color: #00c;">{{$nam}})</lable>
+        </div>
         <br>
         <table border="1" style="width:100%" padding="1px 1px" cellspacing="0px 0px">
             <tr>
-                <td><label>Họ và tên cán bộ: </label></td>
+                <td>Họ và tên cán bộ:<label style="color: #00c; font-weight: bold"> {{$tencb->hoten}} ({{$tencb->macb}}) </label></td>
                 <td width="30%">Nhóm HP:</td>
             </tr>
         </table><br>
@@ -52,31 +56,36 @@ and open the template in the editor.
         <table border="1" style="width:100%; margin-left: -15px;" padding="1px 1px" cellspacing="0px 0px">            
             <tr>
                 <th rowspan="2" width="1%">STT</th>
-                <th rowspan="2" width="1%">Mã nhóm<br>niên luận</th>
-                <th rowspan="2" width="8%">MSSV</th>
+                <th rowspan="2" width="6%">Mã nhóm</th>
+                <th rowspan="2" width="7%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="4" width="25%">Hệ số</th>
+                <th colspan="{{count($tieuchi)}}" width="14%">Hệ số</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>                         
             </tr>
             <tr>
-                <th width="1%">hs1</th>   
-                <th width="1%">hs2</th>
-                <th width="1%">hs3</th>
-                <th width="1%">hs4</th>
+               @foreach($tieuchi as $tc)
+                    <th width='2%'>{{$tc->heso}}</th>
+               @endforeach
             </tr>
-            <tr>
-                <td align="center">1</td>
-                <td align="center">NTH01</td>
-                <td align="center">12345</td>
-                <td>Mười Giờ</td>
-                <td>1</td>     
-                <td>2</td>
-                <td>3</td> 
-                <td>4</td> 
-                <td></td> 
-                <td></td> 
-            </tr>        
+            @foreach($dssv as $stt => $sv) 
+                <tr>
+                    <td align="center">{{$stt+1}}</td>
+                    <td align="center">{{$sv->manhomthuchien}}</td>
+                    <td align="center">{{$sv->mssv}}</td>
+                    <td>{{$sv->hoten}}</td>
+                    @foreach($dsdiem as $diem)
+                        @if($diem->mssv == $sv->mssv)
+                            <td align="center">{{$diem->diem}}</td>
+                        @endif
+                   @endforeach
+                    @foreach($tongdiem as $tong) 
+                        @if($tong->mssv == $sv->mssv)
+                            <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                        @endif                        
+                    @endforeach 
+                </tr>
+            @endforeach        
         </table>
     </body>
 </html>

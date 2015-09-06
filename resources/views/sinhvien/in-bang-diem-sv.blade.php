@@ -36,51 +36,73 @@ and open the template in the editor.
                 <td align="right" width="30%">                    
                     <div style="text-align: left;">
                         <label>Mẫu in M01</label><br>
-                        <label>Ngày in</label>
+                        <label>Ngày in: {{$date}}</label>
                     </div>
                 </td>
             </tr>
         </table>
         
         <h2 align="center" style="margin-bottom: 1px;">KẾT QUẢ THỰC HIỆN ĐỀ TÀI NIÊN LUẬN</h2>
-        <div align="center"><lable>(Học kỳ: - Năm học: )</lable></div>
+        <div align="center">
+            (Học kỳ: <lable style="color: #00c;">{{$hk}}</lable> - Năm học: <lable style="color: #00c;">{{$nam}})</lable>
+        </div>
         <br>
         <table border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">
             <tr>
-                <td colspan="2"><label>Tên đề tài: </label></td>
+                <td width="20%">Họ tên cán bộ:</td>
+                <td colspan="3">
+                    <label style="color: #00c; font-weight: bold">
+                        {{$gv->hoten}} ({{$gv->macb}}) 
+                    </label>
+                </td>             
             </tr>
             <tr>
-                <td>Mã nhóm thực hiện: </td>
+                <td>Tên đề tài:</td>
+                <td colspan="3">
+                    <label style="color: #00c;">
+                        {{$tendt}}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Mã nhóm:</td>
+                <td><label style="color: #00c; font-weight: bold">{{$manhom}}</label></td>
                 <td>Nhóm HP: </td>
+                <td><label style="color: #00c; font-weight: bold">{{$gv->tennhomhp}}</label></td>
             </tr>
         </table><br>
         <h3 align="center">Danh sách điểm</h3>
         <table border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">            
             <tr>
-                <th rowspan="2" width="1%">STT</th>
                 <th rowspan="2" width="8%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="4" width="30%">Hệ số</th>
+                <th colspan="{{count($tieuchi)}}" width="15%">Hệ số</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>                         
             </tr>
             <tr>
-                <th width="2%">hs1</th>   
-                <th width="2%">hs2</th>
-                <th width="2%">hs3</th>
-                <th width="2%">hs4</th>
+               @foreach($tieuchi as $tc)
+                    <th width='2%'>{{$tc->heso}}</th>
+               @endforeach
             </tr>
-            <tr>
-                <td align="center">1</td>
-                <td align="center">12345</td>
-                <td>Mười Giờ</td>
-                <td>1</td>     
-                <td>2</td>
-                <td>3</td> 
-                <td>4</td> 
-                <td></td> 
-                <td></td> 
-            </tr>        
+            @foreach($dssv as $sv)               
+                @if($sv->manhomthuchien == $manhom)  
+                    <tr>
+                        <td align="center">{{$sv->mssv}}</td>
+                        <td>{{$sv->hoten}}</td>
+                        @foreach($dsdiem as $diem)
+                            @if($diem->mssv == $sv->mssv)
+                                <td align="center">{{$diem->diem}}</td>
+                            @endif
+                       @endforeach
+                        @foreach($tongdiem as $tong) 
+                            @if($tong->mssv == $sv->mssv)
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                            @endif                        
+                        @endforeach 
+                    </tr>
+                 @endif
+            @endforeach         
         </table>
     </body>
 </html>

@@ -95,7 +95,7 @@
                         </button> 
                     </td>
                     <td>
-                        <a href="2134/inbangdiemgv">
+                        <a href="2134/inbangdiemgv" target="_blank">
                             <button type="button" name="" class="btn btn-success" style="width: 50%;">
                                 <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
                             </button>
