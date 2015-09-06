@@ -58,7 +58,7 @@
                         <td align="center">
                             @foreach($tendt as $dt)
                                 @if($dt->manhomthuchien == $sv->manhomthuchien)
-                                    <a href="" data-toggle="tooltip" data-placement="bottom" title="{{$dt->tendt}}">
+                                    <a href="" style="color: blueviolet; font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="{{$dt->tendt}}">
                                          {{$sv->manhomthuchien}}
                                     </a>
                                 @endif
@@ -67,15 +67,21 @@
                         <td align="center">{{$sv->mssv}}</td>
                         <td>{{$sv->hoten}}</td>
                         @foreach($dsdiem as $diem) 
-                            @if($diem->mssv == $sv->mssv && $diem->diem != NULL)
-                                <td align="center">
-                                    <input type="text" value="{{$diem->diem}}" style="text-align:center;" size='1' />
-                                </td>
-                            @elseif(($diem->mssv == $sv->mssv) && ($diem->diem == ""))
-                                <td align="center">
-                                    <input type="text" value="" style="text-align:center;" size='1' />
-                                </td>
-                            @endif
+                            <?php
+                                if($diem->mssv == $sv->mssv && isset($diem->diem))
+                                    echo "<td align='center'>".
+                                              "<input type='text' value='$diem->diem' style='text-align:center;' size='1' />".
+                                         "</td>";
+                                else if(!isset($diem->diem))
+                                    echo "<td align='center'>".
+                                              "<input type='text' value='' style='text-align:center;' size='1' />".
+                                         "</td>";
+                            ?>
+                        @endforeach
+                        @foreach($tongdiem as $tong) 
+                            @if($tong->mssv == $sv->mssv)
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                            @endif                        
                         @endforeach
                     </tr>
                 @endforeach                  

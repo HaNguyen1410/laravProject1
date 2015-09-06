@@ -15,25 +15,16 @@
                         <td>{{$diem->diem}}</td>                    
                     @endforeach
 
-====================================================================================
-
-/*==================== Lấy danh sách đề tài của 1 nhóm học phân ======================*/
-    public function ChonDeTai($mssv){
-        $mahp = DB::table('dangky_nhom as dk')
-                ->join('nhom_hocphan as hp','dk.manhomhp','=','hp.manhomhp')
-                ->where('dk.mssv',$mssv)
-                ->value('hp.manhomhp');
-        $dsdtHocPhan = DB::table('ra_de_tai as radt')
-                ->join('de_tai as dt','radt.madt','=','dt.madt')
-                ->where('radt.manhomhp',$mahp)
-                ->get();
-        return view('sinhvien.chon-de-tai')->with('dsdtHocPhan',$dsdtHocPhan);
-    }
-    public function LuuChonDeTai(){
-        
-    }
-
-    
-
 ===============================================================================
+    @if($diem->mssv == $sv->mssv)
+        <td align="center">
+            <input type="text" value="{{$diem->diem}}" style="text-align:center;" size='1' />
+        </td>
+    @elseif($diem->mssv == $sv->mssv && empty($diem->diem))
+        <td align="center">
+            <input type="text" value="" style="text-align:center;" size='1' />
+        </td>
+    @endif
+
+
 

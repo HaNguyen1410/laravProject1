@@ -89,9 +89,14 @@ class DiemController extends Controller
         $dsdiem = DB::table('chitiet_diem')
                 ->select('mssv','diem')->orderBy('mssv','asc')
                 ->whereIn('mssv', $masv)
-                ->get();              
+                ->get();     
+        $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->groupBy('mssv')
+                ->get();
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
-            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem);            
+            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem)->with('tongdiem',$tongdiem);            
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem($macb){   
@@ -140,11 +145,14 @@ class DiemController extends Controller
                 ->select('mssv','diem')->orderBy('mssv','asc')
                 ->whereIn('mssv', $masv)
                 ->get(); 
-//         $tongdiem = $this->tongdiem($mssv);
-//         $diemchu = $this->diemchu($mssv);
+        $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->groupBy('mssv')
+                ->get();
         return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
-                ->with('hk',$hk)->with('tendt',$tendt);
+                ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem);
     }  
     
 }//END Clas DiemController

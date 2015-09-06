@@ -60,12 +60,17 @@
                         @if($diem->mssv == $sv->mssv)
                             <td>{{$diem->diem}}</td>
                         @endif
-                    @endforeach        
+                    @endforeach 
+                    @foreach($tongdiem as $tong) 
+                        @if($tong->mssv == $sv->mssv)
+                            <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                        @endif                        
+                    @endforeach
                 </tr>
             @endforeach         
         </table>
         <div class="col-md-12" style="text-align: right;">
-            <a href="1111317/inbangdiemsv">
+            <a href="1111317/inbangdiemsv" target="_blank">
                 <button type="button" name="" class="btn btn-success" style="width: 15%;">
                     <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
                 </button>

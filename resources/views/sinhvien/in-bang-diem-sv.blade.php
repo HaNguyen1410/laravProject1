@@ -44,7 +44,7 @@ and open the template in the editor.
         
         <h2 align="center" style="margin-bottom: 1px;">KẾT QUẢ THỰC HIỆN ĐỀ TÀI NIÊN LUẬN</h2>
         <div align="center"><lable>(Học kỳ: - Năm học: )</lable></div>
-        
+        <br>
         <table border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <td colspan="2"><label>Tên đề tài: </label></td>

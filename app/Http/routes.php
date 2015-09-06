@@ -28,7 +28,8 @@ Route::get('dangxuat', 'DangNhapController@DangXuat');
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-Route::get('quantri/saoluucsdl','KetxuatCSDL@SaoLuuCSDL');
+//Route::get('quantri/saoluucsdl','KetxuatCSDL@SaoLuuCSDL');
+Route::get('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
 /*
  * ######## Giảng Viên ##################
  */

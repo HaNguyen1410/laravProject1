@@ -66,5 +66,9 @@ class GiangvienController extends Controller
             }
         }
     }
+/*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
+    public function DoiHinhDaiDien($macb){
+        
+    }
 
 }// END Class GiangvienController
