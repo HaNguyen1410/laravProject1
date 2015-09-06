@@ -118,10 +118,12 @@ class ChianhomController extends Controller
         {
             $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng
-            /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check*/
-            $nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
+            
+            /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
+            //$nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
+            $nhomtruong = isset($_POST['rdNhomTruong']) == null ? 0 : 1; 
 //            return $masv_checked.$nhomtruong;
-//              return count($masv_checked);                                             
+//              return count($masv_checked);               
             $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
                             ->update([                        
                                     'manhomthuchien'=>$manth,
@@ -147,25 +149,26 @@ class ChianhomController extends Controller
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/
     public function XoaSVTrongNhom($macb,$mssv){
+        $manth = DB::Table('nhom_thuc_hien as nth')
+                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+                ->where('chn.mssv',$mssv)
+                ->value('chn.manhomthuchien');
+        
         DB::table('chia_nhom')->where('mssv',$mssv)->update(
                     [
                         'manhomthuchien' => " ",
                         'nhomtruong' => 0
                     ]
-                );
+                );        
         
-        $manth = DB::Table('nhom_thuc_hien as nth')
-                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
-                ->where('chn.mssv',$mssv)
-                ->value('chn.manhomthuchien');
         $nhomsv = DB::Table('chia_nhom')->select('mssv')                
                 ->where('manhomthuchien',$manth)
-                ->get();
-        return count($nhomsv);
-//        if(count($nhomsv) == 0){
-//            DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->delete();
-//            DB::table('ra_de_tai')->where('manhomthuchien',$manth)->delete();
-//        }
+                ->get();        
+        
+        if(count($nhomsv) == 0){
+            DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->delete();
+            DB::table('ra_de_tai')->where('manhomthuchien',$manth)->delete();
+        }
         
         $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
         \Session::flash('ThongBao','Xóa --'.$tensv.'-- thành công!');
