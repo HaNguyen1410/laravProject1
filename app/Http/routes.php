@@ -28,7 +28,7 @@ Route::get('dangxuat', 'DangNhapController@DangXuat');
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-Route::get('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
+Route::get('quantri/saoluucsdl','KetxuatCSDL@SaoLuuCSDL');
 /*
  * ######## Giảng Viên ##################
  */
@@ -73,7 +73,8 @@ Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
 route::get('giangvien/nhapdiem/{macb}/inbangdiemgv','IntrangController@InBangDiemGV');
 /*======= Quản lý TÀI LIỆU ==========*/
 route::get('giangvien/khotailieu/{macb}','QltailieuController@KhoTaiLieu');
-        
+route::get('giangvien/khotailieu/{macb}/khotailieuchitiet/{manth}','QltailieuController@KhoTaiLieuChiTiet');
+
 /*======= QUẢN LÝ ĐỀ TÀI ==========*/
 Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
 Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');

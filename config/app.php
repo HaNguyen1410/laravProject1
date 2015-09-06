@@ -136,7 +136,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class,
 //        Illuminate\Html\HtmlServiceProvider::class,
 //        Collective\Html\HtmlServiceProvider::class,
 
@@ -145,7 +144,9 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        App\Providers\RouteServiceProvider::class,		
+        Barryvdh\DomPDF\ServiceProvider::class,
+		Witty\LaravelDbBackup\DBBackupServiceProvider::class,
 
     ],
 

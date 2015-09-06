@@ -20,7 +20,7 @@
                     $command='mysqldump --opt -h' .$mysqlHostName .' -u' .$mysqlUserName .' -p' .$mysqlPassword .' ' .$mysqlDatabaseName .' > ~/' .$mysqlExportPath;
                     exec($command);
                  ?>
-                <a href="">
+                <a href="saoluucsdl">
                     <button type="button" name="" class="btn btn-link" style="width: 10%;">
                         <img src="{{asset('images/data-backup-icon.png')}}"> <br>
                         <label>Sao lưu CSDL</label>

@@ -18,7 +18,33 @@ class QltailieuController extends Controller
 {
 /*========================= Giảng viên quản lý tài liệu =============================*/
     public function KhoTaiLieu($macb){
-        return view('giangvien.kho-tai-lieu');
+        //
+        $dsdt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','chn.manhomthuchien','sv.hoten')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
+                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->where('dt.macb',$macb)
+                ->where('chn.nhomtruong','=',1)
+                ->get();
+        
+        return view('giangvien.kho-tai-lieu')->with('dsdt',$dsdt);
+    }
+/*========================= Giảng viên quản lý tài liệu chi tiết=============================*/
+    public function KhoTaiLieuChiTiet($macb,$manth){
+        $dt = DB::table('de_tai as dt')->select('dt.tendt')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->where('radt.manhomthuchien',$manth)
+                ->first();
+        $dstailieu = DB::table('tai_lieu as tl')
+                ->select('tl.matl','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
+                        'dg.nd_danhgia','dg.ngaydanhgia','cv.giaocho')
+                ->leftjoin('thuc_hien as th','tl.macv','=','th.macv')
+                ->leftjoin('danh_gia as dg','tl.matl','=','dg.matl')
+                ->join('cong_viec as cv','tl.macv','=','cv.macv')
+                ->where('th.manhomthuchien',$manth)
+                ->get();
+        
+        return view('giangvien.kho-tai-lieu-chi-tiet')->with('dt',$dt)->with('dstailieu',$dstailieu);
     }
 /*========================= Sinh viên nộp tài liệu =============================*/
     public function NopTaiLieu($mssv){

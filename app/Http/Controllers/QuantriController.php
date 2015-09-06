@@ -265,7 +265,7 @@ class QuantriController extends Controller
                         'chn.manhomthuchien','chn.nhomtruong')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
-                ->paginate(5);
+                ->paginate(10);
         $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
         $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get(); 
         //Lấy năm học và học kỳ hiện tại      

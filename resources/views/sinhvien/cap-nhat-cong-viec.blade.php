@@ -9,7 +9,21 @@
                 background-color: #dff0d8;
             }
     </style>
+    <script type="text/javascript">
+        $('#txtNgayBatDauThucTe').datetimepicker({
+            dayOfWeekStart: 1,
+            format: "y-m-d H:i:s",
+            step: 10
+        });
 
+        $('#txtNgayKTThucTe').datetimepicker({
+            dayOfWeekStart: 1,
+            format: "y-m-d H:i:s",
+            step: 10
+        });
+
+    </script>   
+    
 <div class="container">
     <div class="row">
         <div class="col-md-12">

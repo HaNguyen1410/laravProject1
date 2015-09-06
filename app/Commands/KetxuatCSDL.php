@@ -4,6 +4,13 @@ namespace App\Commands;
 
 use App\Commands\Command;
 use Illuminate\Contracts\Bus\SelfHandling;
+use View,
+    Response,
+    Validator,
+    Input,
+    Mail,
+    Session;
+use Carbon\Carbon;
 
 class KetxuatCSDL extends Command implements SelfHandling {
 
@@ -12,7 +19,7 @@ class KetxuatCSDL extends Command implements SelfHandling {
      *
      * @var string
      */
-    //protected $name = 'dump:data';
+    //Lệnh backup CSDL trong cửa sổ comand-line
         protected $name = 'db:backup';
 
     /**
@@ -36,18 +43,18 @@ class KetxuatCSDL extends Command implements SelfHandling {
      *
      * @return mixed
      */
-    public function fire() {
+    public function SaoLuuCSDL() {
         $this->info('Database Backup Started');
  
         $host = Config::get('database.connections.mysql.host');
         $database = Config::get('database.connections.mysql.database');
         $username = Config::get('database.connections.mysql.username');
         $password = Config::get('database.connections.mysql.password');
-        $backupPath = app_path() . "\storage\backup\\";
+        $backupPath = "C:\Users\Admin\Downloads\\";
         $backupFileName = $database . "-" . date("Y-m-d-H-i-s") . '.sql';
  
-        //for linux replace the path with /usr/local/bin/mysqldump (The path might varies).
-        $path = "c:\\xampp\mysql\bin\mysqldump";
+        //Đường dẫn chạy mysqldump trong xampp của MySQL.
+        $path = "c:\\xampp\mysql\bin";
  
         //without password
         //$command = $path . " -u " . $username . " " . $database . " > " . $backupPath . $backupFileName;
@@ -56,6 +63,8 @@ class KetxuatCSDL extends Command implements SelfHandling {
         system($command);
         $this->info('Backup File Created At: ' . $backupPath . $backupFileName);
         $this->info('Database Backup Completed');
+        
+        return view('quantri.sao-luu-phuc-hoi-du-lieu');
     }
 
     /**
