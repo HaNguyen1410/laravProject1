@@ -66,9 +66,8 @@ class SinhvienController extends Controller
                 'kinhnghiem'       => $_POST['txtKinhNghiem'],
             );
             $capnhat = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
-            //if($capnhat > 0){
-                return redirect('sinhvien/thongtinsv/1111317');
-            //}
+            
+                return redirect('sinhvien/thongtinsv/1111317');          
         }       
     }
     
@@ -106,7 +105,14 @@ class SinhvienController extends Controller
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
-        }        
+        }  
+        else{
+            $ch = DB::table('sinh_vien')->where('mssv', $post['txtMaSV'])
+                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
+            if($ch > 0){
+               return redirect('sinhvien/thongtinsv/1111317'); 
+            }
+        }
     }
  
      

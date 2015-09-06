@@ -113,7 +113,7 @@
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr> 
-                    <tr>
+<!--                    <tr>
                         <td>Mật khẩu hiện tại:</td>
                         <td colspan="3">
                             <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
@@ -133,7 +133,7 @@
                             <input type="password" id="txtMatKhauMoi2" name="txtMatKhauMoi2" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi2')}}</p>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <td></td>
                         <td colspan="3">

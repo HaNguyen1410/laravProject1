@@ -65,7 +65,7 @@ Route::get('vidu','GiangvienController@ViDu');
 Route::get('thongtingv','GiangvienController@ThongTin_gv');
 Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
-Route::get('giangvien/doimatkhaugv/{masv}','GiangvienController@DoiMatKhauGV');
+Route::get('giangvien/doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
 /*======= NHẬP ĐIỂM ==========*/
 Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
@@ -116,7 +116,7 @@ Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
 Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
 /*======= Trang xem công việc được giao ==========*/
 Route::get('sinhvien/xemviecduocgiao/{mssv}/{hoten}/{manth}','SinhvienController@CongViecSV');
-/*======= Trang đổi mật khẩu sinh viên ==========*/
+/*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/
 Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
 Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
 /*======= XEM ĐIỂM ==========*/

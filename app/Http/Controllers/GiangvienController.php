@@ -43,21 +43,28 @@ class GiangvienController extends Controller
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('giangvien.doi-mat-khau-gv')->with('gv', $row);
     } 
-    public function LuuDoiMatKhauSV(Request $req){        
+    public function LuuDoiMatKhauGV(Request $req){        
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
 //                    'txtMaCB'      => 'required',
 //                    'txtHoTen'     => 'required',
 //                    'txtEmail'     => 'required',
-                    'txtMatKhauCu' => 'required',
+                    'txtMatKhauCu'    => 'required',
                     'txtMatKhauMoi1'  => 'required|min:6|different:txtMatKhauCu',
                     'txtMatKhauMoi2'  => 'required|min:6|same:txtMatKhauMoi1'
                 ]
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
-        }        
+        } 
+        else{
+            $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
+                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
+            if($ch > 0){
+                return redirect('giangvien/thongtingv/2134');                
+            }
+        }
     }
 
 }// END Class GiangvienController

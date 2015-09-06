@@ -78,13 +78,8 @@ class QuantriController extends Controller
         }
         else
         {
-            $hinhdaidien = DB::table('giang_vien')->where('macb','$post([txaCB])')->value('hinhdaidien');
-            
-            $data = array(
-                    'hinhdaidien'   => ($_POST['fHinh'] != "") ? $_POST['fHinh'] : $hinhdaidien,
-                    'matkhau'       => $_POST['txtMatKhau1']
-            );
-            $ch = DB::table('giang_vien')->where('macb',$post(['txtMaCB']))->update($data);
+            $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
+                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
             if($ch > 0){
                 return redirect('quantri/thongtinqt/9876');
             }
@@ -205,10 +200,9 @@ class QuantriController extends Controller
                     'txtEmail'          => 'required|email',
                     'txtSDT'            => 'required|numeric|min:10',
                     //md5('txtMatKhauCu') => 'required|confirmed',
-                    'txtMatKhauCu'      => 'required',
-                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
-                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1',
-                    'ngaytao'           => Carbon::now()
+//                    'txtMatKhauCu'      => 'required',
+//                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
+//                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1',
                 ]
              );
         if($v->fails()){
@@ -223,9 +217,10 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'sdt'       => $_POST['txtSDT'],
-                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
+//                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1 ,
-                    'quantri'   => isset($_POST['ckbQuanTri']) ? 1 : 0
+//                    'quantri'   => isset($_POST['ckbQuanTri']) ? 1 : 0,
+                    'ngaytao'           => Carbon::now()
             );
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])->update($data);
             //Lấy mảng giá trị kho chọn nhiều checkbox Nhóm HP
@@ -326,20 +321,20 @@ class QuantriController extends Controller
             $data = array(
                     'mssv'     => $_POST['txtMaSV'],
                     'hoten'    => $_POST['txtHoTen'],
-                    'gioitinh'  => $_POST['rdGioiTinh'],
+                    'gioitinh' => $_POST['rdGioiTinh'],
                     'ngaysinh' => $_POST['txtNgaySinh'],
                     'email'    => $_POST['txtEmail'],
                     'khoahoc'  => $_POST['txtKhoaHoc'],
-                    'matkhau' => md5($_POST['txtMatKhau1']),
-                    'ngaytao'   => Carbon::now()
+                    'matkhau'  => md5($_POST['txtMatKhau1']),
+                    'ngaytao'  => Carbon::now()
             );
             $ch = DB::table('sinh_vien')->insert($data);            
             $ch2 = DB::table('chia_nhom')->insert(
                         [
-                            'mssv'=>$_POST['txtMaSV'],
-                            'manhomhp'=>$_POST['rdNhomHP'],
+                            'mssv'           => $_POST['txtMaSV'],
+                            'manhomhp'       => $_POST['rdNhomHP'],
                             'manhomthuchien' => "",
-                            'nhomtruong'=>0
+                            'nhomtruong'     => 0
                         ]
                     );
             
@@ -378,9 +373,9 @@ class QuantriController extends Controller
                     'txtEmail'          => 'required|email',
                     'txtKhoaHoc'        => 'required',
                     'rdNhomHP'          => 'required',
-                    'txtMatKhauCu'      => 'required',
-                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
-                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1'
+//                    'txtMatKhauCu'      => 'required',
+//                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
+//                    'txtMatKhauMoi2'    => 'required|min:6|same:txtMatKhauMoi1'
                 ]
              );
         if($v->fails()){
@@ -395,7 +390,7 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'khoahoc'   => $_POST['txtKhoaHoc'],
-                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
+//                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1,
                     'ngaytao'   => Carbon::now()
             );

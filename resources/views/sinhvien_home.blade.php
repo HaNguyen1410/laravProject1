@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="{{Asset('scripts/jquery-ui-1.11.4/style.css')}}">
         <link rel="stylesheet" href="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.css')}}">
         <link rel="stylesheet" href="{{Asset('scripts/datetimepicker/jquery.datetimepicker.css')}}"/> 
-        <script src="{{Asset('scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
+<!--        <script src="{{Asset('scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>-->
         <script src="{{Asset('../bootstrap/js/jquery-1.11.3.min.js')}}"></script>  
         <script src="{{Asset('scripts/jquery-ui-1.11.4/jquery-ui.min.js')}}"></script>   
         <script src="{{Asset('../bootstrap/js/bootstrap.min.js')}}"></script>

@@ -9,7 +9,12 @@
                 background-color: #dff0d8;
             }
     </style>
+    
+    <script src="{{Asset('scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
     <script type="text/javascript">
+        /*window.onerror = function(errorMsg) {
+            $('#console').html($('#console').html()+'<br>'+errorMsg)
+            }*/
         $('#txtNgayBatDauThucTe').datetimepicker({
             dayOfWeekStart: 1,
             format: "y-m-d H:i:s",
@@ -21,7 +26,7 @@
             format: "y-m-d H:i:s",
             step: 10
         });
-
+        /*$('#datetimepicker').datetimepicker({step: 10});*/
     </script>   
     
 <div class="container">
