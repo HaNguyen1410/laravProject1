@@ -1,61 +1,49 @@
-@extends('app')
 
-@section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Đăng nhập</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="{{asset('../bootstrap/css/bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('css/login-bootstrap.css')}}">
+        <script src="{{asset('js/login-bootstrap.js')}}"></script>
+        <script src="{{asset('../bootstrap/js/jquery-1.11.3.min.js')}}"></script>
+        <script src="{{asset('../bootstrap/js/bootstrap.min.js')}}"></script> 
+</head>
 
-					<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="remember"> Remember Me
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary">Login</button>
-
-								<a class="btn btn-link" href="{{ url('/password/email') }}">Forgot Your Password?</a>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-@endsection
+<body>
+	<!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->        
+        <div class="container">
+            <div class="page-header">
+                <h2 style="color: darkblue;">HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN</h2>
+            </div> 
+            <div class="card card-container"> 
+                <img id="profile-img" class="profile-img-card" src="{{asset('images/User-image.png')}}" />
+<!--                <p id="profile-name" class="profile-name-card"></p>-->
+                <form class="form-signin" action="{{ url('/auth/login') }}" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <span id="reauth-email" class="reauth-email"></span>
+                    <label for="inputUsername" >Tên đăng nhập:</label>
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                    <!--<input type="text" id="txtTenDangNhap" name="txtTenDangNhap" class="form-control" placeholder="Tài khoản đăng nhập" required autofocus>-->
+                    <label for="inputPassword" >Mật khẩu:</label>
+                    <input type="password" class="form-control" name="password">
+                    <!--<input type="password" id="txtMatKhau" name="txtMatKhau" class="form-control" placeholder="Mật khẩu" required>-->
+                    <div id="remember" class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Nhớ mật khẩu
+                        </label>
+                    </div>
+                    <button type="submit" name="btnDangNhap" class="btn btn-lg btn-primary btn-block btn-signin">Đăng nhập</button>
+                </form><!-- /form -->
+<!--                <a href="#" class="forgot-password">
+                    Quên mật khẩu?
+                </a>-->
+            </div><!-- /card-container -->
+        </div><!-- /container -->   
+</body>
+</html>

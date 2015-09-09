@@ -14,8 +14,9 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\KetxuatCSDL::class,
         
-    ];
+    ];   
 
     /**
      * Define the application's command schedule.

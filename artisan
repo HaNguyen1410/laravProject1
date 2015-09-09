@@ -1,9 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-//$artisan->Add(new KetxuatCSDL);
-	
-//Artisan::add(new KetxuatCSDL);
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader

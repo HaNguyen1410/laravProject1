@@ -35,8 +35,17 @@ Route::controllers([
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-//Route::get('quantri/saoluucsdl','KetxuatCSDL@SaoLuuCSDL');
-Route::get('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
+Route::post('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
+Route::get('quantri/saoluu', function () {
+    return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
+});
+//Route::get('quantri/saoluucsdl', function () {
+//      $exitCode = Artisan::call('db:backup'); 
+////    $run = new KetxuatCSDL();
+//     App\Console\Commands\KetxuatCSDL::handle();
+//    return view('quantri.sao-luu-phuc-hoi-du-lieu');
+//});
+
 /*
  * ######## Giảng Viên ##################
  */
@@ -77,7 +86,7 @@ Route::get('giangvien/doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
 /*======= NHẬP ĐIỂM ==========*/
 Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
-
+Route::post('luunhapdiem','DiemController@LuuNhapDiem');
 route::get('giangvien/nhapdiem/{macb}/inbangdiemgv','IntrangController@InBangDiemGV');
 /*======= Quản lý TÀI LIỆU ==========*/
 route::get('giangvien/khotailieu/{macb}','QltailieuController@KhoTaiLieu');

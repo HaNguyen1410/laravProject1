@@ -14,9 +14,10 @@ use View,
     Validator,
     Input,
     Mail,
-    Session;
+    Session,
+    Artisan;
 use Carbon\Carbon;
-use App\Commands\Command;
+use App\Commands;
 
 class QuantriController extends Controller
 {
@@ -41,10 +42,10 @@ class QuantriController extends Controller
         }     
     }   
  /*====================== Sao lưu phục hồi CSDL ====================================*/
-    public function SaoLuuCSDL(){
-        $dump = new KetxuatCSDL();
-//        $dump::SaoLuuCSDL();
-        return view('quantri.sao-luu-phuc-hoi-du-lieu');
+    public function SaoLuuCSDL(Request $req){
+        $exitCode = Artisan::call('db:backup'); 
+        
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',0);
     }
     /******************
  * ######## Quản trị Giảng Viên  ###########

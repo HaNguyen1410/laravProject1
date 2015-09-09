@@ -59,8 +59,8 @@
                     <?php $stt=1; ?>
                     @foreach($dsgv as $tt => $rw)                
                         <tr>
-                            <td align='center'>
-                                {{$stt}}
+                            <td align='center'> <?php $p = 5*($_GET['page']-1); ?>
+                                {{$stt+$p}}
                             </td>
                             <td align='center'>{{$rw->macb}}</td>
                             <td>{{$rw->hoten}}</td>

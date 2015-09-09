@@ -37,9 +37,9 @@
                     </div>
                     <button type="submit" name="btnDangNhap" class="btn btn-lg btn-primary btn-block btn-signin">Đăng nhập</button>
                 </form><!-- /form -->
-                <a href="#" class="forgot-password">
+<!--                <a href="#" class="forgot-password">
                     Quên mật khẩu?
-                </a>
+                </a>-->
             </div><!-- /card-container -->
         </div><!-- /container -->   
 </body>

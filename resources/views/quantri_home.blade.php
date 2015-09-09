@@ -59,7 +59,7 @@
                                 </ul>
                             </li> 
                            
-                            <li><a href="{{asset('quantri/saoluucsdl')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
+                            <li><a href="{{asset('quantri/saoluu')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
                                     Sao lưu
                                 </a>
                             </li>

@@ -146,10 +146,12 @@ class DiemController extends Controller
                 ->rightjoin('chia_nhom as chn','chn.mssv','=','diem.mssv')
                 ->whereIn('chn.mssv', $masv)
                 ->get(); 
-        $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
-                ->orderBy('mssv','asc')
-                ->whereIn('mssv', $masv)
-                ->groupBy('mssv')
+        $tongdiem = DB::table('chia_nhom as chn')
+                ->select('chn.mssv','chn.nhanxet', DB::raw('sum(diem.diem) as tongdiem'))
+                ->leftjoin('chitiet_diem as diem','chn.mssv','=','diem.mssv')
+                ->orderBy('chn.mssv','asc')
+                ->whereIn('diem.mssv', $masv)
+                ->groupBy('chn.mssv')
                 ->get();
         return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
@@ -157,7 +159,18 @@ class DiemController extends Controller
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){
+        $post = $req->all();
+        $data1 = array(
+            'matc'      => $_POST['txtMaTC'],
+            'mssv'      => $_POST['txtMaSV'],
+            'diem'      => $_POST['txtDiem']
+        );
         
+        $ch1 = DB::table('chitiet_diem')->insert($data1);
+        $ch2 = DB::table('chia_nhom')->where('mssv',$post['txtMaSV'])->update(
+                    ['nhanxetsv' => $_POST['txtNhanXet']]
+                );
+        return redirect('giangvien/nhapdiem/2134');
     }
     
 }//END Clas DiemController
@@ -166,4 +179,9 @@ class DiemController extends Controller
     from chitiet_diem
     WHERE mssv in (1111317, 1111308,1111324)
     ORDER BY mssv ASC
+ * 
+    SELECT chia_nhom.mssv, sum(chitiet_diem.diem)
+    from chitiet_diem
+    right JOIN chia_nhom on chitiet_diem.mssv = chia_nhom.mssv
+    GROUP BY chia_nhom.mssv
  */
