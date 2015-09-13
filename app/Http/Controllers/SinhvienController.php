@@ -121,6 +121,42 @@ class SinhvienController extends Controller
             }
         }
     }
- 
+/*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
+    public function DoiHinhDaiDienSV(){
+        $masv = Input::get('txtMaSV');
+        $hoten = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
+/*        // Lấy tất cả các INPUT dữ liệu , $_GET,$_POST,$_FILES.
+        $input = explode(' ', Input::get('fHinh'));
+         // VALIDATION RULES
+        $rules = array(
+            'fHinh' => 'image|max:300000',
+        );
+        $validation = \Validator::make($input, $rules);
+        if ($validation->fails()) {
+            return Redirect()->with('message', $validation->errors->first());
+        }*/
+        
+        $file = Input::file('fHinh');
+        // Đặt đường dẫn lưu file upload
+        $luuden = public_path(). '/hinhdaidien/';
+        // Lấy đuôi mở rộng        
+//           $extension = Input::file('fHinh')->getClientOriginalExtension();
+        //Gắn đuôi mở rộng lúc nào cũng là png
+        $extension = "png";
+        // Đặt lại tên file vừa upload lên
+        $gvctrl = new GiangvienController();
+        $tachten = $gvctrl->lay_ten($hoten);               
+        $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $masv)) . '.' . $extension;
+        
+        //Lưu vào CSDL
+        $cn = DB::table('sinh_vien')->where('mssv',$masv)->update(['hinhdaidien' => $fileName]);
+        // Chuyển file upload vào thư mục lưu trữ đã đặt trươc đó
+        $upload_success = $file->move($luuden, $fileName);
+        
+        if ($upload_success) {
+            return Redirect('sinhvien/doimatkhausv/1111317')->with('message', 'Upload hình đại diện thành công!');
+        }
+    }
+
      
 }// END Class SinhvienController

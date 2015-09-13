@@ -60,4 +60,5 @@ class QltailieuController extends Controller
                 ->get();
         return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh);
     }
-}
+    
+}//END Class QltailieuController

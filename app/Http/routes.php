@@ -36,6 +36,7 @@ Route::controllers([
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
+Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT');
 Route::get('quantri/saoluu', function () {
     return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
 });
@@ -85,7 +86,7 @@ Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
 Route::get('giangvien/doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
-route::post('doihinhdaidien','GiangvienController@DoiHinhDaiDien');
+route::post('doihinhdaidiengv','GiangvienController@DoiHinhDaiDienGV');
 /*========= NHẬP ĐIỂM ==========*/
 Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
 Route::post('luunhapdiem','DiemController@LuuNhapDiem');
@@ -144,6 +145,7 @@ Route::get('sinhvien/xemviecduocgiao/{mssv}/{hoten}/{manth}','SinhvienController
 /*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/
 Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
 Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
+route::post('doihinhdaidiensv','SinhvienController@DoiHinhDaiDienSV');
 /*======= XEM ĐIỂM ==========*/
 Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
 route::get('sinhvien/xemdiem/{mssv}/inbangdiemsv','IntrangController@InBangDiemSV');

@@ -12,7 +12,7 @@
   
 <div class="container">
     <div class="row">
-         <div class="col-md-4">  <!-- Upload hình đại diện -->             
+         <div class="col-md-4">  <!-- Upload hình đại diện -->    
             <div align="center">
                 <br><br><br/>
                 @if($gv->hinhdaidien != "")
@@ -20,8 +20,8 @@
                 @else
                     <img src="{{asset('images/User-image.png')}}">
                 @endif
-            </div><br>
-            <form action="{{action('GiangvienController@DoiHinhDaiDien')}}" method="post" enctype="multipart/form-data" name="frmDoiHinhDaiDien" class="form-horizontal">
+            </div><br>             
+            <form action="{{action('GiangvienController@DoiHinhDaiDienGV')}}" method="post" enctype="multipart/form-data" name="frmDoiHinhDaiDien" class="form-horizontal">
                 <input type='hidden' name='_token' value="<?= csrf_token();?>"/>
                 <div align="center">
                     <input type="text" name="txtMaCB" value="{{$gv->macb}}" readonly="" />

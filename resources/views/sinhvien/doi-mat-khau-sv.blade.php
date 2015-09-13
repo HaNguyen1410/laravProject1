@@ -21,12 +21,14 @@
                     <img src="{{asset('images/User-image.png')}}">
                 @endif
             </div><br>
-            <form action="" enctype="multipart/form-data" method="post" class="form-horizontal">
+            <form action="{{action('SinhvienController@DoiHinhDaiDienSV')}}" enctype="multipart/form-data" method="post" class="form-horizontal">
+                <input type='hidden' name='_token' value="<?= csrf_token();?>"/>
                 <div align="center">
+                    <input type="text" name="txtMaSV" value="{{$sv->mssv}}" readonly="" />
                     <input type="file" name="fHinh" id="fHinh" /><br> 
-                    <a href="?cn=ttgv" class="btn btn-success" style="width:30%;">
+                    <button type="submit" class="btn btn-success" style="width:30%;">
                         <img src="{{asset('images/save-as-icon.png')}}"> Lưu hình
-                    </a>
+                    </button>
                 </div>
             </form>
         </div>

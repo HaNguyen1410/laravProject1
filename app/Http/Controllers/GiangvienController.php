@@ -77,16 +77,38 @@ class GiangvienController extends Controller
         }
     }
 /*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
-    public function DoiHinhDaiDien(){
-        // Lấy tất cả các INPUT dữ liệu , $_GET,$_POST,$_FILES.
-        $input = Input::all();
+    public function DoiHinhDaiDienGV(){
+        $macb = Input::get('txtMaCB');
+        $hoten = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
+ /*       // Lấy tất cả các INPUT dữ liệu , $_GET,$_POST,$_FILES.
+        $input = explode(' ', Input::get('fHinh'));
          // VALIDATION RULES
         $rules = array(
-            'fHinh' => 'image|max:3000',
+            'fHinh' => 'image|max:300000',
         );
         $validation = \Validator::make($input, $rules);
         if ($validation->fails()) {
             return Redirect()->with('message', $validation->errors->first());
+        }*/
+        
+        $file = Input::file('fHinh');
+        // Đặt đường dẫn lưu file upload
+        $luuden = public_path(). '/hinhdaidien/';
+        // Lấy đuôi mở rộng        
+//           $extension = Input::file('fHinh')->getClientOriginalExtension();
+        //Gắn đuôi mở rộng lúc nào cũng là png
+        $extension = "png";
+        // Đặt lại tên file vừa upload lên
+        $tachten = $this->lay_ten($hoten);               
+        $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $macb)) . '.' . $extension;
+        
+        //Lưu Hình Vào CSDL
+        DB::table('giang_vien')->where('macb',$macb)->update(['hinhdaidien' => $fileName]);
+        // Chuyển file upload vào thư mục lưu trữ đã đặt trươc đó
+        $upload_success = $file->move($luuden, $fileName);
+        
+        if ($upload_success) {
+            return Redirect('giangvien/doimatkhaugv/2134')->with('message', 'Upload hình đại diện thành công!');
         }
     }
 /*=================== Các Hàm ==================================*/
@@ -119,7 +141,7 @@ class GiangvienController extends Controller
             $n = count($mang);
             $ten = $mang[$n-1];
             
-            return bo_dau_cau($ten);
+            return $this->bo_dau_cau($ten);
         }   
     }
  
