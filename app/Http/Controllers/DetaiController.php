@@ -29,7 +29,8 @@ class DetaiController extends Controller
     }
 /*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/
     public function DsDeTai($macb){
-        $dsdt = DB::table('de_tai')->where('macb',$macb)->paginate(5);
+        $dsdt = DB::table('de_tai')->where('macb',$macb)->get();
+//->paginate(5);
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
@@ -38,7 +39,8 @@ class DetaiController extends Controller
                 ->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
-        $nhomth = DB::table('ra_de_tai')->select('madt','manhomthuchien')
+        $nhomth = DB::table('ra_de_tai as radt')->select('dt.tendt','radt.manhomthuchien')
+                    ->rightjoin('de_tai as dt','radt.madt','=','dt.madt')
                     ->get();
         return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt)->with('nhomhp',$nhomhp)
                     ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('nhomth',$nhomth);
@@ -154,3 +156,7 @@ class DetaiController extends Controller
     }
     
 }
+/*
+SELECT de_tai.tendt, ra_de_tai.manhomthuchien
+from ra_de_tai 
+right join de_tai on ra_de_tai.madt = de_tai.madt

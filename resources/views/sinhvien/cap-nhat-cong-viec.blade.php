@@ -98,7 +98,7 @@
                                         ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
                                         ['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote'],
                                         ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-                                        ['Link','Unlink','Anchor', 'NumberedList','BulletedList','-','Outdent','Indent'],
+                                        ['NumberedList','BulletedList','-','Outdent','Indent'],
                                         ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
                                     ['Style', 'FontFormat', 'FontName', 'FontSize']]
                                 });
@@ -109,9 +109,9 @@
                         <th>Trạng thái</th>
                         <td>
                             <select class="form-control" size="1" name="cbTrangThai">
-                                <option value="1">Đang làm</option>
-                                <option value="2">Sắp làm</option>
-                                <option value="3">Hoàn thành</option>
+                                <option value="Đang làm">Đang làm</option>
+                                <option value="Sắp làm">Sắp làm</option>
+                                <option value="Hoàn thành">Hoàn thành</option>
                             </select>
                             <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
                         </td>
@@ -143,7 +143,7 @@
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="../../phancv/1111317" class="btn btn-warning" style="width:20%;">
+                            <a href="../../../phancv/1111317" class="btn btn-warning" style="width:20%;">
                                 <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
                             </a>                              
                         </td>

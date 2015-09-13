@@ -85,7 +85,7 @@
                             
                         </td>
                         <td>
-                            <a href="../phancongchitiet/1111317/{{$cv->macv}}" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
+                            <a href="../phancongchitiet/1111317/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
                                 {{$cv->congviec}}
                             </a>
                         </td>

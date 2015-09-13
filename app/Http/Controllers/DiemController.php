@@ -95,8 +95,14 @@ class DiemController extends Controller
                 ->whereIn('mssv', $masv)
                 ->groupBy('mssv')
                 ->get();
+         $nhanxet = DB::table('chia_nhom')->select('mssv','nhanxet')
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->get();
+        
         return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
-            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem)->with('tongdiem',$tongdiem);            
+            ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem)->with('tongdiem',$tongdiem)
+            ->with('nhanxet',$nhanxet);            
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem($macb){   
@@ -146,31 +152,59 @@ class DiemController extends Controller
                 ->rightjoin('chia_nhom as chn','chn.mssv','=','diem.mssv')
                 ->whereIn('chn.mssv', $masv)
                 ->get(); 
-        $tongdiem = DB::table('chia_nhom as chn')
-                ->select('chn.mssv','chn.nhanxet', DB::raw('sum(diem.diem) as tongdiem'))
-                ->leftjoin('chitiet_diem as diem','chn.mssv','=','diem.mssv')
+        $tongdiem = DB::table('chitiet_diem as diem')->distinct()
+                ->select('chn.mssv',DB::raw('sum(diem.diem) as tongdiem'))
+                ->rightjoin('chia_nhom as chn','.diem.mssv','=','chn.mssv')
                 ->orderBy('chn.mssv','asc')
                 ->whereIn('diem.mssv', $masv)
                 ->groupBy('chn.mssv')
                 ->get();
+        $nhanxet = DB::table('chia_nhom')->select('mssv','nhanxet')
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->get();
+        
         return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
-                ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem);
+                ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem)
+                ->with('nhanxet',$nhanxet);
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){
         $post = $req->all();
-        $data1 = array(
-            'matc'      => $_POST['txtMaTC'],
-            'mssv'      => $_POST['txtMaSV'],
-            'diem'      => $_POST['txtDiem']
-        );
+        $dsmasv = DB::table('chitiet_diem as diem')->distinct()->select('diem.mssv')
+                ->join('chia_nhom as chn','diem.mssv','=','chn.mssv')
+                ->orderBy('chn.manhomthuchien','asc')
+                ->lists('diem.mssv');
+        //Lấy mảng các giá trị trong bảng
+        $masv = Input::get('txtMaSV');
+        $matc = Input::get('txtMaTC');
+        $diem = Input::get('txtDiem');
+        $nhanxet = Input::get('txtNhanXet');
+//        return $dsmasv;
         
-        $ch1 = DB::table('chitiet_diem')->insert($data1);
-        $ch2 = DB::table('chia_nhom')->where('mssv',$post['txtMaSV'])->update(
-                    ['nhanxetsv' => $_POST['txtNhanXet']]
-                );
-        return redirect('giangvien/nhapdiem/2134');
+       $khac = array_diff_assoc($masv, $dsmasv); //Mảng có stt của các phần tử khác nhau trong mảng so sánh
+       $chuoi = implode(' ', $khac);  //Đưa mảng sang chuỗi
+       $mangkhac = explode(' ', $chuoi); //Đưa chuỗi sang mảng bắt đầu stt từ 0
+//       return $mangkhac; return $mangkhac[$i];
+       for($i = 0; $i < count($mangkhac); $i++){
+           for($j = 0; $j < count($matc); $j++){
+               echo $mangkhac[$i]." - ".$matc[$j]."<br>";
+               
+//               $ch1 = DB::table('chitiet_diem')->insert(
+//                    [
+//                        'matc' => $matc[$j],
+//                        'mssv' => $mangkhac[$i],
+//                    ]
+//               ); 
+           }          
+       }
+        
+//        $ch2 = DB::table('chia_nhom')->whereIn('mssv',$masv)->update(
+//                    ['nhanxetsv' => $_POST['txtNhanXet']]
+//                );
+        
+//        return redirect('giangvien/nhapdiem/2134');
     }
     
 }//END Clas DiemController

@@ -42,7 +42,7 @@
                         </tr>
                         <tr>
                             <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
-                            <td colspan="2">
+                            <td>
                                 <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="{{$tb->batdautb}}" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
                             </td>
@@ -53,6 +53,21 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Nhóm thực hiện:</th>
+                            <td>
+                                <select class="form-control" name="cbNhomNL">
+                                    <option value="Tất cả">Tất cả</option>
+                                    @foreach($dsnhomth as $nhom)
+                                        <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
+                                    @endforeach
+                                </select>
+                            </td>     
+                            <th>Mã Thông báo:</th>
+                            <td align="center">
+                                <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>                               
+                            </td>                           
+                        </tr>
+                        <tr>
                             <th>Đóng hệ thống:</th>
                             <td align="center">
                                 @if($tb->donghethong == 1)
@@ -61,15 +76,11 @@
                                     <input type="checkbox" name="chkDongNop" value="0" style="margin-left: 10px; margin-right: 10px"/>
                                 @endif
                             </td>
-                            <th>Mã Thông báo:</th>
-                            <td align="center">
-                                <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>                               
-                            </td>
-                            <td align="center">
-                                <button type="submit" name="" class="btn btn-primary">
+                            <td colspan="2" align="center">
+                                <button type="submit" name="" class="btn btn-primary" style="width:25%">
                                     <img src="{{asset('images/add-icon.png')}}">Cập Nhật
                                 </button>
-                                <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px;">
+                                <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px; width:25%">
                                     <img src="{{asset('images/delete-icon.png')}}">Hủy Bỏ
                                 </a>
                             </td>

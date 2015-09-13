@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 /***********************
  * =========================== ĐĂNG NHẬP ===========================================
  * ************************
@@ -84,7 +85,8 @@ Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
 Route::get('giangvien/doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');
 Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
-/*======= NHẬP ĐIỂM ==========*/
+route::post('doihinhdaidien','GiangvienController@DoiHinhDaiDien');
+/*========= NHẬP ĐIỂM ==========*/
 Route::get('giangvien/nhapdiem/{macb}','DiemController@NhapDiem');
 Route::post('luunhapdiem','DiemController@LuuNhapDiem');
 route::get('giangvien/nhapdiem/{macb}/inbangdiemgv','IntrangController@InBangDiemGV');

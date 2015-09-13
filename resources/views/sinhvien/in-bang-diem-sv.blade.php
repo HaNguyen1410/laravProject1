@@ -13,11 +13,11 @@ and open the template in the editor.
                 writing-mode: tb-rl;
                 font-family: DejaVu Sans, sans-serif;
                 font-size: 10;
-                margin-left: 50px;
-                margin-right: 50px;               
+                margin-left: 30px;
+                margin-right: 30px;               
             }
             @page { 
-                size: landscape;
+                size: portrait;
             }
             th{
                 background-color: #9acfea;
@@ -104,13 +104,14 @@ and open the template in the editor.
             <tr>
                 <th rowspan="2" width="8%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="{{count($tieuchi)}}" width="15%">Hệ số</th>
+                <th colspan="{{count($dstieuchi)}}" width="15%">Hệ số</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
-                <th rowspan="2" width="4%">Điểm chữ</th>                         
+                <th rowspan="2" width="4%">Điểm chữ</th>   
+                <th rowspan="2" width="20%">Nhận xét</th>                 
             </tr>
             <tr>
-               @foreach($tieuchi as $tc)
-                    <th width='2%'>{{$tc->heso}}</th>
+               @foreach($dstieuchi as $tc)
+                    <th width="2%">{{$tc->heso}}</th>
                @endforeach
             </tr>
             @foreach($dssv as $sv)               
@@ -122,13 +123,18 @@ and open the template in the editor.
                             @if($diem->mssv == $sv->mssv)
                                 <td align="center">{{$diem->diem}}</td>
                             @endif
-                       @endforeach
+                        @endforeach
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
                             @endif                        
                         @endforeach 
+                        @foreach($nhanxet as $nx)
+                        @if($nx->mssv == $sv->mssv)
+                            <td style="color: #00008b;">{{$nx->nhanxet}}</td>
+                        @endif 
+                    @endforeach
                     </tr>
                  @endif
             @endforeach         

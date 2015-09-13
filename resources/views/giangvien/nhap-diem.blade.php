@@ -41,30 +41,30 @@
 <div class="container">
     <div class="row">
     <div class="col-md-12">
-        <h3 style="color: darkblue; font-weight: bold;">BẢNG GHI ĐIỂM NIÊN LUẬN</h3>        
-        <form id="" name="frmNhapDiem" action="{{action('DiemController@LuuNhapDiem')}}" method="post">
-            <table class="table table-bordered" style="width:900px" align='center'>
-                <tr>
-                    <th width='8%'>Năm học:</th>                
-                    <td width='15%'>
-                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$nam}}' class='form-control' readonly=""/>
-                    </td>
-                    <th width='8%'>Học kỳ:</th>
-                    <td width='10%'>
-                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk}}' class='form-control' readonly=""/>
-                    </td>              
-                    <th width='12%'>Tên học phần:</th>
-                    <th width="10%">
-                        <select name="cbNhomNL" class="form-control" style="width:90%">
-                            <option value="">Tất cả</option>
-                            @foreach($dshp as $hp)
-                            <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                </tr>   
-             </table>
-            
+        <h3 style="color: darkblue; font-weight: bold;">BẢNG GHI ĐIỂM NIÊN LUẬN</h3>  
+        <table class="table table-bordered" style="width:900px" align='center'>
+            <tr>
+                <th width='8%'>Năm học:</th>                
+                <td width='15%'>
+                    <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$nam}}' class='form-control' readonly=""/>
+                </td>
+                <th width='8%'>Học kỳ:</th>
+                <td width='10%'>
+                    <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk}}' class='form-control' readonly=""/>
+                </td>              
+                <th width='12%'>Tên học phần:</th>
+                <th width="10%">
+                    <select name="cbNhomNL" class="form-control" style="width:90%">
+                        <option value="">Tất cả</option>
+                        @foreach($dshp as $hp)
+                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>   
+         </table>
+        <form name="frmNhapDiem" action="{{action('DiemController@LuuNhapDiem')}}" method="post"> 
+            <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="1%">STT</th> 
@@ -72,9 +72,9 @@
                     <th rowspan="2" width="1%">MSSV</th>
                     <th rowspan="2" width="12%">Họ và tên</th>
                     <th colspan="{{$n=count($tieuchi)}}" width="30%">Tiêu chí</th> 
+                    <th rowspan="2" width="20%">Nhận xét</th>
                     <th rowspan="2" width="4%">Tổng điểm</th>
                     <th rowspan="2" width="4%">Điểm chữ</th>   
-                    <th rowspan="2" width="20%">Nhận xét</th>
                 </tr>
                 <tr>
                     @foreach($tieuchi as $tc)
@@ -96,34 +96,36 @@
                             @endforeach
                         </td>
                         <td align="center">
-                            <input type="text" name="txtMaSV" size="6" style="border: 0px; text-align: center;" value="{{$sv->mssv}}"/>
+                            <input type="text" name="txtMaSV[]" size="6" style="border: 0px; text-align: center;" value="{{$sv->mssv}}"/>
                         </td>
                         <td>{{$sv->hoten}}</td>
                         @foreach($dsdiem as $diem) 
                             <?php
                                 if($diem->mssv == $sv->mssv && $diem->diem != null)
                                     echo "<td align='center'>".
-                                              "<input type='text' name='txtDiem' value='$diem->diem' style='text-align:center;' size='1' />".
+                                              "<input type='text' name='txtDiem[]' value='$diem->diem' style='text-align:center;' size='1' />".
                                          "</td>";
                                 else if($diem->mssv == $sv->mssv && $diem->diem == null)
                                     for($i=0; $i < count($tieuchi); $i++)
                                         echo "<td align='center'>".
-                                                  "<input type='text' name='txtDiem' value='' style='text-align:center;' size='1' />".
+                                                  "<input type='text' name='txtDiem[]' value='' style='text-align:center;' size='1' />".
                                              "</td>";
                             ?>                        
                         @endforeach
-                        @foreach($tongdiem as $tong)   
-                             
+                        @foreach($nhanxet as $nx)
+                             @if($nx->mssv == $sv->mssv)  
+                                <td><textarea class="form-control" name="txtNhanXet[]">{{$nx->nhanxet}}</textarea></td>  
+                             @endif  
+                        @endforeach
+                        @foreach($tongdiem as $tong)                             
                             @if($tong->mssv == $sv->mssv)                             
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
-                            @endif          
-                                <td><textarea class="form-control" name="txtNhanXet">{{$tong->nhanxet}}{{$tong->mssv}}</textarea></td>              
-                        @endforeach                       
+                            @endif                      
+                        @endforeach                         
                     </tr>
-                @endforeach                  
-            </table>
-
+                @endforeach   
+            </table> 
             <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <td align="right">
@@ -137,21 +139,22 @@
                                 <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
                             </button>
                         </a>
-                        
+
                     </td>
                     <td align="right">
                         <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 55%;">
                             <img src="{{asset('images/save-as-icon.png')}}"> Lưu dữ liệu
                         </button>                            
                     </td>
-<!--                    <td>
+    <!--                    <td>
                         <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width: 60%;">
                             <img src="{{asset('images/calculator.png')}}"> Cập nhật ĐTB
                         </button>
                     </td>-->
-                </tr>
+                </tr> 
             </table>
-        </form>               
+        </form>  
+                     
     </div>
     </div> <!-- /row -->
 </div> <!-- /container -->

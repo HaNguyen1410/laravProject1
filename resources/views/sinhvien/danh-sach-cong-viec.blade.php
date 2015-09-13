@@ -18,15 +18,15 @@
                     type: 'bar'
                 },
                 title: {
-                    text: 'Stacked bar chart'
+                    text: 'Biểu độ thể hiện thời gian thực hiện của cả nhóm'
                 },
                 xAxis: {
-                    categories: ['Apples', 'Oranges']
+                    categories: ['Kế hoạch', 'Thực tế']
                 },
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Total fruit consumption'
+                        text: 'Số ngày thực hiện'
                     }
                 },
                 legend: {
@@ -38,10 +38,10 @@
                     }
                 },
                 series: [{
-                    name: 'John',
+                    name: 'Chưa hoàn thành',
                     data: [4, 3]
                 }, {
-                    name: 'Jane',
+                    name: 'Hoàn thành',
                     data: [2, 3]
                 }]
             });
@@ -55,7 +55,7 @@
                 },
 
                 title: {
-                    text: 'Total fruit consumtion, grouped by gender'
+                    text: 'Biểu đồ thể hiện thời gian thực hiện của mỗi sinh viên'
                 },
 
                 xAxis: {
@@ -66,7 +66,7 @@
                     allowDecimals: false,
                     min: 0,
                     title: {
-                        text: 'Number of fruits'
+                        text: 'Số ngày thực hiện'
                     }
                 },
 
@@ -85,19 +85,19 @@
                 },
 
                 series: [{
-                    name: 'John',
+                    name: 'Tổng ngày làm kế hoạch',
                     data: [5, 3, 4, 7, 2],
                     stack: 'male'
                 }, {
-                    name: 'Joe',
+                    name: 'Đã làm kế hoạch',
                     data: [3, 4, 4, 2, 5],
                     stack: 'male'
                 }, {
-                    name: 'Jane',
+                    name: 'Tổng ngày làm thực tế',
                     data: [2, 5, 6, 2, 1],
                     stack: 'female'
                 }, {
-                    name: 'Janet',
+                    name: 'Đã làm thực tế',
                     data: [3, 0, 4, 4, 3],
                     stack: 'female'
                 }]
@@ -137,28 +137,53 @@
                     <th>%</th>
                     <th width="20%">Nội dung công việc</th>
                 </tr>
-                @foreach($dscv as $stt => $cv)
-                    <tr>
-                        <td>{{$cv->macv}}</td>
-                        <td>
-                            <a href="?cn=kehoach" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
-                                {{$cv->congviec}}
-                            </a>
-                        </td>
-                        <td>{{$cv->trangthai}}</td>
-                        <td>{{$cv->giaocho}}</td>
-                        <td>{{$cv->ngaybatdau_thucte}}</td>
-                        <td>{{$cv->ngayketthuc_thucte}}</td>
-                        <td>{{$cv->sogio_thucte}}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td>{{$cv->noidungthuchien}}</td>
-                    </tr>
+                @foreach($dscv as $stt => $cv)               
+                    @if($cv->phuthuoc_cv == "0")
+                        <tr style="background-color: #FFEFD5;">
+                            <td>{{$cv->macv}}</td>
+                            <td>
+                                <a href="?cn=kehoach" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
+                                    {{$cv->congviec}}
+                                </a>
+                            </td>
+                            <td>{{$cv->trangthai}}</td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td>{{$cv->ngaybatdau_thucte}}</td>
+                            <td>{{$cv->ngayketthuc_thucte}}</td>
+                            <td>{{$cv->sogio_thucte}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>{{$cv->noidungthuchien}}</td>
+                         </tr>
+                    @elseif($cv->phuthuoc_cv != "0")
+                        <tr style="background-color: #FFFFE0;">
+                            <td>{{$cv->macv}}</td>
+                            <td>
+                                <a href="?cn=kehoach" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
+                                    {{$cv->congviec}}
+                                </a>
+                            </td>
+                            <td>{{$cv->trangthai}}</td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td>{{$cv->ngaybatdau_thucte}}</td>
+                            <td>{{$cv->ngayketthuc_thucte}}</td>
+                            <td>{{$cv->sogio_thucte}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>{{$cv->noidungthuchien}}</td>
+                        </tr>
+                    @endif
+                    
                 @endforeach
                 <tr>
                     <td colspan="9" align="center">{!! $dscv->setPath('danhsachcv/1111317')->render() !!}</td>

@@ -39,7 +39,7 @@
                         </tr>
                         <tr>
                             <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
-                            <td colspan="2">
+                            <td>
                                 <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
                             </td>
@@ -49,17 +49,28 @@
                                 <p style='color:red;'>{{$errors->first('txtKetThucNop')}}</p>
                             </td>
                         </tr>
-                        <tr>
-                            <th>Đóng hệ thống:</th>
-                            <td>
-                                <input type="checkbox" name="chkDongNop" value="" style="margin-left: 10px; margin-right: 10px"/>                               
-                            </td>
+                        <tr>                        
                             <th>Mã Thông báo:</th>
                             <td>
                                 <input type="text" name="txtMaTB" value="{{$ma}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>
                                 <input type="text" name="txtMaCB" value="{{$macb}}" size="5" style="margin-left: 10px;"/>
                             </td>
+                            <th>Nhóm thực hiện:</th>
                             <td>
+                                <select class="form-control" name="cbNhomNL">
+                                    <option value="Tất cả">Tất cả</option>
+                                    @foreach($dsnhomth as $nhom)
+                                        <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
+                                    @endforeach
+                                </select>
+                            </td>    
+                        </tr>
+                        <tr>   
+                            <th>Đóng hệ thống:</th>
+                            <td>
+                                <input type="checkbox" name="chkDongNop" value="" style="margin-left: 10px; margin-right: 10px"/>                               
+                            </td>
+                            <td colspan="2" align="center">
                                 <button type="submit" name="" class="btn btn-primary">
                                     <img src="{{asset('images/add-icon.png')}}">Thêm Thông báo
                                 </button>
@@ -69,20 +80,21 @@
                 </form>
             </div>
    
-            <table class="table table-bordered" cellpadding="15px" cellspacing="10px">
+            <table class="table table-bordered table-hover" cellpadding="15px" cellspacing="10px">
                 <tr>
-                    <th>STT</th>
-                    <th>Nội dung thông báo</th>
-                    <th>Thời gian bắt đầu</th>
-                    <th>Thời hạn kết thúc</th>
-                    <th>Ngày tạo</th>
-                    <th>Ngày sửa</th>
-                    <th>Đóng hệ thống</th>
-                    <th>Thao tác</th>
+                    <th width="1%">STT</th>
+                    <th width="25%">Nội dung thông báo</th>
+                    <th width="10%">Thực hiện</th>
+                    <th width="8%">Thời gian bắt đầu</th>
+                    <th width="8%">Thời hạn kết thúc</th>
+                    <th width="8%">Ngày tạo</th>
+                    <th width="8%">Ngày sửa</th>
+                    <th width="8%">Đóng hệ thống</th>
+                    <th width="8%">Thao tác</th>
                 </tr>                                  
                     @if(count($dsthongbao) == 0)
                         <tr>
-                            <td colspan="7" align="center">
+                            <td colspan="9" align="center">
                                 <label style="color: #e74c3c;"> Chưa có thông báo nào!</label> 
                             </td>
                         </tr>
@@ -91,6 +103,7 @@
                             <tr>
                                 <td align="center">{{$stt+1}}</td>
                                 <td>{{$tb->noidungtb}}</td>
+                                <td align="center">{{$tb->manhomthuchien}}</td>
                                 <td align="center">{{$tb->batdautb}}</td>
                                 <td align="center">{{$tb->ketthuctb}}</td>
                                 <td align="center">{{$tb->ngaytao}}</td>

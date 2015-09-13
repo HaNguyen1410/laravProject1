@@ -32,12 +32,22 @@ class IntrangController extends Controller
         $macb = DB::table('giang_vien as gv')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
-                ->where('chn.manhomthuchien',$manhom)
-                ->value('gv.macb');
-        $tieuchi = $this->LayDSTieuChi($macb);
+                ->where('chn.mssv',$mssv)
+                ->value('hp.macb');
+        $dstieuchi = $this->LayDSTieuChi($macb);
         $dssv = $this->LayDSNhomSV($macb);
         $dsdiem = $this->LayDSDiem($macb);
         $tongdiem = $this->LayTongDiem($macb);
+       //Lấy 1 mảng mssv của 1 nhóm thực hiện
+        $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->where('chn.manhomthuchien',$manhom)
+                ->orderBy('chn.mssv', 'asc')
+                ->lists('chn.mssv');
+        $nhanxet = DB::table('chia_nhom')->select('mssv','nhanxet')
+                ->orderBy('mssv','asc')
+                ->whereIn('mssv', $masv)
+                ->get(); 
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -45,7 +55,7 @@ class IntrangController extends Controller
                 ->value('hocky');
         $date = date('Y-m-d');//Carbon::now();
         $view =  \View::make('sinhvien.in-bang-diem-sv', 
-                compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'tieuchi', 'dssv', 'dsdiem', 'tongdiem'));
+                compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'dstieuchi', 'dssv', 'dsdiem', 'tongdiem','nhanxet'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         

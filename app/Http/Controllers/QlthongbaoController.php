@@ -39,10 +39,28 @@ class QlthongbaoController extends Controller
     /*=================== Quản lý thông báo ===============================*/    
     public function QuanLyThongBao($macb){
         $ma = $this->MaTB_tutang();
-        $dsthongbao = DB::table('thong_bao')->where('macb',$macb)->get();
+        $dsthongbao = DB::table('thong_bao as tb')
+                        ->select('tb.matb','tb.noidungtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
+                                'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
+                        ->leftjoin('nhan_thong_bao as ntb','tb.matb','=','ntb.matb')
+                        ->where('tb.macb',$macb)
+                        ->get();
+       //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        //Lấy danh sách nhóm thực hiện trong hk niên khóa hiện tại
+        $dsnhomth = DB::table('nhom_thuc_hien as nth')->distinct()->select('nth.manhomthuchien')
+                    ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+                    ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                    ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                    ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                    ->where('hp.macb',$macb)
+                    ->get();
         
         return view('giangvien.quan-ly-thong-bao')->with('dsthongbao',$dsthongbao)->with('macb',$macb)
-            ->with('ma',$ma);
+            ->with('ma',$ma)->with('dsnhomth',$dsnhomth);
     }
 /*=================== Lưu Thêm thông báo ===============================*/  
     public function LuuThemThongBao(Request $req){
@@ -70,7 +88,13 @@ class QlthongbaoController extends Controller
                 ]
             );
             $ch = DB::table('thong_bao')->insert($data);
-            if($ch > 0){
+            $ch2 = DB::table('nhan_thong_bao')->insert(
+                        [
+                           'matb'           => $_POST['txtMaTB'],
+                           'manhomthuchien' => $_POST['cbNhomNL']
+                        ]
+                    );
+            if($ch2 > 0 && $ch > 0){
                 return redirect('giangvien/quanlythongbao/2134');
             }
         }
@@ -78,7 +102,21 @@ class QlthongbaoController extends Controller
 /*=================== Cập nhật thông báo ===============================*/  
     public function CapNhatThongBao($macb,$matb){
         $tb = DB::table('thong_bao')->where('matb',$matb)->first();
-        return view('giangvien.cap-nhat-thong-bao')->with('macb',$macb)->with('tb',$tb);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        //Lấy danh sách nhóm thực hiện trong hk niên khóa hiện tại
+        $dsnhomth = DB::table('nhom_thuc_hien as nth')->distinct()->select('nth.manhomthuchien')
+                    ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+                    ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                    ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                    ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                    ->where('hp.macb',$macb)
+                    ->get();
+        return view('giangvien.cap-nhat-thong-bao')->with('macb',$macb)->with('tb',$tb)
+            ->with('dsnhomth',$dsnhomth);
     } 
 /*=================== Lưu Cập nhật thông báo ===============================*/  
     public function LuuCapNhatThongBao(Request $req){
@@ -103,15 +141,21 @@ class QlthongbaoController extends Controller
                             'ngaysua'     => Carbon::now()              
                         ]   
                     );
-            if($cn > 0){
-                return redirect('giangvien/quanlythongbao/2134');
-            }
+            $cn2 = DB::table('nhan_thong_bao')->where('matb',$post['txtMaTB'])->update(
+                        [
+                           'manhomthuchien' => $_POST['cbNhomNL']
+                        ]
+                    );
+            
+            return redirect('giangvien/quanlythongbao/2134');
+            
         }
     }
 /*================= Xóa thông báo ========================================*/
     public function XoaThongBao($macb,$matb){
         $delete = DB::table('thong_bao')->where('macb',$macb)->where('matb',$matb)->delete();
-        if($delete > 0){
+        $delete2 = DB::table('nhan_thong_bao')->where('matb',$matb)->delete();
+        if($delete > 0 && $delete2 > 0){
             return redirect('giangvien/quanlythongbao/2134');
         }
     }

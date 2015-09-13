@@ -72,7 +72,7 @@
                     <th width="15%">Công nghệ</th>
                     <th width="4%">Tối đa</th>
                     <th width="15%">Lưu ý</th>
-                    <th width="8%">Nhóm thực hiện</th>
+                    <!--<th width="8%">Nhóm thực hiện</th>-->
                     <th width="10%">Trạng thái</th>
                     <th width="8%">Thao tác</th>
                 </tr>
@@ -91,15 +91,13 @@
                         <td width='15%'>{{$dt->congnghe}}</td>
                         <td align='center'>{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>
-                        @foreach($nhomth as $nhom)
-                            @if($nhom->madt == $dt->madt)                                
+<!--                        @foreach($nhomth as $nhom)      
+                            @if($nhom->tendt == $dt->tendt)
                                 <td align='center'>
                                     {{$nhom->manhomthuchien}}
-                                </td>  
-                            @elseif(count($nhom->manhomthuchien) <= 0)
-                                <td align='center'></td>
+                                </td>
                             @endif
-                        @endforeach 
+                        @endforeach -->
                         <td align='center'>{{$dt->trangthai}}</td>
                         <td align='center'>
                             <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
@@ -109,9 +107,7 @@
                         </td>
                     </tr>
                 @endforeach
-                <tr>
-                    <td colspan="10" align="center">{!! $dsdt->setPath('danhsachdetai/2134')->render() !!}</td>
-                </tr>
+               
             </table>
         </div>
     </div><!-- /row -->

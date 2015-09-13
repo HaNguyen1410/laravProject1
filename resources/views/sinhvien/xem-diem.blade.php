@@ -71,7 +71,8 @@
                 <th rowspan="2" width="15%">Họ và tên</th>
                 <th colspan="{{$n=count($tieuchi)}}" width="30%">Hệ số</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
-                <th rowspan="2" width="4%">Điểm chữ</th>                         
+                <th rowspan="2" width="4%">Điểm chữ</th>    
+                <th rowspan="2" width="20%">Nhận xét</th> 
             </tr>
             <tr>
                 @foreach($tieuchi as $tc)
@@ -94,7 +95,11 @@
                             <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
                         @endif                        
                     @endforeach
-                    
+                    @foreach($nhanxet as $nx)
+                        @if($nx->mssv == $sv->mssv)
+                            <td style="color: #00008b;">{{$nx->nhanxet}}</td>
+                        @endif 
+                    @endforeach
                 </tr>
             @endforeach         
         </table>

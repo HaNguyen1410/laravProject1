@@ -40,10 +40,17 @@ class SinhvienController extends Controller
                 ->first();
         $nhomth = DB::table('nhom_thuc_hien')->select('tochucnhom','lichhop')
                 ->where('manhomthuchien',$manth)->first();
+        $dsthongbao = DB::table('thong_bao as tb')
+                        ->select('tb.matb','tb.noidungtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
+                                'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
+                        ->rightjoin('nhan_thong_bao as ntb','tb.matb','=','ntb.matb')
+                        ->where('ntb.manhomthuchien',$manth)
+                        ->Orwhere('ntb.manhomthuchien','like','Tất cả')
+                        ->get();
                    
         return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien)->with('hp',$hp)
                 ->with('dstv',$dstv)->with('ttgv',$ttgv)->with('nhomth',$nhomth)
-                ->with('detainhom',$detainhom);
+                ->with('detainhom',$detainhom)->with('dsthongbao',$dsthongbao);
     }
 /*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
     public function LuuCapNhatThongTin(Request $request){
