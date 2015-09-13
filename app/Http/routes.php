@@ -35,13 +35,13 @@ Route::controllers([
 Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
 Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
 Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-Route::post('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
 Route::get('quantri/saoluu', function () {
     return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
 });
+Route::post('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
 //Route::get('quantri/saoluucsdl', function () {
 //      $exitCode = Artisan::call('db:backup'); 
-////    $run = new KetxuatCSDL();
+//      $run = new KetxuatCSDL();
 //     App\Console\Commands\KetxuatCSDL::handle();
 //    return view('quantri.sao-luu-phuc-hoi-du-lieu');
 //});
@@ -108,8 +108,8 @@ route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
 //route::get('giangvien/dstieuchi/{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
 //route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
         /*  * Cập nhật tiêu chí đánh giá  */
-//route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
-//route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
+route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
+route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
     /*======= Xóa thông tiêu chí đánh giá ==========*/
 Route::get('giangvien/dstieuchi/{macb}/xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
 /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/
@@ -124,7 +124,12 @@ route::get('giangvien/chianhom/{macb}/xoasvtrongnhom/{mssv}','ChianhomController
 
 /*======= QUẢN LÝ THÔNG BÁO ==========*/
 route::get('giangvien/quanlythongbao/{macb}','QlthongbaoController@QuanLyThongBao');
-
+route::post('luuthemthongbao','QlthongbaoController@LuuThemThongBao');
+    /*======== Cập nhật thông báo ===========*/
+route::get('giangvien/quanlythongbao/{macb}/capnhatthongbao/{matb}','QlthongbaoController@CapNhatThongBao');
+route::post('luucapnhatthongbao','QlthongbaoController@LuuCapNhatThongBao');
+/*======= Xóa Thông báo ==========*/
+Route::get('giangvien/quanlythongbao/{macb}/xoathongbao/{matb}','QlthongbaoController@XoaThongBao');
 /*********************
  * =========================== TRANG SINH VIÊN ===========================================
  * *************************

@@ -88,20 +88,28 @@
                     <th>Ngày tạo</th>
                     <th>Thao tác</th>
                 </tr>
-                @foreach($dstc as $tc)
-                    <tr>
-                        <td align='center'>{{$tc->matc}}</td>
-                        <td>{{$tc->noidungtc}}</td>
-                        <td align='center'>{{$tc->heso}}</td>
-                        <td align='center'>{{$tc->ngaytao}}</td>
-                        <td align='center'>
-                            <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('images/edit-icon.png')}}"></a>&nbsp
-                            <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="2134/xoatieuchi/{{$tc->matc}}">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
-                            </a>
-                        </td>    
-                    </tr>                    
-                @endforeach                             
+                @if(count($dstc) == 0)
+                        <tr>
+                            <td colspan="7" align="center">
+                                <label style="color: #e74c3c;"> Chưa có tiêu chí đánh giá nào!</label> 
+                            </td>
+                        </tr>
+                @elseif (count($dstc) > 0)
+                    @foreach($dstc as $tc)
+                        <tr>
+                            <td align='center'>{{$tc->matc}}</td>
+                            <td>{{$tc->noidungtc}}</td>
+                            <td align='center'>{{$tc->heso}}</td>
+                            <td align='center'>{{$tc->ngaytao}}</td>
+                            <td align='center'>
+                                <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('images/edit-icon.png')}}"></a>&nbsp
+                                <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="2134/xoatieuchi/{{$tc->matc}}">
+                                    <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                </a>
+                            </td>    
+                        </tr>                    
+                    @endforeach    
+                @endif
             </table>
         </div>
         <div class="col-md-12">

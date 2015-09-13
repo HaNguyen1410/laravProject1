@@ -69,7 +69,13 @@
                 @foreach($dssv as $stt => $rw)
                     <tr>
                         <td align='center'>
-                            {{$stt = $stt + 1}}
+                            <?php 
+                                if(isset($_GET['page'])){
+                                    $p = 5*($_GET['page']-1);
+                                    echo $stt+1+$p;
+                                }else
+                                    echo $stt+1;
+                            ?>
                         </td>
                         <td align='center'>
                             <a href="" style="color: seagreen; font-weight: bold;" data-toggle="tooltip" data-placement="top" title="Ngày sinh: {{$rw->ngaysinh}}">

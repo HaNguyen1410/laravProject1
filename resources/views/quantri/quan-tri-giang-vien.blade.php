@@ -56,11 +56,16 @@
                         <th>Khóa</th>
                         <th width=8%>Chức năng</th>
                     </tr>   
-                    <?php $stt=1; ?>
-                    @foreach($dsgv as $tt => $rw)                
+                    @foreach($dsgv as $stt => $rw)                
                         <tr>
-                            <td align='center'> <?php $p = 5*($_GET['page']-1); ?>
-                                {{$stt+$p}}
+                            <td align='center'> 
+                                <?php 
+                                    if(isset($_GET['page'])){
+                                        $p = 5*($_GET['page']-1);
+                                        echo $stt+1+$p;
+                                    }else
+                                        echo $stt+1;
+                                ?>
                             </td>
                             <td align='center'>{{$rw->macb}}</td>
                             <td>{{$rw->hoten}}</td>
@@ -81,9 +86,6 @@
                                 </a>
                             </td>
                         </tr>
-                        <?php 
-                            $stt++; 
-                        ?>
                     @endforeach
 
                     <tr>

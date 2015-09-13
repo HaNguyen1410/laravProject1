@@ -40,4 +40,36 @@
                     exec($command);
                  ?>
 
-
+==============================================
+<!--                <tr>
+                    <td>1</td>
+                    <td>Nộp tài liệu đặc tả sơ bộ</td>
+                    <td>12/02/2014</td>
+                    <td>24/02/2014</td>
+                    <td>11/02/2014</td>
+                    <td align='center'>
+                        <img src="{{asset('images/Unlock.png')}}"/>
+                    </td>
+                    <td align='center'>
+                        <a href=""><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
+                        <a onclick="return confirm('Thông báo **** sẽ bị xóa?');" href="">
+                            <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Nộp sơ đồ mô tả chức năng</td>
+                    <td>20/02/2014</td>
+                    <td>30/02/2014</td>
+                    <td>11/02/2014</td>
+                    <td align='center'>
+                        <img src="{{asset('images/Lock.png')}}"/>
+                    </td>
+                    <td align='center'>
+                        <a href=""><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
+                        <a onclick="return confirm('Thông báo **** sẽ bị xóa?');" href="">
+                            <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                        </a>
+                    </td>
+                </tr>   
