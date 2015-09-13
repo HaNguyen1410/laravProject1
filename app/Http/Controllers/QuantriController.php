@@ -276,7 +276,7 @@ class QuantriController extends Controller
         $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
         \Session::flash('ThongBao','Xóa '.$tencb.' thành công!');
         if($delete){
-            //return $delete; $delete = 1 sau khi thuc hiện xóa
+            //return $delete; $delete = 1 sau khi thuc hiện xóa            
             return redirect('quantri/danhsachgv');
         }
     }

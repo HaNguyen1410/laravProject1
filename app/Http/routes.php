@@ -178,3 +178,4 @@ Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
 Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
 /*======= NỘP TÀI LIỆU ==========*/
 route::get('sinhvien/noptailieu/{mssv}','QltailieuController@NopTaiLieu');
+route::get('luunoptailieu','QltailieuController@LuuNopTaiLieu');

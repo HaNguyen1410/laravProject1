@@ -16,6 +16,26 @@ use View,
 
 class QltailieuController extends Controller
 {
+/*====================== Mã tài liệu tự tăng ====================================*/
+    function matl_tutang(){
+        $pre = "TL";
+        $macuoi= DB::table('tai_lieu')->orderBy('matl','desc')->value('matl');
+        
+        if(count($macuoi) == 0){
+            return $mamoi = "TL01";
+        }
+        else if(count($macuoi) > 0)
+        {
+            $so = (int)substr($macuoi, 2) + 1;
+            if($so <= 9){
+                $pre .="0";
+                return $mamoi = $pre .= $so;
+            }
+            else if($so >= 10)
+                return  $mamoi = $pre .=$so;
+         }
+        
+    }
 /*========================= Giảng viên quản lý tài liệu =============================*/
     public function KhoTaiLieu($macb){
         //
@@ -48,6 +68,7 @@ class QltailieuController extends Controller
     }
 /*========================= Sinh viên nộp tài liệu =============================*/
     public function NopTaiLieu($mssv){
+        $matl = $this->matl_tutang();
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $tendt = DB::table('de_tai as dt')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
@@ -58,7 +79,23 @@ class QltailieuController extends Controller
                 ->where('th.manhomthuchien',$manth)
                 ->where('cv.phuthuoc_cv','=',0)
                 ->get();
-        return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh);
+        $dstailieu = DB::table('tai_lieu as tl')
+                ->select('tl.matl','tl.macv','tl.tentl','tl.kichthuoc','tl.ngaycapnhat',
+                        'tl.dieuchinh','cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.mssv','sv.hoten')
+                ->join('danh_gia as dg','dg.matl','=','tl.matl')
+                ->join('cong_viec as cv','cv.macv','=','tl.macv')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->join('chia_nhom as chn','th.manhomthuchien','=','chn.manhomthuchien')
+                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->where('th.manhomthuchien',$manth)
+                ->get();
+        return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh)
+                        ->with('matl',$matl)->with('dstailieu',$dstailieu);
+    }
+/*========================= Lưu UPLOAD TÀI LIỆU =============================*/
+    public function LuuNopTaiLieu(Request $req){
+        $post = $req->all();
+        
     }
     
 }//END Class QltailieuController
