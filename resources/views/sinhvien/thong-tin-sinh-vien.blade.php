@@ -111,7 +111,12 @@
                         </tr>
                         <tr>
                             <td><label>Tên đề tài:</label></td>
-                            <td style="color:blue;" colspan="3">{{$detainhom->tendt}}</td>
+                            <td style="color:blue;" colspan="3">
+                                <a href="../mota_detai/{{$detainhom->taptindinhkem}}" style="color:darkblue;">
+                                    <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
+                                    {{$detainhom->tendt}}
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td><label>Mã nhóm niên luận: </label></td>

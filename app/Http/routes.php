@@ -101,6 +101,7 @@ Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');
           /*  * Thêm đề tài mới */
 Route::get('giangvien/danhsachdetai/{macb}/themdetai','DetaiController@ThemDeTai');
 Route::post('luuthemdetai','DetaiController@LuuThemDeTai');
+Route::post('uploadmotadetai','DetaiController@UploadMoTaDeTai');
          /*  * Cập nhật đề tài */
 Route::get('giangvien/danhsachdetai/{macb}/capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
 Route::post('luucapnhatdetai','DetaiController@LuuCapNhatDeTai');
@@ -140,6 +141,7 @@ Route::get('giangvien/quanlythongbao/{macb}/xoathongbao/{matb}','QlthongbaoContr
 /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
 Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
 Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
+//Route::get('sinhvien/thongtinsv/{mssv}/xemtaptin/{tentaptin}','SinhvienController@XemTapTin');
 /*======= Trang xem công việc được giao ==========*/
 Route::get('sinhvien/xemviecduocgiao/{mssv}/{hoten}/{manth}','SinhvienController@CongViecSV');
 /*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/

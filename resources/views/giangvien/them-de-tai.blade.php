@@ -8,13 +8,7 @@
                 color: darkblue;
                 background-color: #dff0d8;
                 vertical-align: middle;
-            }
-            #bang1 td:first-child{
-                text-align: right;
-                color: darkblue;
-                background-color: #dff0d8;
-                font-weight: bold;
-            }
+            }           
             
         </style>
 
@@ -22,46 +16,68 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">THÊM ĐỀ TÀI MỚI</h3>                
+            <h3 style="color: darkblue; font-weight: bold;">THÊM ĐỀ TÀI MỚI</h3>  
+            <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
+                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+                <p style="color: #e74c3c; font-weight: bold;" align="center">{!! Session::get('success') !!}</p>
+                <table class="table table-bordered">                    
+                    <tr> 
+                        <th>Mã cán bộ:</th>
+                        <td width="15%">
+                            <input type="text" name="txtMaCB" value="{{$macb}}" style="text-align: center;" readonly="true" class="form-control"/>
+                        </td>
+                        <th>Mã đề tài:</th>
+                        <td width="10%">
+                            <input type="text" name="txtMaDT" value="{{$ma}}" style="text-align: center;" readonly="true" class="form-control"/>
+                        </td>
+                        <th>Tập tin đính kèm:</th>
+                        <td colspan="3"><input type="file" id="fTapTinKem" name="fTapTinKem"/></td>
+                        <p style='color:red;'>{{$errors->first('txtTapTinKem')}}</p>
+                        <td colspan='5' align='center'>
+                             <button type="submit" class="btn btn-warning">
+                                    <img src="{{asset('images/save-upload-icon.png')}}"/>
+                                    Gửi tập tin
+                             </button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
             <form action="{{action('DetaiController@LuuThemDeTai')}}" method="post"  name="formThemDeTai" >  
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" id="bang1">
                     <tr>
-                        <td align="right">Năm học:</td>
-                        <td></td>
-                        <th align="right">Học kỳ:</th>
-                        <td></td>                        
-                    </tr>
-                    <tr>
-                        <td width="25%">Mã đề tài:</td>
+                        <th align="right">Năm học:</th>
                         <td>
-                            <input style="width:30%; text-align: center;" type="text" id="txtMaDeTai" name="txtMaDeTai" value="{{$ma}}" class="form-control" readonly=""/> 
-                            <input type='text' name='txtMaCB' value='{{$macb}}'/>
+                            <input type="text" value="{{$nam}}" style="width:90%; text-align: center" readonly="" class="form-control"/>
                         </td>
-                        <th align="right" width="10%">Nhóm học phần:</th>
-                        <td width="30%">
-                            <select class="form-control" name="cbNhomHP">
-                                @foreach($nhomhp as $hp)
-                                    <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
-                                @endforeach
-                            </select>
+                        <th align="right" width="10%">Học kỳ:</th>
+                        <td>
+                            <input type="text" value="{{$hk}}" style="width:80%;text-align: center" readonly="" class="form-control"/>
+                        </td> 
+                        <th width="10%">Mã cán bộ:</th>
+                        <td align="center">                            
+                            <input type='text' name='txtMaCB' value='{{$macb}}' style="width:70%;" class="form-control" readonly=""/>
+                        </td>
+                        <th width="10%">Mã đề tài:</th>
+                        <td align="center">
+                            <input type="text" id="txtMaDeTai" name="txtMaDeTai" value="{{$ma}}" style="width:60%; text-align: center;" class="form-control" readonly=""/>                        
                         </td>
                     </tr>
                     <tr>
-                        <td width="25%">Tên đề tài:</td>
-                        <td colspan="3">
+                        <th width="20%">Tên đề tài:</th>
+                        <td colspan="7">
                             <input type="text" id="txtTenDeTai" name="txtTenDeTai" value="" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtTenDeTai')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Số sinh viên tối đa</td>
-                        <td>
+                        <th>Số sinh viên tối đa</th>
+                        <td colspan="3">
                             <input type="text" id="txtSoNguoi" name="txtSoNguoi" value="" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtSoNguoi')}}</p>
                         </td>
-                        <th>Trạng thái</th>
-                        <td>
+                        <th colspan="2">Trạng thái</th>
+                        <td colspan="2">
                             <select class="form-control" name="cbmTrangThai">
                                 <option value="Chưa làm">Chưa làm</option>
                                 <option value="Đang làm">Đang làm</option>
@@ -70,8 +86,8 @@
                         </td>
                     </tr>                                            
                     <tr>
-                        <td>Mô tả:</td>
-                        <td colspan="3">
+                        <th>Mô tả:</th>
+                        <td colspan="7">
                             <textarea name="txtMoTa" rows="2" cols="2" class="ckeditor"></textarea>
                             <script language="javascript">
                                 CKEDITOR.replace('txtMoTa',
@@ -84,7 +100,7 @@
                                                 ['Bold', 'Italic', 'Underline', 'StrikeThrough', '-', 'Subscript', 'Superscript'],
                                                 ['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent', 'Blockquote'],
                                                 ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
-                                                ['Link', 'Unlink', 'Anchor', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                                                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
                                                 ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
                                                 ['Style', 'FontFormat', 'FontName', 'FontSize']]
                                         });
@@ -92,8 +108,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Công nghệ thực hiện:</td>
-                        <td colspan="3">
+                        <th>Công nghệ thực hiện:</th>
+                        <td colspan="7">
                             <textarea name="txtCongNghe" rows="2" cols="2" class="ckeditor"></textarea>
                             <script language="javascript">
                                 CKEDITOR.replace('txtCongNghe',
@@ -106,7 +122,7 @@
                                                 ['Bold', 'Italic', 'Underline', 'StrikeThrough', '-', 'Subscript', 'Superscript'],
                                                 ['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent', 'Blockquote'],
                                                 ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
-                                                ['Link', 'Unlink', 'Anchor', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                                                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
                                                 ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
                                                 ['Style', 'FontFormat', 'FontName', 'FontSize']]
                                         });
@@ -114,8 +130,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Những yếu tố cần lưu ý trong đề tài:</td>
-                        <td colspan="3">
+                        <th>Những yếu tố cần lưu ý trong đề tài:</th>
+                        <td colspan="7">
                             <textarea name="txtGhiChu" rows="2" cols="2" class="ckeditor"></textarea>
                             <script language="javascript">
                                 CKEDITOR.replace('txtGhiChu',
@@ -128,20 +144,15 @@
                                                 ['Bold', 'Italic', 'Underline', 'StrikeThrough', '-', 'Subscript', 'Superscript'],
                                                 ['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent', 'Blockquote'],
                                                 ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyFull'],
-                                                ['Link', 'Unlink', 'Anchor', 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                                                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
                                                 ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
                                                 ['Style', 'FontFormat', 'FontName', 'FontSize']]
                                         });
                             </script>
                         </td>
-                    </tr>
-                    <tr>                        
-                        <th>Tập tin đính kèm:</th>
-                        <td colspan="3"><input type="file" name="fTapTinKem"/></td>
                     </tr>                    
                     <tr>
-                        <td></td>
-                        <td align="center" colspan="3">
+                        <td align="center" colspan="8">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('images/save-as-icon.png')}}"> Thêm
                             </button>

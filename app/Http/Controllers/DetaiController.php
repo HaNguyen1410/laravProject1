@@ -58,22 +58,24 @@ class DetaiController extends Controller
 /*=========================== Thêm đề tài ==============================================*/ 
     public function ThemDeTai($macb){
         $ma = $this->madt_tutang();
-        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
-                ->select('hp.manhomhp','hp.tennhomhp')
-                ->join('giang_vien as gv','hp.macb','=','gv.macb')
-                ->where('hp.macb',$macb)
-                ->get();
-         //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
-        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('hp.macb',$macb)
-                ->value('nk.nam');
-        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
-                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('hp.macb',$macb)
-                ->value('nk.hocky');
-        return view('giangvien.them-de-tai')->with('ma',$ma)->with('nhomhp',$nhomhp)
-            ->with('macb',$macb)->with('namcb',$namcb)->with('hkcb',$hkcb);
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+//        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+//                ->select('hp.manhomhp','hp.tennhomhp')
+//                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+//                ->where('hp.mank',$mank)
+//                ->where('hp.macb',$macb)
+//                ->get();
+//                ->with('nhomhp',$nhomhp)
+        return view('giangvien.them-de-tai')->with('ma',$ma)
+            ->with('macb',$macb)->with('nam',$nam)->with('hk',$hk);
     } 
     
     public function LuuThemDeTai(Request $req){
@@ -81,14 +83,14 @@ class DetaiController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtTenDeTai'   => 'required',
-                    'txtSoNguoi'    => 'required|numeric'
+                    'txtSoNguoi'    => 'required|numeric',
                 ]
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else
-        {
+        {            
             $data1 = array(
                     'madt'          => $_POST['txtMaDeTai'],
                     'macb'          => $_POST['txtMaCB'],
@@ -99,7 +101,6 @@ class DetaiController extends Controller
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'trangthai'     => $_POST['cbmTrangThai'],
                     'ngaytao'       => Carbon::now(),
-                    //'taptindinhkem' => $_POST['ftTapTinKem']
                 );  
             $ch1 = DB::table('de_tai')->insert($data1);
             if($ch1 > 0){
@@ -110,17 +111,25 @@ class DetaiController extends Controller
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
     public function CapNhatDeTai($macb,$madt){
         $row = DB::table('de_tai')->where('madt',$madt)->first();
-        //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
-        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('hp.macb',$macb)
-                ->value('nk.nam');
-        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
-                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('hp.macb',$macb)
-                ->value('nk.hocky');
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
+//        $nhomhp = DB::table('nhom_hocphan as hp')->distinct()
+//                ->select('hp.manhomhp','hp.tennhomhp')
+//                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+//                ->where('hp.mank',$mank)
+//                ->where('hp.macb',$macb)
+//                ->get();
+//                ->with('nhomhp',$nhomhp)
+        
         return view('giangvien.cap-nhat-de-tai')->with('dt',$row)->with('macb',$macb)
-                    ->with('namcb',$namcb)->with('hkcb',$hkcb);
+                    ->with('nam',$nam)->with('hk',$hk);
     } 
     
     public function LuuCapNhatDeTai(Request $req){
@@ -128,7 +137,7 @@ class DetaiController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtTenDeTai'   => 'required',
-                    'txtSoNguoi'    => 'required|numeric'
+                    'txtSoNguoi'    => 'required|numeric',
                 ]
              );
         if($v->fails()){
@@ -146,17 +155,67 @@ class DetaiController extends Controller
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'trangthai'     => $_POST['rdTrangThai'],
                     'ngaytao'       => Carbon::now(),
-                    //'taptindinhkem' => $_POST['txtTapTinKem']
             );
-            $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);
+            $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);            
+            
             if($ch > 0){
                 return redirect('giangvien/danhsachdetai/2134');
             }
         }
     }
-    
+/*================= Upload tập tin mô tả đề tài ========================*/
+    public function UploadMoTaDeTai(Request $req){
+        $post = $req->all();
+        $dt = DB::table('de_tai')->where('madt',$post['txtMaDT'])->first();
+        $v = \Validator::make($req->all(),
+                    [
+                        'fTapTinKem' => 'mimes:pdf,doc,docx,ppt,pptm'
+                    ]
+                );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+             $luuden = public_path() . '/mota_detai/';
+             $taptin = Input::file('fTapTinKem');
+             $tenbandau = $taptin->getClientOriginalName();
+            if(count($dt) > 0){
+                DB::table('de_tai')->where('madt',$post['txtMaDT'])->update(                    
+                            [
+                                'taptindinhkem' => $tenbandau
+                            ]
+                        );
+            }
+            else if(count($dt) == 0){
+                DB::table('de_tai')->insert(                    
+                            [
+                                'madt' => $_POST['txtMaDT'],
+                                'macb' => $_POST['txtMaCB'],
+                                'taptindinhkem' => $tenbandau,
+                                'ngaytao'       => Carbon::now()
+                            ]
+                        );
+            }
+            
+            //Lưu tập tin vào thư mục /public/mota_detai
+            $upload_file = $taptin->move($luuden, $tenbandau);
+            // sending back with message
+            Session::flash('success', 'Upload tập tin thành công!'); 
+            
+            if($upload_file && count($dt) == 0){                
+                return redirect('giangvien/danhsachdetai/2134/themdetai');
+            }
+            else if($upload_file && count($dt) > 0){
+                 return redirect('giangvien/danhsachdetai/'.$post['txtMaCB'].'/capnhatdetai/'.$post['txtMaDT']);
+            }
+        }
+        
+    }
+        
+        
 }
 /*
 SELECT de_tai.tendt, ra_de_tai.manhomthuchien
 from ra_de_tai 
 right join de_tai on ra_de_tai.madt = de_tai.madt
+ */

@@ -84,10 +84,16 @@
                                 {{$dt->tendt}}                                
                             </a>
                         </td>
-                        <td>
-                            <a href='$taptin' align='center'><img src="{{asset('images/Filetype-PDF-icon.png')}}"/></a>                            
-                        </td>
-                        <td width='15%'>{{$dt->motadt}}</td>
+                        @if($dt->taptindinhkem != "")
+                            <td>
+                                <a href='{{$dt->taptindinhkem}}' align='center'>
+                                    <img src="{{asset('images/Filetype-PDF-icon.png')}}"/>
+                                </a>                            
+                            </td>
+                        @elseif($dt->taptindinhkem == "")
+                            <td></td>
+                        @endif               
+                        <td width='15%'>{{$dt->motadt}}</td> 
                         <td width='15%'>{{$dt->congnghe}}</td>
                         <td align='center'>{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>

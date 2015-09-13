@@ -50,10 +50,10 @@
                             </td>
                         </tr>
                         <tr>                        
-                            <th>Mã Thông báo:</th>
-                            <td>
-                                <input type="text" name="txtMaTB" value="{{$ma}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>
-                                <input type="text" name="txtMaCB" value="{{$macb}}" size="5" style="margin-left: 10px;"/>
+                            <th>Mã cán bộ và Mã Thông báo:</th>
+                            <td align="center">
+                                <input type="text" name="txtMaTB" value="{{$ma}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control" readonly=""/>
+                                <input type="text" name="txtMaCB" value="{{$macb}}" size="5" style="width:40%; text-align: center;" class="form-control" readonly=""/>
                             </td>
                             <th>Nhóm thực hiện:</th>
                             <td>
