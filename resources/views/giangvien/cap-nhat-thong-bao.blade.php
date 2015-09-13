@@ -27,10 +27,10 @@
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">
                 Cập nhật thông báo: 
-                <lable style="border: 0px; color: #006400">{{$tb->matb}}</lable>
+                <a href="../../{{$macb}}" style="border: 0px; color: #006400">{{$tb->matb}}</a>
             </h3>
             <div class="col-md-12" style="margin-bottom: 10px;">
-                <form action="{{action('QlthongbaoController@LuuCapNhatThongBao')}}" method="post">
+                <form action="{{action('QlthongbaoController@LuuCapNhatThongBao')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <table class="table table-bordered">
                         <tr>
@@ -68,6 +68,11 @@
                             </td>                           
                         </tr>
                         <tr>
+                            <th>Đính kèm:</th>
+                            <td>
+                                <input type="file" name="fDinhKemTB"/>
+                                <p style='color:red;'>{{$errors->first('fDinhKemTB')}}</p>
+                            </td>
                             <th>Đóng hệ thống:</th>
                             <td align="center">
                                 @if($tb->donghethong == 1)
@@ -75,12 +80,14 @@
                                 @elseif($tb->donghethong == 0)
                                     <input type="checkbox" name="chkDongNop" value="0" style="margin-left: 10px; margin-right: 10px"/>
                                 @endif
-                            </td>
-                            <td colspan="2" align="center">
-                                <button type="submit" name="" class="btn btn-primary" style="width:25%">
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
+                                <button type="submit" name="" class="btn btn-primary" style="width:15%">
                                     <img src="{{asset('images/add-icon.png')}}">Cập Nhật
                                 </button>
-                                <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px; width:25%">
+                                <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px; width:15%">
                                     <img src="{{asset('images/delete-icon.png')}}">Hủy Bỏ
                                 </a>
                             </td>

@@ -86,7 +86,7 @@
                         </td>
                         @if($dt->taptindinhkem != "")
                             <td>
-                                <a href='{{$dt->taptindinhkem}}' align='center'>
+                                <a href="../../mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
                                     <img src="{{asset('images/Filetype-PDF-icon.png')}}"/>
                                 </a>                            
                             </td>

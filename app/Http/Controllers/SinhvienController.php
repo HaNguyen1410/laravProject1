@@ -18,12 +18,12 @@ use App\Sinhvien;
 class SinhvienController extends Controller
 {
 /*=================== Hiển thị và download file =================*/
-    public function XemTapTin($tentaptin){   
-        
-//        $pdf = \PDF::loadView($tentaptin);
-        
-        return stream($tentaptin.".pdf");
-    }
+//    public function XemTapTin($tentaptin){   
+//        
+////        $pdf = \PDF::loadView($tentaptin);
+//        
+//        return stream($tentaptin.".pdf");
+//    }
 /*============================= Hiển thị thông tin của 1 sinh viên ========================================*/
     public function HienThiSV($masv){
         $sinhvien = Sinhvien::find($masv);
@@ -49,7 +49,7 @@ class SinhvienController extends Controller
         $nhomth = DB::table('nhom_thuc_hien')->select('tochucnhom','lichhop')
                 ->where('manhomthuchien',$manth)->first();
         $dsthongbao = DB::table('thong_bao as tb')
-                        ->select('tb.matb','tb.noidungtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
+                        ->select('tb.matb','tb.noidungtb','tb.dinhkemtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
                                 'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
                         ->rightjoin('nhan_thong_bao as ntb','tb.matb','=','ntb.matb')
                         ->where('ntb.manhomthuchien',$manth)

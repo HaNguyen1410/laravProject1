@@ -27,7 +27,7 @@
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">Quản lý các thông báo</h3>
             <div class="col-md-12" style="margin-bottom: 10px;">
-                <form action="{{action('QlthongbaoController@LuuThemThongBao')}}" method="post">
+                <form action="{{action('QlthongbaoController@LuuThemThongBao')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <table class="table table-bordered">
                         <tr>
@@ -66,11 +66,18 @@
                             </td>    
                         </tr>
                         <tr>   
+                            <th>Đính kèm:</th>
+                            <td>
+                                <input type="file" name="fDinhKemTB"/>
+                                <p style='color:red;'>{{$errors->first('fDinhKemTB')}}</p>
+                            </td>
                             <th>Đóng hệ thống:</th>
                             <td>
                                 <input type="checkbox" name="chkDongNop" value="" style="margin-left: 10px; margin-right: 10px"/>                               
-                            </td>
-                            <td colspan="2" align="center">
+                            </td>                            
+                        </tr>
+                        <tr>
+                            <td colspan="4" align="center">
                                 <button type="submit" name="" class="btn btn-primary">
                                     <img src="{{asset('images/add-icon.png')}}">Thêm Thông báo
                                 </button>
@@ -84,6 +91,7 @@
                 <tr>
                     <th width="1%">STT</th>
                     <th width="25%">Nội dung thông báo</th>
+                    <th width="4%">Đính Kèm</th>
                     <th width="10%">Thực hiện</th>
                     <th width="8%">Thời gian bắt đầu</th>
                     <th width="8%">Thời hạn kết thúc</th>
@@ -103,6 +111,15 @@
                             <tr>
                                 <td align="center">{{$stt+1}}</td>
                                 <td>{{$tb->noidungtb}}</td>
+                                @if($tb->dinhkemtb != "")
+                                    <td>
+                                        <a href="../../thongbao/{{$tb->dinhkemtb}}" align='center' target="_blank">
+                                            <img src="{{asset('images/file-pdf-icon.png')}}"/>
+                                        </a>                            
+                                    </td>
+                                @elseif($tb->dinhkemtb == "")
+                                    <td></td>
+                                @endif  
                                 <td align="center">{{$tb->manhomthuchien}}</td>
                                 <td align="center">{{$tb->batdautb}}</td>
                                 <td align="center">{{$tb->ketthuctb}}</td>

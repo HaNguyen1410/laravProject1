@@ -75,7 +75,7 @@ class ChianhomController extends Controller
                 ->get();      
         //Lấy tên đề tài của các nhóm trong hoc kỳ niên khóa hiện tại
         $detainhom = DB::table('de_tai as dt')->distinct()->orderBy('chn.manhomthuchien','asc')
-                ->select('dt.tendt','chn.manhomthuchien')
+                ->select('dt.tendt','dt.taptindinhkem','chn.manhomthuchien')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
@@ -90,7 +90,7 @@ class ChianhomController extends Controller
         $madt = DB::table('ra_de_tai')->select('madt')->lists('madt');     
         //Lấy madt, tendt của 1 cán bộ mà chưa có nhóm nào thực hiện, ở bất cứ năm học, học kỳ nào
         $dsdetai = DB::table('de_tai')->distinct()
-                ->select('madt','tendt')
+                ->select('madt','tendt','taptindinhkem')
                 ->where('macb',$macb)
                 ->whereNotIn('madt',$madt)
                 ->get();
@@ -175,7 +175,7 @@ class ChianhomController extends Controller
         $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
         \Session::flash('ThongBao','Xóa --'.$tensv.'-- thành công!');
         
-        return redirect('giangvien/chianhom/2134');         
+        return redirect('giangvien/chianhom/'.$macb);         
     }
 
     

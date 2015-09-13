@@ -40,7 +40,7 @@ class QlthongbaoController extends Controller
     public function QuanLyThongBao($macb){
         $ma = $this->MaTB_tutang();
         $dsthongbao = DB::table('thong_bao as tb')
-                        ->select('tb.matb','tb.noidungtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
+                        ->select('tb.matb','tb.noidungtb','tb.dinhkemtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
                                 'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
                         ->leftjoin('nhan_thong_bao as ntb','tb.matb','=','ntb.matb')
                         ->where('tb.macb',$macb)
@@ -69,18 +69,29 @@ class QlthongbaoController extends Controller
                 [
                     'txtNoiDungTB'  => 'required',
                     'txtBatDauNop'  => 'required|date',
-                    'txtKetThucNop' => 'required|date'
+                    'txtKetThucNop' => 'required|date',
+                    'fDinhKemTB'    => 'mimes:pdf,doc,docx,ppt,pptm,xls,xlsm'
                 ]
             );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else{
+            $luuden = public_path().'/thongbao/';
+            $taptin = Input::file('fDinhKemTB');
+            if($taptin != null){                
+                $tenbandau = $taptin->getClientOriginalName();
+            }
+            else {
+                $tenbandau = "";
+            }
+            
             $data = array(
                 [
                     'matb'        => $_POST['txtMaTB'],
                     'macb'        => $_POST['txtMaCB'],
                     'noidungtb'   => $_POST['txtNoiDungTB'],
+                    'dinhkemtb'   => $tenbandau,
                     'batdautb'    => $_POST['txtBatDauNop'],
                     'ketthuctb'   => $_POST['txtKetThucNop'],
                     'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
@@ -94,6 +105,11 @@ class QlthongbaoController extends Controller
                            'manhomthuchien' => $_POST['cbNhomNL']
                         ]
                     );
+            //Lưu file vào thư mục public/thongbao
+            if($taptin != null){
+                $upload_tb = $taptin->move($luuden, $tenbandau);
+            }
+            
             if($ch2 > 0 && $ch > 0){
                 return redirect('giangvien/quanlythongbao/2134');
             }
@@ -116,7 +132,7 @@ class QlthongbaoController extends Controller
                     ->where('hp.macb',$macb)
                     ->get();
         return view('giangvien.cap-nhat-thong-bao')->with('macb',$macb)->with('tb',$tb)
-            ->with('dsnhomth',$dsnhomth);
+            ->with('dsnhomth',$dsnhomth)->with('macb',$macb);
     } 
 /*=================== Lưu Cập nhật thông báo ===============================*/  
     public function LuuCapNhatThongBao(Request $req){
@@ -125,16 +141,27 @@ class QlthongbaoController extends Controller
                 [
                     'txtNoiDungTB'  => 'required',
                     'txtBatDauNop'  => 'required|date',
-                    'txtKetThucNop' => 'required|date'
+                    'txtKetThucNop' => 'required|date',
+                    'fDinhKemTB'    => 'mimes:pdf,doc,docx,ppt,pptm,xls,xlsm'
                 ]
             );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else{
+            $luuden = public_path().'/thongbao/';
+            $taptin = Input::file('fDinhKemTB');
+            if($taptin != null){
+                 $tenbandau = $taptin->getClientOriginalName();
+            }
+            else {
+                $tenbandau = DB::table('thong_bao')->where('matb',$post['txtMaTB'])->value('dinhkemtb');
+            }
+            
             $cn = DB::table('thong_bao')->where('matb',$post['txtMaTB'])->update(
                          [   
                             'noidungtb'   => $_POST['txtNoiDungTB'],
+                            'dinhkemtb'     => $tenbandau,
                             'batdautb'    => $_POST['txtBatDauNop'],
                             'ketthuctb'   => $_POST['txtKetThucNop'],
                             'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
@@ -145,8 +172,12 @@ class QlthongbaoController extends Controller
                         [
                            'manhomthuchien' => $_POST['cbNhomNL']
                         ]
-                    );
-            
+                    ); 
+            //Lưu file vào thư mục public/thongbao
+            if($taptin != null){
+                $upload_tb = $taptin->move($luuden, $tenbandau);
+            }
+                 
             return redirect('giangvien/quanlythongbao/2134');
             
         }

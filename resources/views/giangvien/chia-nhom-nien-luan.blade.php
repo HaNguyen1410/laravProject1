@@ -66,7 +66,11 @@
                             <select class="form-control" id="cbDeTai" name="cbDeTai">
                                 <option value="">Chọn tên đề tài</option>
                                 @foreach($dsdetai as $dt)
-                                <option value="{{$dt->madt}}">{{$dt->tendt}}</option>
+                                    @if($dt->taptindinhkem == "")
+                                        <option value="{{$dt->madt}}">{{$dt->tendt}}</option>
+                                    @elseif($dt->taptindinhkem != "")
+                                        <option value="{{$dt->madt}}">{{$dt->taptindinhkem}}</option>                                    
+                                    @endif
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbDeTai')}}</p>
@@ -124,7 +128,11 @@
                     <tr>
                         <td>{{$stt+1}}</td>
                         <td>{{$dt->manhomthuchien}}</td>
-                        <td>{{$dt->tendt}}</td>
+                        @if($dt->taptindinhkem != "")
+                            <td>{{$dt->taptindinhkem}}</td>
+                        @elseif($dt->taptindinhkem == "")
+                            <td>{{$dt->tendt}}</td>
+                        @endif
                     </tr>                        
                 @endforeach
             </table>           

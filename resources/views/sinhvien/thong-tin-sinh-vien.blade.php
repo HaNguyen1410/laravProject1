@@ -44,9 +44,16 @@
                 @foreach($dsthongbao as $stt => $tb)                
                     <tr>
                         <td>
-                            <label style="color: #e74c3c; padding-left: 20px;">
-                                {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
-                            </label> 
+                            @if($tb->dinhkemtb == "")
+                                <label style="color: #e74c3c; padding-left: 20px;">
+                                    {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
+                                </label> 
+                            @elseif($tb->dinhkemtb != "")
+                            <a href="../../thongbao/{{$tb->dinhkemtb}}" target="_blank" style="color: #e74c3c; padding-left: 20px;">
+                                    {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
+                                </a>
+                            @endif
+                            
                         </td>
                     </tr>
                 @endforeach
@@ -112,7 +119,7 @@
                         <tr>
                             <td><label>Tên đề tài:</label></td>
                             <td style="color:blue;" colspan="3">
-                                <a href="../mota_detai/{{$detainhom->taptindinhkem}}" style="color:darkblue;">
+                                <a href="../../mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
                                     <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
                                     {{$detainhom->tendt}}
                                 </a>
