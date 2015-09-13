@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 use App\Giangvien;
 
 class GiangvienController extends Controller
@@ -84,7 +85,7 @@ class GiangvienController extends Controller
         $input = explode(' ', Input::get('fHinh'));
          // VALIDATION RULES
         $rules = array(
-            'fHinh' => 'image|max:300000',
+            'fHinh' => 'image|max:300000|mimes: jpg,png,gif',
         );
         $validation = \Validator::make($input, $rules);
         if ($validation->fails()) {

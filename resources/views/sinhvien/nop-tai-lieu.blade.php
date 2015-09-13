@@ -46,6 +46,7 @@
                     <tr>
                         <th>Tài liệu:</th>
                         <td colspan="4">
+                             <input type="text" name="txtMaSV" value="{{$mssv}}"/>
                              <input type="file" id="fTaiLieu" name="fTaiLieu" style="width:60%;"/> 
                              <p style='color:red;'>{{$errors->first('fTaiLieu')}}</p>
                         </td>
@@ -73,10 +74,10 @@
                     <th width="1%">STT</th>
                     <th width="4%">Công việc</th>
                     <th width="8%">Tên tập tin</th>
-                    <th width="4%">Cỡ</th>
+                    <th width="15%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
                     <th width="10%">Tác giả</th>
-                    <th width="20%">Nhận xét GV</th>
+                    <th width="15%">Nhận xét</th>
                     <th width="6%">Ngày nhận xét</th>
                     <th width="5%">Thao tác</th>
                  </tr> 
@@ -95,14 +96,20 @@
                                     {{$tl->macv}}
                                 </a>
                             </td>
-                            <td><label>{{$tl->tentl}}</label></td>
-                            <td>{{$tl->kichthuoc}}</td>
+                            <td>
+                                <a style="color: #006400;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->kichthuoc}} Kb">                                    
+                                    {{$tl->tentl}}
+                                </a>
+                            </td>
+                            <td>{{$tl->mota}}</td>
                             <td>{{$tl->ngaycapnhat}}</td>
                             <td>{{$tl->hoten}}</td>
                             <td>{{$tl->nd_danhgia}}</td>
                             <td>{{$tl->ngaydanhgia}}</td>
                             <td align="center">
-                                <a href=""><img src="{{asset('images/Document-Delete-icon.png')}}"></a>
+                                <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">
+                                    <img src="{{asset('images/Document-Delete-icon.png')}}">
+                                </a>
                             </td>
                          </tr>
                     @endforeach

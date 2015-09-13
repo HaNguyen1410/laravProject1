@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use Carbon\Carbon;
 
 class QltailieuController extends Controller
 {
@@ -79,23 +80,67 @@ class QltailieuController extends Controller
                 ->where('th.manhomthuchien',$manth)
                 ->where('cv.phuthuoc_cv','=',0)
                 ->get();
-        $dstailieu = DB::table('tai_lieu as tl')
-                ->select('tl.matl','tl.macv','tl.tentl','tl.kichthuoc','tl.ngaycapnhat',
-                        'tl.dieuchinh','cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.mssv','sv.hoten')
-                ->join('danh_gia as dg','dg.matl','=','tl.matl')
+        $dstailieu = DB::table('tai_lieu as tl')->distinct()
+                ->select('tl.matl','tl.macv','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
+                        'tl.dieuchinh','cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten')
+                ->leftjoin('danh_gia as dg','dg.matl','=','tl.matl')
                 ->join('cong_viec as cv','cv.macv','=','tl.macv')
                 ->join('thuc_hien as th','cv.macv','=','th.macv')
-                ->join('chia_nhom as chn','th.manhomthuchien','=','chn.manhomthuchien')
-                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
                 ->where('th.manhomthuchien',$manth)
                 ->get();
         return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh)
-                        ->with('matl',$matl)->with('dstailieu',$dstailieu);
+                        ->with('matl',$matl)->with('dstailieu',$dstailieu)->with('mssv',$mssv);
     }
 /*========================= Lưu UPLOAD TÀI LIỆU =============================*/
     public function LuuNopTaiLieu(Request $req){
         $post = $req->all();
+        $v = \Validator::make($req->all(),
+                [
+                    'cbTenCV'  => 'required',
+                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm'
+                ]
+            );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+            $luuden = public_path() . '/tailieu/';
+            $taptin = Input::file('fTaiLieu');
+            $kichthuoc= $taptin->getClientSize();
+            //Đổi kích thước file từ bytes sang Kb
+            $kichthuoc_mb = $kichthuoc/(1024);
+            //$extension = Input::file('fTaiLieu')->getClientOriginalExtension();
+            $tenbandau = Input::file('fTaiLieu')->getClientOriginalName(); 
+            DB::table('tai_lieu')->insert(
+                        [
+                            'matl'        => $_POST['txtMaTL'],
+                            'tentl'       => $tenbandau,
+                            'mssv'        => $_POST['txtMaSV'],
+                            'macv'        => $_POST['cbTenCV'],
+                            'kichthuoc'   => $kichthuoc_mb,
+                            'mota'        => $_POST['txtMoTa'],
+                            'ngaycapnhat' => Carbon::now()
+                        ]
+                    );
+            DB::table('danh_gia')->insert(
+                        [
+                            'matl' => $_POST['txtMaTL'],                            
+                        ]
+                    );
+            $upload_success = $taptin->move($luuden, $tenbandau);
+            
+            if ($upload_success) {
+                return Redirect('sinhvien/noptailieu/1111317')->with('message', 'Gửi tài liệu thành công!');
+            }
+        }
+    }
+ /*======================== Xóa tài liệu nào đó ========================*/
+    public function XoaTaiLieu($mssv,$matl){
+        $del1 = DB::table('tai_lieu')->where('matl',$matl)->delete();
+        $del2 = DB::table('danh_gia')->where('matl',$matl)->delete();
         
+        return Redirect('sinhvien/noptailieu/1111317');
     }
     
 }//END Class QltailieuController

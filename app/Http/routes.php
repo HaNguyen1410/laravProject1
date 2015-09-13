@@ -178,4 +178,6 @@ Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
 Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
 /*======= NỘP TÀI LIỆU ==========*/
 route::get('sinhvien/noptailieu/{mssv}','QltailieuController@NopTaiLieu');
-route::get('luunoptailieu','QltailieuController@LuuNopTaiLieu');
+route::post('luunoptailieu','QltailieuController@LuuNopTaiLieu');
+/* ------ Xóa tài liệu đã chọn -------- */
+Route::get('sinhvien/noptailieu/{mssv}/xoatailieu/{matl}','QltailieuController@XoaTaiLieu');
