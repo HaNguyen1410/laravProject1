@@ -109,7 +109,11 @@
                             </li>                                 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   Họ và tên (macb)
+                                   <?php
+                                        if(isset($_SESSION['gv'])){
+                                            $dn = $tk->hoten;
+                                        }
+                                   ?>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">

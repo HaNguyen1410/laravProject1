@@ -19,15 +19,16 @@ Route::get('/', function () {
  * =========================== ĐĂNG NHẬP ===========================================
  * ************************
  */
-Route::get('dangnhap', 'DangNhapController@DangNhap');
-
+Route::get('dangnhap', 'DangNhap\DangnhapController@DangNhap');
+Route::post('goidangnhap', 'DangNhap\DangnhapController@GoiDangNhap');
 Route::get('dangxuat', 'DangNhapController@DangXuat');
 //Route::resource('sessions','SessionsController');
-/*######### Góibestmomo/scafold": "dev-master" đăng nhập ################*/
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+
+/*######### Gói bestmomo/scafold": "dev-master" đăng nhập ################*/
+//Route::controllers([
+//    'auth' => 'Auth\AuthController',
+//    'password' => 'Auth\PasswordController',
+//]);
 //Đường Link: http://localhost/laravProject1/public/auth/login
 
 /***********************

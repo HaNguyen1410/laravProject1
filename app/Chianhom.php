@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class Dangkynhom extends Model
+class Chianhom extends Model
 {
     public $timestamps = false;
-    public $table = "dangky_nhom";  
+    public $table = "chia_nhom";  
     //$table->primary(array('mssv', 'manhomhp'));
     protected $primaryKey = array('mssv', 'manhomhp');
     protected $fillable = [       
@@ -16,5 +16,6 @@ class Dangkynhom extends Model
         'manhomhp',
         'manhomthuchien',
         'nhomtruong',
+        'nhanxet'
     ];
 }
