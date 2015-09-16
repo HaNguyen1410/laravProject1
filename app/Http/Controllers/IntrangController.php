@@ -12,7 +12,8 @@ use View,
     Validator,
     Input,
     Mail,
-    Session;
+    Session,
+    PDF;
 use Carbon\Carbon;
 
 class IntrangController extends Controller
@@ -57,7 +58,8 @@ class IntrangController extends Controller
         $view =  \View::make('sinhvien.in-bang-diem-sv', 
                 compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'dstieuchi', 'dssv', 'dsdiem', 'tongdiem','nhanxet'));
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
+//        $pdf->loadHTML($view);
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
         
         //$pdf = \PDF::loadView('giangvien.in-bang-diem-gv');
         
@@ -74,7 +76,8 @@ class IntrangController extends Controller
         $tieuchi = $this->LayDSTieuChi($macb);
         $dssv = $this->LayDSNhomSV($macb);
         $dsdiem = $this->LayDSDiem($macb);
-        $tongdiem = $this->LayTongDiem($macb);
+        $tongdiem = $this->LayTongDiem($macb); 
+        $nhanxet = $this->LayNhanXet($macb);
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -82,9 +85,10 @@ class IntrangController extends Controller
                 ->value('hocky');
         $date = date('Y-m-d');//Carbon::now();
         $view =  \View::make('giangvien.in-bang-diem-gv', 
-                compact('nam', 'hk','tencb','tieuchi', 'dssv', 'dsdiem', 'tongdiem', 'date', 'macb'));
+                compact('nam', 'hk','tencb','tieuchi', 'dssv', 'dsdiem', 'tongdiem', 'date', 'macb', 'nhanxet'));
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
+//        $pdf->loadHTML($view);
+         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
         
         //$pdf = \PDF::loadView('giangvien.in-bang-diem-gv');
         
@@ -157,5 +161,16 @@ class IntrangController extends Controller
                 ->groupBy('mssv')
                 ->get();
         return $tongdiem;
+    }
+/*====================== Lấy nhận xét =============================*/
+    public function LayNhanXet($macb){
+        $dsmasv = DB::table('chia_nhom as chn')->select('chn.mssv','chn.nhanxet')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.macb',$macb)
+                ->lists('chn.mssv');
+        $dsNhanXet = DB::table('chia_nhom')->select('mssv','nhanxet')
+                ->whereIn('mssv',$dsmasv)
+                ->get();
+        return $dsNhanXet;
     }
 }

@@ -14,13 +14,11 @@ and open the template in the editor.
                 font-size: 10;
                 margin-left: 50px;
                 margin-right: 50px;            
-            }
-            @page {
-                size: landscape; 
-            }
+            }            
             th{
                 background-color: #9acfea;
             }
+            @page {size: landscape;}
         </style>
     </head>
      <?php 
@@ -89,7 +87,8 @@ and open the template in the editor.
                 <th rowspan="2" width="15%">Họ và tên</th>
                 <th colspan="{{count($tieuchi)}}" width="14%">Hệ số</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
-                <th rowspan="2" width="4%">Điểm chữ</th>                         
+                <th rowspan="2" width="4%">Điểm chữ</th>   
+                <th rowspan="2" width="20%">Nhận xét</th>                        
             </tr>
             <tr>
                @foreach($tieuchi as $tc)
@@ -110,9 +109,18 @@ and open the template in the editor.
                     @foreach($tongdiem as $tong) 
                         @if($tong->mssv == $sv->mssv)
                             <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                            <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                            @if($tong->tongdiem == null)
+                                <td></td>
+                            @elseif($tong->tongdiem != null)
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                            @endif 
                         @endif                        
                     @endforeach 
+                    @foreach($nhanxet as $nx)
+                        @if($nx->mssv == $sv->mssv)
+                            <td style="color: #00008b;">{{$nx->nhanxet}}</td>
+                        @endif 
+                    @endforeach
                 </tr>
             @endforeach        
         </table>

@@ -127,14 +127,18 @@ and open the template in the editor.
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                @if($tong->tongdiem == null)
+                                    <td></td>
+                                @elseif($tong->tongdiem != null)
+                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                @endif 
                             @endif                        
                         @endforeach 
                         @foreach($nhanxet as $nx)
-                        @if($nx->mssv == $sv->mssv)
-                            <td style="color: #00008b;">{{$nx->nhanxet}}</td>
-                        @endif 
-                    @endforeach
+                            @if($nx->mssv == $sv->mssv)
+                                <td style="color: #00008b;">{{$nx->nhanxet}}</td>
+                            @endif 
+                        @endforeach
                     </tr>
                  @endif
             @endforeach         
