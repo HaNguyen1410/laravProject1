@@ -104,7 +104,7 @@
                             <td>{{$tl->mota}}</td>
                             <td>{{$tl->ngaycapnhat}}</td>
                             <td>{{$tl->hoten}}</td>
-                            <td>{{$tl->nd_danhgia}}</td>
+                            <td><p style="color: #000080;">{{$tl->nd_danhgia}}</p></td>
                             <td>{{$tl->ngaydanhgia}}</td>
                             <td align="center">
                                 <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">

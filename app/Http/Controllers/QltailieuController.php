@@ -47,8 +47,19 @@ class QltailieuController extends Controller
                 ->where('dt.macb',$macb)
                 ->where('chn.nhomtruong','=',1)
                 ->get();
+        //Lấy danh sách mã nhóm mà cán bộ này hướng dẫn
+        $dsnhom = DB::table('nhom_hocphan as hp')->select('chn.manhomthuchien')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->lists('chn.manhomthuchien');
+        $tailieu = DB::table('tai_lieu as tl')                
+                ->select('th.manhomthuchien','tl.mota',
+                        DB::raw('min(tl.ngaycapnhat) as ngaycapnhat,th.manhomthuchien'))
+                ->join('thuc_hien as th','tl.macv','=','th.macv')
+                ->whereIn('th.manhomthuchien',$dsnhom)
+                ->groupBy('th.manhomthuchien')
+                ->get();
         
-        return view('giangvien.kho-tai-lieu')->with('dsdt',$dsdt);
+        return view('giangvien.kho-tai-lieu')->with('dsdt',$dsdt)->with('tailieu',$tailieu);
     }
 /*========================= Giảng viên quản lý tài liệu chi tiết=============================*/
     public function KhoTaiLieuChiTiet($macb,$manth){
@@ -65,9 +76,46 @@ class QltailieuController extends Controller
                 ->where('th.manhomthuchien',$manth)
                 ->get();
         
-        return view('giangvien.kho-tai-lieu-chi-tiet')->with('dt',$dt)->with('dstailieu',$dstailieu);
+        return view('giangvien.kho-tai-lieu-chi-tiet')->with('dt',$dt)->with('dstailieu',$dstailieu)
+                     ->with('macb',$macb);
     }
-/*========================= Sinh viên nộp tài liệu =============================*/
+/*==================== Lưu nhận xét về tài liệu của 1 giảng viên =======================*/
+    public function LuuDanhGia(Request $req){
+        $post = $req->all();
+        $manth = DB::table('danh_gia as dg')
+                ->join('tai_lieu as tl','dg.matl','=','tl.matl')
+                ->join('thuc_hien as th','tl.macv','=','th.macv')
+                ->where('tl.matl',$post['cbMaTL'])
+                ->value('th.manhomthuchien');
+        $v = \Validator::make($req->all(),
+                    [
+                        'cbMaTL'     => 'required',
+                        'txtDanhGia' => 'required'
+                    ]
+                );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+//            $data = array(
+//                [
+//                    'macb'        => $_POST['txtMaCB'],
+//                    'nd_danhgia'  => $_POST['txtDanhGia'],
+//                    'ngaydanhgia' => Carbon::now()
+//                ]
+//            );
+            $cn = DB::table('danh_gia')->where('matl',$post['cbMaTL'])->update(
+                        [
+                            'macb' => $_POST['txtMaCB'],
+                            'nd_danhgia' => $_POST['txtDanhGia'],
+                            'ngaydanhgia' => Carbon::now()
+                        ]
+                    );
+            
+            return redirect('giangvien/khotailieu/'.$post['txtMaCB'].'/khotailieuchitiet/'.$manth);
+        }
+    }
+    /*========================= Sinh viên nộp tài liệu =============================*/
     public function NopTaiLieu($mssv){
         $matl = $this->matl_tutang();
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
@@ -82,7 +130,7 @@ class QltailieuController extends Controller
                 ->get();
         $dstailieu = DB::table('tai_lieu as tl')->distinct()
                 ->select('tl.matl','tl.macv','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
-                        'tl.dieuchinh','cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten')
+                        'cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten')
                 ->leftjoin('danh_gia as dg','dg.matl','=','tl.matl')
                 ->join('cong_viec as cv','cv.macv','=','tl.macv')
                 ->join('thuc_hien as th','cv.macv','=','th.macv')
@@ -144,3 +192,10 @@ class QltailieuController extends Controller
     }
     
 }//END Class QltailieuController
+
+/*
+ SELECT thuc_hien.manhomthuchien,tai_lieu.mota, min(tai_lieu.ngaycapnhat)
+from tai_lieu
+left join thuc_hien on tai_lieu.macv = thuc_hien.macv
+GROUP BY thuc_hien.manhomthuchien
+ */

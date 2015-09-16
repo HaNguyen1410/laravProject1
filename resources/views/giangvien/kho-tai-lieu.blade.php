@@ -40,9 +40,13 @@
                             </a> 
                         </td>
                         <td align="center">{{$dt->manhomthuchien}}</td>
-                        <td>{{$dt->hoten}}</td>
-                        <td></td>
-                        <td>Cập nhật thêm chức năng mới trong tài liệu đặc tả</td>
+                        <td>{{$dt->hoten}}</td>                       
+                        @foreach($tailieu as $tl) 
+                            @if($dt->manhomthuchien == $tl->manhomthuchien)
+                                <td>{{$tl->ngaycapnhat}}</td>
+                                <td>{{$tl->mota}}</td>
+                            @endif
+                        @endforeach   
                     </tr>
                 @endforeach
             </table>              

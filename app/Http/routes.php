@@ -94,7 +94,7 @@ route::get('giangvien/nhapdiem/{macb}/inbangdiemgv','IntrangController@InBangDie
 /*======= Quản lý TÀI LIỆU ==========*/
 route::get('giangvien/khotailieu/{macb}','QltailieuController@KhoTaiLieu');
 route::get('giangvien/khotailieu/{macb}/khotailieuchitiet/{manth}','QltailieuController@KhoTaiLieuChiTiet');
-
+route::post('luudanhgia','QltailieuController@LuuDanhGia');
 /*======= QUẢN LÝ ĐỀ TÀI ==========*/
 Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
 Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');
