@@ -108,9 +108,6 @@ Route::post('luucapnhatdetai','DetaiController@LuuCapNhatDeTai');
 /*======= QUY ĐỊNH TIÊU CHÍ CHẤM ĐIỂM ==========*/
 route::get('giangvien/dstieuchi/{macb}','QdtieuchiController@DSTieuChi');
 route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
-        /*  * Thêm tiêu chí đánh giá  */
-//route::get('giangvien/dstieuchi/{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
-//route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
         /*  * Cập nhật tiêu chí đánh giá  */
 route::get('giangvien/dstieuchi/{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
 route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');

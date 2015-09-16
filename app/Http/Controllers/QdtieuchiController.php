@@ -85,7 +85,7 @@ class QdtieuchiController extends Controller
             $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
             $ch2 = DB::table('quy_dinh')->insert($data2);
             
-            return redirect('giangvien/dstieuchi/2134');
+            return redirect('giangvien/dstieuchi/'.$post['txtMaCB']);
            
         }
     }
@@ -118,9 +118,9 @@ class QdtieuchiController extends Controller
                     'ngaytao'    => Carbon::now()   
             );
             $ch = DB::table('tieu_chi_danh_gia')->where('matc', $post['txtMaTC'])->update($data);
-            if($ch > 0){
+//            if($ch > 0){
                 return redirect('giangvien/dstieuchi/2134');
-            }
+//            }
         }
     }
 }
