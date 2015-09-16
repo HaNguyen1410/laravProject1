@@ -10,6 +10,18 @@
             background-color: #dff0d8;
         }
     </style>    
+    <script>
+        function kt_diem(){
+            $diem = document.getElementsByName('txtDiem');
+            for($i = 0; $i < count($tieuchi); $i++){
+                if($tieuchi[$i] < $diem){
+                    alert('Điểm nhập vào không được lớn hơn hệ số!');
+                    return true;
+                }else
+                    return false;
+            }         
+        }
+    </script>
     <?php 
         /*========================== Quy điểm số ra điểm chữ ====================*/ 
                 function diemchu($d){
@@ -69,7 +81,7 @@
                 <tr>
                     <th rowspan="2" width="1%">STT</th> 
                     <th rowspan="2" width="3%">Mã nhóm</th>
-                    <th rowspan="2" width="1%">MSSV</th>
+                    <th rowspan="2" width="1%">Mã số sinh viên</th>
                     <th rowspan="2" width="12%">Họ và tên</th>
                     <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí</th> 
                     <th rowspan="2" width="20%">Nhận xét</th>
@@ -79,7 +91,7 @@
                 <tr>
                     @foreach($tieuchi as $tc)
                         <th width="2%">
-                            <input type="text" name="txtMaTC" value="{{$tc->heso}}" size="1" style="text-align: center; border: 0px; background-color: #dff0d8;"/>
+                            <input type="text" name="txtMaTC[]" value="{{$tc->heso}}" size="1" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
                     @endforeach                                   
                 </tr>
@@ -96,7 +108,7 @@
                             @endforeach
                         </td>
                         <td align="center">
-                            <input type="text" name="txtMaSV[]" size="6" style="border: 0px; text-align: center;" value="{{$sv->mssv}}"/>
+                            <input type="text" name="txtMaSV[]" size="6" style="border: 0px; background-color: #dff0d8; text-align: center;" value="{{$sv->mssv}}" readonly=""/>
                         </td>
                         <td>{{$sv->hoten}}</td>                        
                         @foreach($dsdiem as $diem) 
@@ -131,7 +143,7 @@
             <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <td align="right">
-                        <button type="button" name="" class="btn btn-info" style="width: 50%;">
+                        <button onclick="return kt_diem();" type="submit" class="btn btn-info" style="width: 50%;">
                             <img src="{{asset('images/excel-icon.png')}}"> Nhập từ Exel...
                         </button> 
                     </td>

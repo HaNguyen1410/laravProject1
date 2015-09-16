@@ -132,40 +132,25 @@ class DiemController extends Controller
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){
-        $post = $req->all();
-        $dsmasv = DB::table('chitiet_diem as diem')->distinct()->select('diem.mssv')
-                ->join('chia_nhom as chn','diem.mssv','=','chn.mssv')
-                ->orderBy('chn.manhomthuchien','asc')
-                ->lists('diem.mssv');
+        $post = $req->all();        
         //Lấy mảng các giá trị trong bảng
         $masv = Input::get('txtMaSV');
         $matc = Input::get('txtMaTC');
         $diem = Input::get('txtDiem');
         $nhanxet = Input::get('txtNhanXet');
 //        return $dsmasv;
+//        return $_POST['txtDiem'];
+//        return $matc;          
+
+        $ch1 = DB::table('chitiet_diem')->whereIn('mssv',$post['txtMaSV'])->whereIn('matc',$post['txtMaTC'])
+                ->update(
+                        ['diem' => $_POST['txtDiem']]
+                   );        
+        $ch2 = DB::table('chia_nhom')->whereIn('mssv',$masv)->update(
+                    ['nhanxetsv' => $_POST['txtNhanXet']]
+                );
         
-       $khac = array_diff_assoc($masv, $dsmasv); //Mảng có stt của các phần tử khác nhau trong mảng so sánh
-       $chuoi = implode(' ', $khac);  //Đưa mảng sang chuỗi
-       $mangkhac = explode(' ', $chuoi); //Đưa chuỗi sang mảng bắt đầu stt từ 0
-//       return $mangkhac; return $mangkhac[$i];
-       for($i = 0; $i < count($mangkhac); $i++){
-           for($j = 0; $j < count($matc); $j++){
-               echo $mangkhac[$i]." - ".$matc[$j]."<br>";
-               
-//               $ch1 = DB::table('chitiet_diem')->insert(
-//                    [
-//                        'matc' => $matc[$j],
-//                        'mssv' => $mangkhac[$i],
-//                    ]
-//               ); 
-           }          
-       }
-        
-//        $ch2 = DB::table('chia_nhom')->whereIn('mssv',$masv)->update(
-//                    ['nhanxetsv' => $_POST['txtNhanXet']]
-//                );
-        
-//        return redirect('giangvien/nhapdiem/2134');
+        return redirect('giangvien/nhapdiem/2134');
     }
     
 //2 Hàm bên dưới vì chưa biết gọi qua View như thế nào nên => không sài tới
