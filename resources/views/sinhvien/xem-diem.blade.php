@@ -75,31 +75,49 @@
                 <th rowspan="2" width="20%">Nhận xét</th> 
             </tr>
             <tr>
-                @foreach($tieuchi as $tc)
-                    <th width="2%">{{$tc->heso}}</th>
-                @endforeach                                   
+                @if(count($tieuchi) == 0)
+                    <th></th>
+                @elseif(count($tieuchi) > 0)
+                    @foreach($tieuchi as $tc)
+                        <th width="2%">
+                            <a data-toggle="tooltip" data-placement="top" title="Mã tiêu chí: [{{$tc->matc}}]">
+                                {{$tc->heso}}
+                            </a>
+                        </th>
+                    @endforeach 
+                @endif                                                  
             </tr>
             @foreach($dssv as $stt => $sv)
                 <tr>
                     <td align="center">{{$stt+1}}</td>
                     <td align="center">{{$sv->mssv}}</td>
                     <td>{{$sv->hoten}}</td>
-                    @foreach($dsdiem as $diem) 
-                        @if($diem->mssv == $sv->mssv)
-                            <td>{{$diem->diem}}</td>
-                        @endif
-                    @endforeach 
-                    @foreach($tongdiem as $tong) 
-                        @if($tong->mssv == $sv->mssv)
-                            <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                            <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
-                        @endif                        
-                    @endforeach
+                    @if(count($tieuchi) == 0)
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    @elseif(count($tieuchi) > 0)
+                        @foreach($dsdiem as $diem) 
+                            @if($diem->mssv == $sv->mssv)
+                                <td>{{$diem->diem}}</td>
+                            @endif
+                        @endforeach 
+                        @foreach($tongdiem as $tong) 
+                            @if($tong->mssv == $sv->mssv)
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                                @if($tong->tongdiem == null)
+                                    <td></td>
+                                @elseif($tong->tongdiem != null)
+                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                @endif                                    
+                            @endif                        
+                        @endforeach
+                    @endif   
                     @foreach($nhanxet as $nx)
                         @if($nx->mssv == $sv->mssv)
                             <td style="color: #00008b;">{{$nx->nhanxet}}</td>
                         @endif 
-                    @endforeach
+                    @endforeach                    
                 </tr>
             @endforeach         
         </table>
@@ -113,12 +131,14 @@
         <table class="table table-bordered" style="width: 600px;">
             <tr>
                 <th width="2%">STT</th>
+                <th width="10%">Mã tiêu chí</th>
                 <th width="50%">Nội dung đánh giá</th>
                 <th width="10%">Mức điểm tối đa</th>                        
             </tr>
             @foreach($tieuchi as $stt => $tc)
                 <tr>
                     <td align='center'>{{$stt+1}}</td>
+                    <td align='center' style="color: brown; font-weight: bold;">[{{$tc->matc}}]</td>
                     <td>{{$tc->noidungtc}}</td>
                     <td align='center'>{{$tc->heso}}</td>
                 </tr>

@@ -45,8 +45,8 @@ class QdtieuchiController extends Controller
 /*========= Xóa Tiêu chí đánh giá ==============*/    
     public function XoaTieuChi($macb,$matc){
         $Xoaqd = DB::table('quy_dinh')->where('matc',$matc)->delete();
-        $Xoatc = DB::table('tieu_chi_danh_gia')->where('matc',$matc)->delete();
         $Xoad = DB::table('chitiet_diem')->where('matc',$matc)->delete();
+        $Xoatc = DB::table('tieu_chi_danh_gia')->where('matc',$matc)->delete();
         
         \Session::flash('ThongBao','Xóa thành công!');       
             
@@ -60,6 +60,11 @@ class QdtieuchiController extends Controller
     
     public function LuuThemTieuChi(Request $req){
         $post = $req->all();
+        //Lấy ds mssv do 1 cán bộ dạy
+        $dsmasv = DB::table('nhom_hocphan as hp')->select('chn.mssv')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('hp.macb',$post['txtMaCB'])
+                ->lists('chn.mssv');
         $v = \Validator::make($req->all(),
                 [
                     'txtMaTC'       => 'required',
@@ -82,8 +87,18 @@ class QdtieuchiController extends Controller
                     'macb'   => $_POST['txtMaCB'],
                     'matc'   => $_POST['txtMaTC']
             );
+            
             $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
             $ch2 = DB::table('quy_dinh')->insert($data2);
+            for($i = 0; $i < count($dsmasv); $i++){
+                //echo $dsmasv[$i]."<br>";                
+                $ch3 = DB::table('chitiet_diem')->insert(
+                        [   'matc' => $_POST['txtMaTC'],                          
+                            'mssv' => $dsmasv[$i]
+                        ]
+                    );
+            }
+            
             
             return redirect('giangvien/dstieuchi/'.$post['txtMaCB']);
            

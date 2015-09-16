@@ -15,47 +15,7 @@ use View,
     Session;
 
 class DiemController extends Controller
-{
-/*========================== Tính tổng điểm của 1 sv =====================================*/
-    function tongdiem($mssv){
-        $dstongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
-                ->where('mssv','=',$mssv)
-                ->groupBy('mssv')
-                ->get();
-        
-        if(count($dstongdiem) > 0){           
-            return $dstongdiem->tongdiem;
-        } 
-        else 
-            return null;
-    }
- /*========================== Quy điểm số ra điểm chữ =====================================*/ 
-    function diemchu($mssv){
-       $d = tongdiem($mssv);
-        if($d<=0 && $d<4){
-            return F;
-        }
-        else if($d<=4 || $d<=4.4){
-            return 'D';
-        }
-        else if($d<=4.5 || $d<=4.9){
-            return 'D+';
-        }
-        else if($d<=5.0 || $d<=5.9){
-            return 'C';
-        }
-        else if($d<=6 || $d<=6.9){
-            return 'C+';
-        }
-        else if($d<=7 || $d<=7.9){
-            return 'B';
-        }
-        else if($d<=8 || $d<=8.9){
-            return 'B+';
-        }
-        else     
-            return 'A';
-    }    
+{ 
 /*=========================== Danh sách điểm nhóm ==============================================*/
     public function XemDiem($mssv){
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
@@ -87,7 +47,7 @@ class DiemController extends Controller
                 ->lists('chn.mssv');
         //Lấy điểm của mỗi sv trong mảng mssv trên       
         $dsdiem = DB::table('chitiet_diem')
-                ->select('mssv','diem')->orderBy('mssv','asc')
+                ->select('mssv','matc','diem')->orderBy('matc','asc')
                 ->whereIn('mssv', $masv)
                 ->get();     
         $tongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
@@ -122,6 +82,7 @@ class DiemController extends Controller
                 ->where('hp.macb',$macb)
                 ->get(); 
         $tieuchi = DB::table('tieu_chi_danh_gia as tc')
+                ->select('tc.matc','tc.heso','tc.noidungtc')
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
                 ->get();
@@ -141,15 +102,15 @@ class DiemController extends Controller
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->get();
-        //Lấy 1 mảng mssv của 1 nhóm thực hiện
+        //Lấy 1 mảng mssv của các nhóm thực hiện
         $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->lists('chn.mssv');
         //Lấy điểm của mỗi sv trong mảng mssv trên       
         $dsdiem = DB::table('chitiet_diem as diem')
-                ->select('chn.mssv','diem.diem')->orderBy('mssv','asc')
-                ->rightjoin('chia_nhom as chn','chn.mssv','=','diem.mssv')
+                ->select('chn.mssv','diem.matc','diem.diem')->orderBy('diem.matc','asc')
+                ->join('chia_nhom as chn','chn.mssv','=','diem.mssv')
                 ->whereIn('chn.mssv', $masv)
                 ->get(); 
         $tongdiem = DB::table('chitiet_diem as diem')->distinct()
@@ -206,6 +167,48 @@ class DiemController extends Controller
         
 //        return redirect('giangvien/nhapdiem/2134');
     }
+    
+//2 Hàm bên dưới vì chưa biết gọi qua View như thế nào nên => không sài tới
+/*========================== Tính tổng điểm của 1 sv =====================================*/
+    function tongdiem($mssv){
+        $dstongdiem = DB::table('chitiet_diem')->select('mssv',DB::raw('sum(diem) as tongdiem'))
+                ->where('mssv','=',$mssv)
+                ->groupBy('mssv')
+                ->get();
+        
+        if(count($dstongdiem) > 0){           
+            return $dstongdiem->tongdiem;
+        } 
+        else 
+            return null;
+    }
+ /*========================== Quy điểm số ra điểm chữ =====================================*/ 
+    function diemchu($mssv){
+       $d = tongdiem($mssv);
+        if($d<=0 && $d<4){
+            return F;
+        }
+        else if($d<=4 || $d<=4.4){
+            return 'D';
+        }
+        else if($d<=4.5 || $d<=4.9){
+            return 'D+';
+        }
+        else if($d<=5.0 || $d<=5.9){
+            return 'C';
+        }
+        else if($d<=6 || $d<=6.9){
+            return 'C+';
+        }
+        else if($d<=7 || $d<=7.9){
+            return 'B';
+        }
+        else if($d<=8 || $d<=8.9){
+            return 'B+';
+        }
+        else     
+            return 'A';
+    } 
     
 }//END Clas DiemController
 /*

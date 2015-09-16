@@ -25,6 +25,7 @@
                 <img id="profile-img" class="profile-img-card" src="{{asset('images/User-image.png')}}" />
 <!--                <p id="profile-name" class="profile-name-card"></p>-->
                 <form class="form-signin" action="" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <span id="reauth-email" class="reauth-email"></span>
                     <label for="inputUsername" >Tên đăng nhập:</label>
                     <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" class="form-control" placeholder="Tài khoản đăng nhập" required autofocus>

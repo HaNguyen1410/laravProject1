@@ -71,7 +71,7 @@
                     <th rowspan="2" width="3%">Mã nhóm</th>
                     <th rowspan="2" width="1%">MSSV</th>
                     <th rowspan="2" width="12%">Họ và tên</th>
-                    <th colspan="{{$n=count($tieuchi)}}" width="30%">Tiêu chí</th> 
+                    <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí</th> 
                     <th rowspan="2" width="20%">Nhận xét</th>
                     <th rowspan="2" width="4%">Tổng điểm</th>
                     <th rowspan="2" width="4%">Điểm chữ</th>   
@@ -98,20 +98,18 @@
                         <td align="center">
                             <input type="text" name="txtMaSV[]" size="6" style="border: 0px; text-align: center;" value="{{$sv->mssv}}"/>
                         </td>
-                        <td>{{$sv->hoten}}</td>
+                        <td>{{$sv->hoten}}</td>                        
                         @foreach($dsdiem as $diem) 
-                            <?php
-                                if($diem->mssv == $sv->mssv && $diem->diem != null)
-                                    echo "<td align='center'>".
-                                              "<input type='text' name='txtDiem[]' value='$diem->diem' style='text-align:center;' size='1' />".
-                                         "</td>";
-                                else if($diem->mssv == $sv->mssv && $diem->diem == null)
-                                    for($i=0; $i < count($tieuchi); $i++)
-                                        echo "<td align='center'>".
-                                                  "<input type='text' name='txtDiem[]' value='' style='text-align:center;' size='1' />".
-                                             "</td>";
-                            ?>                        
-                        @endforeach
+                            @if($diem->mssv == $sv->mssv && $diem->diem != null)
+                                <td align="center">
+                                    <input type="text" name="txtDiem[]" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
+                                </td> 
+                            @elseif($diem->mssv == $sv->mssv && $diem->diem == null)
+                                <td align="center">
+                                    <input type="text" name="txtDiem[]" value="" style="text-align:center; vertical-align: middle;" size="1" />
+                                </td>
+                            @endif                                             
+                        @endforeach     
                         @foreach($nhanxet as $nx)
                              @if($nx->mssv == $sv->mssv)  
                                 <td><textarea class="form-control" name="txtNhanXet[]">{{$nx->nhanxet}}</textarea></td>  
@@ -120,9 +118,13 @@
                         @foreach($tongdiem as $tong)                             
                             @if($tong->mssv == $sv->mssv)                             
                                 <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                @if($tong->tongdiem == null)
+                                    <td></td>
+                                @elseif($tong->tongdiem != null)
+                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                @endif 
                             @endif                      
-                        @endforeach                         
+                        @endforeach 
                     </tr>
                 @endforeach   
             </table> 

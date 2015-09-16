@@ -20,6 +20,7 @@ Route::get('/', function () {
  * ************************
  */
 Route::get('dangnhap', 'DangNhapController@DangNhap');
+
 Route::get('dangxuat', 'DangNhapController@DangXuat');
 //Route::resource('sessions','SessionsController');
 /*######### Góibestmomo/scafold": "dev-master" đăng nhập ################*/
