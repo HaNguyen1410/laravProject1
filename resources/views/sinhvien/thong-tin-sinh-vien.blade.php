@@ -119,10 +119,17 @@
                         <tr>
                             <td><label>Tên đề tài:</label></td>
                             <td style="color:blue;" colspan="3">
-                                <a href="../../mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
-                                    <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
-                                    {{$detainhom->tendt}}
-                                </a>
+                                @if($detainhom->taptindinhkem != "")
+                                    <a href="../../mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
+                                        <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
+                                        {{$detainhom->tendt}}
+                                    </a>
+                                @elseif($detainhom->taptindinhkem == "")
+                                    <a href="{{$sv->mssv}}/inchitietdetaisv/{{$detainhom->madt}}" target="_blank" style="color:darkblue;">
+                                        <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
+                                        {{$detainhom->tendt}}
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                         <tr>

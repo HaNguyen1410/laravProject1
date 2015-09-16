@@ -91,7 +91,8 @@
                 <tr>
                     @foreach($tieuchi as $tc)
                         <th width="2%">
-                            <input type="text" name="txtMaTC[]" value="{{$tc->heso}}" size="1" style="text-align: center;" class="form-control" readonly=""/>
+                            <input type="text" name="txtMaTC[]" value="{{$tc->matc}}" size="1" style="text-align: center;" class="form-control" readonly=""/>
+                            {{$tc->heso}}
                         </th>
                     @endforeach                                   
                 </tr>

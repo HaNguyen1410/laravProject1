@@ -18,7 +18,51 @@ use Carbon\Carbon;
 
 class IntrangController extends Controller
 {
- /*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
+     
+/*====================== Sinh viên In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
+    public function InChiTietDeTaiSV($mssv,$madt){        
+        $tencb = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten')
+                ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.mssv',$mssv)->first();
+        $nk = DB::table('nien_khoa as nk')->select('nk.nam','nk.hocky')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->join('de_tai as dt','hp.macb','=','dt.macb')
+                ->where('dt.madt',$madt)
+                ->first();
+        $detai = DB::table('de_tai')->where('madt',$madt)->first();
+        
+        $view = \View::make('sinhvien.in-chi-tiet-de-tai', 
+                compact('tencb','nk','detai'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        
+        $tendt = DB::table('de_tai')->select('tendt')
+                ->where('madt',$madt)
+                ->value('tendt');
+        return $pdf->stream($tendt.".pdf");
+    }   
+/*====================== In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
+    public function InChiTietDeTai($macb,$madt){
+        $tencb = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
+        $nk = DB::table('nien_khoa as nk')->select('nk.nam','nk.hocky')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->join('de_tai as dt','hp.macb','=','dt.macb')
+                ->where('dt.madt',$madt)
+                ->first();
+        $detai = DB::table('de_tai')->where('madt',$madt)->first();
+        
+        $view = \View::make('giangvien.in-chi-tiet-de-tai', 
+                compact('tencb','nk','detai'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        
+        $tendt = DB::table('de_tai')->select('tendt')
+                ->where('madt',$madt)
+                ->value('tendt');
+        return $pdf->stream($tendt.".pdf");
+    }
+/*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
     public function InBangDiemSV($mssv){
         $manhom = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien'); 
         $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','hp.tennhomhp')

@@ -19,10 +19,17 @@
             <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <p style="color: #e74c3c; font-weight: bold;" align="center">{!! Session::get('success') !!}</p>
-                <table class="table table-bordered">                    
+                <table class="table table-bordered"> 
+                     <tr>
+                        <th width="15%">Tên đề tài:</th>
+                        <td colspan="6">
+                            <input type="text" id="txtTenDeTai" name="txtTenDeTai" value="{{$dt->tendt}}" class="form-control" /> 
+                            <p style='color:red;'>{{$errors->first('txtTenDeTai')}}</p>
+                        </td>
+                    </tr>
                     <tr> 
                         <th>Mã cán bộ:</th>
-                        <td width="15%">
+                        <td width="10%">
                             <input type="text" name="txtMaCB" value="{{$macb}}" style="text-align: center;" readonly="true" class="form-control"/>
                         </td>
                         <th>Mã đề tài:</th>
@@ -30,12 +37,12 @@
                             <input type="text" name="txtMaDT" value="{{$dt->madt}}" style="text-align: center;" readonly="true" class="form-control"/>
                         </td>
                         <th>Tập tin đính kèm:</th>
-                        <td colspan="3"><input type="file" id="fTapTinKem" name="fTapTinKem"/></td>
+                        <td><input type="file" id="fTapTinKem" name="fTapTinKem"/></td>
                         <p style='color:red;'>{{$errors->first('txtTapTinKem')}}</p>
-                        <td colspan='5' align='center'>
+                        <td align='center'>
                              <button type="submit" class="btn btn-warning">
                                     <img src="{{asset('images/save-upload-icon.png')}}"/>
-                                    Gửi tập tin
+                                    Cập nhật đề tài
                              </button>
                         </td>
                     </tr>

@@ -78,9 +78,9 @@
                 </tr>
                 @foreach($dsdt as $stt => $dt)
                     <tr>
-                        <td align='center'>{{$stt+1}}</td>
+                        <td align='center' style="vertical-align: middle;">{{$stt+1}}</td>
                         <td width='15%'>
-                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}}">
+                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
                                 {{$dt->tendt}}                                
                             </a>
                         </td>
@@ -91,11 +91,15 @@
                                 </a>                            
                             </td>
                         @elseif($dt->taptindinhkem == "")
-                            <td></td>
+                            <td style="vertical-align: middle;">
+                                <a href="{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
+                                    Chi tiết
+                                </a>
+                            </td>
                         @endif               
                         <td width='15%'>{{$dt->motadt}}</td> 
                         <td width='15%'>{{$dt->congnghe}}</td>
-                        <td align='center'>{{$dt->songuoitoida}}</td>
+                        <td align="center" style="vertical-align: middle;">{{$dt->songuoitoida}}</td>
                         <td>{{$dt->ghichudt}}</td>
 <!--                        @foreach($nhomth as $nhom)      
                             @if($nhom->tendt == $dt->tendt)
@@ -104,9 +108,9 @@
                                 </td>
                             @endif
                         @endforeach -->
-                        <td align='center'>{{$dt->trangthai}}</td>
+                        <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
                         <td align='center'>
-                            <a href="2134/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
+                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
                             <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
                                 <img src="{{asset('images/Document-Delete-icon.png')}}"/>
                             </a>

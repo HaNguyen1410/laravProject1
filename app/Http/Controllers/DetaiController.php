@@ -154,7 +154,7 @@ class DetaiController extends Controller
                     'congnghe'      => $_POST['txtCongNghe'],
                     'ghichudt'      => $_POST['txtGhiChu'],
                     'trangthai'     => $_POST['rdTrangThai'],
-                    'ngaytao'       => Carbon::now(),
+                    'ngaysua'       => Carbon::now(),
             );
             $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);            
             
@@ -169,7 +169,8 @@ class DetaiController extends Controller
         $dt = DB::table('de_tai')->where('madt',$post['txtMaDT'])->first();
         $v = \Validator::make($req->all(),
                     [
-                        'fTapTinKem' => 'mimes:pdf,doc,docx,ppt,pptm'
+                        'txtTenDeTai' => 'required',
+                        'fTapTinKem'  => 'mimes:pdf,doc,docx,ppt,pptm'
                     ]
                 );
         if($v->fails()){
@@ -182,15 +183,18 @@ class DetaiController extends Controller
             if(count($dt) > 0){
                 DB::table('de_tai')->where('madt',$post['txtMaDT'])->update(                    
                             [
-                                'taptindinhkem' => $tenbandau
+                                'tendt'         => $_POST['txtTenDeTai'],
+                                'taptindinhkem' => $tenbandau,
+                                'ngaysua'       => Carbon::now()
                             ]
                         );
             }
             else if(count($dt) == 0){
                 DB::table('de_tai')->insert(                    
                             [
-                                'madt' => $_POST['txtMaDT'],
-                                'macb' => $_POST['txtMaCB'],
+                                'madt'          => $_POST['txtMaDT'],
+                                'macb'          => $_POST['txtMaCB'],
+                                'tendt'         => $_POST['txtTenDeTai'],
                                 'taptindinhkem' => $tenbandau,
                                 'ngaytao'       => Carbon::now()
                             ]

@@ -144,12 +144,14 @@ class DiemController extends Controller
 
         for($i = 0; $i < count($matc); $i++){
             for($j = 0; $j < count($masv); $j++){
-                for($d = 0; $d < count($diem); $d++){
+                for($d = 0; $d < count($diem); $d++){                    
 //                    echo $masv[$j]." - ".$matc[$i]." - ".$diem[$d]."<br>";
-                $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
+                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
                         ->update(
                                 ['diem' => $diem[$d]]
-                           );                     
+                           );   
+                    continue;     
+//                    break;
                 }
             }
         }     
@@ -158,10 +160,12 @@ class DiemController extends Controller
                 $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$s])->update(
                             ['nhanxet' => $nhanxet[$nx]]
                         );
+                continue;
+//                break;
             }
         }
           
-        return redirect('giangvien/nhapdiem/2134');
+//        return redirect('giangvien/nhapdiem/2134');
     }
     
 //2 Hàm bên dưới vì chưa biết gọi qua View như thế nào nên => không sài tới

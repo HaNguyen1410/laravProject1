@@ -99,6 +99,7 @@ route::post('luudanhgia','QltailieuController@LuuDanhGia');
 /*======= QUẢN LÝ ĐỀ TÀI ==========*/
 Route::get('giangvien/danhsachdetai/{macb}','DetaiController@DsDeTai');
 Route::get('giangvien/danhsachdetai/xoadt/{madt}','DetaiController@XoaDeTai');
+Route::get('giangvien/danhsachdetai/{macb}/inchitietdetai/{madt}','IntrangController@InChiTietDeTai');
           /*  * Thêm đề tài mới */
 Route::get('giangvien/danhsachdetai/{macb}/themdetai','DetaiController@ThemDeTai');
 Route::post('luuthemdetai','DetaiController@LuuThemDeTai');
@@ -132,12 +133,14 @@ route::get('giangvien/quanlythongbao/{macb}/capnhatthongbao/{matb}','QlthongbaoC
 route::post('luucapnhatthongbao','QlthongbaoController@LuuCapNhatThongBao');
 /*======= Xóa Thông báo ==========*/
 Route::get('giangvien/quanlythongbao/{macb}/xoathongbao/{matb}','QlthongbaoController@XoaThongBao');
+
 /*********************
  * =========================== TRANG SINH VIÊN ===========================================
  * *************************
  */
 /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
 Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
+Route::get('sinhvien/thongtinsv/{mssv}/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
 Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
 //Route::get('sinhvien/thongtinsv/{mssv}/xemtaptin/{tentaptin}','SinhvienController@XemTapTin');
 /*======= Trang xem công việc được giao ==========*/
