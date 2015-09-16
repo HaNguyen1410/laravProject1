@@ -142,14 +142,25 @@ class DiemController extends Controller
 //        return $_POST['txtDiem'];
 //        return $matc;          
 
-        $ch1 = DB::table('chitiet_diem')->whereIn('mssv',$post['txtMaSV'])->whereIn('matc',$post['txtMaTC'])
-                ->update(
-                        ['diem' => $_POST['txtDiem']]
-                   );        
-        $ch2 = DB::table('chia_nhom')->whereIn('mssv',$masv)->update(
-                    ['nhanxetsv' => $_POST['txtNhanXet']]
-                );
-        
+        for($i = 0; $i < count($matc); $i++){
+            for($j = 0; $j < count($masv); $j++){
+                for($d = 0; $d < count($diem); $d++){
+//                    echo $masv[$j]." - ".$matc[$i]." - ".$diem[$d]."<br>";
+                $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
+                        ->update(
+                                ['diem' => $diem[$d]]
+                           );                     
+                }
+            }
+        }     
+        for($s = 0; $s < count($masv); $s++){
+            for($nx = 0; $nx < count($nhanxet); $nx++){
+                $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$s])->update(
+                            ['nhanxet' => $nhanxet[$nx]]
+                        );
+            }
+        }
+          
         return redirect('giangvien/nhapdiem/2134');
     }
     

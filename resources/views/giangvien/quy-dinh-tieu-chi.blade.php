@@ -60,7 +60,7 @@
                         <tr>
                             <th>Nội dung đánh giá:</th>
                             <td colspan="3">
-                                 <textarea class="form-control" rows="4" name="txtNoiDungTC"></textarea>
+                                 <textarea class="form-control" rows="3" name="txtNoiDungTC"></textarea>
                                  <p style='color:red;'>{{$errors->first('txtNoiDungTC')}}</p>
                             </td>
                         </tr>
@@ -83,9 +83,10 @@
         </div>
         <div class="col-md-12">            
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
+            <table class="table table-bordered" style="width: 900px" align='center'>
                 <tr>
                     <th width="5%">STT</th>
+                    <th width="8%">Mã tiêu chí</th>
                     <th>Nội dung đánh giá</th>
                     <th width="10%">Mức điểm</th>
                     <th>Ngày tạo</th>
@@ -98,11 +99,16 @@
                             </td>
                         </tr>
                 @elseif (count($dstc) > 0)
-                    @foreach($dstc as $tc)
+                    @foreach($dstc as $stt => $tc)
                         <tr>
-                            <td align='center'>{{$tc->matc}}</td>
+                            <td align='center'>{{$stt+1}}</td>
+                            <td align='center'>
+                                <label style="color: brown; font-weight: bold;">[{{$tc->matc}}]</label>
+                            </td>
                             <td>{{$tc->noidungtc}}</td>
-                            <td align='center'>{{$tc->heso}}</td>
+                            <td align='center'>
+                                <label style="color: red; font-weight: bold;">{{$tc->heso}}</label>                                
+                            </td>
                             <td align='center'>{{$tc->ngaytao}}</td>
                             <td align='center'>
                                 <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('images/edit-icon.png')}}"></a>&nbsp
