@@ -70,22 +70,24 @@ class AuthController extends Controller
         return view('giaodienchung.dang-nhap');
     }
 /*=====================  =======================*/    
-    public function GoiDangNhap(DangnhapRequest $reqdn){
-        $v = $reqdn->rules();
-        if($v->fails()){
-            return redirect()->back()->withErrors($v->errors());
+    public function GoiDangNhap(DangnhapRequest $request){
+//        $v = $request->rules();
+        if($request->rules()->all()){
+            return redirect()->back()->withErrors($request->errors());
         }
-        else{
+        else
+          {
             $dangnhap = array(
-            'macb'    => $reqdn->txtTenDangNhap,
-            'matkhau' => $reqdn->txtMatKhau,
-            'quantri' => 1
-            );        
+                'macb'    => $request->txtTenDangNhap,
+                'matkhau' => $request->txtMatKhau,
+            );   
             if(\Auth::attempt($dangnhap)){
-                return redirect()->route('quantri/danhsachgv');
+                echo "Thành công";
+//                return redirect()->route('quantri/danhsachgv');
             }else{
-                return redirect()->back();
+                echo "Thất bại";
+//                return redirect()->back();
             }
-        }                 
+         }                 
     }    
 }
