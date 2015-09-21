@@ -87,7 +87,7 @@ class SinhvienController extends Controller
                                  ,'cv.sogio_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
-               ->join('dangky_nhom as dk','nth.manhomthuchien','=','dk.manhomthuchien')
+               ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                ->where('nth.manhomthuchien','=',$manth)
                ->where('cv.giaocho','like',$hoten)->orwhere('cv.giaocho','like','cả nhóm')
                ->get();

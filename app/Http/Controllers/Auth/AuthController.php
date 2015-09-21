@@ -71,16 +71,21 @@ class AuthController extends Controller
     }
 /*=====================  =======================*/    
     public function GoiDangNhap(DangnhapRequest $reqdn){
-        $dangnhap = array(
+        $v = $reqdn->rules();
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+            $dangnhap = array(
             'macb'    => $reqdn->txtTenDangNhap,
             'matkhau' => $reqdn->txtMatKhau,
             'quantri' => 1
-        );        
-        if(\Auth::attempt($dangnhap)){
-            return redirect()->route('quantri/danhsachgv');
-        }else{
-            return redirect()->back();
-        }
-                 
+            );        
+            if(\Auth::attempt($dangnhap)){
+                return redirect()->route('quantri/danhsachgv');
+            }else{
+                return redirect()->back();
+            }
+        }                 
     }    
 }

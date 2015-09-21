@@ -28,10 +28,10 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <span id="reauth-username" class="reauth-username"></span>
                     <label for="inputUsername" >Tên đăng nhập:</label>
-                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" value="" class="form-control" placeholder="Tài khoản đăng nhập" required autofocus>
+                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" value="" class="form-control" placeholder="Tài khoản đăng nhập" autofocus>
                     <p style='color:red;'>{{$errors->first('txtTenDangNhap')}}</p>
                     <label for="inputPassword" >Mật khẩu:</label>
-                    <input type="password" id="txtMatKhau" name="txtMatKhau" value="" class="form-control" placeholder="Mật khẩu" required>
+                    <input type="password" id="txtMatKhau" name="txtMatKhau" value="" class="form-control" placeholder="Mật khẩu">
                     <p style='color:red;'>{{$errors->first('txtMatKhau')}}</p>
                     <div id="remember" class="checkbox">
                         <label>

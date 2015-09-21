@@ -78,7 +78,18 @@
                 </tr>
                 @foreach($dsdt as $stt => $dt)
                     <tr>
-                        <td align='center' style="vertical-align: middle;">{{$stt+1}}</td>
+                        <td align='center' style="vertical-align: middle;">
+                            <?php
+                                if(isset($_GET['page'])){
+                                    $p = 5*($_GET['page']-1);
+                                    //Vì $stt là chỉ số của 1 mảng nên luôn luôn bắt đầu bằng 0
+                                    echo $stt+1+$p;
+                                }
+                                else{
+                                    echo $stt+1;
+                                }
+                            ?>
+                        </td>
                         <td width='15%'>
                             <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
                                 {{$dt->tendt}}                                
@@ -117,7 +128,9 @@
                         </td>
                     </tr>
                 @endforeach
-               
+                <tr>
+                    <td colspan="10" align="center">{!! $dsdt->setPath('../danhsachdetai/2134')->render() !!}</td>
+                </tr> 
             </table>
         </div>
     </div><!-- /row -->

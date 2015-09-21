@@ -51,7 +51,7 @@ Route::group(['prefix'=>'quantri'],function(){
     });
     Route::post('saoluucsdl','QuantriController@SaoLuuCSDL');
 /*
- * ######## Giảng Viên ##################
+ * ######## Quản trị Giảng Viên ##################
  */
     Route::get('danhsachgv','QuantriController@DanhSachGV');
     Route::group(['prefix'=>'danhsachgv'],function(){
@@ -66,7 +66,7 @@ Route::group(['prefix'=>'quantri'],function(){
         Route::get('xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
     });
  /*
- * ######## Sinh Viên ##################
+ * ######## Quản trị Sinh Viên ##################
  */
     Route::get('danhsachsv','QuantriController@DanhSachSV');
     Route::group(['prefix'=>'danhsachsv'],function(){
@@ -127,7 +127,10 @@ route::get('giangvien/theodoikehoach/{macb}', 'TheodoikehoachController@TheoDoiK
 route::get('giangvien/theodoikehoach/cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
 route::get('giangvien/theodoikehoach/cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
 /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
-route::get('giangvien/chianhom/{macb}','ChianhomController@ChiaNhomNL');
+/*
+ * {mahp?} : dấu ? thể hiện rằng biến 'mahp' có hay không url vẫn chạy
+ */
+route::get('giangvien/chianhom/{macb}/{mahp?}','ChianhomController@ChiaNhomNL');
 route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
 route::get('giangvien/chianhom/{macb}/xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
 
