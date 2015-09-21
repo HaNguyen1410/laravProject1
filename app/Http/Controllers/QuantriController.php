@@ -89,40 +89,38 @@ class QuantriController extends Controller
         }
     }
 /*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
-    public function DoiHinhDaiDienQT(){
+    public function DoiHinhDaiDienQT(Request $req){
         $macb = Input::get('txtMaCB');
         $hoten = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
- /*       // Lấy tất cả các INPUT dữ liệu , $_GET,$_POST,$_FILES.
-        $input = explode(' ', Input::get('fHinh'));
-         // VALIDATION RULES
-        $rules = array(
-            'fHinh' => 'image|max:300000',
-        );
-        $validation = \Validator::make($input, $rules);
-        if ($validation->fails()) {
-            return Redirect()->with('message', $validation->errors->first());
-        }*/
-        
-        $file = Input::file('fHinh');
-        // Đặt đường dẫn lưu file upload
-        $luuden = public_path(). '/hinhdaidien/';
-        // Lấy đuôi mở rộng        
-//           $extension = Input::file('fHinh')->getClientOriginalExtension();
-        //Gắn đuôi mở rộng lúc nào cũng là png
-        $extension = "png";
-        // Đặt lại tên file vừa upload lên
-        $name = new GiangvienController();
-        $tachten = $name->lay_ten($hoten);               
-        $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $macb)) . '.' . $extension;
-        
-        //Lưu Hình Vào CSDL
-        DB::table('giang_vien')->where('macb',$macb)->update(['hinhdaidien' => $fileName]);
-        // Chuyển file upload vào thư mục lưu trữ đã đặt trươc đó
-        $upload_success = $file->move($luuden, $fileName);
-        
-        if ($upload_success) {
-            return Redirect('quantri/doimatkhauqt/9876')->with('message', 'Upload hình đại diện thành công!');
-        }
+        $post = $req->all();
+        $v = \Validator::make($req->all(),
+                [
+                    'fHinh' => 'required|image|mimes:jpg,png'
+                ]
+            );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }else{
+             // Đặt đường dẫn lưu file upload
+            $luuden = public_path(). '/hinhdaidien/';
+            // Lấy đuôi mở rộng        
+    //           $extension = Input::file('fHinh')->getClientOriginalExtension();
+            //Gắn đuôi mở rộng lúc nào cũng là png
+            $extension = "png";
+            // Đặt lại tên file vừa upload lên
+            $name = new GiangvienController();
+            $tachten = $name->lay_ten($hoten);               
+            $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $macb)) . '.' . $extension;
+
+            //Lưu Hình Vào CSDL
+            DB::table('giang_vien')->where('macb',$macb)->update(['hinhdaidien' => $fileName]);
+            // Chuyển file upload vào thư mục lưu trữ đã đặt trươc đó
+            $upload_success = Input::file('fHinh')->move($luuden, $fileName);
+
+            if ($upload_success) {
+                return Redirect('quantri/doimatkhauqt/9876')->with('message', 'Upload hình đại diện thành công!');
+            }
+        } 
     }
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachGV(){
@@ -175,7 +173,7 @@ class QuantriController extends Controller
                     'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email|max:255',
                     'txtSDT'      => 'required|numeric|min:10',
-                    'chkNhomHP'   => 'required',
+//                    'chkNhomHP'   => 'required',
                     'txtMatKhau1' => 'required|min:6',
                     'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'                    
                 ]

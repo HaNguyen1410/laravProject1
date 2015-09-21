@@ -19,9 +19,9 @@ Route::get('/', function () {
  * =========================== ĐĂNG NHẬP ===========================================
  * ************************
  */
-Route::get('dangnhap', 'DangNhap\DangnhapController@DangNhap');
-Route::post('goidangnhap', 'DangNhap\DangnhapController@GoiDangNhap');
-Route::get('dangxuat', 'DangNhapController@DangXuat');
+Route::get('dangnhap', 'Auth\AuthController@DangNhap');
+Route::post('goidangnhap', 'Auth\AuthController@GoiDangNhap');
+Route::get('dangxuat', 'Auth\AuthController@DangXuat');
 //Route::resource('sessions','SessionsController');
 
 /*######### Gói bestmomo/scafold": "dev-master" đăng nhập ################*/
@@ -35,47 +35,51 @@ Route::get('dangxuat', 'DangNhapController@DangXuat');
  * =========================== Trang quản trị ===========================================
  * ************************
  */
-Route::get('quantri/thongtinqt/{macb}','QuantriController@ThongTinQT');
-Route::get('quantri/doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
-Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT');
-Route::get('quantri/saoluu', function () {
-    return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
-});
-Route::post('quantri/saoluucsdl','QuantriController@SaoLuuCSDL');
 //Route::get('quantri/saoluucsdl', function () {
 //      $exitCode = Artisan::call('db:backup'); 
 //      $run = new KetxuatCSDL();
 //     App\Console\Commands\KetxuatCSDL::handle();
 //    return view('quantri.sao-luu-phuc-hoi-du-lieu');
 //});
-
+Route::group(['prefix'=>'quantri'],function(){
+    Route::get('thongtinqt/{macb}','QuantriController@ThongTinQT');
+    Route::get('doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
+    Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
+    Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT');
+    Route::get('saoluu', function () {
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
+    });
+    Route::post('saoluucsdl','QuantriController@SaoLuuCSDL');
 /*
  * ######## Giảng Viên ##################
  */
-Route::get('quantri/danhsachgv','QuantriController@DanhSachGV');
-/*======= Thêm giảng viên mới==========*/
-Route::get('quantri/danhsachgv/themgv','QuantriController@ThemGV');
-Route::post('luuthemgv','QuantriController@LuuThemGV');
-/*======= Cập nhật thông tin giảng viên ==========*/
-Route::get('quantri/danhsachgv/capnhatgv/{macb}','QuantriController@CapNhatGV');
-Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
-/*======= Xóa thông tin Giảng viên ==========*/
-Route::get('quantri/danhsachgv/xoagv/{macb}','QuantriController@XoaGV');
-Route::get('quantri/danhsachgv/xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
-
-/*
+    Route::get('danhsachgv','QuantriController@DanhSachGV');
+    Route::group(['prefix'=>'danhsachgv'],function(){
+    /*======= Thêm giảng viên mới==========*/
+        Route::get('themgv','QuantriController@ThemGV');
+        Route::post('luuthemgv','QuantriController@LuuThemGV');
+    /*======= Cập nhật thông tin giảng viên ==========*/
+        Route::get('capnhatgv/{macb}','QuantriController@CapNhatGV');
+        Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
+    /*======= Xóa thông tin Giảng viên ==========*/
+        Route::get('xoagv/{macb}','QuantriController@XoaGV');
+        Route::get('xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
+    });
+ /*
  * ######## Sinh Viên ##################
  */
-Route::get('quantri/danhsachsv','QuantriController@DanhSachSV');
-/*======= Trang thêm sinh viên mới==========*/
-Route::get('quantri/danhsachsv/themsv','QuantriController@ThemSV');
-Route::post('luuthemsv','QuantriController@LuuThemSV');
-/*======= Cập nhật thông tin sinh viên ==========*/
-Route::get('quantri/danhsachsv/capnhatsv/{masv}','QuantriController@CapNhatSV');
-Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
-/*======= Xóa thông tin sinh viên ==========*/
-Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
+    Route::get('danhsachsv','QuantriController@DanhSachSV');
+    Route::group(['prefix'=>'danhsachsv'],function(){
+    /*======= Trang thêm sinh viên mới==========*/
+        Route::get('themsv','QuantriController@ThemSV');
+        Route::post('luuthemsv','QuantriController@LuuThemSV');
+    /*======= Cập nhật thông tin sinh viên ==========*/    
+        Route::get('capnhatsv/{masv}','QuantriController@CapNhatSV');
+        Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
+    /*======= Xóa thông tin sinh viên ==========*/
+        Route::get('xoasv/{masv}','QuantriController@XoaSV');
+    });
+});
 
 /**********************
  * =========================== TRANG GIẢNG VIÊN ===========================================
@@ -84,6 +88,7 @@ Route::get('quantri/danhsachsv/xoasv/{masv}','QuantriController@XoaSV');
 Route::get('vidu','GiangvienController@ViDu');
 /*======= Hiển thị trang thông tin giảng viên ==========*/
 Route::get('thongtingv','GiangvienController@ThongTin_gv');
+
 Route::get('giangvien/thongtingv/{macb}','GiangvienController@ThongTinGV');
 /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
 Route::get('giangvien/doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');

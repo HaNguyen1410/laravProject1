@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use App\Http\Requests\DangnhapRequest;
+
 class AuthController extends Controller
 {
     /*
@@ -62,4 +64,23 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    
+/*=============== Hiển thị giao diện đăng nhập =====================*/    
+    public function DangNhap(){
+        return view('giaodienchung.dang-nhap');
+    }
+/*=====================  =======================*/    
+    public function GoiDangNhap(DangnhapRequest $reqdn){
+        $dangnhap = array(
+            'macb'    => $reqdn->txtTenDangNhap,
+            'matkhau' => $reqdn->txtMatKhau,
+            'quantri' => 1
+        );        
+        if(\Auth::attempt($dangnhap)){
+            return redirect()->route('quantri/danhsachgv');
+        }else{
+            return redirect()->back();
+        }
+                 
+    }    
 }

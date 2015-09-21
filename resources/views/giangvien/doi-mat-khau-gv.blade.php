@@ -26,6 +26,7 @@
                 <div align="center">
                     <input type="text" name="txtMaCB" value="{{$gv->macb}}" readonly="" />
                     <input type="file" name="fHinh" id="fHinh" /><br> 
+                    <p style='color:red;'>{{$errors->first('fHinh')}}</p>
                     <button type="submit" class="btn btn-success" style="width:30%;">
                         <img src="{{asset('images/save-as-icon.png')}}"> Lưu hình
                     </button>
