@@ -182,10 +182,10 @@ route::get('sinhvien/xemdiem/{mssv}/inbangdiemsv','IntrangController@InBangDiemS
 /*======= THÔNG TIN NHÓM NIÊN LUẬN ==========*/
 Route::get('sinhvien/themthongtinnhom/{mssv}','SVthongtinnhomController@ThemThongTinNhom');
 Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
-
-/*======= PHÂN CÔNG NHIỆM VỤ ==========*/
 /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
 Route::get('sinhvien/danhsachcv/{mssv}','PhancvController@DanhSachCV');
+
+/*======= PHÂN CÔNG NHIỆM VỤ ==========*/
       /* ++ * CÔNG VIỆC CHÍNH  */
 Route::get('sinhvien/phancv/{mssv}','PhancvController@DSPhanCV');
     /* ++ * Thêm Công việc chính  */

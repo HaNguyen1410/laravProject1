@@ -21,6 +21,16 @@
             <div class="page-header">
                 <h2 style="color: darkblue;">HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN</h2>
             </div> 
+            @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                            <strong>Whoops!</strong> Có một số vấn đề trong ô nhập dữ liệu.<br><br>
+                            <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                            </ul>
+                    </div>
+            @endif
             <div class="card card-container"> 
                 <img id="profile-img" class="profile-img-card" src="{{asset('images/User-image.png')}}" />
 <!--                <p id="profile-name" class="profile-name-card"></p>-->
@@ -28,11 +38,11 @@
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <span id="reauth-username" class="reauth-username"></span>
                     <label for="inputUsername" >Tên đăng nhập:</label>
-                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" value="" class="form-control" placeholder="Tài khoản đăng nhập" autofocus>
-                    <p style='color:red;'>{{$errors->first('txtTenDangNhap')}}</p>
+                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" class="form-control" placeholder="Tài khoản đăng nhập" autofocus>
+                    <!--<p style='color:red;'>{{$errors->first('txtTenDangNhap')}}</p>-->
                     <label for="inputPassword" >Mật khẩu:</label>
-                    <input type="password" id="txtMatKhau" name="txtMatKhau" value="" class="form-control" placeholder="Mật khẩu">
-                    <p style='color:red;'>{{$errors->first('txtMatKhau')}}</p>
+                    <input type="password" id="txtMatKhau" name="txtMatKhau" class="form-control" placeholder="Mật khẩu">
+                    <!--<p style='color:red;'>{{$errors->first('txtMatKhau')}}</p>-->
                     <div id="remember" class="checkbox">
                         <label>
                             <input type="checkbox" value="remember-me"> Nhớ mật khẩu

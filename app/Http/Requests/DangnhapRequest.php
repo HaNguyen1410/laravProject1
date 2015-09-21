@@ -28,10 +28,11 @@ class DangnhapRequest extends Request
             'txtMatKhau'       => 'required'
         ];
     }
-    public function thongbao(){
+// tên hàm 'messages' bắt buộc vì laravel có hỗ trợ
+    public function messages(){
         return [
-            'txtTenDangNhap.required' => 'Chưa nhập tên đăng nhập',
-            'txtMatKhau.required'     => 'Chưa nhập mật khẩu'
+            'txtTenDangNhap.required' => 'Vui lòng nhập tên đăng nhập',
+            'txtMatKhau.required'     => 'Vui lòng nhập mật khẩu'
         ];
     }
 }

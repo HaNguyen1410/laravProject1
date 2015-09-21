@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+//use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use App\Http\Requests\DangnhapRequest;
+use App\Giangvien;
 
 class AuthController extends Controller
 {
@@ -70,24 +71,21 @@ class AuthController extends Controller
         return view('giaodienchung.dang-nhap');
     }
 /*=====================  =======================*/    
-    public function GoiDangNhap(DangnhapRequest $request){
-//        $v = $request->rules();
-        if($request->rules()->all()){
-            return redirect()->back()->withErrors($request->errors());
-        }
-        else
-          {
+    public function GoiDangNhap(DangnhapRequest $request){   
+//        echo $request->txtTenDangNhap;
+//        $mk = md5($request->txtMatKhau);
             $dangnhap = array(
                 'macb'    => $request->txtTenDangNhap,
                 'matkhau' => $request->txtMatKhau,
             );   
             if(\Auth::attempt($dangnhap)){
                 echo "Thành công";
+//                echo \Auth::user()->hoten;
 //                return redirect()->route('quantri/danhsachgv');
             }else{
-                echo "Thất bại";
+                echo "Thất bại: ".$request->txtMatKhau;
 //                return redirect()->back();
-            }
-         }                 
-    }    
+            }              
+    }
+    
 }

@@ -12,7 +12,8 @@ use View,
     Validator,
     Input,
     Mail,
-    Session;
+    Session,
+    Hash;
 use Carbon\Carbon;
 use App\Giangvien;
 
@@ -70,8 +71,9 @@ class GiangvienController extends Controller
             return redirect()->back()->withErrors($v->errors());
         } 
         else{
+            $mk = Hash::make($post['txtMatKhauMoi1']);
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
-                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
+                    ->update(['matkhau' => $mk]);
             if($ch > 0){
                 return redirect('giangvien/thongtingv/2134');                
             }
