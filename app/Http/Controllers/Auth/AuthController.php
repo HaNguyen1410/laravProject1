@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use App\Http\Requests\DangnhapRequest;
 use App\Giangvien;
+use Hash;
 
 class AuthController extends Controller
 {
@@ -74,6 +75,9 @@ class AuthController extends Controller
     public function GoiDangNhap(DangnhapRequest $request){   
 //        echo $request->txtTenDangNhap;
 //        $mk = md5($request->txtMatKhau);
+//        $mk = Hash::make($request->txtMatKhau);
+//          Hash::check('matkhau', $request->txtMatKhau);
+        
             $dangnhap = array(
                 'macb'    => $request->txtTenDangNhap,
                 'matkhau' => $request->txtMatKhau,

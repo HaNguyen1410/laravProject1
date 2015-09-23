@@ -12,7 +12,8 @@ use View,
     Validator,
     Input,
     Mail,
-    Session;
+    Session,
+    Hash;
 use App\Sinhvien;
 
 class SinhvienController extends Controller
@@ -116,7 +117,7 @@ class SinhvienController extends Controller
         }  
         else{
             $ch = DB::table('sinh_vien')->where('mssv', $post['txtMaSV'])
-                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
+                    ->update(['matkhau' => Hash::make($_POST['txtMatKhauMoi1'])]);
             if($ch > 0){
                return redirect('sinhvien/thongtinsv/1111317'); 
             }

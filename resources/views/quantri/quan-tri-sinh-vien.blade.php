@@ -71,7 +71,7 @@
                         <td align='center'>
                             <?php 
                                 if(isset($_GET['page'])){
-                                    $p = 5*($_GET['page']-1);
+                                    $p = 10*($_GET['page']-1);
                                     echo $stt+1+$p;
                                 }else
                                     echo $stt+1;

@@ -19,8 +19,10 @@
         </style>
         <script>
             function kt(){
-                if(document.getElementById('cbDeTai').value == '')
+                if(document.getElementById('cbDeTai').value == ''){                    
+                    alert('Vui lòng nhập và đầy đủ các thông tin trong khung "Phân chia thành viên"!');
                     return false;
+                }
                 document.getElementById('frChiaNhom').method = 'post';
                 document.getElementById('frChiaNhom').action = "{{action('ChianhomController@LuuChiaNhomNL')}}";
                 return true;

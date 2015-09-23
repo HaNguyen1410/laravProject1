@@ -39,7 +39,7 @@ class ChianhomController extends Controller
     public function ChiaNhomNL($macb,Request $req){
         //Nếu selectbox có giá trị manhp thì lấy manhp
         //$mahp = $req->cbNhomHP;
-        $mahp = '6';
+        $mahp = $req->cbNhomHP;
         $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
