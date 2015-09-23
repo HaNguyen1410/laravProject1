@@ -14,6 +14,8 @@ return [
         // on windows: 'C:\\...\\mysql\\bin\\'
         // on linux: '/usr/bin/'
         // trailing slash is required
+                
+
 	'mysql' => [
 		'dump_command_path' => 'C:\\xampp\\mysql\\bin\\',
 		'restore_command_path' => 'C:\\xampp\\mysql\\bin\\',

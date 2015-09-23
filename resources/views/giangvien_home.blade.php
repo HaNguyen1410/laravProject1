@@ -109,7 +109,7 @@
                             </li>                                 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Họ và tên cán bộ(macb)
+                                    Họ tên (macb)
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">

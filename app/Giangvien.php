@@ -2,11 +2,16 @@
 
 namespace App;
 
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use DB;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Giangvien extends Model
+class Giangvien extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+    use Authenticatable, CanResetPassword;
+    
     public $timestamps = false;
     public $table = "giang_vien";
     protected $primaryKey = 'macb';

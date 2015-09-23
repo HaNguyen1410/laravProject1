@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Config\database;
 use App\Giangvien;
 use DB;
 use View,
@@ -43,6 +44,9 @@ class QuantriController extends Controller
     }   
  /*====================== Sao lưu phục hồi CSDL ====================================*/
     public function SaoLuuCSDL(Request $req){
+//        $database = \Config::get('database.connections.mysql.database');
+//        $ten = date("YmdHis") . '.sql';//$database ."-" . 
+//        $backupPath = storage_path() . "\dumps\\";
         $exitCode = Artisan::call('db:backup'); 
         
         return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',0);

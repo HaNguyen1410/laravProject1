@@ -36,15 +36,13 @@ class ChianhomController extends Controller
         } 
     }   
 /*====================  ======================*/
-    public function ChiaNhomNL($macb){
-        //$get = $req::all(); ,$mahp, Request $req
+    public function ChiaNhomNL($macb,Request $req){
+        //Nếu selectbox có giá trị manhp thì lấy manhp
+        //$mahp = $req->cbNhomHP;
         $mahp = '6';
         $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
-//        $mahp = DB::table('nhom_hocphan as hp')
-//                ->join('giang_vien as gv','hp.macb','=','gv.macb')
-//                ->where('hp.macb',$macb)->value('manhomhp');
         //Lấy những sinh viên chưa có nhóm thực hiện niên luận
         $dstensv = DB::table('chia_nhom as chn')->distinct()
                 ->select('chn.mssv','sv.hoten')

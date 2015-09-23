@@ -21,6 +21,9 @@
                             <img src="{{asset('images/accept-icon.png')}}"/>
                             Sao lưu CSDL thành công!
                         </lable>
+<!--                        <a href="../storage/dumps/">
+                            <lable style="color: #860000; font-weight: bold;">Tải về</lable>
+                        </a>-->
                     @endif
                 </div>
             </div>                      
