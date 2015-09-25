@@ -75,7 +75,7 @@ class AuthController extends Controller
     public function GoiDangNhap(DangnhapRequest $request){   
 //        echo $request->txtTenDangNhap;
 //        $mk = md5($request->txtMatKhau);
-//        $mk = Hash::make($request->txtMatKhau);
+//            $mk = Hash::make($request->txtMatKhau);
 //          Hash::check('matkhau', $request->txtMatKhau);
         
             $dangnhap = array(

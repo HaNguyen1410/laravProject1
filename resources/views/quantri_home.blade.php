@@ -77,6 +77,7 @@
                                 </ul>
                             </li>
                         </ul>
+<!--                        
                         <ul class="nav navbar-nav navbar-right">
                             <li> 
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px; margin-right: 40px;">
@@ -101,7 +102,7 @@
                                     </div>
                                 </div>
                             </li>                        
-                        </ul>
+                        </ul>-->
                     </div><!--/.nav-collapse -->
                 </div><!--/container -->
             </nav>

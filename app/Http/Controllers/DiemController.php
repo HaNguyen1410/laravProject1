@@ -132,6 +132,9 @@ class DiemController extends Controller
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){
+        $dstc = DB::table('tieu_chi_danh_gia as tc')
+                ->join('quy_dinh as qd','tc.matc','=','qd.matc')
+                ->where('qd.macb','2134')->get();
         $post = $req->all();        
         //Lấy mảng các giá trị trong bảng
         $masv = Input::get('txtMaSV');
@@ -142,28 +145,27 @@ class DiemController extends Controller
 //        return $_POST['txtDiem'];
 //        return $matc;          
 
-        for($i = 0; $i < count($matc); $i++){
-            for($j = 0; $j < count($masv); $j++){
-                for($d = 0; $d < count($diem); $d++){                    
-//                    echo $masv[$j]." - ".$matc[$i]." - ".$diem[$d]."<br>";
-                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
-                        ->update(
-                                ['diem' => $diem[$d]]
-                           );   
-                    continue;     
-//                    break;
+        for($j = 0; $j < count($masv); $j++){   
+            for($i = 0; $i < count($matc); $i++){
+                for($d = 0; $d < count($diem); $d++){  
+                    echo $masv[$j]." - ".$matc[$i]." - ".$diem[$d]."<br>";
+//                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
+//                        ->update(
+//                                ['diem' => $diem[$d]]
+//                           );  
+                         
                 }
-            }
+            } 
         }     
-        for($s = 0; $s < count($masv); $s++){
-            for($nx = 0; $nx < count($nhanxet); $nx++){
-                $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$s])->update(
-                            ['nhanxet' => $nhanxet[$nx]]
-                        );
-                continue;
-//                break;
-            }
-        }
+//        for($s = 0; $s < count($masv); $s++){
+//            for($nx = 0; $nx < count($nhanxet); $nx++){
+//                echo $masv[$s]."->".$nx.". ".$nhanxet[$nx]."<br>";
+//                $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$s])->update(
+//                            ['nhanxet' => $nhanxet[$nx]]
+//                        ); 
+//            }
+//           
+//        }
           
 //        return redirect('giangvien/nhapdiem/2134');
     }
