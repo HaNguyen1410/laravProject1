@@ -59,9 +59,9 @@
                         <tr>
                             <td align="center">
                                 @if($gv->hinhdaidien != "")
-                                    <img width='100px' src="../../hinhdaidien/{{$gv->hinhdaidien}}">
+                                    <img width='100px' src="../../public/hinhdaidien/{{$gv->hinhdaidien}}">
                                 @else
-                                    <img src="{{asset('images/User-image.png')}}"/>
+                                    <img src="{{asset('public/images/User-image.png')}}"/>
                                 @endif
                             </td>
                         </tr>

@@ -44,7 +44,7 @@
                         <th>
                             <a href="danhsachsv/themsv">
                                 <button type="button" class="btn btn-primary" style="width:90%">
-                                    <img src="{{asset('images/add-icon.png')}}"> Thêm
+                                    <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                                </button>
                             </a>
                         </th>
@@ -94,22 +94,22 @@
                         <td align='center' width="8%">{{$rw->ngaytao}}</td>
                         <td width="5%" align='center'>
                             @if($rw->nhomtruong == 1)
-                                <img src="{{asset('images/check.png')}}"/>
+                                <img src="{{asset('public/images/check.png')}}"/>
                             @else
-                                <img src="{{asset('images/uncheck.png')}}"/>
+                                <img src="{{asset('public/images/uncheck.png')}}"/>
                             @endif
                         </td>
                         <td align='center' width="5%">
                             @if($rw->khoa == 1)
-                                <img src="{{asset('images/Lock.png')}}"/>
+                                <img src="{{asset('public/images/Lock.png')}}"/>
                             @elseif($rw->khoa == 0)
-                                <img src="{{asset('images/Unlock.png')}}"/>
+                                <img src="{{asset('public/images/Unlock.png')}}"/>
                             @endif
                         </td>
                         <td align='center'>
-                            <a href="danhsachsv/capnhatsv/{{$rw->mssv}}"><img src="{{asset('images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                            <a href="danhsachsv/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
                             <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>   

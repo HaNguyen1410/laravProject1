@@ -124,7 +124,7 @@
         <div class="col-md-12" style="text-align: right;">
             <a href="1111317/inbangdiemsv" target="_blank">
                 <button type="button" name="" class="btn btn-success" style="width: 15%;">
-                    <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
+                    <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                 </button>
             </a><hr>
         </div>

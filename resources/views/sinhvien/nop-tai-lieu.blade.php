@@ -60,7 +60,7 @@
                     <tr>
                         <td colspan='5' align='center'>
                              <button type="submit" class="btn btn-warning">
-                                    <img src="{{asset('images/save-upload-icon.png')}}"/>
+                                    <img src="{{asset('public/images/save-upload-icon.png')}}"/>
                                     Gửi tập tin
                              </button>
                         </td>
@@ -108,7 +108,7 @@
                             <td>{{$tl->ngaydanhgia}}</td>
                             <td align="center">
                                 <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">
-                                    <img src="{{asset('images/Document-Delete-icon.png')}}">
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}">
                                 </a>
                             </td>
                          </tr>

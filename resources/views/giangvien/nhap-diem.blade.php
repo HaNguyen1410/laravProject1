@@ -145,20 +145,20 @@
                 <tr>
                     <td align="right">
                         <button onclick="return kt_diem();" type="submit" class="btn btn-info" style="width: 50%;">
-                            <img src="{{asset('images/excel-icon.png')}}"> Nhập từ Exel...
+                            <img src="{{asset('public/images/excel-icon.png')}}"> Nhập từ Exel...
                         </button> 
                     </td>
                     <td>
                         <a href="2134/inbangdiemgv" target="_blank">
                             <button type="button" name="" class="btn btn-success" style="width: 50%;">
-                                <img src="{{asset('images/printer-icon.png')}}"> In bảng điểm
+                                <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                             </button>
                         </a>
 
                     </td>
                     <td align="right">
                         <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 55%;">
-                            <img src="{{asset('images/save-as-icon.png')}}"> Lưu dữ liệu
+                            <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu dữ liệu
                         </button>                            
                     </td>
     <!--                    <td>

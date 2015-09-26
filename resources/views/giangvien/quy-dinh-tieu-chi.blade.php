@@ -45,7 +45,7 @@
                         <tr>
                             <td colspan="4" align="center">
                                 <button type="submit" name="btnThem" class="btn btn-primary" style="width: 20%;">
-                                    <img src="{{asset('images/save-as-icon.png')}}"> Thêm
+                                    <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
                                 </button>                                                              
                             </td>
                         </tr>
@@ -111,9 +111,9 @@
                             </td>
                             <td align='center'>{{$tc->ngaytao}}</td>
                             <td align='center'>
-                                <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('images/edit-icon.png')}}"></a>&nbsp
+                                <a href="2134/capnhattieuchi/{{$tc->matc}}"><img src="{{asset('public/images/edit-icon.png')}}"></a>&nbsp
                                 <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="2134/xoatieuchi/{{$tc->matc}}">
-                                    <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
                             </td>    
                         </tr>                    

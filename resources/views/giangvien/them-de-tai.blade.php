@@ -42,7 +42,7 @@
                         <p style='color:red;'>{{$errors->first('txtTapTinKem')}}</p>
                         <td align='center'>
                              <button type="submit" class="btn btn-warning">
-                                    <img src="{{asset('images/save-upload-icon.png')}}"/>
+                                    <img src="{{asset('public/images/save-upload-icon.png')}}"/>
                                     Thêm đề tài
                              </button>
                         </td>
@@ -161,10 +161,10 @@
                     <tr>
                         <td align="center" colspan="8">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
                             </button>
                             <a href="{{asset('giangvien/danhsachdetai/2134')}}" class="btn btn-warning" style="width:20%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                   
                         </td>
                     </tr>

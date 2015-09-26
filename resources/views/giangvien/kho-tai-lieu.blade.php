@@ -34,7 +34,7 @@
                         <td align="center">
                             {{$dt->madt}}
                         </td>
-                        <td><img src="{{asset('images/folder-page-icon.png')}}"/>
+                        <td><img src="{{asset('public/images/folder-page-icon.png')}}"/>
                             <a href="2134/khotailieuchitiet/{{$dt->manhomthuchien}}">
                                 {{$dt->tendt}}
                             </a> 

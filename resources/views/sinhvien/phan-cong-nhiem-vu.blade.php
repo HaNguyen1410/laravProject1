@@ -52,7 +52,7 @@
                     <th width="10%" style="text-align: right;">
                         <a href="{{asset('sinhvien/phancv/1111317/themcvchinh')}}">
                             <button type="button" name="btnThem" class="btn btn-primary">
-                            <img src="{{asset('images/add-icon.png')}}">Thêm công việc
+                            <img src="{{asset('public/images/add-icon.png')}}">Thêm công việc
                             </button>
                         </a>
                     </th>
@@ -104,10 +104,10 @@
                         </td>
                         <td align='center'>
                             <a href="1111317/capnhatcvchinh/{{$cv->macv}}">
-                                <img src="{{asset('images/edit-icon.png')}}"/>
+                                <img src="{{asset('public/images/edit-icon.png')}}"/>
                             </a>&nbsp &nbsp &nbsp
                             <a href="">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>

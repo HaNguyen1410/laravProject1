@@ -54,7 +54,7 @@
                         <td>
                             <a href="2134/themdetai">
                                 <button type="button" name="" class="btn btn-primary">
-                                    <img src="{{asset('images/add-icon.png')}}">Thêm đề tài
+                                    <img src="{{asset('public/images/add-icon.png')}}">Thêm đề tài
                                 </button>
                             </a>
                         </td>
@@ -97,8 +97,8 @@
                         </td>
                         @if($dt->taptindinhkem != "")
                             <td>
-                                <a href="../../mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
-                                    <img src="{{asset('images/Filetype-PDF-icon.png')}}"/>
+                                <a href="../../public/mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
+                                    <img src="{{asset('public/images/Filetype-PDF-icon.png')}}"/>
                                 </a>                            
                             </td>
                         @elseif($dt->taptindinhkem == "")
@@ -121,9 +121,9 @@
                         @endforeach -->
                         <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
                         <td align='center'>
-                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}"><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp
+                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}"><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp
                             <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>

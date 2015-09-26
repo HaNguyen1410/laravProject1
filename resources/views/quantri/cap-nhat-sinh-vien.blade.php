@@ -17,7 +17,7 @@
             <div align="center"><input type="file"  />Chọn hình</div><br>
             <div align="center">
                 <button  type="submit" name="" class="btn btn-info">
-                    <img src="{{asset('images/excel-icon.png')}}"> Cập nhật
+                    <img src="{{asset('public/images/excel-icon.png')}}"> Cập nhật
                 </button>
             </div>
         </div>
@@ -138,10 +138,10 @@
                         <td></td>
                         <td colspan="3">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:30%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
                             <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>

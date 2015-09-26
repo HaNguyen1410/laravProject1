@@ -48,7 +48,7 @@
                     <tr>
                         <td colspan="4" align="center">
                             <button type="submit" class="btn btn-primary" style="width: 10%">
-                                <img src="{{asset('images/save-as-icon.png')}}">Lưu
+                                <img src="{{asset('public/images/save-as-icon.png')}}">Lưu
                             </button>
                         </td>
                     </tr>

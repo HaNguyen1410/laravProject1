@@ -180,7 +180,7 @@
                     <tr>
                         <td colspan="6" align='center'>
                             <button type="submit" name="btnLuu" class="btn btn-success" style="width: 20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}">&nbsp;
+                                <img src="{{asset('public/images/save-as-icon.png')}}">&nbsp;
                                 Lưu thông tin
                             </button>
                         </td>

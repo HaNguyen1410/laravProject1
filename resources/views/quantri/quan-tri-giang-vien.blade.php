@@ -36,7 +36,7 @@
                         <th>
                             <a href="danhsachgv/themgv">
                                 <button type="button" class="btn btn-primary" style="width:60%">
-                                    <img src="{{asset('images/add-icon.png')}}"> Thêm
+                                    <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                                </button>
                             </a>
                         </th>
@@ -74,15 +74,15 @@
                             <td align='center'>{{$rw->ngaytao}}</td>
                             <td align='center'>
                                 @if($rw->khoa == 1)
-                                    <img src="{{asset('images/Lock.png')}}"/>
+                                    <img src="{{asset('public/images/Lock.png')}}"/>
                                 @elseif($rw->khoa == 0)
-                                    <img src="{{asset('images/Unlock.png')}}"/>
+                                    <img src="{{asset('public/images/Unlock.png')}}"/>
                                 @endif
                             </td>
                             <td align='center'>
-                                <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
+                                <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
                                 <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachgv/xoagv/{{$rw->macb}}'>
-                                    <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
                             </td>
                         </tr>

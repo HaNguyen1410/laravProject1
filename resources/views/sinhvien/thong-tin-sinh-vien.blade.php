@@ -120,13 +120,13 @@
                             <td><label>Tên đề tài:</label></td>
                             <td style="color:blue;" colspan="3">
                                 @if($detainhom->taptindinhkem != "")
-                                    <a href="../../mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
-                                        <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
+                                    <a href="../../public/mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
+                                        <img src="{{asset('public/images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
                                         {{$detainhom->tendt}}
                                     </a>
                                 @elseif($detainhom->taptindinhkem == "")
                                     <a href="{{$sv->mssv}}/inchitietdetaisv/{{$detainhom->madt}}" target="_blank" style="color:darkblue;">
-                                        <img src="{{asset('images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
+                                        <img src="{{asset('public/images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
                                         {{$detainhom->tendt}}
                                     </a>
                                 @endif
@@ -240,7 +240,7 @@
                                 <td></td>
                                 <td align="center">
                                     <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 20%;">
-                                        <img src="{{asset('images/save-as-icon.png')}}"> Lưu 
+                                        <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu 
                                     </button>
                                 </td>                                  
                             </tr>
@@ -253,9 +253,9 @@
                         <tr>
                             <td align="center">
                                  @if($sv->hinhdaidien != "")
-                                        <img width='200px' src='../../hinhdaidien/{{$sv->hinhdaidien}}'>
+                                        <img width='200px' src='../../public/hinhdaidien/{{$sv->hinhdaidien}}'>
                                  @else
-                                        <img src="{{asset('images/User-image.png')}}">
+                                        <img src="{{asset('public/images/User-image.png')}}">
                                  @endif                                        
                             </td>
                         </tr>

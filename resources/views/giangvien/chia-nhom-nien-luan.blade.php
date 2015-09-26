@@ -110,7 +110,7 @@
                                 <p style='color:red;'>{{$errors->first('rdNhomTruong')}}</p>
                             </div>
                             <button onclick="return kt();" type="submit" name="btnLưu" class="btn btn-success" style="width: 20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}">&nbsp;
+                                <img src="{{asset('public/images/save-as-icon.png')}}">&nbsp;
                                 Lưu 
                             </button>
                         </td>
@@ -159,14 +159,14 @@
                         <td width="25%">{{$svnhom->hoten}}</td>
                         <td align="center">
                             @if($svnhom->nhomtruong == 0)                            
-                                <a href=""><input type="image" src="{{asset('images/uncheck.png')}}" /></a>
+                                <a href=""><input type="image" src="{{asset('public/images/uncheck.png')}}" /></a>
                             @else
-                                <a href=""><input type="image" src="{{asset('images/check.png')}}"/></a>
+                                <a href=""><input type="image" src="{{asset('public/images/check.png')}}"/></a>
                             @endif
                         </td>
                         <td align="center" >
                             <a onclick="return confirm('Xóa sinh viên **{{$svnhom->hoten}}** ra khỏi nhóm {{$svnhom->manhomthuchien}}?');" href="2134/xoasvtrongnhom/{{$svnhom->mssv}}">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>

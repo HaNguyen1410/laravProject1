@@ -18,7 +18,7 @@
                 <div align="center"><input type="file" name="fDanhSach" id="fDanhSach" /></div><br>
                 <div align="center">
                     <button  type="submit" class="btn btn-info">
-                        <img src="{{asset('images/excel-icon.png')}}"> Thêm
+                        <img src="{{asset('public/images/excel-icon.png')}}"> Thêm
                     </button>
                 </div>
             </form>                                    
@@ -104,10 +104,10 @@
                         <td></td>
                         <td colspan="3">
                             <button  type="submit" name="btnThem" class="btn btn-primary" style="width:30%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
                             </button>&nbsp;&nbsp;
                             <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>
                     </tr>

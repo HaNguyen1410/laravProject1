@@ -2,9 +2,9 @@
 
 @section('content_gv')
 
-        <script src="{{asset('scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
-        <script src="{{asset('scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
-        <script src="{{asset('scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script> 
+        <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
+        <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
+        <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script> 
         <script type="text/javascript">
             $(function () {
                 // Create the chart
@@ -165,9 +165,9 @@
                     <td align='center'></td>
                     <td align='center'>
                         @if($tv->nhomtruong == 1)
-                            <img src="{{asset('images/check.png')}}"/>
+                            <img src="{{asset('public/images/check.png')}}"/>
                         @elseif($tv->nhomtruong == 0)
-                            <img src="{{asset('images/uncheck.png')}}"/>
+                            <img src="{{asset('public/images/uncheck.png')}}"/>
                         @endif
                     </td>
                 </tr>
@@ -191,7 +191,7 @@
                 <div class="col-md-12">
                     <h4 style="color: #c7254e;">
                         <a href="../cvphuthuoc/{{$tv->manhomthuchien}}/{{$cvchinh->macv}}">
-                            <img src="{{asset('images/box-icon1.png')}}"/>
+                            <img src="{{asset('public/images/box-icon1.png')}}"/>
                             {{$cvchinh->congviec}}
                         </a>
                     </h4>

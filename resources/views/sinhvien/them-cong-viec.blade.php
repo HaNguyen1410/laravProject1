@@ -111,10 +111,10 @@
                         <td></td>
                         <td colspan="3" align="center">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm công việc
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm công việc
                             </button>&nbsp;&nbsp;
                             <a href="../../phancv/1111317" class="btn btn-warning" style="width:20%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                            
                         </td>
                     </tr>

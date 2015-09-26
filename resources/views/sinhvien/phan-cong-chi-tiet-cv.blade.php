@@ -29,7 +29,7 @@
                 </label>
                  <a href="{{$cvchinh->macv}}/themcvphu" style="margin-left: 40%;">
                     <button type="button" name="btnThem" class="btn btn-primary" style="width:20%;">
-                    <img src="{{asset('images/add-icon.png')}}">Thêm công việc
+                    <img src="{{asset('public/images/add-icon.png')}}">Thêm công việc
                     </button>
                  </a>
             </div>
@@ -73,10 +73,10 @@
                         </td>
                         <td align='center'>
                             <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
-                                <img src="{{asset('images/edit-icon.png')}}"/>
+                                <img src="{{asset('public/images/edit-icon.png')}}"/>
                             </a>&nbsp
                             <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="../1111317/{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>

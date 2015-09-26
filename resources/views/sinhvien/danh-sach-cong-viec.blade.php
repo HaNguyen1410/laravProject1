@@ -9,8 +9,8 @@
             background-color: #dff0d8;
         }
     </style>
-    <script src="{{asset('scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
-    <script src="{{asset('scripts/Highcharts-4.1.7/js/modules/exporting.js')}}"></script>
+    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
+    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/exporting.js')}}"></script>
     <script type="text/javascript">
         $(function () {
             $('#container1').highcharts({

@@ -16,9 +16,9 @@
             <div align="center">
                 <br><br><br/>
                 @if($gv->hinhdaidien != "")
-                <img width='100px' src='../../hinhdaidien/{{$gv->hinhdaidien}}'>
+                <img width='100px' src='../../public/hinhdaidien/{{$gv->hinhdaidien}}'>
                 @else
-                    <img src="{{asset('images/User-image.png')}}">
+                    <img src="{{asset('public/images/User-image.png')}}">
                 @endif
             </div><br>             
             <form action="{{action('GiangvienController@DoiHinhDaiDienGV')}}" method="post" enctype="multipart/form-data" name="frmDoiHinhDaiDien" class="form-horizontal">
@@ -28,7 +28,7 @@
                     <input type="file" name="fHinh" id="fHinh" /><br> 
                     <p style='color:red;'>{{$errors->first('fHinh')}}</p>
                     <button type="submit" class="btn btn-success" style="width:30%;">
-                        <img src="{{asset('images/save-as-icon.png')}}"> Lưu hình
+                        <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu hình
                     </button>
                 </div>
             </form>
@@ -81,11 +81,11 @@
                     <tr>
                         <td colspan="2" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width: 20%;">                                
-                                <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>
                             &nbsp;&nbsp;
                             <a href="?cn=ttgv" class="btn btn-warning" style="width:20%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                              
                         </td>
                     </tr>

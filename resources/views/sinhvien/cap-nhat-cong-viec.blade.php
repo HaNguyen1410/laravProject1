@@ -10,7 +10,7 @@
             }
     </style>
     
-    <script src="{{Asset('scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
+    <script src="{{Asset('public/scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
     <script type="text/javascript">
         /*window.onerror = function(errorMsg) {
             $('#console').html($('#console').html()+'<br>'+errorMsg)
@@ -141,10 +141,10 @@
                         <td></td>
                         <td colspan="3" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Cập nhật
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
                             <a href="../../../phancv/1111317" class="btn btn-warning" style="width:20%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                              
                         </td>
                     </tr>

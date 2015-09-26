@@ -11,14 +11,14 @@
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <a href="">
                         <button type="submit" name="" class="btn btn-link" style="width: 20%; text-align: center">
-                            <img src="{{asset('images/data-backup-icon.png')}}"> <br>
+                            <img src="{{asset('public/images/data-backup-icon.png')}}"> <br>
                         </button>
                     </a>                  
                 </form>  <br>  
                 <div style="background-color: #B0E0E6;">
                     @if($giatri == 0)
                         <lable style="color: #006400; font-weight: bold;">
-                            <img src="{{asset('images/accept-icon.png')}}"/>
+                            <img src="{{asset('public/images/accept-icon.png')}}"/>
                             Sao lưu CSDL thành công!
                         </lable>
 <!--                        <a href="../storage/dumps/">
