@@ -16,7 +16,8 @@ use View,
     Input,
     Mail,
     Session,
-    Artisan;
+    Artisan,
+    Hash;
 use Carbon\Carbon;
 use App\Commands;
 
@@ -188,16 +189,23 @@ class QuantriController extends Controller
         else
         {
             $data1 = array(
-                    'macb'      => $_POST['txtMaCB'],
-                    'hoten'     => $_POST['txtHoTen'],
-                    'gioitinh'  => $_POST['rdGioiTinh'],
-                    'ngaysinh'  => $_POST['txtNgaySinh'],
-                    'email'     => $_POST['txtEmail'],
-                    'sdt'       => $_POST['txtSDT'],
-                    'matkhau'   => md5($_POST['txtMatKhau1']),
+                    'macb'      => $req->txtMaCB,
+                    'hoten'     => $req->txtHoTen,
+                    'gioitinh'  => $req->rdGioiTinh,
+                    'ngaysinh'  => $req->txtNgaySinh,
+                    'email'     => $req->txtEmail,
+                    'sdt'       => $req->txtSDT,
+                    'matkhau'   => Hash::make($req->txtMatKhau1),
                     'ngaytao'   => Carbon::now() 
             );            
-            $ch1 = DB::table('giang_vien')->insert($data1);
+            
+            $gv = new Giangvien();
+            $gv->macb=$req->txtMaCB;
+            $gv->hoten=$req->txtHoTen;
+            $gv->matkhau=Hash::make($req->txtMatKhau1);
+            $gv->save();
+            
+//            $ch1 = DB::table('giang_vien')->insert($data1);
             //Lấy mảng manhomhp khi đã chon checkbox
             $nhomhp_checked = Input::get('chkNhomHP');
             $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)->update(

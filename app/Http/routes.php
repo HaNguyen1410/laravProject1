@@ -21,6 +21,7 @@ Route::get('/', function () {
  */
 Route::get('dangnhap', 'Auth\AuthController@DangNhap');
 Route::post('goidangnhap', 'Auth\AuthController@GoiDangNhap');
+
 Route::get('dangxuat', 'Auth\AuthController@DangXuat');
 //Route::resource('sessions','SessionsController');
 
@@ -164,7 +165,6 @@ Route::group(['prefix'=>'giangvien'], function(){
  * =========================== TRANG SINH VIÊN ===========================================
  * *************************
  */
-
 /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
 Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
 Route::get('sinhvien/thongtinsv/{mssv}/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');

@@ -5,11 +5,11 @@
     <meta charset="utf-8">
     <title>Đăng nhập</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link type="text/css" rel="stylesheet" href="{{asset('../bootstrap/css/bootstrap.min.css')}}">
-        <link type="text/css" rel="stylesheet" href="{{asset('css/login-bootstrap.css')}}">
-        <script src="{{asset('js/login-bootstrap.js')}}"></script>
-        <script src="{{asset('../bootstrap/js/jquery-1.11.3.min.js')}}"></script>
-        <script src="{{asset('../bootstrap/js/bootstrap.min.js')}}"></script> 
+        <link type="text/css" rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+        <link type="text/css" rel="stylesheet" href="{{asset('public/css/login-bootstrap.css')}}">
+        <script src="{{asset('public/js/login-bootstrap.js')}}"></script>
+        <script src="{{asset('bootstrap/js/jquery-1.11.3.min.js')}}"></script>
+        <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script> 
 </head>
 
 <body>

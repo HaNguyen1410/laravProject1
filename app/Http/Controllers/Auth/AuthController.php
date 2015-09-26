@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-//use App\User;
+use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -10,7 +10,8 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use App\Http\Requests\DangnhapRequest;
 use App\Giangvien;
-use Hash;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Registrar;
 
 class AuthController extends Controller
 {
@@ -25,15 +26,17 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use AuthenticatesAndRegistersUsers;
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Guard $auth)
     {
+        $this->auth = $auth;
+        
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -82,12 +85,12 @@ class AuthController extends Controller
                 'macb'    => $request->txtTenDangNhap,
                 'matkhau' => $request->txtMatKhau,
             );   
-            if(\Auth::attempt($dangnhap)){
+            if($this->auth->attempt($dangnhap)){
                 echo "Thành công";
 //                echo \Auth::user()->hoten;
 //                return redirect()->route('quantri/danhsachgv');
             }else{
-                echo "Thất bại: ".$request->txtMatKhau;
+                echo "Thất bại: ".$this->auth->user();
 //                return redirect()->back();
             }              
     }
