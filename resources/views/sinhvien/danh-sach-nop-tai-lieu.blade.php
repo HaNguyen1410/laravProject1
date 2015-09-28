@@ -30,17 +30,18 @@
                </button>
             </a>
         </div> 
-        <div class="col-md-12">     
+        <div class="col-md-12">   
+            <p style="color: blue; font-weight: bold;">{{ Session::get('BaoThem') }}</p>
+            <p style="color: blue; font-weight: bold;">{{ Session::get('BaoCapNhat') }}</p>
              <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                  <tr>
                     <th width="1%">STT</th>
-                    <th width="6%">Công việc chính</th>
+                    <th width="6%">Mã công việc chính</th>
                     <th width="8%">Tên tập tin</th>
                     <th width="12%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
-                    <th width="10%">Tác giả</th>
-                    <th width="15%">Nhận xét</th>
-                    <th width="6%">Ngày nhận xét</th>
+                    <th width="10%">Người nộp</th>
+                    <th width="15%">Thực hiện</th>
                     <th width="4%">Thao tác</th>
                  </tr> 
                  @if(count($dstailieu) == 0)
@@ -69,13 +70,10 @@
                                     <label>{{$tl->ngaycapnhat}}</label>
                                 </a> 
                             </td>
-                            <td>{{$tl->hoten}}</td>
-                            <td><p style="color: #000080;">{{$tl->nd_danhgia}}</p></td>
+                            <td>{{$tl->hoten}}</td> 
+                            <td>{{$tl->giaocho}}</td>
                             <td align="center">
-                                {{$tl->ngaydanhgia}}                                                               
-                            </td>
-                            <td align="center">
-                                <a href="">
+                                <a href="{{asset('sinhvien/danhsachnoptailieu/capnhatnoptailieu/'.$tl->matl)}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp
                                 <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">
@@ -83,11 +81,21 @@
                                 </a>
                             </td>
                          </tr>
+                         <tr>
+                             <td colspan="6">
+                                 <label style="color: darkblue;">Nhận xét của giảng viên:</label><br>
+                                <p style="color: #000080;">{{$tl->nd_danhgia}}</p>
+                            </td>
+                            <td colspan="2" style="color: darkblue;">
+                                <label>Ngày nhận xét:</label><br>
+                                {{$tl->ngaydanhgia}}                                                               
+                            </td>
+                         </tr>
                     @endforeach
                  @endif                 
              </table><hr>
          </div>                                            
-    </div><!-- /row -->
+    </div><!-- /row 
 
 </div>   <!-- /container -->
 @endsection

@@ -14,11 +14,10 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">
-               <a href="{{asset('sinhvien/danhsachnoptailieu/')}}">Danh sách nộp tài liệu</a>  
-                &Gt; 
-                Nộp tài liệu
+                <a href="{{asset('sinhvien/danhsachnoptailieu/')}}">Danh sách nộp tài liệu</a>  
+                &Gt; Cập nhật nộp tài liệu
             </h3>
-            <form action="{{action('QltailieuController@LuuNopTaiLieu')}}" method="post" enctype="multipart/form-data">
+            <form action="{{action('QltailieuController@LuuCapNhatNopTL')}}" method="post" enctype="multipart/form-data">
                  <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                  <table class="table table-bordered" id="bang1">
                     <tr>
@@ -28,13 +27,7 @@
                         </td>
                         <th width='15%'>Tên công việc:</th>
                         <td>
-                             <select class="form-control" name="cbGiaiDoan">
-                                    <option value="">-- Chọn tên công việc --</option>  
-                                @foreach($dscvchinh as $cv)
-                                    <option value="{{$cv->macv}}">{{$cv->congviec}}</option>  
-                                @endforeach
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbGiaiDoan')}}</p>
+                            <label>{{$tencv->congviec}}</label>
                         </td>
                     </tr>
                     <tr>
@@ -47,7 +40,7 @@
                     <tr>
                         <th>Mô tả tài liệu:</th>
                         <td colspan="4">
-                            <textarea name="txtMoTa" class="form-control" rows="3"></textarea><br>
+                            <textarea name="txtMoTa" class="form-control" rows="3">{{$tencv->mota}}</textarea><br>
                         </td>
                     </tr>
                     <tr>

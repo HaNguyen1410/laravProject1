@@ -233,7 +233,8 @@ Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
         route::get('noptailieu','QltailieuController@NopTaiLieu');
         route::post('luunoptailieu','QltailieuController@LuuNopTaiLieu');
         /* ------ Cập nhật tài liệu -------- */
-        
+        route::get('capnhatnoptailieu/{matl}','QltailieuController@CapNhatNopTL');
+        route::post('luucapnhatnoptailieu','QltailieuController@LuuCapNhatNopTL');
         /* ------ Xóa tài liệu đã chọn -------- */
         Route::get('xoatailieu/{matl}','QltailieuController@XoaTaiLieu');
         });          

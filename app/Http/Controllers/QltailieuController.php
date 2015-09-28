@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Auth;
 
 class QltailieuController extends Controller
@@ -133,12 +134,13 @@ class QltailieuController extends Controller
                 ->value('dt.tendt');
         $dstailieu = DB::table('tai_lieu as tl')->distinct()
                 ->select('tl.matl','tl.macv','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
-                        'cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten','th.tuan')
+                        'cv.congviec','cv.giaocho','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten','th.tuan')
                 ->leftjoin('danh_gia as dg','dg.matl','=','tl.matl')
                 ->join('cong_viec as cv','cv.macv','=','tl.macv')
                 ->join('thuc_hien as th','cv.macv','=','th.macv')
                 ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
                 ->where('th.manhomthuchien',$manth)
+                ->orderBy('tl.ngaycapnhat','desc')
                 ->get();
         return view('sinhvien.danh-sach-nop-tai-lieu')->with('tendt',$tendt)
                         ->with('dstailieu',$dstailieu)->with('mssv',$mssv);
@@ -197,11 +199,55 @@ class QltailieuController extends Controller
             $upload_success = $taptin->move($luuden, $tenbandau);
             
             if ($upload_success) {
-                return Redirect('sinhvien/danhsachnoptailieu/noptailieu')->with('message', 'Gửi tài liệu thành công!');
+                return Redirect::to('sinhvien/danhsachnoptailieu')->with('BaoThem', 'Gửi tài liệu thành công!');
             }
         }
     }
- /*======================== Xóa tài liệu nào đó ========================*/
+/*=================== Cập nhật nộp tài liệu =========================*/
+    public function CapNhatNopTL($matl){
+        $macvchinh = DB::table('tai_lieu')->where('matl',$matl)->value('macv');
+        $tencv = DB::table('cong_viec as cv')->select('cv.macv','cv.congviec','tl.mota')
+                ->join('tai_lieu as tl','cv.macv','=','tl.macv')
+                ->where('cv.macv',$macvchinh)->first();
+        return view('sinhvien.cap-nhat-nop-tai-lieu')->with('matl',$matl)
+            ->with('tencv',$tencv);
+    } 
+/*=================== Lưu Cập nhật nộp tài liệu =========================*/
+    public function LuuCapNhatNopTL(Request $req){
+        $mssv = \Auth::user()->taikhoan;
+//        $post = $req->all();
+        $v = \Validator::make($req->all(),
+                [
+                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm'
+                ]
+            );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+            $luuden = public_path() . '/tailieu/';
+            $taptin = Input::file('fTaiLieu');
+            $kichthuoc= $taptin->getClientSize();
+            //Đổi kích thước file từ bytes sang Kb
+            $kichthuoc_mb = $kichthuoc/(1024);
+            //$extension = Input::file('fTaiLieu')->getClientOriginalExtension();
+            $tenbandau = Input::file('fTaiLieu')->getClientOriginalName(); 
+            DB::table('tai_lieu')->where('matl',$req->txtMaTL)->update(
+                            [
+                                'tentl'       => $tenbandau,
+                                'mssv'        => $mssv,
+                                'kichthuoc'   => $kichthuoc_mb,
+                                'mota'        => $_POST['txtMoTa'],
+                                'ngaycapnhat' => Carbon::now()
+                            ]
+                    );
+            $upload_success = $taptin->move($luuden, $tenbandau);
+
+            return Redirect::to('sinhvien/danhsachnoptailieu')
+                    ->with('BaoCapNhat', 'Gửi cập nhật tài liệu thành công!');
+        } 
+    }
+/*======================== Xóa tài liệu nào đó ========================*/
     public function XoaTaiLieu($matl){
         $mssv = \Auth::user()->taikhoan;
         $del1 = DB::table('tai_lieu')->where('matl',$matl)->delete();
