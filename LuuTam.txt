@@ -6,10 +6,25 @@
 
 ==============================================
 
-{!! Auth::user()->hoten !!} ({!! Auth::user()->macb !!})
+
 
 ==========================================================================
-[1]	Đánh giá về sự hoàn thành của dự án	2	2015-09-09	   
-2	[2]	Kỹ năng làm việc nhóm	1	2015-07-18	   
-3	[3]	Tài liệu báo cáo	3	2015-03-31	   
-4	[4]	Phần Demo dự án	2	2015-03-31	   
+function kt_radio(){
+                  var isOK = false;
+            // Kiểm tra tùy chọn Nhóm trưởng bằng cách duyệt các phần tử trong mảng
+                for(var i=0; i < frChiaNhom.rdNhomTruong.lengthl; i++)
+                {
+                    if(frChiaNhom.rdNhomTruong[i].checked == true)
+                    {
+                        // Nếu người dùng có chọn nhóm trưởng
+                        isOK = true;
+                        break;
+                    }
+                }
+                // Nếu người dùng không chọn Nhóm trưởng
+                if(isOK == false)
+                {
+                    alert("Xin vui lòng chọn 1 nhóm trưởng");
+                    return false;
+                }
+            }

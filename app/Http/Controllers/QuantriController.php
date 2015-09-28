@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Config\database;
-use App\Giangvien;
 use DB;
 use View,
     Response,
@@ -20,6 +19,9 @@ use View,
     Hash;
 use Carbon\Carbon;
 use App\Commands;
+use App\Giangvien;
+use App\Sinhvien;
+use App\User;
 
 class QuantriController extends Controller
 {
@@ -87,7 +89,12 @@ class QuantriController extends Controller
         else
         {
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
-                    ->update(['matkhau' => md5($_POST['txtMatKhauMoi1'])]);
+                    ->update(['matkhau' => Hash::make($_POST['txtMatKhauMoi1'])]);
+   //Lưu cập nhật mật khẩu vào bảng Users        
+            $thanhvien = new User;
+            $thanhvien->where('taikhoan',$req->txtMaCB)
+                    ->update('password',Hash::make($req->txtMatKhauMoi1));
+                        
             if($ch > 0){
                 return redirect('quantri/thongtinqt/9876');
             }
@@ -188,24 +195,38 @@ class QuantriController extends Controller
         }
         else
         {
-            $data1 = array(
-                    'macb'      => $req->txtMaCB,
-                    'hoten'     => $req->txtHoTen,
-                    'gioitinh'  => $req->rdGioiTinh,
-                    'ngaysinh'  => $req->txtNgaySinh,
-                    'email'     => $req->txtEmail,
-                    'sdt'       => $req->txtSDT,
-                    'matkhau'   => Hash::make($req->txtMatKhau1),
-                    'ngaytao'   => Carbon::now() 
-            );            
+//            $data1 = array(
+//                    'macb'      => $req->txtMaCB,
+//                    'hoten'     => $req->txtHoTen,
+//                    'gioitinh'  => $req->rdGioiTinh,
+//                    'ngaysinh'  => $req->txtNgaySinh,
+//                    'email'     => $req->txtEmail,
+//                    'sdt'       => $req->txtSDT,
+//                    'matkhau'   => Hash::make($req->txtMatKhau1),
+//                    'ngaytao'   => Carbon::now() 
+//            );            
+//            $ch1 = DB::table('giang_vien')->insert($data1);
             
             $gv = new Giangvien();
-            $gv->macb=$req->txtMaCB;
-            $gv->hoten=$req->txtHoTen;
-            $gv->matkhau=Hash::make($req->txtMatKhau1);
+            $gv->macb = $req->txtMaCB;
+            $gv->hoten = $req->txtHoTen;
+            $gv->gioitinh = $req->rdGioiTinh;
+            $gv->ngaysinh = $req->txtNgaySinh;
+            $gv->email = $req->txtEmail;
+            $gv->sdt = $req->txtSDT;
+            $gv->matkhau = Hash::make($req->txtMatKhau1);
+            $gv->ngaytao = Carbon::now();
             $gv->save();
-            
-//            $ch1 = DB::table('giang_vien')->insert($data1);
+//Thêm macb, hoten, email, matkhau vào bảng Users        
+            $thanhvien = new User;
+            $thanhvien->taikhoan = $req->txtMaCB;
+            $thanhvien->name = $req->txtHoTen;
+            $thanhvien->email = $req->txtEmail;
+            $thanhvien->password = Hash::make($req->txtMatKhau1);
+            $thanhvien->quyen = 'gv';
+            $thanhvien->remember_token= $req->_token;
+            $thanhvien->save();           
+
             //Lấy mảng manhomhp khi đã chon checkbox
             $nhomhp_checked = Input::get('chkNhomHP');
             $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)->update(
@@ -214,29 +235,36 @@ class QuantriController extends Controller
                         ]
                    );
             
-            return redirect('quantri/danhsachgv');           
+            return redirect('quantri/giangvien');           
         }
     }
 /*=========================== Sửa thông tin Giảng viên ==============================================*/ 
     public function CapNhatGV($macb){
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
-        //Lấy năm học và học kỳ hiện tại      
-        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
-        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
-                ->where('nam',$nam)
+        //Lấy năm học và học kỳ của giảng viên đang dạy      
+        $nam = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nam');
+        $hk = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
                 ->value('hocky');
         $mank = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->where('hp.macb',$macb)
                 ->value('nk.mank');
         //Lấy ds nhóm học phần chưa có GV nào phụ trách giảng dạy
         $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('nk.mank',$mank)
                 ->where('hp.macb','=',"")
-                ->get();  
+                ->Orwhere('hp.macb',$macb)
+                ->get(); 
+        $gv_hp = DB::table('nhom_hocphan')->where('mank',$mank)->value('manhomhp');
+        
         return view('quantri.cap-nhat-giang-vien')->with('gv',$row)->with('dshp',$dshp)
-                ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank);
+                ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank)->with('gv_hp',$gv_hp);
     } 
     
     public function LuuCapNhatGV(Request $req){
@@ -258,7 +286,7 @@ class QuantriController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }
         else
-        {
+        {            
             $data = array(
                     'macb'      => $_POST['txtMaCB'],
                     'hoten'     => $_POST['txtHoTen'],
@@ -266,17 +294,28 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'sdt'       => $_POST['txtSDT'],
-//                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
+                    'matkhau'   => Hash::make($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1 ,
 //                    'quantri'   => isset($_POST['ckbQuanTri']) ? 1 : 0,
                     'ngaytao'           => Carbon::now()
             );
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])->update($data);
+//Lưu cập nhật mật khẩu vào bảng Users      
+            $idgv = DB::table('users')->where('taikhoan',$req->txtMaCB)->value('id');
+            $thanhvien = User::find($idgv); 
+            $thanhvien->taikhoan= $req->txtMaCB;
+            $thanhvien->name = $req->txtHoTen;
+            $thanhvien->email = $req->txtEmail;
+            $thanhvien->password = Hash::make($req->txtMatKhauMoi1);
+    //      $thanhvien->quyen = 'gv';
+            $thanhvien->remember_token= $req->_token;
+            $thanhvien->save();
+            
             //Lấy mảng giá trị kho chọn nhiều checkbox Nhóm HP
             $nhomhp_checked = Input::get('chkNhomHP');
             $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)
                     ->update(['macb' => $_POST['txtMaCB']]);
-            return redirect('quantri/danhsachgv');
+            return redirect('quantri/giangvien');
            
         }
     }
@@ -287,7 +326,7 @@ class QuantriController extends Controller
         \Session::flash('ThongBao','Xóa '.$tencb.' thành công!');
         if($delete){
             //return $delete; $delete = 1 sau khi thuc hiện xóa            
-            return redirect('quantri/danhsachgv');
+            return redirect('quantri/giangvien');
         }
     }
 /*=========================== Xóa Giảng viên Khỏi NHÓM HP ==============================================*/ 
@@ -295,7 +334,7 @@ class QuantriController extends Controller
         $reject = DB::table('nhom_hocphan')->where('manhomhp',$mahp)->update(['macb'=>""]);
         \Session::flash('ThongBaoRut','Xóa thành công!');
         
-         return redirect('quantri/danhsachgv');
+         return redirect('quantri/giangvien');
         
     }
 /*********************
@@ -304,15 +343,10 @@ class QuantriController extends Controller
  */
 /*=========================== Danh sách cán bộ hướng dẫn niên luận ==============================================*/ 
     public function DanhSachSV(){
-        $ds = DB::table('sinh_vien as sv')
-                ->select('sv.mssv','sv.hoten','sv.ngaysinh','sv.khoahoc','sv.ngaytao','sv.email','sv.khoa','hp.tennhomhp',
-                        'chn.manhomthuchien','chn.nhomtruong')
-                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
-                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
-                ->paginate(10);
+        //Lấy mảng năm và học kỳ
         $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get();
         $hocky = DB::table('nien_khoa as nk')->distinct()->select('hocky')->get(); 
-        //Lấy năm học và học kỳ hiện tại      
+        //Lấy giá trị năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
                 ->where('nam',$nam)
@@ -321,6 +355,16 @@ class QuantriController extends Controller
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->where('nk.nam',$nam)->where('nk.hocky',$hk)
                 ->value('nk.mank');
+        //Lấy danh sách sinh viên ở hk hiện tại
+        $ds = DB::table('sinh_vien as sv')
+                ->select('sv.mssv','sv.hoten','sv.ngaysinh','sv.khoahoc','sv.ngaytao','sv.email','sv.khoa','hp.tennhomhp',
+                        'chn.manhomthuchien','chn.nhomtruong')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.mank',$mank)
+                ->orderBy('chn.manhomthuchien','desc')
+                ->paginate(10);
+        //Lấy danh sách nhóm hp ở hk-nk hiện tại
         $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('nk.mank',$mank)
@@ -358,6 +402,7 @@ class QuantriController extends Controller
                     'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email',
                     'txtKhoaHoc'  => 'required',
+                    'rdNhomHP'    => 'required',
                     'txtMatKhau1' => 'required|min:6',
                     'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'
                 ]
@@ -367,17 +412,38 @@ class QuantriController extends Controller
         }
         else
         {
-            $data = array(
-                    'mssv'     => $_POST['txtMaSV'],
-                    'hoten'    => $_POST['txtHoTen'],
-                    'gioitinh' => $_POST['rdGioiTinh'],
-                    'ngaysinh' => $_POST['txtNgaySinh'],
-                    'email'    => $_POST['txtEmail'],
-                    'khoahoc'  => $_POST['txtKhoaHoc'],
-                    'matkhau'  => md5($_POST['txtMatKhau1']),
-                    'ngaytao'  => Carbon::now()
-            );
-            $ch = DB::table('sinh_vien')->insert($data);            
+//            $data = array(
+//                    'mssv'     => $_POST['txtMaSV'],
+//                    'hoten'    => $_POST['txtHoTen'],
+//                    'gioitinh' => $_POST['rdGioiTinh'],
+//                    'ngaysinh' => $_POST['txtNgaySinh'],
+//                    'email'    => $_POST['txtEmail'],
+//                    'khoahoc'  => $_POST['txtKhoaHoc'],
+//                    'matkhau'  => Hash::make($_POST['txtMatKhau1']),
+//                    'ngaytao'  => Carbon::now()
+//            );
+//            $ch = DB::table('sinh_vien')->insert($data); 
+    //Thêm thông tin sinh viên vào bảng sinh_vien
+            $sv = new Sinhvien();
+            $sv->mssv = $req->txtMaSV;
+            $sv->hoten = $req->txtHoTen;
+            $sv->gioitinh = $req->rdGioiTinh;
+            $sv->ngaysinh = $req->txtNgaySinh;
+            $sv->email = $req->txtEmail;
+            $sv->sdt = $req->txtSDT;
+            $sv->matkhau = Hash::make($req->txtMatKhau1);
+            $sv->ngaytao = Carbon::now();
+            $sv->save();
+//Thêm macb, hoten, email, matkhau vào bảng Users        
+            $thanhvien = new User;
+            $thanhvien->taikhoan = $req->txtMaSV;
+            $thanhvien->name = $req->txtHoTen;
+            $thanhvien->email = $req->txtEmail;
+            $thanhvien->password = Hash::make($req->txtMatKhau1);
+            $thanhvien->quyen = 'sv';
+            $thanhvien->remember_token= $req->_token;
+            $thanhvien->save();
+            
             $ch2 = DB::table('chia_nhom')->insert(
                         [
                             'mssv'           => $_POST['txtMaSV'],
@@ -387,21 +453,28 @@ class QuantriController extends Controller
                         ]
                     );
             
-           return redirect('quantri/danhsachsv');
+           return redirect('quantri/sinhvien');
            
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
     public function CapNhatSV($masv){
         $row = DB::table('sinh_vien')->where('mssv',$masv)->first();
-        //Lấy năm học và học kỳ hiện tại
-        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
-        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
-                ->where('nam',$nam)
-                ->value('hocky');
+        //Lấy năm học và học kỳ của sinh viên đang hoc
+        $nam = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.mssv',$masv)
+                ->value('nk.nam');
+        $hk = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.mssv',$masv)
+                ->value('nk.hocky');
         $mank = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
-                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('chn.mssv',$masv)
                 ->value('nk.mank');
         $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
@@ -432,6 +505,7 @@ class QuantriController extends Controller
         }
         else
         {
+//            $mk =isset($_POST['txtMatKhauMoi1']) ? 
             $data = array(
                     'mssv'      => $_POST['txtMaSV'],
                     'hoten'     => $_POST['txtHoTen'],
@@ -439,18 +513,31 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'khoahoc'   => $_POST['txtKhoaHoc'],
-//                    'matkhau'   => md5($_POST['txtMatKhauMoi1']),
+//                    'matkhau'   => Hash::make($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1,
                     'ngaytao'   => Carbon::now()
             );
             $ch = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
-            $nhomhp = Input::has('rdNhomHP') == TRUE ? : $_POST['rdNhomHP']; 
+//Lưu cập nhật mật khẩu vào bảng Users  
+            $idsv = DB::table('users')->where('taikhoan',$req->txtMaSV)->value('id');
+            $thanhvien = User::find($idsv);
+            $thanhvien->taikhoan = $req->txtMaSV;
+            $thanhvien->name = $req->txtHoTen;
+            $thanhvien->email = $req->txtEmail;
+    //        $thanhvien->password = Hash::make($req->txtMatKhauMoi1);
+    //        $thanhvien->quyen = 'sv';
+            $thanhvien->remember_token= $req->_token;
+            $thanhvien->save();
+            
+           if(isset($_POST['rdNhomHP'])){
+               $nhomhp = Input::get('rdNhomHP'); 
+           }
             $ch2 = DB::table('chia_nhom')->where('mssv',$post['txtMaSV'])->update(
                         [
                             'manhomhp' => $nhomhp,
                         ]
                     );
-            return redirect('quantri/danhsachsv');
+            return redirect('quantri/sinhvien');
            
         }
     }
@@ -461,7 +548,7 @@ class QuantriController extends Controller
         \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
         if($delete){
             //return $delete; $delete = 1 sau khi thuc hiện xóa
-            return redirect('quantri/danhsachsv');
+            return redirect('quantri/sinhvien');
         }
     }
     

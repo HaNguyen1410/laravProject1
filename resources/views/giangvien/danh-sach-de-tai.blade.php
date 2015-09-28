@@ -76,60 +76,68 @@
                     <th width="10%">Trạng thái</th>
                     <th width="8%">Thao tác</th>
                 </tr>
-                @foreach($dsdt as $stt => $dt)
+                @if(count($dsdt) == 0)
                     <tr>
-                        <td align='center' style="vertical-align: middle;">
-                            <?php
-                                if(isset($_GET['page'])){
-                                    $p = 5*($_GET['page']-1);
-                                    //Vì $stt là chỉ số của 1 mảng nên luôn luôn bắt đầu bằng 0
-                                    echo $stt+1+$p;
-                                }
-                                else{
-                                    echo $stt+1;
-                                }
-                            ?>
-                        </td>
-                        <td width='15%'>
-                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
-                                {{$dt->tendt}}                                
-                            </a>
-                        </td>
-                        @if($dt->taptindinhkem != "")
-                            <td>
-                                <a href="../../public/mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
-                                    <img src="{{asset('public/images/Filetype-PDF-icon.png')}}"/>
-                                </a>                            
-                            </td>
-                        @elseif($dt->taptindinhkem == "")
-                            <td style="vertical-align: middle;">
-                                <a href="{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
-                                    Chi tiết
-                                </a>
-                            </td>
-                        @endif               
-                        <td width='15%'>{{$dt->motadt}}</td> 
-                        <td width='15%'>{{$dt->congnghe}}</td>
-                        <td align="center" style="vertical-align: middle;">{{$dt->songuoitoida}}</td>
-                        <td>{{$dt->ghichudt}}</td>
-<!--                        @foreach($nhomth as $nhom)      
-                            @if($nhom->tendt == $dt->tendt)
-                                <td align='center'>
-                                    {{$nhom->manhomthuchien}}
-                                </td>
-                            @endif
-                        @endforeach -->
-                        <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
-                        <td align='center'>
-                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}">
-                                <img src="{{asset('public/images/edit-icon.png')}}"/>
-                            </a>&nbsp
-                            <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
-                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
-                            </a>
+                        <td colspan="9" align="center">
+                            <label style="color: #e74c3c;"> Chưa có đề tài nào!</label> 
                         </td>
                     </tr>
-                @endforeach
+                @elseif (count($dsdt) > 0)
+                    @foreach($dsdt as $stt => $dt)
+                        <tr>
+                            <td align='center' style="vertical-align: middle;">
+                                <?php
+                                    if(isset($_GET['page'])){
+                                        $p = 5*($_GET['page']-1);
+                                        //Vì $stt là chỉ số của 1 mảng nên luôn luôn bắt đầu bằng 0
+                                        echo $stt+1+$p;
+                                    }
+                                    else{
+                                        echo $stt+1;
+                                    }
+                                ?>
+                            </td>
+                            <td width='15%'>
+                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
+                                    {{$dt->tendt}}                                
+                                </a>
+                            </td>
+                            @if($dt->taptindinhkem != "")
+                                <td>
+                                    <a href="../../public/mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
+                                        <img src="{{asset('public/images/Filetype-PDF-icon.png')}}"/>
+                                    </a>                            
+                                </td>
+                            @elseif($dt->taptindinhkem == "")
+                                <td style="vertical-align: middle;">
+                                    <a href="{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
+                                        Chi tiết
+                                    </a>
+                                </td>
+                            @endif               
+                            <td width='15%'>{{$dt->motadt}}</td> 
+                            <td width='15%'>{{$dt->congnghe}}</td>
+                            <td align="center" style="vertical-align: middle;">{{$dt->songuoitoida}}</td>
+                            <td>{{$dt->ghichudt}}</td>
+    <!--                        @foreach($nhomth as $nhom)      
+                                @if($nhom->tendt == $dt->tendt)
+                                    <td align='center'>
+                                        {{$nhom->manhomthuchien}}
+                                    </td>
+                                @endif
+                            @endforeach -->
+                            <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
+                            <td align='center'>
+                                <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}">
+                                    <img src="{{asset('public/images/edit-icon.png')}}"/>
+                                </a>&nbsp
+                                <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 <tr>
                     <td colspan="10" align="center">{!! $dsdt->setPath('../danhsachdetai/2134')->render() !!}</td>
                 </tr> 

@@ -58,53 +58,60 @@
                     <th width="6%">Số giờ làm dự án</th>
                     <th width="8%">Trạng thái(%)</th>
                 </tr>
-                
-                @foreach($dsdtnhom as $stt => $dtn)                
+                @if(count($dsdtnhom) == 0)
                     <tr>
-                        <td align='center'>{{$stt+1}}</td>
-                        <td align='center'>{{$dtn->manhomthuchien}}</td>
-                        <td>
-                           <a href='cvchinh/{{$dtn->manhomthuchien}}'>
-                                {{$dtn->tendt}}
-                            </a>  
+                        <td colspan="9" align="center">
+                            <label style="color: #e74c3c;"> Chưa có thông tin!</label> 
                         </td>
-                        <td>{{$dtn->hoten}}</td>
-                        <td>{{$dtn->tochucnhom}}</td>
-                        <td align='center'>                            
-                            <?php
-                              //Chuyển chuổi thành các phần tử trong 1 mảng 
-                               $ngay = explode(', ', $dtn->lichhop);
-                               //var_dump($ngay); //Xem kết quả của mảng vừa tách được từ chuỗi ban đầu 
-                               for($i = 0; $i < count($ngay); $i++){                                    
-                                   //Cắt số trong chuỗi ngày
-                                   $ngay_so = substr($ngay[$i],1); 
-                                   $kytu = substr($ngay[$i], 0, 1);
-                                   //So sánh ký tự đầu tiên
-                                   $bs = strcasecmp($kytu, 'S');
-                                   $bc = strcasecmp($kytu, 'C');
-                                   if($bs == 0){
-                                       echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
-                                           "<label style='color:green;'>Sáng thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
-                                        "</div>";
-                                   }
-                                   else if($bc == 0){
-                                       echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
-                                               "<label style='color:green;'>Chiều thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
-                                            "</div>";                                        
-                                   }
-                               }                                    
-                           ?>    
-                        </td>
-                        <td align='center'>{{$dtn->sogio_thucte}}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$dtn->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $dtn->tiendo; ?>%">
-                                    <span style='color:brown;'>{{$dtn->tiendo}}%</span>
-                                </div>
-                            </div>
-                        </td>                                           
                     </tr>
-                @endforeach
+                @elseif (count($dsdtnhom) > 0)
+                    @foreach($dsdtnhom as $stt => $dtn)                
+                        <tr>
+                            <td align='center'>{{$stt+1}}</td>
+                            <td align='center'>{{$dtn->manhomthuchien}}</td>
+                            <td>
+                               <a href='cvchinh/{{$dtn->manhomthuchien}}'>
+                                    {{$dtn->tendt}}
+                                </a>  
+                            </td>
+                            <td>{{$dtn->hoten}}</td>
+                            <td>{{$dtn->tochucnhom}}</td>
+                            <td align='center'>                            
+                                <?php
+                                  //Chuyển chuổi thành các phần tử trong 1 mảng 
+                                   $ngay = explode(', ', $dtn->lichhop);
+                                   //var_dump($ngay); //Xem kết quả của mảng vừa tách được từ chuỗi ban đầu 
+                                   for($i = 0; $i < count($ngay); $i++){                                    
+                                       //Cắt số trong chuỗi ngày
+                                       $ngay_so = substr($ngay[$i],1); 
+                                       $kytu = substr($ngay[$i], 0, 1);
+                                       //So sánh ký tự đầu tiên
+                                       $bs = strcasecmp($kytu, 'S');
+                                       $bc = strcasecmp($kytu, 'C');
+                                       if($bs == 0){
+                                           echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
+                                               "<label style='color:green;'>Sáng thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                            "</div>";
+                                       }
+                                       else if($bc == 0){
+                                           echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
+                                                   "<label style='color:green;'>Chiều thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                                "</div>";                                        
+                                       }
+                                   }                                    
+                               ?>    
+                            </td>
+                            <td align='center'>{{$dtn->sogio_thucte}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$dtn->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $dtn->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$dtn->tiendo}}%</span>
+                                    </div>
+                                </div>
+                            </td>                                           
+                        </tr>
+                    @endforeach
+                @endif
             </table>                    
         </div>
     </div> <!-- /row -->

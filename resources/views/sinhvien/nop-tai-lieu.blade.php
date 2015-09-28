@@ -1,13 +1,8 @@
-@extends('sinhvien_home')
+@extends('giangvien_home')
 
-@section('content_sv')
+@section('content_gv')
 
     <style type="text/css">
-        #bang1 th{
-            text-align: right;
-            color: darkblue;
-            background-color: #dff0d8;
-        }
         th{
             text-align: center;
             color: darkblue;
@@ -15,16 +10,13 @@
         }
     </style>
 
-
-<div class="container">            
+<div class="container">  
     <div class="row">
-        <h3 style="color: darkblue; font-weight: bold;" align="center">NỘP TÀI LIỆU</h3><br>
-        <div class="col-md-12" style="margin-bottom: 20px; width: 80%;">
-            <label style="margin-left: 15px; color: #00008b">Tên đề tài: </label><br>                    
-            <lable style="margin-left: 30px; color: #00008b; font-size: 13pt;">{{$tendt}}</lable>
-        </div>        
         <div class="col-md-12">
-             <form action="{{action('QltailieuController@LuuNopTaiLieu')}}" method="post" enctype="multipart/form-data">
+            <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">
+               Nộp tài liệu
+            </h3>
+            <form action="{{action('QltailieuController@LuuNopTaiLieu')}}" method="post" enctype="multipart/form-data">
                  <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                  <table class="table table-bordered" id="bang1">
                     <tr>
@@ -34,13 +26,13 @@
                         </td>
                         <th width='15%'>Tên công việc:</th>
                         <td>
-                             <select class="form-control" name="cbTenCV">
+                             <select class="form-control" name="cbGiaiDoan">
                                     <option value="">-- Chọn tên công việc --</option>  
-                                @foreach($dscvchinh as $cv)
-                                    <option value="{{$cv->macv}}">{{$cv->congviec}}</option>  
+                                @foreach($dsgiaidoan as $giaidoan)
+                                    <option value="{{$giaidoan->magd}}">{{$giaidoan->tengd}}</option>  
                                 @endforeach
                             </select>
-                            <p style='color:red;'>{{$errors->first('cbTenCV')}}</p>
+                            <p style='color:red;'>{{$errors->first('cbGiaiDoan')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -66,57 +58,8 @@
                         </td>
                     </tr>
                 </table>
-            </form>
-         </div> 
-         <div class="col-md-12">     
-             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
-                 <tr>
-                    <th width="1%">STT</th>
-                    <th width="4%">Công việc</th>
-                    <th width="8%">Tên tập tin</th>
-                    <th width="15%">Mô tả</th>                    
-                    <th width="6%">Ngày đăng</th>
-                    <th width="10%">Tác giả</th>
-                    <th width="15%">Nhận xét</th>
-                    <th width="6%">Ngày nhận xét</th>
-                    <th width="5%">Thao tác</th>
-                 </tr> 
-                 @if(count($dstailieu) == 0)
-                    <tr>
-                        <td colspan="9" align="center">
-                            <label style="color: #e74c3c;"> Chưa có tài liệu nào!</label> 
-                        </td>
-                    </tr>
-                 @elseif(count($dstailieu) > 0)
-                    @foreach($dstailieu as $stt => $tl)
-                        <tr>
-                            <td>{{$stt+1}}</td>
-                            <td>
-                                <a style="color: #006400;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->congviec}}">                                    
-                                    {{$tl->macv}}
-                                </a>
-                            </td>
-                            <td>
-                                <a style="color: #006400;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->kichthuoc}} Kb">                                    
-                                    {{$tl->tentl}}
-                                </a>
-                            </td>
-                            <td>{{$tl->mota}}</td>
-                            <td>{{$tl->ngaycapnhat}}</td>
-                            <td>{{$tl->hoten}}</td>
-                            <td><p style="color: #000080;">{{$tl->nd_danhgia}}</p></td>
-                            <td>{{$tl->ngaydanhgia}}</td>
-                            <td align="center">
-                                <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">
-                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}">
-                                </a>
-                            </td>
-                         </tr>
-                    @endforeach
-                 @endif                 
-             </table><hr>
-         </div>                                            
-    </div><!-- /row -->
-
-</div>   <!-- /container -->
+            </form>          
+        </div>
+    </div> <!-- /row -->        
+</div> <!-- /container -->   
 @endsection

@@ -29,8 +29,7 @@ return [
     |
     */
 
-//    'model' => App\User::class,
-     'model' => App\Giangvien::class,
+    'model' => App\User::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -43,9 +42,7 @@ return [
     |
     */
 
-//    'table' => 'users',
-    'table' => 'giang_vien',
-//    'table' => 'sinh_vien',
+    'table' => 'users',
     
 
     /*

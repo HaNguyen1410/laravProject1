@@ -28,27 +28,35 @@
                     <th width="10%">Ngày đăng mới nhất</th>
                     <th width="50%">Ghi chú</th>
                 </tr>
-                @foreach($dsdt as $stt => $dt)
+                 @if(count($dsdt) == 0)
                     <tr>
-                        <td align="center">{{$stt+1}}</td>
-                        <td align="center">
-                            {{$dt->madt}}
+                        <td colspan="9" align="center">
+                            <label style="color: #e74c3c;"> Chưa có tài liệu nào!</label> 
                         </td>
-                        <td><img src="{{asset('public/images/folder-page-icon.png')}}"/>
-                            <a href="2134/khotailieuchitiet/{{$dt->manhomthuchien}}">
-                                {{$dt->tendt}}
-                            </a> 
-                        </td>
-                        <td align="center">{{$dt->manhomthuchien}}</td>
-                        <td>{{$dt->hoten}}</td>                       
-                        @foreach($tailieu as $tl) 
-                            @if($dt->manhomthuchien == $tl->manhomthuchien)
-                                <td>{{$tl->ngaycapnhat}}</td>
-                                <td>{{$tl->mota}}</td>
-                            @endif
-                        @endforeach   
                     </tr>
-                @endforeach
+                @elseif (count($dsdt) > 0)
+                    @foreach($dsdt as $stt => $dt)
+                        <tr>
+                            <td align="center">{{$stt+1}}</td>
+                            <td align="center">
+                                {{$dt->madt}}
+                            </td>
+                            <td><img src="{{asset('public/images/folder-page-icon.png')}}"/>
+                                <a href="2134/khotailieuchitiet/{{$dt->manhomthuchien}}">
+                                    {{$dt->tendt}}
+                                </a> 
+                            </td>
+                            <td align="center">{{$dt->manhomthuchien}}</td>
+                            <td>{{$dt->hoten}}</td>                       
+                            @foreach($tailieu as $tl) 
+                                @if($dt->manhomthuchien == $tl->manhomthuchien)
+                                    <td>{{$tl->ngaycapnhat}}</td>
+                                    <td>{{$tl->mota}}</td>
+                                @endif
+                            @endforeach   
+                        </tr>
+                    @endforeach
+                @endif
             </table>              
         </div>   
     </div>

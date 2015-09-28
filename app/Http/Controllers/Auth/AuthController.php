@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use Validator;
+use Validator,
+    Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -27,6 +28,8 @@ class AuthController extends Controller
     */
 
     use AuthenticatesAndRegistersUsers;
+    
+//    protected $redirectAfterLogout = 'dangnhap';
 
     /**
      * Create a new authentication controller instance.
@@ -82,17 +85,23 @@ class AuthController extends Controller
 //          Hash::check('matkhau', $request->txtMatKhau);
         
             $dangnhap = array(
-                'macb'    => $request->txtTenDangNhap,
-                'matkhau' => $request->txtMatKhau,
+                'email'    => $request->txtTenDangNhap,
+                'password' => $request->txtMatKhau,
             );   
+    // tim giao vien va chuyen ve giao dien giao vien neu can
             if($this->auth->attempt($dangnhap)){
-                echo "Thành công";
-//                echo \Auth::user()->hoten;
-//                return redirect()->route('quantri/danhsachgv');
+//                echo "Thành công";
+                return redirect()->intended();
             }else{
-                echo "Thất bại: ".$this->auth->user();
-//                return redirect()->back();
+//                echo "Thất bại: ".$this->auth->user();
+                return redirect()->back();
             }              
     }
-    
+/*=============== Hiển thị giao diện đăng nhập =====================*/    
+    public function DangXuat(){
+//        \Auth::logout();
+        Session::flush();
+        return redirect()->guest('dangnhap');
+//        return view('giaodienchung.dang-nhap');
+    }    
 }

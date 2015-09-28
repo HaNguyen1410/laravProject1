@@ -16,6 +16,8 @@ use View,
     Hash;
 use Carbon\Carbon;
 use App\Giangvien;
+use App\User;
+use App\Http\Controllers\Auth;
 
 class GiangvienController extends Controller
 {
@@ -55,7 +57,8 @@ class GiangvienController extends Controller
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('giangvien.doi-mat-khau-gv')->with('gv', $row);
     } 
-    public function LuuDoiMatKhauGV(Request $req){        
+    public function LuuDoiMatKhauGV(Request $req){   
+        $macb = \Auth::user()->taikhoan;
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -74,8 +77,14 @@ class GiangvienController extends Controller
             $mk = Hash::make($post['txtMatKhauMoi1']);
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
                     ->update(['matkhau' => $mk]);
+        //Lưu cập nhật mật khẩu vào bảng Users      
+            $idgv = DB::table('users')->where('taikhoan',$req->txtMaCB)->value('id');
+            $thanhvien = User::find($idgv);
+            $thanhvien->password = $mk;
+            $thanhvien->save();            
+            
             if($ch > 0){
-                return redirect('giangvien/thongtingv/2134');                
+                return redirect('giangvien/thongtingv/'.$macb);                
             }
         }
     }

@@ -29,12 +29,12 @@
                         <th>
                             <select class="form-control" name='cbHocKy'>
                                 @foreach($hocky as $nk)
-                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                    <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
                                 @endforeach
                             </select>
                         </th>
                         <th>
-                            <a href="danhsachgv/themgv">
+                            <a href="giangvien/themgv">
                                 <button type="button" class="btn btn-primary" style="width:60%">
                                     <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                                </button>
@@ -80,7 +80,7 @@
                                 @endif
                             </td>
                             <td align='center'>
-                                <a href='danhsachgv/capnhatgv/{{$rw->macb}}'><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
+                                <a href='giangvien/capnhatgv/{{$rw->macb}}'><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
                                 <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachgv/xoagv/{{$rw->macb}}'>
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
@@ -89,7 +89,7 @@
                     @endforeach
 
                     <tr>
-                        <td colspan="9" align="center">{!! $dsgv->setPath('danhsachgv')->render() !!}</td>
+                        <td colspan="9" align="center">{!! $dsgv->setPath('giangvien')->render() !!}</td>
                     </tr>                     
                 </table>
             </div>            
@@ -112,7 +112,7 @@
                         <td align="center">{{$gvhp->nam}}</td>
                         <td align="center">{{$gvhp->hocky}}</td>
                         <td align='center'>
-                            <a onclick="return confirm('Rút giảng viên **{{$rw->hoten}}** khỏi nhóm HP **{{$gvhp->tennhomhp}}?');" href='danhsachgv/xoagvkhoihocphan/{{$gvhp->manhomhp}}'>
+                            <a onclick="return confirm('Rút giảng viên **{{$rw->hoten}}** khỏi nhóm HP **{{$gvhp->tennhomhp}}?');" href='giangvien/xoagvkhoihocphan/{{$gvhp->manhomhp}}'>
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

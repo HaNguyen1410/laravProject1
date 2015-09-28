@@ -32,25 +32,6 @@
                 <form action="{{action('QlthongbaoController@LuuThemThongBao')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <table class="table table-bordered">
-                        <tr>
-                            <th>Nội dung thông báo:</th>
-                            <td colspan="4">
-                                <textarea class="form-control" name="txtNoiDungTB" rows="4"></textarea>
-                                <p style='color:red;'>{{$errors->first('txtNoiDungTB')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
-                            <td>
-                                <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
-                            </td>
-                            <th title="Hạn chót mở hệ thống cho sinh viên nộp tài liệu">Thời hạn kết thúc</th>
-                            <td>
-                                <input type="text" id="txtNgayKetThuc" name="txtKetThucNop" value="" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtKetThucNop')}}</p>
-                            </td>
-                        </tr>
                         <tr>                        
                             <th>Mã cán bộ và Mã Thông báo:</th>
                             <td align="center">
@@ -67,6 +48,25 @@
                                 </select>
                             </td>    
                         </tr>
+                        <tr>
+                            <th>Nội dung thông báo:</th>
+                            <td colspan="4">
+                                <textarea class="form-control" name="txtNoiDungTB" rows="4"></textarea>
+                                <p style='color:red;'>{{$errors->first('txtNoiDungTB')}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
+                            <td width="25%">
+                                <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="" class="form-control"/>
+                                <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
+                            </td>
+                            <th title="Hạn chót mở hệ thống cho sinh viên nộp tài liệu">Thời hạn kết thúc</th>
+                            <td width="25%">
+                                <input type="text" id="txtNgayKetThuc" name="txtKetThucNop" value="" class="form-control"/>
+                                <p style='color:red;'>{{$errors->first('txtKetThucNop')}}</p>
+                            </td>
+                        </tr>
                         <tr>   
                             <th>Đính kèm:</th>
                             <td>
@@ -81,7 +81,7 @@
                         <tr>
                             <td colspan="4" align="center">
                                 <button type="submit" name="" class="btn btn-primary">
-                                    <img src="{{asset('public/images/add-icon.png')}}">Thêm Thông báo
+                                    <img src="{{asset('public/images/add-icon.png')}}">Thêm thông báo
                                 </button>
                                 <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px; width:15%">
                                     <img src="{{asset('public/images/delete-icon.png')}}">Hủy Bỏ

@@ -13,44 +13,54 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 style="display:block; float: left; color: darkblue; font-weight: bold;">DANH SÁCH SINH VIÊN</h4>
-            <div class="col-md-12" style="display:block; float:left;">
-                <table class="table table-bordered" style="width: 850px" align="center">
-                    <tr>
-                        <th align="right">Năm học:</th>
-                        <th>
-                            <select class="form-control" name='cbNamHoc'>
-                                @foreach($namhoc as $nk)
-                                <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
-                                @endforeach
-                            </select>
-                        </th>
-                        <th align="right">Học kỳ:</th>
-                        <th>
-                            <select class="form-control" name='cbHocKy'>
-                                @foreach($hocky as $nk)
-                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
-                                @endforeach
-                            </select>
-                        </th>
-                        <th align="right">Nhóm học phần:</th>
-                        <th>
-                            <select class="form-control" name='cbNhomHP'>
-                                @foreach($dshp as $hp)
-                                    <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
-                                @endforeach
-                            </select>
-                        </th>
-                        <th>
-                            <a href="danhsachsv/themsv">
-                                <button type="button" class="btn btn-primary" style="width:90%">
-                                    <img src="{{asset('public/images/add-icon.png')}}"> Thêm
-                               </button>
-                            </a>
-                        </th>
-                    </tr>
-                </table>            
+            <h4 style="color: darkblue; font-weight: bold;">DANH SÁCH SINH VIÊN</h4>
+            <div style="display:block; float: left;">
+                <form action="" method="post">
+                    <table class="table table-bordered" style="width: 900px" align="left">                    
+                        <tr>
+                            <th align="right">Năm học:</th>
+                            <th>
+                                <select class="form-control" name='cbNamHoc'>
+                                    @foreach($namhoc as $nk)
+                                    <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                                    @endforeach
+                                </select>
+                            </th>
+                            <th align="right">Học kỳ:</th>
+                            <th>
+                                <select class="form-control" name='cbHocKy'>
+                                    @foreach($hocky as $nk)
+                                    <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                    @endforeach
+                                </select>
+                            </th>
+                            <th align="right">Nhóm học phần:</th>
+                            <th>
+                                <select class="form-control" name='cbNhomHP'>
+                                        <option value="0">Tất cả</option>
+                                    @foreach($dshp as $hp)
+                                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
+                                    @endforeach
+                                </select>
+                            </th>
+                            <th>                            
+                                <a href="sinhvien/indanhsachsinhvien/2134" target="_blank">
+                                    <button type="button" name="" class="btn btn-success">
+                                        <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                    </button>
+                                </a>
+                            </th>
+                        </tr>
+                    </table> 
+                </form> 
             </div>    
+            <div align="right" style="margin-top: 20px;">
+                <a href="sinhvien/themsv">
+                    <button type="button" class="btn btn-primary" style="width:12%;">
+                        <img src="{{asset('public/images/add-icon.png')}}"> Thêm
+                   </button>
+                </a>
+            </div>        
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
@@ -58,7 +68,7 @@
                     <th width="6%">MSSV</th>
                     <th width="18%">Họ và tên</th>
                     <th width="15%">Email</th>
-                    <th width="4%">Tên HP</th>
+                    <th width="4%">Nhóm HP</th>
                     <th width="8%">Mã nhóm thực hiện đề tài</th>
                     <th>Người tạo</th> 
                     <th>Ngày tạo</th>
@@ -107,7 +117,7 @@
                             @endif
                         </td>
                         <td align='center'>
-                            <a href="danhsachsv/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                            <a href="sinhvien/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
                             <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
@@ -115,7 +125,7 @@
                     </tr>   
                 @endforeach
                 <tr>
-                    <td colspan="11" align="center">{!! $dssv->setPath('danhsachsv')->render() !!}</td>
+                    <td colspan="11" align="center">{!! $dssv->setPath('sinhvien')->render() !!}</td>
                 </tr>      
            </table>
 

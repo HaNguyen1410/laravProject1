@@ -106,7 +106,7 @@
                             <button  type="submit" name="btnThem" class="btn btn-primary" style="width:30%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
+                            <a href="{{Asset('quantri/sinhvien')}}" class="btn btn-warning" style="width:30%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>

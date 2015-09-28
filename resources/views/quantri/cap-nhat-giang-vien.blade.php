@@ -104,18 +104,15 @@
                         <td>Nhóm học phần:</td>
                         <td colspan="3">
                             @foreach($dshp as $hp)
-                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                                @if($gv_hp == $hp->manhomhp)
+                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP" value="{{$hp->manhomhp}}" checked=""/> &nbsp;&nbsp;&nbsp;
+                                @else
+                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                                @endif                                
                             @endforeach
-                             <p style='color:red;'>{{$errors->first('chkNhomHP')}}</p>
-                        </td>
+                             <p style='color:red;'>{{$errors->first('rdNhomHP')}}</p>
+                        </td>                          
                     </tr>  
-<!--                    <tr>
-                        <td>Mật khẩu hiện tại:</td>
-                        <td colspan="3">
-                            <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
-                            <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
-                        </td>
-                    </tr>
                     <tr>
                         <td>Mật khẩu mới:</td>
                         <td colspan="3">
@@ -123,6 +120,13 @@
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
                     </tr>
+<!--                    <tr>
+                        <td>Mật khẩu hiện tại:</td>
+                        <td colspan="3">
+                            <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
+                        </td>
+                    </tr>                    
                     <tr>
                         <td>Nhập lại mật khẩu mới:</td>
                         <td colspan="3">
@@ -136,7 +140,7 @@
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('quantri/danhsachgv')}}" class="btn btn-warning" style="width:20%;">
+                            <a href="{{Asset('quantri/giangvien')}}" class="btn btn-warning" style="width:20%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>

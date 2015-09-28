@@ -39,17 +39,7 @@ class ChianhomController extends Controller
     public function ChiaNhomNL($macb,Request $req){
         //Nếu selectbox có giá trị manhp thì lấy manhp
         //$mahp = $req->cbNhomHP;
-        $mahp = '6';
-        $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
-                ->join('giang_vien as gv','hp.macb','=','gv.macb')
-                ->where('hp.macb',$macb)->get();
-        //Lấy những sinh viên chưa có nhóm thực hiện niên luận
-        $dstensv = DB::table('chia_nhom as chn')->distinct()
-                ->select('chn.mssv','sv.hoten')
-                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
-                ->where('chn.manhomhp','=',$mahp)
-                ->where('chn.manhomthuchien','=',"")
-                ->get(); 
+ 
         //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
         $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
@@ -59,6 +49,22 @@ class ChianhomController extends Controller
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->where('hp.macb',$macb)
                 ->value('nk.hocky');
+        //Lấy mã nhóm HP của năm hiện tại mà cán bộ phụ trách
+        $mahp = DB::table('nhom_hocphan as hp')
+                ->join('nien_khoa as nk','hp.mank','=','nk.mank')
+                ->where('hp.macb',$macb)
+                ->where('nk.nam',$namcb)->where('nk.hocky',$hkcb)
+                ->value('hp.manhomhp');
+        $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
+                ->join('giang_vien as gv','hp.macb','=','gv.macb')
+                ->where('hp.macb',$macb)->get();
+        //Lấy những sinh viên chưa có nhóm thực hiện niên luận
+        $dstensv = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.mssv','sv.hoten')
+                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->where('chn.manhomhp','=',$mahp)
+                ->where('chn.manhomthuchien','=',"")
+                ->get();         
         //Lấy ds nhóm của học kỳ niên khóa hiện tại mà cán bộ đang dạy
         $dsNhom = DB::table('sinh_vien as sv')->distinct()
                 ->select('chn.manhomthuchien','sv.mssv','sv.hoten','chn.nhomtruong')
@@ -71,7 +77,7 @@ class ChianhomController extends Controller
                 ->where('nk.nam',$namcb)
                 ->where('nk.hocky',$hkcb)
                 ->get();      
-        //Lấy tên đề tài của các nhóm trong hoc kỳ niên khóa hiện tại
+        //Lấy tên đề tài của các nhóm trong hoc kỳ niên khóa của cán bộ đang dạy
         $detainhom = DB::table('de_tai as dt')->distinct()->orderBy('chn.manhomthuchien','asc')
                 ->select('dt.tendt','dt.taptindinhkem','chn.manhomthuchien')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
@@ -121,7 +127,8 @@ class ChianhomController extends Controller
             
             /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
             //$nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
-            $nhomtruong = isset($_POST['rdNhomTruong']) == null ? 0 : 1; 
+            
+            $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
 //            return $masv_checked.$nhomtruong;
 //              return count($masv_checked);               
             $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)

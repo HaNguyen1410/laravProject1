@@ -121,18 +121,12 @@ class QltailieuController extends Controller
         }
     }
     /*========================= Sinh viên nộp tài liệu =============================*/
-    public function NopTaiLieu($mssv){
-        $matl = $this->matl_tutang();
+    public function DanhSachNopTaiLieu($mssv){
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $tendt = DB::table('de_tai as dt')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->where('radt.manhomthuchien',$manth)
                 ->value('dt.tendt');
-        $dscvchinh = DB::table('cong_viec as cv')->select('cv.macv','cv.congviec')
-                ->join('thuc_hien as th','cv.macv','=','th.macv')
-                ->where('th.manhomthuchien',$manth)
-                ->where('cv.phuthuoc_cv','=',0)
-                ->get();
         $dstailieu = DB::table('tai_lieu as tl')->distinct()
                 ->select('tl.matl','tl.macv','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
                         'cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten')
@@ -142,10 +136,16 @@ class QltailieuController extends Controller
                 ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
                 ->where('th.manhomthuchien',$manth)
                 ->get();
-        return view('sinhvien.nop-tai-lieu')->with('tendt',$tendt)->with('dscvchinh',$dscvchinh)
-                        ->with('matl',$matl)->with('dstailieu',$dstailieu)->with('mssv',$mssv);
+        return view('sinhvien.danh-sach-nop-tai-lieu')->with('tendt',$tendt)
+                        ->with('dstailieu',$dstailieu)->with('mssv',$mssv);
     }
-/*========================= Lưu UPLOAD TÀI LIỆU =============================*/
+/*========================= UPLOAD TÀI LIỆU =============================*/
+    public function NopTaiLieu($mssv){
+        $matl = $this->matl_tutang();
+        
+        return view('sinhvien.nop-tai-lieu')->with('mssv',$mssv)->with('matl',$matl);
+    }
+    /*========================= Lưu UPLOAD TÀI LIỆU =============================*/
     public function LuuNopTaiLieu(Request $req){
         $post = $req->all();
         $v = \Validator::make($req->all(),

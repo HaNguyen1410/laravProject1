@@ -69,7 +69,7 @@ CREATE TABLE `chitiet_diem` (
 
 LOCK TABLES `chitiet_diem` WRITE;
 /*!40000 ALTER TABLE `chitiet_diem` DISABLE KEYS */;
-INSERT INTO `chitiet_diem` VALUES ('4','1111222',NULL),('4','1111223',NULL),('4','1111271',0),('4','1111306',0),('4','1111308',0),('4','1111317',0),('4','1111324',0),('4','1111333',NULL),('4','1111342',0),('4','1111359',0),('4','1111366',NULL),('4','1111432',0),('4','1113456',0),('4','1211234',NULL),('4','21321',NULL),('5','1111222',NULL),('5','1111223',NULL),('5','1111271',0),('5','1111306',0),('5','1111308',0),('5','1111317',0),('5','1111324',0),('5','1111333',NULL),('5','1111342',0),('5','1111359',0),('5','1111366',NULL),('5','1111432',0),('5','1113456',0),('5','1211234',NULL),('5','21321',NULL),('6','1111222',NULL),('6','1111223',NULL),('6','1111271',0),('6','1111306',0),('6','1111308',0),('6','1111317',0),('6','1111324',0),('6','1111333',NULL),('6','1111342',0),('6','1111359',0),('6','1111366',NULL),('6','1111432',0),('6','1113456',0),('6','1211234',NULL),('6','21321',NULL),('7','1111222',NULL),('7','1111223',NULL),('7','1111271',0),('7','1111306',0),('7','1111308',0),('7','1111317',0),('7','1111324',0),('7','1111333',NULL),('7','1111342',0),('7','1111359',0),('7','1111366',NULL),('7','1111432',0),('7','1113456',0),('7','1211234',NULL),('7','21321',NULL);
+INSERT INTO `chitiet_diem` VALUES ('4','1111222',NULL),('4','1111223',NULL),('4','1111271',0),('4','1111306',0),('4','1111308',0),('4','1111317',0),('4','1111324',0),('4','1111333',NULL),('4','1111342',0),('4','1111359',0),('4','1111366',NULL),('4','1111432',0),('4','1113456',0),('4','1211234',NULL),('4','21321',NULL),('5','1111222',NULL),('5','1111223',NULL),('5','1111271',0),('5','1111306',0),('5','1111308',0),('5','1111317',0),('5','1111324',0),('5','1111333',NULL),('5','1111342',0),('5','1111359',0),('5','1111366',NULL),('5','1111432',0),('5','1113456',0),('5','1211234',NULL),('5','21321',NULL),('6','1111222',NULL),('6','1111223',NULL),('6','1111271',0),('6','1111306',0),('6','1111308',0),('6','1111317',0),('6','1111324',0),('6','1111333',NULL),('6','1111342',0),('6','1111359',0),('6','1111366',NULL),('6','1111432',0),('6','1113456',0),('6','1211234',NULL),('6','21321',NULL),('7','1111222',NULL),('7','1111223',NULL),('7','1111271',0),('7','1111306',0),('7','1111308',0),('7','1111317',0),('7','1111324',0),('7','1111333',NULL),('7','1111342',0),('7','1111359',0),('7','1111366',NULL),('7','1111432',0),('7','1113456',0),('7','1211234',NULL),('7','21321',NULL),('8','1111222',NULL),('8','1111223',NULL),('8','1111271',NULL),('8','1111306',NULL),('8','1111308',NULL),('8','1111317',NULL),('8','1111324',NULL),('8','1111333',NULL),('8','1111342',NULL),('8','1111359',NULL),('8','1111366',NULL),('8','1111432',NULL),('8','1113456',NULL),('8','1211234',NULL),('8','21321',NULL);
 /*!40000 ALTER TABLE `chitiet_diem` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +132,7 @@ CREATE TABLE `danh_gia` (
 
 LOCK TABLES `danh_gia` WRITE;
 /*!40000 ALTER TABLE `danh_gia` DISABLE KEYS */;
-INSERT INTO `danh_gia` VALUES ('TL01','',NULL,NULL),('TL02','',NULL,NULL),('TL03','',NULL,NULL),('TL04','',NULL,NULL),('TL05','',NULL,NULL),('TL06','',NULL,NULL);
+INSERT INTO `danh_gia` VALUES ('TL01','2134','vẫn chưa rõ ràng','2015-09-28'),('TL02','',NULL,NULL),('TL03','',NULL,NULL),('TL04','',NULL,NULL),('TL05','',NULL,NULL),('TL06','',NULL,NULL);
 /*!40000 ALTER TABLE `danh_gia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,6 +172,32 @@ INSERT INTO `de_tai` VALUES ('1','2134','Website bán đồ nội thất','Thi�
 UNLOCK TABLES;
 
 --
+-- Table structure for table `giai_doan`
+--
+
+DROP TABLE IF EXISTS `giai_doan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `giai_doan` (
+  `magd` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `tengd` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `ngaybatdau_kehoach` date DEFAULT NULL,
+  `sotuan_kehoach` int(11) DEFAULT NULL,
+  PRIMARY KEY (`magd`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `giai_doan`
+--
+
+LOCK TABLES `giai_doan` WRITE;
+/*!40000 ALTER TABLE `giai_doan` DISABLE KEYS */;
+INSERT INTO `giai_doan` VALUES ('GD01','Phân tích yêu cầu',NULL,NULL),('GD02','Thiết kế phần mềm',NULL,NULL),('GD03','Lập trình phần mềm',NULL,NULL),('GD04','Kiểm thử phần mềm',NULL,NULL);
+/*!40000 ALTER TABLE `giai_doan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `giang_vien`
 --
 
@@ -205,6 +231,55 @@ INSERT INTO `giang_vien` VALUES ('1234','Pham Tâm An','Nữ','2015-09-30','an@g
 UNLOCK TABLES;
 
 --
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES ('2014_10_12_000000_create_users_table',1),('2014_10_12_100000_create_password_resets_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `nam_trong`
+--
+
+DROP TABLE IF EXISTS `nam_trong`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `nam_trong` (
+  `macv` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `matl` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `magd` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `mank` int(11) NOT NULL,
+  PRIMARY KEY (`macv`,`matl`,`magd`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `nam_trong`
+--
+
+LOCK TABLES `nam_trong` WRITE;
+/*!40000 ALTER TABLE `nam_trong` DISABLE KEYS */;
+INSERT INTO `nam_trong` VALUES ('1','TL05','GD01',5),('1','TL06','GD01',5),('CV1','TL01','GD01',5),('CV1.1','TL03','GD02',5),('CV1.2','TL04','GD02',5),('CV2','TL02','GD02',5);
+/*!40000 ALTER TABLE `nam_trong` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `nhan_thong_bao`
 --
 
@@ -224,7 +299,7 @@ CREATE TABLE `nhan_thong_bao` (
 
 LOCK TABLES `nhan_thong_bao` WRITE;
 /*!40000 ALTER TABLE `nhan_thong_bao` DISABLE KEYS */;
-INSERT INTO `nhan_thong_bao` VALUES ('Tất cả','TB02'),('Tất cả','TB03'),('NTH02','TB04');
+INSERT INTO `nhan_thong_bao` VALUES ('Tất cả','TB02'),('Tất cả','TB03'),('NTH02','TB04'),('Tất cả','TB05');
 /*!40000 ALTER TABLE `nhan_thong_bao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,6 +395,31 @@ INSERT INTO `nien_khoa` VALUES (1,'2012-2013',1),(2,'2012-2013',2),(3,'2012-2013
 UNLOCK TABLES;
 
 --
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `quy_dinh`
 --
 
@@ -340,7 +440,7 @@ CREATE TABLE `quy_dinh` (
 
 LOCK TABLES `quy_dinh` WRITE;
 /*!40000 ALTER TABLE `quy_dinh` DISABLE KEYS */;
-INSERT INTO `quy_dinh` VALUES ('3718','1'),('3718','2'),('3718','3'),('2134','4'),('2134','5'),('2134','6'),('2134','7');
+INSERT INTO `quy_dinh` VALUES ('3718','1'),('3718','2'),('3718','3'),('2134','4'),('2134','5'),('2134','6'),('2134','7'),('2134','8');
 /*!40000 ALTER TABLE `quy_dinh` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -403,7 +503,7 @@ CREATE TABLE `sinh_vien` (
 
 LOCK TABLES `sinh_vien` WRITE;
 /*!40000 ALTER TABLE `sinh_vien` DISABLE KEYS */;
-INSERT INTO `sinh_vien` VALUES ('1111222','Hoàng Hậu','Nữ','1992-08-04',66,'hau@gmail.com',NULL,'',NULL,NULL,NULL,'fcea920f7412b5da7be0cf42b8c93759','2015-09-04',0),('1111223','Cindy Candy','nữ','1992-08-04',36,'candy@gmail.com',NULL,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111271','Lê Giang Anh','nam','1993-03-11',37,'anh111271@student.ctu.edu.vn',0,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111306','Nguyễn Hoàng Long','Nữ','1993-08-18',37,'long111206@student.ctu.edu.vn',54645635,'','Mô hình MVC                                                                                                                                        ',' Đã học C/C++, Java, PHP                                                                                                                                        ',' Chưa được thực hiện 1 phần mềm nào                                                                                                                        ','e10adc3949ba59abbe56e057f20f883e','2015-07-14',0),('1111308','Võ Thành Luân','nam','1993-09-22',37,'luan111308@student.ctu.edu.vn',0,'','	',NULL,NULL,NULL,'0000-00-00',0),('1111317','Nguyễn Thiên Lý','Nữ','1993-06-03',36,'ngoc111319@student.ctu.edu.vn',123456789,'Ly1111317.png',' - Thiết kế CSDL, Thiết kế và phát triển phần mềm, phân tích số liệu.                                                                                                                                                                      ','- Biết về ngôn ngữ lập trình C/C++, Lập trình java, ngôn ngữ lập trình php.                                                                                                                          ',' - Đã từng làm phần mềm quản lý hóa đơn bằng ngôn ngữ lập trình java.                                                                                                                             ','fcea920f7412b5da7be0cf42b8c93759','2015-09-06',0),('1111324','Đoàn Ái Ngọc','nữ','1992-02-01',37,'dngoc111324@student.ctu.edu.vn',0,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111333','Mật Mã','nam','1992-11-01',36,'ma@gmail.com',NULL,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111342','Lê Trương Quốc Thắng','nam','1993-03-18',37,'thang111342@student.ctu.edu.vn',0,'','	\r\n',NULL,NULL,NULL,'0000-00-00',0),('1111359','Nguyễn Châu Thiên Tú','nam','1992-08-21',37,'tu111359@student.ctu.edu.vn',0,'','',NULL,NULL,NULL,'0000-00-00',0),('1111366','Ngô Hải Vân','nam','1993-08-10',37,'van111366@student.ctu.edu.vn',0,'','\r\n',NULL,NULL,NULL,'0000-00-00',0),('1111432','Lâm Thành Đồng','Nam','0000-00-00',36,'dong@gmail.com',0,'Dong1111432.jpg','','','','d41d8cd98f00b204e980','0000-00-00',0),('1113456','Cẩm Tú cầu','Nữ','1995-12-01',39,'cau113456@gmail.com',NULL,'','','','','e10adc3949ba59abbe56','2015-07-14',0),('1211234','La Trịnh Nhân Ái','Nữ','2015-07-01',38,'ai233234@student.ctu.edu.vn',0,'','','','','d41d8cd98f00b204e980','2015-07-27',0),('21321','Chưa Biết','Nam','2015-08-04',40,'biet@gmail.com',NULL,'',NULL,NULL,NULL,'123456','0000-00-00',0),('21322','sdsdfsdf','Nữ','2015-08-03',22,'ai@student.ctu.edu.vn',0,'',NULL,NULL,NULL,'e10adc3949ba59abbe56e057f20f883e','2015-08-31',0),('21323','Hoa Phát Tài','Nữ','2015-09-21',21,'phattai@gmail.com',0,'',NULL,NULL,NULL,'e10adc3949ba59abbe56e057f20f883e','2015-09-04',0);
+INSERT INTO `sinh_vien` VALUES ('1111222','Hoàng Hậu','Nữ','1992-08-04',66,'hau@gmail.com',NULL,'',NULL,NULL,NULL,'fcea920f7412b5da7be0cf42b8c93759','2015-09-04',0),('1111223','Cindy Candy','nữ','1992-08-04',36,'candy@gmail.com',NULL,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111271','Lê Giang Anh','nam','1993-03-11',37,'anh111271@student.ctu.edu.vn',0,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111306','Nguyễn Hoàng Long','Nữ','1993-08-18',37,'long111206@student.ctu.edu.vn',54645635,'','Mô hình MVC                                                                                                                                        ',' Đã học C/C++, Java, PHP                                                                                                                                        ',' Chưa được thực hiện 1 phần mềm nào                                                                                                                        ','e10adc3949ba59abbe56e057f20f883e','2015-07-14',0),('1111308','Võ Thành Luân','nam','1993-09-22',37,'luan111308@student.ctu.edu.vn',0,'','	',NULL,NULL,NULL,'0000-00-00',0),('1111317','Nguyễn Thiên Lý','Nữ','1993-06-03',36,'ngoc111319@student.ctu.edu.vn',123456789,'Ly1111317.png',' - Thiết kế CSDL, Thiết kế và phát triển phần mềm, phân tích số liệu. \r\n- Sử dụng phần mềm kiểm thử.                                                                                                                                                                      ','- Biết về ngôn ngữ lập trình C/C++, Lập trình java, ngôn ngữ lập trình php.                                                                                                                          ',' - Đã từng làm phần mềm quản lý hóa đơn bằng ngôn ngữ lập trình java.                                                                                                                             ','fcea920f7412b5da7be0cf42b8c93759','2015-09-06',0),('1111324','Đoàn Ái Ngọc','nữ','1992-02-01',37,'dngoc111324@student.ctu.edu.vn',0,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111333','Mật Mã','nam','1992-11-01',36,'ma@gmail.com',NULL,'',NULL,NULL,NULL,NULL,'0000-00-00',0),('1111342','Lê Trương Quốc Thắng','nam','1993-03-18',37,'thang111342@student.ctu.edu.vn',0,'','	\r\n',NULL,NULL,NULL,'0000-00-00',0),('1111359','Nguyễn Châu Thiên Tú','nam','1992-08-21',37,'tu111359@student.ctu.edu.vn',0,'','',NULL,NULL,NULL,'0000-00-00',0),('1111366','Ngô Hải Vân','nam','1993-08-10',37,'van111366@student.ctu.edu.vn',0,'','\r\n',NULL,NULL,NULL,'0000-00-00',0),('1111432','Lâm Thành Đồng','Nam','0000-00-00',36,'dong@gmail.com',0,'Dong1111432.jpg','','','','d41d8cd98f00b204e980','0000-00-00',0),('1113456','Cẩm Tú cầu','Nữ','1995-12-01',39,'cau113456@gmail.com',NULL,'','','','','e10adc3949ba59abbe56','2015-07-14',0),('1211234','La Trịnh Nhân Ái','Nữ','2015-07-01',38,'ai233234@student.ctu.edu.vn',0,'','','','','d41d8cd98f00b204e980','2015-07-27',0),('21321','Chưa Biết','Nam','2015-08-04',40,'biet@gmail.com',NULL,'',NULL,NULL,NULL,'123456','0000-00-00',0),('21322','sdsdfsdf','Nữ','2015-08-03',22,'ai@student.ctu.edu.vn',0,'',NULL,NULL,NULL,'e10adc3949ba59abbe56e057f20f883e','2015-08-31',0),('21323','Hoa Phát Tài','Nữ','2015-09-21',21,'phattai@gmail.com',0,'',NULL,NULL,NULL,'e10adc3949ba59abbe56e057f20f883e','2015-09-04',0);
 /*!40000 ALTER TABLE `sinh_vien` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -416,6 +516,7 @@ DROP TABLE IF EXISTS `tai_lieu`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tai_lieu` (
   `matl` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `magd` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `macv` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `mssv` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `tentl` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -433,7 +534,7 @@ CREATE TABLE `tai_lieu` (
 
 LOCK TABLES `tai_lieu` WRITE;
 /*!40000 ALTER TABLE `tai_lieu` DISABLE KEYS */;
-INSERT INTO `tai_lieu` VALUES ('TL01','CV1','1111317','DacTa.doc',62,'cdsấ','2015-09-13 09:32:28',''),('TL02','CV1','1111317','DacTaSoBo.docx',62,'','2015-09-13 09:33:53',''),('TL03','CV1','1111317','CTU_Slide.ppt',275.5,'đá','2015-09-13 09:37:14',''),('TL04','CV2','1111317','03-DSSV-TTTT-05-05-2015_Chinh thuc.pdf',558.996,'fsfsfsdf','2015-09-13 09:37:36',''),('TL05','CV2','1111317','Dacta_Thietke_Kiemthu.pdf',565.209,'dsfad','2015-09-13 09:38:06',''),('TL06','CV5','1111308','KeHoach.doc',48,'fdsfdsf','2015-09-13 09:45:47','');
+INSERT INTO `tai_lieu` VALUES ('TL01','','CV1','1111317','DacTa.doc',62,'cdsấ','2015-09-13 09:32:28',''),('TL02','','CV2','1111317','DacTaSoBo.docx',62,'','2015-09-13 09:33:53',''),('TL03','','CV1.1','1111317','CTU_Slide.ppt',275.5,'đá','2015-09-13 09:37:14',''),('TL04','','CV1.2','1111317','03-DSSV-TTTT-05-05-2015_Chinh thuc.pdf',558.996,'fsfsfsdf','2015-09-13 09:37:36',''),('TL05','','1','1111317','Dacta_Thietke_Kiemthu.pdf',565.209,'dsfad','2015-09-13 09:38:06',''),('TL06','','1','1111308','KeHoach.doc',48,'fdsfdsf','2015-09-13 09:45:47','');
 /*!40000 ALTER TABLE `tai_lieu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -464,7 +565,7 @@ CREATE TABLE `thong_bao` (
 
 LOCK TABLES `thong_bao` WRITE;
 /*!40000 ALTER TABLE `thong_bao` DISABLE KEYS */;
-INSERT INTO `thong_bao` VALUES ('2134','TB02','Chưa nộp tài liệu đặt tả sơ bộ','DacTaSoBo.docx','2015-09-13','2015-09-19',0,'2015-09-13','2015-09-13'),('2134','TB03','Nộp tài liệu đặc tả sơ bộ','','2015-09-01','2015-09-08',0,'2015-09-13','2015-09-13'),('2134','TB04','fsfsdf','Dacta_Thietke_Kiemthu.pdf','2015-09-01','2015-09-22',1,'2015-09-13','2015-09-13');
+INSERT INTO `thong_bao` VALUES ('2134','TB02','Chưa nộp tài liệu đặt tả sơ bộ','DacTaSoBo.docx','2015-09-13','2015-09-19',0,'2015-09-13','2015-09-13'),('2134','TB03','Nộp tài liệu đặc tả sơ bộ','','2015-09-01','2015-09-08',0,'2015-09-13','2015-09-13'),('2134','TB04','fsfsdf','Dacta_Thietke_Kiemthu.pdf','2015-09-01','2015-09-22',1,'2015-09-13','2015-09-13'),('2134','TB05','fdsfsdf','','2015-09-01','2015-09-30',0,'2015-09-28','0000-00-00');
 /*!40000 ALTER TABLE `thong_bao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -517,8 +618,38 @@ CREATE TABLE `tieu_chi_danh_gia` (
 
 LOCK TABLES `tieu_chi_danh_gia` WRITE;
 /*!40000 ALTER TABLE `tieu_chi_danh_gia` DISABLE KEYS */;
-INSERT INTO `tieu_chi_danh_gia` VALUES ('1','Tính sáng tạo',1,'2014-06-30'),('2','Phần mềm dự án',5,'2014-06-30'),('3','Tài liệu dự án',4,'2014-06-30'),('4','Kỹ năng làm việc nhóm',1,'2015-09-24'),('5','Đánh giá về sự hoàn thành của dự án',2,'2015-09-24'),('6','Tài liệu báo cáo',3,'2015-09-24'),('7','Phần Demo dự án',2,'2015-09-24');
+INSERT INTO `tieu_chi_danh_gia` VALUES ('1','Tính sáng tạo',1,'2014-06-30'),('2','Phần mềm dự án',5,'2014-06-30'),('3','Tài liệu dự án',4,'2014-06-30'),('4','Kỹ năng làm việc nhóm',1,'2015-09-24'),('5','Đánh giá về sự hoàn thành của dự án',2,'2015-09-24'),('6','Tài liệu báo cáo',3,'2015-09-24'),('7','Phần Demo dự án',2,'2015-09-24'),('8','dfadá',1,'2015-09-28');
 /*!40000 ALTER TABLE `tieu_chi_danh_gia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `quyen` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -530,4 +661,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-09-29  3:02:22
+-- Dump completed on 2015-09-29  3:16:46

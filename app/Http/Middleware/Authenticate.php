@@ -38,10 +38,27 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('auth/login');
+//                return redirect()->guest('auth/login');
+                return redirect()->guest('dangnhap');
             }
         }
-
+        if ($request->is('giangvien/*')) {
+            if(\Auth::user()->quyen != 'gv')
+                return redirect()->guest('dangnhap');
+        }
+        
+        if ($request->is('quantri/*')) {
+            if(\Auth::user()->quyen != 'qt')
+                return redirect()->guest('dangnhap');
+        }
+        
+        if ($request->is('sinhvien/*')) {
+            if(\Auth::user()->quyen != 'sv')
+                return redirect()->guest('dangnhap');
+        }
+        /* $action = $request->route()->getActionName();
+        echo $action; */
+        
         return $next($request);
     }
 }

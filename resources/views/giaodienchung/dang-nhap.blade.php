@@ -32,13 +32,13 @@
                     </div>
             @endif
             <div class="card card-container"> 
-                <img id="profile-img" class="profile-img-card" src="{{asset('images/User-image.png')}}" />
+                <img id="profile-img" class="profile-img-card" src="{{asset('public/images/User-image.png')}}" />
 <!--                <p id="profile-name" class="profile-name-card"></p>-->
                 <form class="form-signin" action="{{action('Auth\AuthController@GoiDangNhap')}}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <span id="reauth-username" class="reauth-username"></span>
                     <label for="inputUsername" >Tên đăng nhập:</label>
-                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" class="form-control" placeholder="Tài khoản đăng nhập" autofocus>
+                    <input type="text" id="txtTenDangNhap" name="txtTenDangNhap" class="form-control" placeholder="Nhập tài khoản email" autofocus>
                     <!--<p style='color:red;'>{{$errors->first('txtTenDangNhap')}}</p>-->
                     <label for="inputPassword" >Mật khẩu:</label>
                     <input type="password" id="txtMatKhau" name="txtMatKhau" class="form-control" placeholder="Mật khẩu">

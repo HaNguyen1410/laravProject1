@@ -112,19 +112,19 @@
                             <input type="text" name="txtEmail" value="<?= $sv->email ?>" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
-                    </tr> 
+                    </tr>                     
+<!--                    <tr>
+                        <td>Mật khẩu mới:</td>
+                        <td colspan="3">
+                            <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
+                        </td>
+                    </tr>-->
 <!--                    <tr>
                         <td>Mật khẩu hiện tại:</td>
                         <td colspan="3">
                             <input type="password" id="txtMatKhauCu" name="txtMatKhauCu" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauCu')}}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Mật khẩu mới:</td>
-                        <td colspan="3">
-                            <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
-                            <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -140,7 +140,7 @@
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:30%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="{{Asset('quantri/danhsachsv')}}" class="btn btn-warning" style="width:30%;">
+                            <a href="{{Asset('quantri/sinhvien')}}" class="btn btn-warning" style="width:30%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                
                         </td>

@@ -129,6 +129,11 @@ class SinhvienController extends Controller
         else{
             $ch = DB::table('sinh_vien')->where('mssv', $post['txtMaSV'])
                     ->update(['matkhau' => Hash::make($_POST['txtMatKhauMoi1'])]);
+            //Lưu cập nhật mật khẩu vào bảng Users        
+            $thanhvien = new User;
+            $thanhvien->where('taikhoan',$req->txtMaSV)
+                    ->update('password',Hash::make($req->txtMatKhauMoi1));
+            
             if($ch > 0){
                return redirect('sinhvien/thongtinsv/1111317'); 
             }

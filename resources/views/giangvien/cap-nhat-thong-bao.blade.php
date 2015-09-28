@@ -33,6 +33,21 @@
                 <form action="{{action('QlthongbaoController@LuuCapNhatThongBao')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <table class="table table-bordered">
+                        <tr>   
+                            <th>Mã Thông báo:</th>
+                            <td align="center">
+                                <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control" readonly=""/>                               
+                            </td> 
+                            <th>Nhóm thực hiện:</th>
+                            <td>
+                                <select class="form-control" name="cbNhomNL">
+                                    <option value="Tất cả">Tất cả</option>
+                                    @foreach($dsnhomth as $nhom)
+                                        <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
+                                    @endforeach
+                                </select>
+                            </td>                            
+                        </tr>
                         <tr>
                             <th>Nội dung thông báo:</th>
                             <td colspan="4">
@@ -42,30 +57,15 @@
                         </tr>
                         <tr>
                             <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
-                            <td>
+                            <td width="24%">
                                 <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="{{$tb->batdautb}}" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
                             </td>
                             <th title="Hạn chót mở hệ thống cho sinh viên nộp tài liệu">Thời hạn kết thúc</th>
-                            <td>
+                            <td  width="24%">
                                 <input type="text" id="txtNgayKetThuc" name="txtKetThucNop" value="{{$tb->ketthuctb}}" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtKetThucNop')}}</p>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>Nhóm thực hiện:</th>
-                            <td>
-                                <select class="form-control" name="cbNhomNL">
-                                    <option value="Tất cả">Tất cả</option>
-                                    @foreach($dsnhomth as $nhom)
-                                        <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
-                                    @endforeach
-                                </select>
-                            </td>     
-                            <th>Mã Thông báo:</th>
-                            <td align="center">
-                                <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>                               
-                            </td>                           
                         </tr>
                         <tr>
                             <th>Đính kèm:</th>

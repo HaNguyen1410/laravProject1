@@ -67,11 +67,11 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/theodoikehoach/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">
+                                    <li><a href="{{asset('giangvien/theodoikehoach/'.Auth::user()->taikhoan)}}" data-toggle="tooltip" data-placement="bottom" title="Theo dõi thực hiện dự án">
                                             Theo dõi kế hoạch</a>
                                     </li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('giangvien/quanlythongbao/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Thông báo thời hạn nộp tài liệu, ngày báo cáo tiến độ với giảng viên hướng dẫn">
+                                    <li><a href="{{asset('giangvien/quanlythongbao/'.Auth::user()->taikhoan)}}" data-toggle="tooltip" data-placement="bottom" title="Thông báo thời hạn nộp tài liệu, ngày báo cáo tiến độ với giảng viên hướng dẫn">
                                             Quản lý thông báo</a>
                                     </li>
                                 </ul>
@@ -82,28 +82,28 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/danhsachdetai/2134')}}" >
+                                    <li><a href="{{asset('giangvien/danhsachdetai/'.Auth::user()->taikhoan)}}" >
                                             Đề tài</a>
                                     </li>
                                     <li class="divider"></li>                           
                                     <li>
                                         <!--   -->
-                                        <a href="{{asset('giangvien/chianhom/2134')}}" data-toggle="tooltip" data-placement="bottom" title="Chia đề tài vào mỗi nhóm sinh viên">
+                                        <a href="{{asset('giangvien/chianhom/'.Auth::user()->taikhoan)}}" data-toggle="tooltip" data-placement="bottom" title="Chia đề tài vào mỗi nhóm sinh viên">
                                             Chia nhóm thực hiện
                                         </a>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="{{asset('giangvien/khotailieu/2134')}}">Kho tài liệu</a></li>
+                            <li><a href="{{asset('giangvien/khotailieu/2134'.Auth::user()->taikhoan)}}">Kho tài liệu</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Chấm điểm
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/dstieuchi/2134')}}">Tiêu chí</a></li>
+                                    <li><a href="{{asset('giangvien/dstieuchi/'.Auth::user()->taikhoan)}}">Tiêu chí</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="{{asset('giangvien/nhapdiem/2134')}}">Nhập điểm</a></li>
+                                    <li><a href="{{asset('giangvien/nhapdiem/'.Auth::user()->taikhoan)}}">Nhập điểm</a></li>
 
                                 </ul>
                             </li>                                 
@@ -113,9 +113,9 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/thongtingv/2134')}}">Thông tin cá nhân</a></li>
+                                    <li><a href="{{url('giangvien/thongtingv/'.Auth::user()->taikhoan)}}">Thông tin cá nhân</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('giangvien/doimatkhaugv/2134')}}">Đổi mật khẩu</a></li>
+                                    <li><a href="{{asset('giangvien/doimatkhaugv/'.Auth::user()->taikhoan)}}">Đổi mật khẩu</a></li>
                                 </ul>
                             </li>
                             
@@ -144,9 +144,16 @@
                                     </div>
                                 </div>
                             </li>  
-                            <li style="margin-right: 15px;">
-                                <a href="{{asset('/dangnhap')}}">
-                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                            <li>
+                                <a>
+                                    <lable style="font-weight: bold; color: #00008b;">
+                                        {!! Auth::user()->name !!} - {!! Auth::user()->taikhoan !!}
+                                    </lable>
+                                </a>
+                            </li>
+                            <li style="margin-right: 15px;">                                
+                                <a href="{{asset('dangxuat')}}">
+                                    (Đăng xuất)
                                 </a>
                             </li>
                         </ul>

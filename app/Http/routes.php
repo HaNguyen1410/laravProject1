@@ -20,10 +20,10 @@ Route::get('/', function () {
  * ************************
  */
 Route::get('dangnhap', 'Auth\AuthController@DangNhap');
-Route::post('goidangnhap', 'Auth\AuthController@GoiDangNhap');
+Route::post('dangnhap', 'Auth\AuthController@GoiDangNhap');
 
 Route::get('dangxuat', 'Auth\AuthController@DangXuat');
-//Route::resource('sessions','SessionsController');
+//Route::resource('sessions','SessionsController'); Theo RestfulController.
 
 /*######### Gói bestmomo/scafold": "dev-master" đăng nhập ################*/
 //Route::controllers([
@@ -54,8 +54,8 @@ Route::group(['prefix'=>'quantri'],function(){
 /*
  * ######## Quản trị Giảng Viên ##################
  */
-    Route::get('danhsachgv','QuantriController@DanhSachGV');
-    Route::group(['prefix'=>'danhsachgv'],function(){
+    Route::get('giangvien','QuantriController@DanhSachGV');
+    Route::group(['prefix'=>'giangvien'],function(){
     /*======= Thêm giảng viên mới==========*/
         Route::get('themgv','QuantriController@ThemGV');
         Route::post('luuthemgv','QuantriController@LuuThemGV');
@@ -69,8 +69,8 @@ Route::group(['prefix'=>'quantri'],function(){
  /*
  * ######## Quản trị Sinh Viên ##################
  */
-    Route::get('danhsachsv','QuantriController@DanhSachSV');
-    Route::group(['prefix'=>'danhsachsv'],function(){
+    Route::get('sinhvien','QuantriController@DanhSachSV');
+    Route::group(['prefix'=>'sinhvien'],function(){
     /*======= Trang thêm sinh viên mới==========*/
         Route::get('themsv','QuantriController@ThemSV');
         Route::post('luuthemsv','QuantriController@LuuThemSV');
@@ -79,6 +79,8 @@ Route::group(['prefix'=>'quantri'],function(){
         Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
     /*======= Xóa thông tin sinh viên ==========*/
         Route::get('xoasv/{masv}','QuantriController@XoaSV');
+    /*=========== In danh sách sinh viên =============*/
+        Route::get('indanhsachsinhvien/{macbqt}/{mahp}','IntrangController@InDanhSachSV');
     });
 });
 
@@ -90,7 +92,7 @@ Route::get('vidu','GiangvienController@ViDu');
 /*======= Hiển thị trang thông tin giảng viên ==========*/
 Route::get('thongtingv','GiangvienController@ThongTin_gv');
 
-Route::group(['prefix'=>'giangvien'], function(){
+Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     /*======= Trang THÔNG TIN giảng viên ==========*/
     Route::get('thongtingv/{macb}','GiangvienController@ThongTinGV');
     /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
@@ -171,50 +173,57 @@ Route::group(['prefix'=>'giangvien'], function(){
  * =========================== TRANG SINH VIÊN ===========================================
  * *************************
  */
-/*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
-Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
-Route::get('sinhvien/thongtinsv/{mssv}/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
-Route::get('sinhvien/thongtinsv/{mssv}/capnhatkynang','SinhvienController@CapNhatKyNang');
-Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
-//Route::get('sinhvien/thongtinsv/{mssv}/xemtaptin/{tentaptin}','SinhvienController@XemTapTin');
-/*======= Trang xem công việc được giao ==========*/
-Route::get('sinhvien/xemviecduocgiao/{mssv}/{hoten}/{manth}','SinhvienController@CongViecSV');
-/*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/
-Route::get('sinhvien/doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
-Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
-route::post('doihinhdaidiensv','SinhvienController@DoiHinhDaiDienSV');
-/*======= XEM ĐIỂM ==========*/
-Route::get('sinhvien/xemdiem/{mssv}','DiemController@XemDiem');
-route::get('sinhvien/xemdiem/{mssv}/inbangdiemsv','IntrangController@InBangDiemSV');
-/*======= THÔNG TIN NHÓM NIÊN LUẬN ==========*/
-Route::get('sinhvien/themthongtinnhom/{mssv}','SVthongtinnhomController@ThemThongTinNhom');
-Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
-/*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
-Route::get('sinhvien/danhsachcv/{mssv}','PhancvController@DanhSachCV');
-
-/*======= PHÂN CÔNG NHIỆM VỤ ==========*/
+Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
+    /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
+    Route::get('thongtinsv/{mssv}','SinhvienController@HienThiSV');
+    Route::get('thongtinsv/{mssv}/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
+    Route::get('thongtinsv/{mssv}/capnhatkynang','SinhvienController@CapNhatKyNang');
+    Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
+    /*======= Trang xem công việc được giao ==========*/
+    Route::get('xemviecduocgiao/{mssv}/{hoten}/{manth}','SinhvienController@CongViecSV');
+    /*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/
+    Route::get('doimatkhausv/{masv}','SinhvienController@DoiMatKhauSV');
+    Route::post('luudoimatkhausv','SinhvienController@LuuDoiMatKhauSV');
+    route::post('doihinhdaidiensv','SinhvienController@DoiHinhDaiDienSV');
+    /*======= XEM ĐIỂM ==========*/
+    Route::get('xemdiem/{mssv}','DiemController@XemDiem');
+    route::get('xemdiem/{mssv}/inbangdiemsv','IntrangController@InBangDiemSV');
+    /*======= THÔNG TIN NHÓM NIÊN LUẬN ==========*/
+    Route::get('themthongtinnhom/{mssv}','SVthongtinnhomController@ThemThongTinNhom');
+    Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
+    /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
+    Route::get('danhsachcv/{mssv}','PhancvController@DanhSachCV');
+    
+/*====##### Chức năng của NHÓM TRƯỞNG #####====*/
+    /*======= PHÂN CÔNG NHIỆM VỤ ==========*/
       /* ++ * CÔNG VIỆC CHÍNH  */
-Route::get('sinhvien/phancv/{mssv}','PhancvController@DSPhanCV');
-    /* ++ * Thêm Công việc chính  */
-Route::get('sinhvien/phancv/{mssv}/themcvchinh','PhancvController@ThemcvChinh');
-Route::post('luuthemcvchinh','PhancvController@LuuThemcvChinh');
-    /* ++ * Cập nhật Công việc chính  */
-Route::get('sinhvien/phancv/{mssv}/capnhatcvchinh/{macv}','PhancvController@CapNhatcvChinh');
-Route::post('luucapnhatcvchinh','PhancvController@LuuCapNhatcvChinh');
-/* ------ Xóa công việc chính -------- */
-Route::get('sinhvien/phancv/{mssv}/xoacvchinh/{macv}','PhancvController@XoacvChinh');
-     /* ++  * CÔNG VIỆC CHI TIẾT   */
-Route::get('sinhvien/phancongchitiet/{mssv}/{macv}','PhancvController@DSPhanChiTiet');
-    /* ++ * Thêm công việc chi tiết (công việc phụ thuộc)  */
-Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/themcvphu','PhancvController@ThemcvPhu');
-Route::post('luuthemcvphu','PhancvController@LuuThemcvPhu');
-    /* ++ * Cập nhật công việc chi tiết (công việc phụ thuộc)  */
-Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/capnhatcvphu/{macvphu}','PhancvController@CapNhatcvPhu');
-Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
-/* ------ Xóa công việc chi tiết (công việc phụ thuộc) -------- */
-Route::get('sinhvien/phancongchitiet/{mssv}/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
-/*======= NỘP TÀI LIỆU ==========*/
-route::get('sinhvien/noptailieu/{mssv}','QltailieuController@NopTaiLieu');
-route::post('luunoptailieu','QltailieuController@LuuNopTaiLieu');
-/* ------ Xóa tài liệu đã chọn -------- */
-Route::get('sinhvien/noptailieu/{mssv}/xoatailieu/{matl}','QltailieuController@XoaTaiLieu');
+    Route::get('phancv/{mssv}','PhancvController@DSPhanCV');
+        /* ++ * Thêm Công việc chính  */
+    Route::get('phancv/{mssv}/themcvchinh','PhancvController@ThemcvChinh');
+    Route::post('luuthemcvchinh','PhancvController@LuuThemcvChinh');
+        /* ++ * Cập nhật Công việc chính  */
+    Route::get('phancv/{mssv}/capnhatcvchinh/{macv}','PhancvController@CapNhatcvChinh');
+    Route::post('luucapnhatcvchinh','PhancvController@LuuCapNhatcvChinh');
+    /* ------ Xóa công việc chính -------- */
+    Route::get('phancv/{mssv}/xoacvchinh/{macv}','PhancvController@XoacvChinh');
+    /* ++  * CÔNG VIỆC CHI TIẾT   */
+    Route::get('phancongchitiet/{mssv}/{macv}','PhancvController@DSPhanChiTiet');
+        /* ++ * Thêm công việc chi tiết (công việc phụ thuộc)  */
+    Route::get('phancongchitiet/{mssv}/{macv}/themcvphu','PhancvController@ThemcvPhu');
+    Route::post('luuthemcvphu','PhancvController@LuuThemcvPhu');
+        /* ++ * Cập nhật công việc chi tiết (công việc phụ thuộc)  */
+    Route::get('phancongchitiet/{mssv}/{macv}/capnhatcvphu/{macvphu}','PhancvController@CapNhatcvPhu');
+    Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
+    /* ------ Xóa công việc chi tiết (công việc phụ thuộc) -------- */
+    Route::get('phancongchitiet/{mssv}/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
+    /*======= NỘP TÀI LIỆU ==========*/
+    route::get('danhsachnoptailieu/{mssv}','QltailieuController@DanhSachNopTaiLieu');
+    /* ------ Nộp tài liệu -------- */
+    route::get('danhsachnoptailieu/{mssv}/noptailieu','QltailieuController@NopTaiLieu');
+    route::post('luunoptailieu','QltailieuController@LuuNopTaiLieu');
+    /* ------ Xóa tài liệu đã chọn -------- */
+    Route::get('noptailieu/{mssv}/xoatailieu/{matl}','QltailieuController@XoaTaiLieu');
+    
+});
+
+     

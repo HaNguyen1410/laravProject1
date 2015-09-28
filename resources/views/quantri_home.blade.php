@@ -53,9 +53,9 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('quantri/danhsachgv')}}">Giảng viên</a></li>
+                                    <li><a href="{{asset('quantri/giangvien')}}">Giảng viên</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="{{asset('quantri/danhsachsv')}}">Sinh viên</a></li>
+                                    <li><a href="{{asset('quantri/sinhvien')}}">Sinh viên</a></li>
                                 </ul>
                             </li> 
                            
