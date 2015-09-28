@@ -90,7 +90,8 @@ class PhancvController extends Controller
    public function DSPhanCV(){
        $mssv = \Auth::user()->taikhoan;
        $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
-       $tiendonhom = DB::table('nhom_thuc_hien')->where('manhomthuchien','=',$manth)->first();
+       $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo')
+               ->where('manhomthuchien','=',$manth)->first();
        //Lấy tên đề tài của 1 nhóm
        $tendt = DB::table('de_tai as dt')
                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
@@ -103,7 +104,7 @@ class PhancvController extends Controller
                ->where('cv.phuthuoc_cv','=',0)->get();
       // 
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
-               ->with('dscvchinh',$dscvchinh);
+               ->with('dscvchinh',$dscvchinh)->with('manth',$manth);
    }
 /*========= Xóa công việc chính ==============*/    
     public function XoacvChinh($macv){

@@ -19,24 +19,43 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">Phân công thực hiện đề tài</h3> 
+            <h3 style="color: darkblue; font-weight: bold;">Phân công thực hiện đề tài (Mã nhóm: {{$manth}})</h3> <br>
             <div class="col-md-12"> 
                 <!-- thanh tiến độ thời gian thực hiện -->
                 <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
-                <div class="progress" style="width:50%">
-                    <div class="progress-bar progress-bar-success" style="width: 20%">
-                      20% Complete (success)
+                <div class="progress" style="width:70%">
+                    <?php 
+                        $tuan = ($tiendonhom->sotuan_thucte*100)/$tiendonhom->sotuan_kehoach; 
+                        $t = round($tuan,1);      
+                        if($t > 0 && $t <= 70){
+                            $antoan = $t;
+                            $canhbao = 0;
+                            $nguyhiem = 0;
+                        }
+                        else if($t > 70 && $t <= 90){
+                            $antoan = 70;
+                            $canhbao = $t-70;
+                            $nguyhiem = 0;
+                        }
+                        else if($t > 90 && $t <= 100){
+                            $antoan = 70;
+                            $canhbao = 20;
+                            $nguyhiem = $t - 90;
+                        }
+                    ?>
+                    <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
+                      {{$antoan}}% Complete (success)
                     </div>
-                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
-                      20% Complete (warning)
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
+                      {{$canhbao}}% Complete (warning)
                     </div>
-                    <div class="progress-bar progress-bar-danger" style="width: 10%">
-                      <span class="sr-only">10% Complete (danger)</span>
+                    <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
+                      <span class="sr-only">{{$nguyhiem}}% Complete (danger)</span>
                     </div>
                 </div>
                 <!-- thanh tiến độ côg việc -->
                 <lable style="display: block; float: left; width: 27%;">Công việc hoàn thành: &nbsp;</lable>
-                <div class="progress" style="width:50%">
+                <div class="progress" style="width:70%">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$tiendonhom->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width: <?= $tiendonhom->tiendo?>%;">
                       {{$tiendonhom->tiendo}}%
                     </div>
