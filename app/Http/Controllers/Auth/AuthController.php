@@ -93,7 +93,16 @@ class AuthController extends Controller
     // tim giao vien va chuyen ve giao dien giao vien neu can
             if($this->auth->attempt($dangnhap)){
 //                echo "Thành công";
-                return redirect()->intended();
+//                return redirect()->intended();
+                if($this->auth->user()->quyen == 'qt'){
+                    return redirect('quantri/thongtinqt');
+                }
+                else if($this->auth->user()->quyen == 'gv'){
+                    return redirect('giangvien/thongtingv');
+                }
+                else if($this->auth->user()->quyen == 'sv'){
+                    return redirect('sinhvien/thongtinsv');
+                }
             }else{
 //                echo "Thất bại: ".$this->auth->user();
                 return redirect()->back()->withErrors('Email hoặc mật khẩu không đúng!');

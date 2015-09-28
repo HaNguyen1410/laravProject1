@@ -113,13 +113,13 @@
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr>                     
-<!--                    <tr>
+                    <tr>
                         <td>Mật khẩu mới:</td>
                         <td colspan="3">
                             <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
                         </td>
-                    </tr>-->
+                    </tr>
 <!--                    <tr>
                         <td>Mật khẩu hiện tại:</td>
                         <td colspan="3">

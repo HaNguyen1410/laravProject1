@@ -18,12 +18,12 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN GIẢNG VIÊN</h3><br>
+            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN QUẢN TRỊ VIÊN</h3><br>
         </div>               
         <div class="row">
                 <div class="col-md-9 col-md-push-3">
-                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
-                        <tr><th colspan="2" style="text-align: center">Thông tin giảng viên</th></tr>
+                    <table class="table table-bordered" border="0" align='center' style="width:700px;">
+                        <tr><th colspan="2" style="text-align: center">Thông tin cá nhân</th></tr>
                         <tr>
                             <td width="30%"><label>Mã số cán bộ:</label></td>
                             <td style="color:blue;">{{$gv->macb}}</td>
@@ -48,10 +48,6 @@
                             <td><label>Điện thoại:</label></td>
                             <td style="color:blue;">{{$gv->sdt}}</td>
                         </tr>
-                        <tr>
-                            <td><label>Hướng dẫn nhóm học phần:</label></td>
-                            <td style="color:blue;">{{$hp}}</td>
-                        </tr>
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
@@ -59,7 +55,7 @@
                         <tr>
                             <td align="center">
                                 @if($gv->hinhdaidien != "")
-                                    <img width='100px' src="../../public/hinhdaidien/{{$gv->hinhdaidien}}">
+                                    <img width='100px' src="../public/hinhdaidien/{{$gv->hinhdaidien}}">
                                 @else
                                     <img src="{{asset('public/images/User-image.png')}}"/>
                                 @endif

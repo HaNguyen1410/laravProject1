@@ -15,6 +15,7 @@ use View,
     Session,
     Hash;
 use App\Sinhvien;
+use App\User;
 use App\Http\Controllers\Auth;
 
 class SinhvienController extends Controller
@@ -125,7 +126,7 @@ class SinhvienController extends Controller
 //                    'txtMaSV'      => 'required',
 //                    'txtHoTen'     => 'required',
 //                    'txtEmail'     => 'required',
-                    'txtMatKhauCu' => 'required',
+                    'txtMatKhauCu'    => 'required',
                     'txtMatKhauMoi1'  => 'required|min:6|different:txtMatKhauCu',
                     'txtMatKhauMoi2'  => 'required|min:6|same:txtMatKhauMoi1'
                 ]
@@ -134,12 +135,14 @@ class SinhvienController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }  
         else{
+            $mk = Hash::make($_POST['txtMatKhauMoi1']);
             $ch = DB::table('sinh_vien')->where('mssv', $post['txtMaSV'])
-                    ->update(['matkhau' => Hash::make($_POST['txtMatKhauMoi1'])]);
-            //Lưu cập nhật mật khẩu vào bảng Users        
-            $thanhvien = new User;
-            $thanhvien->where('taikhoan',$req->txtMaSV)
-                    ->update('password',Hash::make($req->txtMatKhauMoi1));
+                    ->update(['matkhau' => $mk]);
+        //Lưu cập nhật mật khẩu vào bảng Users      
+            $idsv = DB::table('users')->where('taikhoan',$req->txtMaSV)->value('id');
+            $thanhvien = User::find($idsv);
+            $thanhvien->password = $mk;
+            $thanhvien->save();       
             
             if($ch > 0){
                return redirect('sinhvien/thongtinsv'); 

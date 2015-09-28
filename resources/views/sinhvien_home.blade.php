@@ -61,23 +61,29 @@
                         </button>
                     </div>               
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">                       
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Quản lý công việc
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('sinhvien/themthongtinnhom')}}" data-toggle="tooltip" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
-                                            Thêm thông tin nhóm
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>                                
-                                    <li><a href="{{asset('sinhvien/phancv')}}">Phân công việc</a></li>
-                                    <li class="divider"></li>                             
-                                    <li><a href="{{asset('sinhvien/danhsachnoptailieu')}}">Nộp tài liệu</a></li>                               
-                                </ul>
-                            </li>        
+                        <ul class="nav navbar-nav">    
+                            <?php 
+                                $mssv = Auth::user()->taikhoan;
+                                $nhomtruong = DB::table('chia_nhom')->where('mssv',$mssv)->value('nhomtruong');
+                            ?>
+                            @if($nhomtruong == 1)
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Quản lý công việc
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{asset('sinhvien/themthongtinnhom')}}" data-toggle="tooltip" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
+                                                Thêm thông tin nhóm
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>                                
+                                        <li><a href="{{asset('sinhvien/phancv')}}">Phân công việc</a></li>
+                                        <li class="divider"></li>                             
+                                        <li><a href="{{asset('sinhvien/danhsachnoptailieu')}}">Nộp tài liệu</a></li>                               
+                                    </ul>
+                                </li>  
+                            @endif                                  
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Thông tin nhóm

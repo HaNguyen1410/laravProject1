@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use App\Config\database;
+use Illuminate\Support\Facades\Redirect;
 use DB;
 use View,
     Response,
@@ -22,6 +23,7 @@ use App\Commands;
 use App\Giangvien;
 use App\Sinhvien;
 use App\User;
+use App\Http\Controllers\Auth;
 
 class QuantriController extends Controller
 {
@@ -59,7 +61,8 @@ class QuantriController extends Controller
  * *****************
  */
 /*=========================== Thông tin quản trị viên ==============================================*/ 
-    public function ThongTinQT($macb){
+    public function ThongTinQT(){
+        $macb = \Auth::user()->taikhoan;
         $giangvien = Giangvien::find($macb);
         $tennhomhp = DB::table('giang_vien as gv')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
@@ -67,7 +70,8 @@ class QuantriController extends Controller
         return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien)->with('hp',$tennhomhp);
     }
  /*=========================== Đổi mật khẩu ==============================================*/   
-    public function DoiMatKhauQT($macb){
+    public function DoiMatKhauQT(){
+        $macb = \Auth::user()->taikhoan;
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('quantri.doi-mat-khau-qt')->with('gv', $row);
     } 
@@ -88,26 +92,28 @@ class QuantriController extends Controller
         }
         else
         {
+            $mk = Hash::make($_POST['txtMatKhauMoi1']);
             $ch = DB::table('giang_vien')->where('macb',$post['txtMaCB'])
-                    ->update(['matkhau' => Hash::make($_POST['txtMatKhauMoi1'])]);
+                    ->update(['matkhau' => $mk]);
    //Lưu cập nhật mật khẩu vào bảng Users        
-            $thanhvien = new User;
-            $thanhvien->where('taikhoan',$req->txtMaCB)
-                    ->update('password',Hash::make($req->txtMatKhauMoi1));
+            $idqt = DB::table('users')->where('taikhoan',$post['txtMaCB'])->value('id');
+            $thanhvien = User::find($idqt);
+            $thanhvien->password = $mk;
+            $thanhvien->save();
                         
             if($ch > 0){
-                return redirect('quantri/thongtinqt/9876');
+                return redirect('quantri/thongtinqt');
             }
         }
     }
 /*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
     public function DoiHinhDaiDienQT(Request $req){
-        $macb = Input::get('txtMaCB');
+        $macb = \Auth::user()->taikhoan;
         $hoten = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'fHinh' => 'required|image|mimes:jpg,png'
+                    'fHinh' => 'required|image'
                 ]
             );
         if($v->fails()){
@@ -130,7 +136,7 @@ class QuantriController extends Controller
             $upload_success = Input::file('fHinh')->move($luuden, $fileName);
 
             if ($upload_success) {
-                return Redirect('quantri/doimatkhauqt/9876')->with('message', 'Upload hình đại diện thành công!');
+                return Redirect::to('quantri/doimatkhauqt')->with('message', 'Upload hình đại diện thành công!');
             }
         } 
     }
@@ -513,7 +519,7 @@ class QuantriController extends Controller
                     'ngaysinh'  => $_POST['txtNgaySinh'],
                     'email'     => $_POST['txtEmail'],
                     'khoahoc'   => $_POST['txtKhoaHoc'],
-//                    'matkhau'   => Hash::make($_POST['txtMatKhauMoi1']),
+                    'matkhau'   => Hash::make($_POST['txtMatKhauMoi1']),
                     'khoa'      => isset($_POST['ckbKhoa']) ? 0 : 1,
                     'ngaytao'   => Carbon::now()
             );
@@ -524,7 +530,7 @@ class QuantriController extends Controller
             $thanhvien->taikhoan = $req->txtMaSV;
             $thanhvien->name = $req->txtHoTen;
             $thanhvien->email = $req->txtEmail;
-    //        $thanhvien->password = Hash::make($req->txtMatKhauMoi1);
+            $thanhvien->password = Hash::make($req->txtMatKhauMoi1);
     //        $thanhvien->quyen = 'sv';
             $thanhvien->remember_token= $req->_token;
             $thanhvien->save();

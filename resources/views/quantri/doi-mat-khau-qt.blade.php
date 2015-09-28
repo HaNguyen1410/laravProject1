@@ -14,9 +14,10 @@
     <div class="row">
         <div class="col-md-4">  <!-- Upload hình đại diện -->                      
             <div align="center">
+                <p style="color: blue; font-weight: bold;">{{ Session::get('message') }}</p>
                 <br><br><br/>
                  @if($gv->hinhdaidien != "")
-                    <img width='100px' src='../../public/hinhdaidien/{{$gv->hinhdaidien}}'>
+                    <img width='100px' src='../public/hinhdaidien/{{$gv->hinhdaidien}}'>
                 @else
                     <img src="{{asset('public/images/User-image.png')}}">
                 @endif
@@ -24,7 +25,6 @@
             <form action="{{action('QuantriController@DoiHinhDaiDienQT')}}" enctype="multipart/form-data" method="post" class="form-horizontal">
                 <input type='hidden' name='_token' value="<?= csrf_token();?>"/>
                 <div align="center">
-                    <input type="text" name="txtMaCB" value="{{$gv->macb}}" readonly="" />
                     <input type="file" name="fHinh" id="fHinh" /><br> 
                     <p style='color:red;'>{{$errors->first('fHinh')}}</p>
                     <button type="submit" class="btn btn-success" style="width:30%;">
@@ -83,7 +83,7 @@
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width: 20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;
-                            <a href="{{asset('quantri/thongtinqt/2134')}}" class="btn btn-warning" style="width:20%;">
+                            <a href="{{asset('quantri/thongtinqt')}}" class="btn btn-warning" style="width:20%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                              
                         </td>

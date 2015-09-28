@@ -42,9 +42,9 @@ Route::get('dangxuat', 'Auth\AuthController@DangXuat');
 //     App\Console\Commands\KetxuatCSDL::handle();
 //    return view('quantri.sao-luu-phuc-hoi-du-lieu');
 //});
-Route::group(['prefix'=>'quantri'],function(){
-    Route::get('thongtinqt/{macb}','QuantriController@ThongTinQT');
-    Route::get('doimatkhauqt/{macb}','QuantriController@DoiMatKhauQT');
+Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
+    Route::get('thongtinqt','QuantriController@ThongTinQT');
+    Route::get('doimatkhauqt','QuantriController@DoiMatKhauQT');
     Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
     Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT');
     Route::get('saoluu', function () {

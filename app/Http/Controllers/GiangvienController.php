@@ -86,7 +86,7 @@ class GiangvienController extends Controller
             $thanhvien->save();            
             
             if($ch > 0){
-                return redirect('giangvien/thongtingv/'.$macb);                
+                return redirect('giangvien/thongtingv');                
             }
         }
     }

@@ -69,9 +69,9 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('quantri/thongtinqt/9876')}}">Thông tin cá nhân</a></li>
+                                    <li><a href="{{asset('quantri/thongtinqt')}}">Thông tin cá nhân</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('quantri/doimatkhauqt/9876')}}">Đổi mật khẩu</a></li>                                    
+                                    <li><a href="{{asset('quantri/doimatkhauqt')}}">Đổi mật khẩu</a></li>                                    
                                 </ul>
                             </li>
                         </ul>
@@ -101,9 +101,16 @@
                                     </div>
                                 </div>
                             </li> -->   
-                            <li style="margin-right: 15px;">
-                                <a href="{{asset('/dangnhap')}}">
-                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                            <li>
+                                <a>
+                                    <lable style="font-weight: bold; color: #00008b;">
+                                        {!! Auth::user()->name !!} - {!! Auth::user()->taikhoan !!}
+                                    </lable>
+                                </a>
+                            </li>
+                            <li style="margin-right: 15px;">                                
+                                <a href="{{asset('dangxuat')}}">
+                                    (Đăng xuất)
                                 </a>
                             </li>
                         </ul>
