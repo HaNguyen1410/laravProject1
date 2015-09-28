@@ -149,31 +149,24 @@ class DiemController extends Controller
 //        return $_POST['txtDiem'];
 //        return $matc;          
 
-        for($j = 0; $j < count($masv); $j++){   
-            echo $masv[$j]."<br>";
+        for($j = 0; $j < count($masv); $j++){           
+            for($i = 0; $i < count($matc); $i++){
+//                echo $matc[$i]."=".Input::get($masv[$j]."_".$matc[$i])."<br>";
+                $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
+                        ->update(
+                                ['diem' => Input::get($masv[$j]."_".$matc[$i])]
+                           );
+            }            
         }    
-        for($i = 0; $i < count($matc); $i++){
-                echo $matc[$i]."<br>";
-         } 
-        for($d = 0; $d < count($diem); $d++){  
-                echo $diem[$d]."<br>";
-        }
-//                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
-//                        ->update(
-//                                ['diem' => $diem[$d]]
-//                           );
         
-//        for($s = 0; $s < count($masv); $s++){
-//            for($nx = 0; $nx < count($nhanxet); $nx++){
-//                echo $masv[$s]."->".$nx.". ".$nhanxet[$nx]."<br>";
-//                $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$s])->update(
-//                            ['nhanxet' => $nhanxet[$nx]]
-//                        ); 
-//            }
-//           
-//        }
+        for($k = 0; $k < count($masv); $k++){
+//            echo $masv[$k]."=>".Input::get($masv[$k])."<br>";            
+            $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$k])->update(
+                        ['nhanxet' => Input::get($masv[$k])]
+                    );                       
+        }
           
-//        return redirect('giangvien/nhapdiem');
+        return redirect('giangvien/nhapdiem');
     }
     
 //2 Hàm bên dưới vì chưa biết gọi qua View như thế nào nên => không sài tới

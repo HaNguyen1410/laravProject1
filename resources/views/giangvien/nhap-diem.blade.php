@@ -124,21 +124,21 @@
                             <td align="center">
                                 <input type="text" name="txtMaSV[]" size="6" style="border: 0px; background-color: #dff0d8; text-align: center;" value="{{$sv->mssv}}" readonly=""/>
                             </td>
-                            <td>{{$sv->hoten}}</td>                        
-                            @foreach($dsdiem as $diem) 
+                            <td>{{$sv->hoten}}</td>                            
+                            @foreach($dsdiem as $diem)                                    
                                 @if($diem->mssv == $sv->mssv && $diem->diem != null)
                                     <td align="center">
-                                        <input type="text" name="txtDiem[]" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
+                                        <input type="text" name="{{$sv->mssv}}_{{$diem->matc}}" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
                                     </td> 
                                 @elseif($diem->mssv == $sv->mssv && $diem->diem == null)
                                     <td align="center">
-                                        <input type="text" name="txtDiem[]" value="" style="text-align:center; vertical-align: middle;" size="1" />
+                                        <input type="text" name="{{$sv->mssv}}_{{$diem->matc}}" value="" style="text-align:center; vertical-align: middle;" size="1" />
                                     </td>
-                                @endif                                             
+                                @endif 
                             @endforeach     
                             @foreach($nhanxet as $nx)
                                  @if($nx->mssv == $sv->mssv)  
-                                    <td><textarea class="form-control" name="txtNhanXet[]">{{$nx->nhanxet}}</textarea></td>  
+                                    <td><textarea class="form-control" name="{{$sv->mssv}}">{{$nx->nhanxet}}</textarea></td>  
                                  @endif  
                             @endforeach
                             @foreach($tongdiem as $tong)                             
