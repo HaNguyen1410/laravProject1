@@ -29,7 +29,7 @@
                     <tr>
                         <td>Năm học:</td>
                         <td>
-<!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
+                            <!--<input type="text" name="txtMaNK" value="{{$mank}}" class="form-control" readonly=""/>-->
                             <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
                         </td>
                         <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>

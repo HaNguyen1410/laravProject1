@@ -43,10 +43,19 @@
                             <th align="right" width="10%">Nhóm học phần:</th>
                             <th width="12%">
                                 <select class="form-control" name='cbNhomHP'>
+                                    @if($mahp == null)
+                                        <option value="0" selected="">Tất cả</option>
+                                    @elseif($mahp != null)
                                         <option value="0">Tất cả</option>
-                                    @foreach($dshp as $hp)
-                                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
-                                    @endforeach
+                                        @foreach($dshp as $hp)
+                                            @if($mahp == $hp->manhomhp)
+                                                <option value="{{$hp->manhomhp}}" selected="">{{$hp->tennhomhp}}</option>
+                                            @else
+                                                <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option> 
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                        
                                 </select>
                             </th>
                             <th width="15%">
@@ -54,12 +63,20 @@
                                     Liệt kê
                                 </button>
                             </th>
-                            <th width="15%">                            
-                                <a href="{{asset('quantri/sinhvien/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
-                                    <button type="button" name="" class="btn btn-success">
-                                        <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
-                                    </button>
-                                </a>
+                            <th width="15%">  
+                                @if($mahp == null)
+                                    <a href="{{asset('quantri/sinhvien/0/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
+                                        <button type="button" name="" class="btn btn-success">
+                                            <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                        </button>
+                                    </a>
+                                @elseif($mahp != null)
+                                    <a href="{{asset('quantri/sinhvien/'.$mahp.'/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
+                                        <button type="button" name="" class="btn btn-success">
+                                            <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                        </button>
+                                    </a>
+                                @endif
                             </th>
                         </tr>
                     </table> 
@@ -69,7 +86,7 @@
                 DANH SÁCH SINH VIÊN
             </h4>  
             <div align="right">
-                <a href="{{asset('quantri/sinhvien/themsv')}}">
+                <a href="{{asset('quantri/sinhvien/0/themsv')}}">
                     <button type="submit" class="btn btn-primary" style="width:12%;">
                         <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                    </button>
@@ -140,7 +157,7 @@
                                 </td>
                                 <td align='center'>
                                     @if($mahp == null)
-                                        <a href="sinhvien/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                                        <a href="sinhvien/0/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
                                     @elseif($mahp != null)
                                         <a href="../sinhvien/{{$mahp}}/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
                                     @endif
@@ -152,7 +169,11 @@
                         @endforeach
                     @endif
                 <tr>
-                    <td colspan="11" align="center">{!! $dssv->setPath('../sinhvien/'.$mahp)->render() !!}</td>
+                    @if($mahp == null)
+                        <td colspan="11" align="center">{!! $dssv->setPath('sinhvien')->render() !!}</td>                       
+                    @elseif($mahp != null)
+                        <td colspan="11" align="center">{!! $dssv->setPath('../sinhvien/'.$mahp)->render() !!}</td> 
+                    @endif
                 </tr>      
            </table>
 

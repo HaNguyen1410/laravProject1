@@ -355,7 +355,7 @@ class QuantriController extends Controller
         return redirect('quantri/sinhvien/'.$mahp);           
     }
 /*======================== Quản trị In Danh sách sinh viên ==================================*/    
-    public function InDanhSachSV($macbqt){
+    public function InDanhSachSV($macbqt,$mahp){
         $mahp = \Request::segment(3);
         $view = \View::make('quantri.in-danh-sach-sinh-vien');
         $pdf = \App::make('dompdf.wrapper');
@@ -389,6 +389,7 @@ class QuantriController extends Controller
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->where('hp.mank',$mank)
                 ->orderBy('chn.manhomthuchien','desc')
+                ->orderBy('hp.tennhomhp','asc')   
                 ->paginate(10);
         }
         else if($mahp != null){
@@ -499,8 +500,8 @@ class QuantriController extends Controller
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
-    public function CapNhatSV($masv){
-        $row = DB::table('sinh_vien')->where('mssv',$masv)->first();
+    public function CapNhatSV($mahp,$masv){
+        $sv = DB::table('sinh_vien')->where('mssv',$masv)->first();
         //Lấy năm học và học kỳ của sinh viên đang hoc
         $nam = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
@@ -522,8 +523,9 @@ class QuantriController extends Controller
                 ->where('nk.mank',$mank)
                 ->get();  
         $sv_hp = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomhp');
-        return view('quantri.cap-nhat-sinh-vien')->with('sv',$row)->with('dshp',$dshp)
-            ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank)->with('sv_hp',$sv_hp);
+        
+        return view('quantri.cap-nhat-sinh-vien')->with('sv',$sv)->with('dshp',$dshp)
+            ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank)->with('sv_hp',$sv_hp)->with('masv',$masv);
     } 
     
     public function LuuCapNhatSV(Request $req){
