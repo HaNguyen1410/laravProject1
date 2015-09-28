@@ -15,7 +15,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">SỬA ĐỀ TÀI</h3>  
+            <h3 style="color: darkblue; font-weight: bold;">
+                <a href="{{asset('giangvien/danhsachdetai')}}">Danh sách đề tài</a>  
+                &Gt;
+                Sửa đề tài
+            </h3>  
             <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <p style="color: #e74c3c; font-weight: bold;" align="center">{!! Session::get('success') !!}</p>

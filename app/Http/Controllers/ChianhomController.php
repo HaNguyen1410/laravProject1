@@ -18,6 +18,39 @@ use App\Http\Controllers\Auth;
 
 class ChianhomController extends Controller
 {
+/*======================== IN Danh sách sinh viên ==================================*/    
+    public function InDanhSachDeTaiNhom($mahp,$macb){
+        $nguoiin = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');        
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
+                ->value('nk.mank');
+        $mahp = \Request::segment(3);
+        if($mahp != null){
+            $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('hp.manhomhp',$mahp)                    
+                    ->first();
+            $dssv = DB::table('sinh_vien as sv')
+                    ->leftjoin('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                    ->leftjoin('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
+                    ->leftjoin('de_tai as dt','radt.madt','=','dt.madt')
+                    ->where('chn.manhomhp',$mahp)
+                    ->orderBy('chn.manhomthuchien','asc')
+                    ->get();
+        }
+        $view = \View::make('giangvien.in-danh-sach-de-tai-nhom',
+                compact('macb','nguoiin','namht','hkht','gv_hp','dssv'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+       
+        return $pdf->stream("DanhSachDeTaiNhom.pdf");
+    }    
  /*====================== Mã nhóm thực hiện tự tăng ====================================*/
     function manth_tutang(){
         $pre = "NTH";
@@ -41,7 +74,7 @@ class ChianhomController extends Controller
         $ma = Input::get('cbNhomHP');
         return redirect('giangvien/chianhom/'.$ma);
     }
-    /*====================  ======================*/
+/*====================  ======================*/
     public function ChiaNhomNL(){
         $macb = \Auth::user()->taikhoan;
         //Nếu selectbox có giá trị manhp thì lấy manhp

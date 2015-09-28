@@ -378,7 +378,7 @@ class QuantriController extends Controller
         $mahp = Input::get('cbNhomHP');
         return redirect('quantri/sinhvien/'.$mahp);           
     }
-/*======================== In Danh sách sinh viên ==================================*/    
+/*======================== IN Danh sách sinh viên ==================================*/    
     public function InDanhSachSV($mahp,$macbqt){
         $nguoiin = DB::table('giang_vien')->where('macb',$macbqt)->value('hoten');
         //Lấy giá trị năm học và học kỳ hiện tại      

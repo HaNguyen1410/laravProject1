@@ -154,6 +154,8 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
         route::post('laynhomhp','ChianhomController@LayNhomHP');
         route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
         route::get('xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
+        /*======== In danh sách nhóm đề tài của mỗi nhóm hp ===========*/
+        route::get('{mahp?}/indanhsachdetainhom/{macb}','ChianhomController@InDanhSachDeTaiNhom');        
     });
     /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/
     route::get('theodoikehoach', 'TheodoikehoachController@TheoDoiKH');

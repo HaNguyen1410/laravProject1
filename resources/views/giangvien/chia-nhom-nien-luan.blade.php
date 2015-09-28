@@ -42,11 +42,11 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered">                    
                     <tr>
-                        <th align="right" width="10%">Năm học:</th>
-                        <th width="15%">
+                        <th align="right" width="8%">Năm học:</th>
+                        <th width="12%">
                             <input type="text" name="txtNamHoc" value="{{$namcb}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
-                        <th align="right" width="8%">Học kỳ:</th>
+                        <th align="right" width="7%">Học kỳ:</th>
                         <th width="7%">
                             <input type="text" name="txtHocKy" value="{{$hkcb}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
@@ -55,7 +55,7 @@
                             <input type="text" name="txtHocKy" value="{{$manth}}" style="text-align: center;" class="form-control" readonly=""/>
                         </th>
                         <th align="right" width="12%">Nhóm học phần:</th>
-                        <th width="10%">
+                        <th width="8%">
 <!--                            <select onchange="document.frChiaNhom.submit()" class="form-control" name="cbNhomHP">
                                 @foreach($dsmahp as $hp)
                                     <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
@@ -78,9 +78,22 @@
                             </select>
                         </th>
                         <th style="text-align: center">
-                            <button type="submit" name="btnLưu" class="btn btn-success">
+                            <button type="submit" name="btnLưu" class="btn btn-success" style="width: 130px;">
                                 Liệt kê
                             </button>
+                        </th>
+                        <th width="12%">  
+                            @if($mahp == null || $mahp == 0)
+                                <button onclick="return confirm('Vui lòng chọn nhóm HP muốn in!');" type="button" name="" class="btn btn-success">
+                                    <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                </button>
+                            @elseif($mahp != null)
+                                <a href="{{asset('giangvien/chianhom/'.$mahp.'/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank">
+                                    <button type="button" name="" class="btn btn-success">
+                                        <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                    </button>
+                                </a>
+                            @endif
                         </th>
                     </tr>
                 </table>
