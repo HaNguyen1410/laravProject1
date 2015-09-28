@@ -17,7 +17,8 @@ use View,
     Mail,
     Session,
     Artisan,
-    Hash;
+    Hash,
+    PDF;
 use Carbon\Carbon;
 use App\Commands;
 use App\Giangvien;
@@ -354,10 +355,31 @@ class QuantriController extends Controller
         $mahp = Input::get('cbNhomHP');
         return redirect('quantri/sinhvien/'.$mahp);           
     }
-/*======================== Quản trị In Danh sách sinh viên ==================================*/    
-    public function InDanhSachSV($macbqt,$mahp){
+/*======================== In Danh sách sinh viên ==================================*/    
+    public function InDanhSachSV($mahp,$macbqt){
+        $nguoiin = DB::table('giang_vien')->where('macb',$macbqt)->value('hoten');
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');        
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
+                ->value('nk.mank');
         $mahp = \Request::segment(3);
-        $view = \View::make('quantri.in-danh-sach-sinh-vien');
+        if($mahp != null){
+            $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('hp.manhomhp',$mahp)                    
+                    ->first();
+            $dssv = DB::table('sinh_vien as sv')
+                    ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                    ->where('chn.manhomhp',$mahp)
+                    ->orderBy('chn.manhomthuchien','asc')
+                    ->get();
+        }
+        $view = \View::make('quantri.in-danh-sach-sinh-vien',compact('macbqt','nguoiin','namht','hkht','gv_hp','dssv'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
        

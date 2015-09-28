@@ -43,8 +43,11 @@
                             <th align="right" width="10%">Nhóm học phần:</th>
                             <th width="12%">
                                 <select class="form-control" name='cbNhomHP'>
-                                    @if($mahp == null)
+                                    @if($mahp == null || $mahp == 0)
                                         <option value="0" selected="">Tất cả</option>
+                                        @foreach($dshp as $hp)
+                                            <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
+                                        @endforeach 
                                     @elseif($mahp != null)
                                         <option value="0">Tất cả</option>
                                         @foreach($dshp as $hp)
@@ -53,9 +56,8 @@
                                             @else
                                                 <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option> 
                                             @endif
-                                        @endforeach
+                                        @endforeach   
                                     @endif
-                                        
                                 </select>
                             </th>
                             <th width="15%">
@@ -64,12 +66,10 @@
                                 </button>
                             </th>
                             <th width="15%">  
-                                @if($mahp == null)
-                                    <a href="{{asset('quantri/sinhvien/0/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
-                                        <button type="button" name="" class="btn btn-success">
-                                            <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
-                                        </button>
-                                    </a>
+                                @if($mahp == null || $mahp == 0)
+                                    <button onclick="return confirm('Vui lòng chọn nhóm HP muốn in!');" type="button" name="" class="btn btn-success">
+                                        <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                    </button>
                                 @elseif($mahp != null)
                                     <a href="{{asset('quantri/sinhvien/'.$mahp.'/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
                                         <button type="button" name="" class="btn btn-success">
