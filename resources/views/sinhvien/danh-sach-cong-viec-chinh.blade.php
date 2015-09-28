@@ -59,7 +59,7 @@
                 },
 
                 xAxis: {
-                    categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+                    categories: ['GD1', 'GD2', 'GD3', 'GD4', 'GD5']
                 },
 
                 yAxis: {
@@ -85,7 +85,7 @@
                 },
 
                 series: [{
-                    name: 'Tổng ngày làm kế hoạch',
+                    name: 'Tổng tuần làm kế hoạch',
                     data: [5, 3, 4, 7, 2],
                     stack: 'male'
                 }, {
@@ -93,7 +93,7 @@
                     data: [3, 4, 4, 2, 5],
                     stack: 'male'
                 }, {
-                    name: 'Tổng ngày làm thực tế',
+                    name: 'Tổng tuần làm thực tế',
                     data: [2, 5, 6, 2, 1],
                     stack: 'female'
                 }, {
@@ -109,6 +109,9 @@
 
     <div class="row">
         <h3 style="color: darkblue; font-weight: bold;" align="center">DANH SÁCH CÔNG VIỆC CHÍNH (GIAI ĐOẠN) TRONG NHÓM</h3><br> 
+        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
+            <div id="container1" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
+        </div>
     <!-- Sơ đồ tiến độ công việc theo tuần -->    
         <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
             <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>

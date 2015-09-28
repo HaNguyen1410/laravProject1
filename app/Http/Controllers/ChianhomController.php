@@ -63,6 +63,7 @@ class ChianhomController extends Controller
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('hp.macb',$macb)
                 ->where('nk.nam',$namcb)->where('nk.hocky',$hkcb)
+                ->orderBy('hp.manhomhp','asc')
                 ->value('hp.manhomhp');
         }
         else $mahp = $var;

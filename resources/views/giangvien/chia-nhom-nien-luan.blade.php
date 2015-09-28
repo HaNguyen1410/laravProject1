@@ -61,10 +61,20 @@
                                     <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
                                 @endforeach
                             </select>-->
-                            <select class="form-control" name="cbNhomHP">
-                                @foreach($dsmahp as $hp)
-                                    <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
-                                @endforeach
+                            <select class="form-control" name='cbNhomHP'>
+                                @if($mahp == null || $mahp == 0)
+                                    @foreach($dshp as $hp)
+                                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
+                                    @endforeach 
+                                @elseif($mahp != null)
+                                    @foreach($dsmahp as $hp)
+                                        @if($mahp == $hp->manhomhp)
+                                            <option value="{{$hp->manhomhp}}" selected="">{{$hp->tennhomhp}}</option>
+                                        @else
+                                            <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option> 
+                                        @endif
+                                    @endforeach   
+                                @endif
                             </select>
                         </th>
                         <th style="text-align: center">

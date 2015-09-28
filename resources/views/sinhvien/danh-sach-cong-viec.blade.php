@@ -19,7 +19,7 @@
                 },
 
                 title: {
-                    text: 'Biểu đồ thể hiện "số tuần" thực hiện của mỗi sinh viên'
+                    text: 'Biểu đồ thể hiện tiến độ (%) thực hiện công việc của mỗi sinh viên theo tuần'
                 },
 
                 xAxis: {
@@ -79,6 +79,7 @@
         <div class="col-md-12">
             <table class="table table-bordered table-striped" border="0" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
+                    <th width="2%">Tuần</th>
                     <th width="2%">ID</th>
                     <th width="15%">Công việc</th>
                     <th width="8%">Trạng thái</th>
@@ -91,6 +92,7 @@
                 </tr>
                 @foreach($dscv as $stt => $cv) 
                     <tr>
+                        <td align="center">{{$cv->tuan}}</td>
                         <td align="center">{{$cv->macv}}</td>
                         <td>
                             <a href="?cn=kehoach" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
@@ -112,9 +114,6 @@
                         <td>{{$cv->noidungthuchien}}</td>
                      </tr>          
                 @endforeach
-                <tr>
-                    <td colspan="9" align="center">{!! $dscv->setPath('danhsachcv')->render() !!}</td>
-                </tr> 
             </table> 
         </div>  <!-- /class="col-md-12" -->  
     </div> <!-- /row -->
