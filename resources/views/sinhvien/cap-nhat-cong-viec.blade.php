@@ -128,7 +128,7 @@
                     <tr>
                         <th>Số giờ thực tế</th>
                         <td>
-                            <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="{{$ndcv->sogio_thucte}}" class="form-control"/>
+                            <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="{{$ndcv->sotuan_thucte}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>

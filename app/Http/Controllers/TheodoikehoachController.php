@@ -19,7 +19,7 @@ class TheodoikehoachController extends Controller
 {
 /*================== Số thời gian thực hiện dự án của mỗi sinh viên ======================*/ 
     function GioLam($hoten){
-        $tonggio = DB::table('cong_viec as cv')->select('chn.mssv',DB::raw('SUM(cv.sogio_thucte) as tonggio'))
+        $tonggio = DB::table('cong_viec as cv')->select('chn.mssv',DB::raw('SUM(cv.sotuan_thucte) as tonggio'))
                 ->join('thuc_hien as th','cv.macv','=','th.macv')
                 ->join('chia_nhom as chn','th.manhomthuchien','=','chn.manhomthuchien')
                 ->where('cv.giaocho','like',$hoten)
@@ -32,7 +32,7 @@ class TheodoikehoachController extends Controller
         $macb = \Auth::user()->taikhoan;
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
-                        'nth.lichhop','nth.sogio_thucte','nth.tiendo')
+                        'nth.lichhop','nth.sotuan_thucte','nth.tiendo')
                 ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                 ->join('sinh_vien as sv', 'chn.mssv','=','sv.mssv')
                 ->join('ra_de_tai as radt','nth.manhomthuchien','=','radt.manhomthuchien')
@@ -54,7 +54,7 @@ class TheodoikehoachController extends Controller
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){
         $dstv = DB::table('sinh_vien as sv')
-                ->select('chn.manhomthuchien','sv.mssv','sv.hoten','nth.sogio_thucte','chn.nhomtruong',
+                ->select('chn.manhomthuchien','sv.mssv','sv.hoten','nth.sotuan_thucte','chn.nhomtruong',
                         'sv.kynangcongnghe','sv.kienthuclaptrinh','sv.kinhnghiem')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->join('nhom_thuc_hien as nth','chn.manhomthuchien','=','nth.manhomthuchien')

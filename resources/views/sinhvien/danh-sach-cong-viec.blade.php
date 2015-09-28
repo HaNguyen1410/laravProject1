@@ -133,7 +133,7 @@
                     <th width="10%">Giao cho</th>
                     <th width="8%">Bắt đầu <br> (thực tế)</th>
                     <th width="8%">Kết thúc <br> (thực tế)</th>
-                    <th width="7%">Số giờ <br> (thực tế)</th>
+                    <th width="7%">Số tuần <br> (thực tế)</th>
                     <th>%</th>
                     <th width="20%">Nội dung công việc</th>
                 </tr>
@@ -150,7 +150,7 @@
                             <td>{{$cv->giaocho}}</td>
                             <td>{{$cv->ngaybatdau_thucte}}</td>
                             <td>{{$cv->ngayketthuc_thucte}}</td>
-                            <td>{{$cv->sogio_thucte}}</td>
+                            <td>{{$cv->sotuan_thucte}}</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
@@ -172,7 +172,7 @@
                             <td>{{$cv->giaocho}}</td>
                             <td>{{$cv->ngaybatdau_thucte}}</td>
                             <td>{{$cv->ngayketthuc_thucte}}</td>
-                            <td>{{$cv->sogio_thucte}}</td>
+                            <td>{{$cv->sotuan_thucte}}</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">

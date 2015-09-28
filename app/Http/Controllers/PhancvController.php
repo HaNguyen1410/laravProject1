@@ -24,7 +24,7 @@ class PhancvController extends Controller
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
-                                ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sogio_thucte'
+                                ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sotuan_thucte'
                                  ,'cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
@@ -143,7 +143,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     //'ngaybatdau_thucte',
                     //'ngayketthuc_thucte',
-                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
                     'phuthuoc_cv'          => 0,
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
@@ -202,7 +202,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
                     'ngayketthuc_thucte'   => $_POST['txtNgayKTThucTe'],
-                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
                     'phuthuoc_cv'          => 0,
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
@@ -283,7 +283,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'   => $_POST['txtNgayKetThucKH'],
                     //'ngaybatdau_thucte',
                     //'ngayketthuc_thucte',
-                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
                     'phuthuoc_cv'          => $_POST['txtMacvChinh'],
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
@@ -343,7 +343,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
                     'ngayketthuc_thucte'   => $_POST['txtNgayKTThucTe'],
-                    'sogio_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
                     'phuthuoc_cv'          => $_POST['txtMacvChinh'],
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],

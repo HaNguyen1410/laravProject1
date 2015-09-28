@@ -73,7 +73,7 @@
                 <tr>
                     <th>Bắt đầu</th>
                     <th>Kết thúc</th>
-                    <th>Số giờ</th>
+                    <th>Số tuần</th>
                 </tr>
                 @foreach($dscvchinh as $stt => $cv)
                     <tr>
@@ -93,7 +93,7 @@
                         <td>{{$cv->trangthai}}</td>
                         <td>{{$cv->ngaybatdau_thucte}}</td>
                         <td>{{$cv->ngayketthuc_thucte}}</td>
-                        <td>{{$cv->sogio_thucte}}</td>
+                        <td>{{$cv->sotuan_thucte}}</td>
                         <td>{{$cv->phuthuoc_cv}}</td>
                         <td>
                             <div class="progress">

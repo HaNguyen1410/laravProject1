@@ -103,7 +103,7 @@ class SinhvienController extends Controller
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
        $dsDuocGiao = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
-                                 ,'cv.sogio_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
+                                 ,'cv.sotuan_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')

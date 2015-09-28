@@ -42,7 +42,7 @@
                 <tr>
                     <th>Bắt đầu</th>
                     <th>Kết thúc</th>
-                    <th>Số giờ</th>
+                    <th>Số tuần</th>
                 </tr>
                 @foreach($dscvphu as $stt => $cvphu)
                     <tr>
@@ -56,7 +56,7 @@
                         <td>{{$cvphu->giaocho}}</td>
                         <td>{{$cvphu->ngaybatdau_thucte}}</td>
                         <td>{{$cvphu->ngayketthuc_thucte}}</td>
-                        <td>{{$cvphu->sogio_thucte}}</td>
+                        <td>{{$cvphu->sotuan_thucte}}</td>
                         <td>{{$cvphu->noidungthuchien}}</td>
                         <td>
                             <div class="progress">

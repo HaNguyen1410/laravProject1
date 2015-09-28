@@ -37,7 +37,7 @@
                                     <td>{{$cv->giaocho}}</td>
                                     <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
                                     <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                                    <td align="center">{{$cv->sogio_thucte}}</td>
+                                    <td align="center">{{$cv->sotuan_thucte}}</td>
                                     <td align="center">{{$cv->phuthuoc_cv}}</td>
                                     <td align="center">{{$cv->uutien}}</td>
                                     <td align="center">{{$cv->trangthai}}</td>

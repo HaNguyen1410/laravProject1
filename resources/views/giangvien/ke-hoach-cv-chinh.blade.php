@@ -214,7 +214,7 @@
                                      <th>Kết thúc</th>
                                      <th>Bắt đầu</th>
                                      <th>Kết thúc</th>
-                                     <th>Số giờ</th>
+                                     <th>Số tuần</th>
                                   </tr>
                                   <tr>
                                      <td align='center'>{{$cvchinh->macv}}</td>
@@ -225,7 +225,7 @@
                                      <td align='center'>{{$cvchinh->ngayketthuc_kehoach}}</td> 
                                      <td align='center'>{{$cvchinh->ngaybatdau_thucte}}</td>
                                      <td align='center'>{{$cvchinh->ngayketthuc_thucte}}</td>                            
-                                     <td align='center'>{{$cvchinh->sogio_thucte}}</td>
+                                     <td align='center'>{{$cvchinh->sotuan_thucte}}</td>
                                   </tr>
                                       <td colspan='9'>
                                             <h4 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h4>
