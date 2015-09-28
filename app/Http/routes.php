@@ -199,7 +199,8 @@ Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
     Route::get('themthongtinnhom','SVthongtinnhomController@ThemThongTinNhom');
     Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
     /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
-    Route::get('danhsachcv','PhancvController@DanhSachCV');
+    Route::get('danhsachcvchinh','PhancvController@DanhSachCVChinh');
+    Route::get('danhsachcvchinh/danhsachcv/{macvphu}','PhancvController@DanhSachCV');
     
 /*====##### Chức năng của NHÓM TRƯỞNG #####====*/
     /*======= PHÂN CÔNG NHIỆM VỤ ==========*/

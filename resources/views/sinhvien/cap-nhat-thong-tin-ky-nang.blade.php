@@ -1,6 +1,6 @@
-@extends('giangvien_home')
+@extends('sinhvien_home')
 
-@section('content_gv')
+@section('content_sv')
 
     <style type="text/css">
         th{
@@ -19,7 +19,7 @@
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <form action="{{action('SinhvienController@LuuCapNhatThongTin')}}" method="post">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                    <table class="table table-bordered" border="0" width="800px" id="bang2">
+                    <table class="table table-bordered" border="0" id="bang2" style="width:900px;" align="center">
                         <tr>
                             <th width="20%">Mã số sinh viên:</th>
                             <td>                                

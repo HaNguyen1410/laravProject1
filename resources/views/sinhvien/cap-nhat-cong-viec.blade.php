@@ -90,7 +90,7 @@
                         </td>
                         <th>Trong tuần:</th>
                         <td>
-                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" class="form-control"/>
+                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" placeholder="Nhập theo dạng: 1-3" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                     </tr>

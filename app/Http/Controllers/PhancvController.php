@@ -19,7 +19,26 @@ use App\Http\Controllers\Auth;
 class PhancvController extends Controller
 {
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
-    public function DanhSachCV(){
+    public function DanhSachCVChinh(){
+        $mssv = \Auth::user()->taikhoan;
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $dscvnhom = DB::table('cong_viec as cv')->distinct()
+               ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
+                        ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sotuan_thucte','cv.phuthuoc_cv'
+                         ,'cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien','th.tuan')
+               ->join('thuc_hien as th','cv.macv','=','th.macv')
+               ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
+               ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+               ->where('chn.mssv','=',$mssv)
+               ->where('nth.manhomthuchien','=',$manth)
+               ->where('cv.phuthuoc_cv','=',0)
+               ->paginate(5);
+               //->get();
+        
+        return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom);
+    }
+/*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
+    public function DanhSachCV($macvphu){
         $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
@@ -30,6 +49,7 @@ class PhancvController extends Controller
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                ->where('chn.mssv','=',$mssv)
+               ->where('cv.phuthuoc_cv',$macvphu)
                ->where('nth.manhomthuchien','=',$manth)
                ->paginate(5);
                //->get();

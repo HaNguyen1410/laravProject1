@@ -90,12 +90,12 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('sinhvien/danhsachcv')}}">Danh sách các công việc</a></li>                                    
+                                    <li><a href="{{asset('sinhvien/danhsachcvchinh')}}">Danh sách các công việc</a></li>                                    
                                     <li class="divider"></li>    
                                     <li><a href="{{asset('sinhvien/xemdiem')}}">Xem điểm</a></li>                                                       
                                 </ul>
                             </li>                           
-                            <li class="dropdown active">
+                            <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <?php
                                         $mssv = Auth::user()->taikhoan;

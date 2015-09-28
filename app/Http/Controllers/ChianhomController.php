@@ -128,26 +128,27 @@ class ChianhomController extends Controller
                     'chkThanhVien'     =>'required',
 //                  'rdNhomTruong'     =>'sometimes|required'
                 ]
-        );
+        );       
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else
         {
             $masv_checked = Input::get('chkThanhVien'); //trả về 1 mảng mssv 
-            return var_dump($masv_checked);
+//            return var_dump($masv_checked);
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng          
 //           return $masv_checked.$nhomtruong;                
 //           return count($masv_checked); 
             
             /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
 //            $nhomtruong = $req->has('rdNhomTruong') == FALSE ? 1 : 0; 
-             $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
+//             $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
+//            return var_dump(Input::get('rdNhomTruong'));
             
             $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
                             ->update([                        
                                     'manhomthuchien'=>$manth,
-                                    'nhomtruong'=>$nhomtruong
+                                    'nhomtruong'=>$req->has('rdNhomTruong') == FALSE ? 1 : 0
                                ]);            
             
             $ch2 = DB::table('ra_de_tai')->insert(

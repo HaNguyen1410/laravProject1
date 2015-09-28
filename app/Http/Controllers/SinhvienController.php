@@ -96,22 +96,28 @@ class SinhvienController extends Controller
     }
     
 /*============================= Công việc được giao của 1 sinh viên ========================================*/
-    public function CongViecSV()
-    {
+    public function CongViecSV(){
         $mssv = \Auth::user()->taikhoan;
         $hoten = \Auth::user()->name;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $tendt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt')
+               ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+               ->where('radt.manhomthuchien',$manth)
+               ->first();
        $dsDuocGiao = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
-                                 ,'cv.sotuan_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
+                        ,'cv.sotuan_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo'
+                       ,'cv.noidungthuchien','th.tuan')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
+               ->where('cv.giaocho','like',$hoten)->Orwhere('cv.giaocho','like','cả nhóm')
                ->where('nth.manhomthuchien','=',$manth)
-               ->where('cv.giaocho','like',$hoten)->orwhere('cv.giaocho','like','cả nhóm')
+               ->orderBy('cv.macv','asc')
                ->get();
         
-        return view('sinhvien.xem-cong-viec-duoc-giao')->with('dscv',$dsDuocGiao)->with('hoten',$hoten);
+        return view('sinhvien.xem-cong-viec-duoc-giao')->with('dscv',$dsDuocGiao)->with('hoten',$hoten)
+            ->with('manth',$manth)->with('tendt',$tendt);
     }
 /*=========================== Đổi mật khẩu Sinh Viên ==============================================*/   
     public function DoiMatKhauSV(){

@@ -111,11 +111,15 @@
                         <td align="center" colspan="5">                                                  
                             @foreach($dstensv as $sv)
                                 <div style="padding: 2px 2px 2px 60px; display: block; float: left;">  
-                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
-                                           {{$sv->mssv}}
-                                       </a>
-                                       : <input type="checkbox" name="chkThanhVien[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp
-                                       Nhóm trưởng: <input type="radio" name="rdNhomTruong"/><br>
+                                    @for($i = 0; $i < count($dstensv); $i++)
+                                        <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
+                                              {{$sv->mssv}}
+                                        </a> 
+                                       : <input type="checkbox" name="chkThanhVien[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp                                      
+
+                                          Nhóm trưởng: <input type="radio" name="rdNhomTruong{{$i}}"/><br>
+                                       <?php break; ?>
+                                    @endfor
                                 </div> 
                             @endforeach                                
                         </td>
