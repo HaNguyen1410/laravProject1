@@ -63,7 +63,7 @@ class QltailieuController extends Controller
     }
 /*========================= Giảng viên quản lý tài liệu chi tiết=============================*/
     public function KhoTaiLieuChiTiet($macb,$manth){
-        $dt = DB::table('de_tai as dt')->select('dt.tendt')
+        $dt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','dt.macb')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->where('radt.manhomthuchien',$manth)
                 ->first();
@@ -75,9 +75,21 @@ class QltailieuController extends Controller
                 ->join('cong_viec as cv','tl.macv','=','cv.macv')
                 ->where('th.manhomthuchien',$manth)
                 ->get();
-        
         return view('giangvien.kho-tai-lieu-chi-tiet')->with('dt',$dt)->with('dstailieu',$dstailieu)
-                     ->with('macb',$macb);
+                     ->with('macb',$macb)->with('manth',$manth);
+    }
+/*==================== Nhận xét về 1 tài liệu =======================*/
+    public function DanhGiaTaiLieu($macb,$manth,$matl){       
+        $dt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','dt.macb')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->where('radt.manhomthuchien',$manth)
+                ->first();        
+        $tailieu = DB::table('tai_lieu as tl')->select('tl.matl','tl.tentl','dg.nd_danhgia')
+                ->join('danh_gia as dg','tl.matl','=','dg.matl')
+                ->where('dg.matl',$matl)
+                ->first();
+        return view('giangvien.danh-gia-tai-lieu')->with('macb',$macb)->with('tailieu',$tailieu)
+            ->with('dt',$dt)->with('manth',$manth)->with('matl',$matl);
     }
 /*==================== Lưu nhận xét về tài liệu của 1 giảng viên =======================*/
     public function LuuDanhGia(Request $req){
@@ -85,11 +97,11 @@ class QltailieuController extends Controller
         $manth = DB::table('danh_gia as dg')
                 ->join('tai_lieu as tl','dg.matl','=','tl.matl')
                 ->join('thuc_hien as th','tl.macv','=','th.macv')
-                ->where('tl.matl',$post['cbMaTL'])
+                ->where('tl.matl',$post['txtMaTL'])
                 ->value('th.manhomthuchien');
         $v = \Validator::make($req->all(),
                     [
-                        'cbMaTL'     => 'required',
+                        'txtMaTL'     => 'required',
                         'txtDanhGia' => 'required'
                     ]
                 );
@@ -97,14 +109,7 @@ class QltailieuController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }
         else{
-//            $data = array(
-//                [
-//                    'macb'        => $_POST['txtMaCB'],
-//                    'nd_danhgia'  => $_POST['txtDanhGia'],
-//                    'ngaydanhgia' => Carbon::now()
-//                ]
-//            );
-            $cn = DB::table('danh_gia')->where('matl',$post['cbMaTL'])->update(
+            $cn = DB::table('danh_gia')->where('matl',$post['txtMaTL'])->update(
                         [
                             'macb' => $_POST['txtMaCB'],
                             'nd_danhgia' => $_POST['txtDanhGia'],

@@ -26,33 +26,37 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">
-                Cập nhật thông báo: 
-                <a href="../../{{$macb}}" style="border: 0px; color: #006400">{{$tb->matb}}</a>
+                Thêm thông báo: 
             </h3>
             <div class="col-md-12" style="margin-bottom: 10px;">
-                <form action="{{action('QlthongbaoController@LuuCapNhatThongBao')}}" method="post" enctype="multipart/form-data">
+                <form action="{{action('QlthongbaoController@LuuThemThongBao')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <table class="table table-bordered">
                         <tr>
                             <th>Nội dung thông báo:</th>
                             <td colspan="4">
-                                <textarea class="form-control" name="txtNoiDungTB" rows="4">{{$tb->noidungtb}}</textarea>
+                                <textarea class="form-control" name="txtNoiDungTB" rows="4"></textarea>
                                 <p style='color:red;'>{{$errors->first('txtNoiDungTB')}}</p>
                             </td>
                         </tr>
                         <tr>
                             <th title="Bắt đầu mở hệ thống cho sinh viên nộp tài liệu">Thời gian bắt đầu</th>
                             <td>
-                                <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="{{$tb->batdautb}}" class="form-control"/>
+                                <input type="text" id="txtNgayBatDau" name="txtBatDauNop" value="" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtBatDauNop')}}</p>
                             </td>
                             <th title="Hạn chót mở hệ thống cho sinh viên nộp tài liệu">Thời hạn kết thúc</th>
                             <td>
-                                <input type="text" id="txtNgayKetThuc" name="txtKetThucNop" value="{{$tb->ketthuctb}}" class="form-control"/>
+                                <input type="text" id="txtNgayKetThuc" name="txtKetThucNop" value="" class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtKetThucNop')}}</p>
                             </td>
                         </tr>
-                        <tr>
+                        <tr>                        
+                            <th>Mã cán bộ và Mã Thông báo:</th>
+                            <td align="center">
+                                <input type="text" name="txtMaTB" value="{{$ma}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control" readonly=""/>
+                                <input type="text" name="txtMaCB" value="{{$macb}}" size="5" style="width:40%; text-align: center;" class="form-control" readonly=""/>
+                            </td>
                             <th>Nhóm thực hiện:</th>
                             <td>
                                 <select class="form-control" name="cbNhomNL">
@@ -61,31 +65,23 @@
                                         <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
                                     @endforeach
                                 </select>
-                            </td>     
-                            <th>Mã Thông báo:</th>
-                            <td align="center">
-                                <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control"/>                               
-                            </td>                           
+                            </td>    
                         </tr>
-                        <tr>
+                        <tr>   
                             <th>Đính kèm:</th>
                             <td>
                                 <input type="file" name="fDinhKemTB"/>
                                 <p style='color:red;'>{{$errors->first('fDinhKemTB')}}</p>
                             </td>
                             <th>Đóng hệ thống:</th>
-                            <td align="center">
-                                @if($tb->donghethong == 1)
-                                    <input type="checkbox" name="chkDongNop" value="1" checked="true" style="margin-left: 10px; margin-right: 10px"/>
-                                @elseif($tb->donghethong == 0)
-                                    <input type="checkbox" name="chkDongNop" value="0" style="margin-left: 10px; margin-right: 10px"/>
-                                @endif
+                            <td>
+                                <input type="checkbox" name="chkDongNop" value="" style="margin-left: 10px; margin-right: 10px"/>                               
                             </td>                            
                         </tr>
                         <tr>
                             <td colspan="4" align="center">
-                                <button type="submit" name="" class="btn btn-primary" style="width:15%">
-                                    <img src="{{asset('images/add-icon.png')}}">Cập Nhật
+                                <button type="submit" name="" class="btn btn-primary">
+                                    <img src="{{asset('public/images/add-icon.png')}}">Thêm Thông báo
                                 </button>
                                 <a href="{{asset('giangvien/quanlythongbao/2134')}}" class="btn btn-warning" style="margin-left: 10px; width:15%">
                                     <img src="{{asset('public/images/delete-icon.png')}}">Hủy Bỏ

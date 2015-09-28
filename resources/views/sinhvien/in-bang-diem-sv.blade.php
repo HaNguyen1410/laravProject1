@@ -75,7 +75,7 @@ and open the template in the editor.
             (Học kỳ: <lable style="color: #00c;">{{$hk}}</lable> - Năm học: <lable style="color: #00c;">{{$nam}})</lable>
         </div>
         <br>
-        <table border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">
+        <table border="0" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <td width="20%">Họ tên cán bộ:</td>
                 <td colspan="3">
@@ -142,6 +142,20 @@ and open the template in the editor.
                     </tr>
                  @endif
             @endforeach         
+        </table><br>
+        <table border="0" style="width:500px;" align="right" padding="1px 1px" cellspacing="0px 0px">
+            <tr>
+                <td align="center">
+                    <label style="font-weight: bold">Người in</label>
+                </td>             
+            </tr>
+            <tr>
+                <td align="center">
+                    <label style="color: #00c; font-weight: bold">
+                        {{$tensv->hoten}} ({{$tensv->mssv}}) 
+                    </label>
+                </td>                
+            </tr>
         </table>
     </body>
 </html>

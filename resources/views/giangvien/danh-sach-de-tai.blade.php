@@ -121,7 +121,9 @@
                         @endforeach -->
                         <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
                         <td align='center'>
-                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}"><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp
+                            <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}">
+                                <img src="{{asset('public/images/edit-icon.png')}}"/>
+                            </a>&nbsp
                             <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>

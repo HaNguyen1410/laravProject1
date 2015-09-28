@@ -59,62 +59,46 @@
                 @endforeach
             </table>
         </div>  
-        <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN SINH VIÊN</h3><br>
+        <div class="col-md-12" style="margin-bottom: 15px;">
+            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN SINH VIÊN</h3>
+            <div align="center">
+                (Học kỳ: <lable style="color: #00c; font-weight: bold;">{{$hk}}</lable> - Năm học: <lable style="color: #00c; font-weight: bold;">{{$nam}})</lable>
+            </div>       
         </div>          
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-9 col-md-push-3">
-                    <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
-                            Giảng viên hướng dẫn
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">
-                                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
-                                        <tr>
-                                            <th width="40%">MSCB:</th>
-                                            <td>{{$ttgv->macb}}</td>                                    
-                                        </tr>
-                                        <tr>
-                                            <th>Họ và tên:</th>
-                                            <td>{{$ttgv->hoten}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Email:</th>
-                                            <td>{{$ttgv->email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Điện thoại:</th>
-                                            <td>{{$ttgv->sdt}}</td>
-                                        </tr>
-                                    </table>
-                                </a>
-                            </li>
-                        </ul>
-                    </div> <!-- /dropdown -->
-
-                    <br>
                     <table class="table table-bordered" border="0" width="700px" cellpadding="25px" cellspacing="0px" align='center' id="bang1">
                         <tr><th colspan="4" style="text-align: center">Thông tin sinh viên</th></tr>
                         <tr>
                             <td><label>Mã số sinh viên:</label></td>
-                            <td style="color:blue;" colspan="3">{{$sv->mssv}}</td>                                    
-                        </tr>
-                        <tr>
+                            <td style="color:blue;">{{$sv->mssv}}</td>                             
                             <td><label>Họ và tên:</label></td>
                             <td style="color:blue;" colspan="3">{{$sv->hoten}}</td>
                         </tr>
                         <tr>
                             <td><label>Ngày sinh:</label></td>
-                            <td style="color:blue;" colspan="3">{{$sv->ngaysinh}}</td>
+                            <td style="color:blue;">{{$sv->ngaysinh}}</td>                            
+                            <td><label>Điện thoại sinh viên:</label></td>
+                            <td style="color:blue;">{{$sv->sdt}}</td>
                         </tr>
                         <tr>
                             <td><label>Khóa:</label></td>
                             <td style="color:blue;">{{$sv->khoahoc}}</td>
-                            <td width="10%"><label>Nhóm học phần:</label></td>
+                            <td width="20%"><label>Nhóm học phần:</label></td>
                             <td style="color:blue;">{{$hp->tennhomhp}}</td>
+                        </tr>
+                        <tr>
+                            <td><label>Mã giảng viên:</label></td>
+                            <td style="color:blue;">{{$ttgv->macb}}</td>
+                            <td><label>Họ và tên giảng viên:</label></td>
+                            <td style="color:blue;">{{$ttgv->hoten}}</td>
+                        </tr>
+                        <tr>
+                            <td><label>Số điện thoại giảng viên:</label></td>
+                            <td style="color:blue;">{{$ttgv->sdt}}</td>
+                            <td><label>Email giảng viên:</label></td>
+                            <td style="color:blue;">{{$ttgv->email}}</td>
                         </tr>
                         <tr>
                             <td><label>Tên đề tài:</label></td>
@@ -157,9 +141,9 @@
                                                             <td>{{$tv->hoten}}</td>
                                                             <td align='center'>
                                                                 @if($tv->nhomtruong == 1)
-                                                                    <img src="{{asset('images/check.png')}}"/>
+                                                                    <img src="{{asset('public/images/check.png')}}"/>
                                                                 @elseif($tv->nhomtruong == 0)
-                                                                    <img src="{{asset('images/uncheck.png')}}"/>
+                                                                    <img src="{{asset('public/images/uncheck.png')}}"/>
                                                                 @endif
                                                             </td>
                                                         </tr>
@@ -203,49 +187,25 @@
                                  ?>      
                             </td>
                         </tr>
-                    </table>
-                    <form action="{{action('SinhvienController@LuuCapNhatThongTin')}}" method="post">
-                        <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                        <table class="table table-bordered" border="0" width="800px" id="bang2">
-                            <tr><th colspan="2" style="text-align: center">Xác nhận thông tin</th></tr>
-                            <tr>
-                                <td>Số điện thoại:</td>
-                                <td>
-                                    <input type="text" name="txtMaSV" value="<?php echo $sv['mssv'];?>" />
-                                    <input type="text" name="txtDienThoai" value="<?php echo $sv['sdt'];?>" class="form-control">
-                                    <p style='color:red;'>{{$errors->first('txtDienThoai')}}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kỹ năng công nghệ:</td>
-                                <td>
-                                    <textarea class="form-control" name="txtCongNghe" rows="3"><?php echo $sv['kynangcongnghe'];?></textarea>                                            
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kiến thức về ngôn lập trình:</td>
-                                <td>
-                                    <textarea class="form-control" name="txtLapTrinh" rows="3" style="text-align: left;"><?php echo $sv['kienthuclaptrinh'];?></textarea>
-                                    <p style='color:red;'>{{$errors->first('txtLapTrinh')}}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kinh nghiệm:</td>
-                                <td>
-                                    <textarea class="form-control" name="txtKinhNghiem" rows="3"><?php echo $sv['kinhnghiem'];?></textarea>
-                                    <p style='color:red;'>{{$errors->first('txtKinhNghiem')}}</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td align="center">
-                                    <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 20%;">
-                                        <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu 
-                                    </button>
-                                </td>                                  
-                            </tr>
-                        </table>
-                    </form>                            
+                        <tr>
+                            <td><label>Kỹ năng công nghệ:</label></td>
+                            <td style="color:blue;" colspan="2">{{$sv->kynangcongnghe}}</td>  
+                            <td rowspan="3" align="center">
+                                <a href="1111317/capnhatkynang">
+                                    <button type="button" class="btn btn-default">
+                                        Cập nhật <img src="{{asset('public/images/user-edit-icon.png')}}"/>
+                                    </button> 
+                                </a> 
+                            </td>
+                        </tr>                       
+                            <td><label>Kiến thức lập trình:</label></td>
+                            <td style="color:blue;" colspan="2">{{$sv->kienthuclaptrinh}}</td>
+                        </tr>
+                        <tr>                          
+                            <td><label>Kinh nghiệm lập trình:</label></td>
+                            <td style="color:blue;" colspan="2">{{$sv->kinhnghiem}}</td>                            
+                        </tr>
+                    </table>                                             
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
                     <br><br><br>

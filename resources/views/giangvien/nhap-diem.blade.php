@@ -83,7 +83,7 @@
                     <th rowspan="2" width="3%">Mã nhóm</th>
                     <th rowspan="2" width="1%">Mã số sinh viên</th>
                     <th rowspan="2" width="12%">Họ và tên</th>
-                    <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí</th> 
+                    <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí - Điểm tối đa</th> 
                     <th rowspan="2" width="20%">Nhận xét</th>
                     <th rowspan="2" width="4%">Tổng điểm</th>
                     <th rowspan="2" width="4%">Điểm chữ</th>   
@@ -91,7 +91,7 @@
                 <tr>
                     @foreach($tieuchi as $tc)
                         <th width="2%">
-                            <input type="text" name="txtMaTC[]" value="{{$tc->matc}}" size="1" style="text-align: center;" class="form-control" readonly=""/>
+                            <input type="text" name="txtMaTC[]" value="[{{$tc->matc}}]" size="1" style="text-align: center; border: 0px; background-color: #F5F5F5; height: 25px;" class="form-control" readonly=""/>
                             {{$tc->heso}}
                         </th>
                     @endforeach                                   

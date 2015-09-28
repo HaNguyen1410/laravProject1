@@ -82,23 +82,21 @@
                             <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
                             <li class="dropdown active">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Họ và tên sinh viên (mssv)
+                                    Thông tin sinh viên
                                     <span class="caret"></span>
                                 </a>
-                                <ul class="dropdown-menu" role='menu'>
-                                    <li><a href="{{asset('sinhvien/thongtinsv/1111317')}}">Thông tin sinh viên</a></li>
-                                    <li class="divider"></li>                                    
+                                <ul class="dropdown-menu" role='menu'>  
+                                    <li><a href="{{asset('sinhvien/thongtinsv/1111317')}}">Thông tin cá nhân</a></li>
+                                    <li class="divider"></li>
                                     <li><a href="{{asset('sinhvien/xemviecduocgiao/1111317/Phạm Thúy Ngọc/NTH02')}}">Xem công việc</a></li>
                                     <li class="divider"></li>
                                     <li><a href="{{asset('sinhvien/doimatkhausv/1111317')}}">Đổi mật khẩu</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{{asset('/dangnhap')}}">Đăng xuất</a></li>
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right">                            
                             <li> 
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px; margin-right: 40px;">
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px;">
                                      <img src="{{Asset('public/images/search-icon(4).png')}}">
                                 </button>
                                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -119,7 +117,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>                        
+                            </li> 
+                            <li style="margin-right: 15px;">
+                                <a href="{{asset('/dangnhap')}}">
+                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                                </a>
+                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>

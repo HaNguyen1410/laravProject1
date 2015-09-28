@@ -72,7 +72,7 @@ and open the template in the editor.
             (Học kỳ: <lable style="color: #00c;">{{$hk}}</lable> - Năm học: <lable style="color: #00c;">{{$nam}})</lable>
         </div>
         <br>
-        <table border="1" style="width:100%" padding="1px 1px" cellspacing="0px 0px">
+        <table border="0" style="width:100%" padding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <td>Họ và tên cán bộ:<label style="color: #00c; font-weight: bold"> {{$tencb->hoten}} ({{$tencb->macb}}) </label></td>
                 <td width="30%">Nhóm HP:</td>

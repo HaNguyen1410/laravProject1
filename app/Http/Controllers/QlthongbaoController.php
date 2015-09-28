@@ -38,7 +38,6 @@ class QlthongbaoController extends Controller
     }
     /*=================== Quản lý thông báo ===============================*/    
     public function QuanLyThongBao($macb){
-        $ma = $this->MaTB_tutang();
         $dsthongbao = DB::table('thong_bao as tb')
                         ->select('tb.matb','tb.noidungtb','tb.dinhkemtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
                                 'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
@@ -49,7 +48,18 @@ class QlthongbaoController extends Controller
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
                 ->where('nam',$nam)
-                ->value('hocky');
+                ->value('hocky');        
+        
+        return view('giangvien.quan-ly-thong-bao')->with('dsthongbao',$dsthongbao)->with('macb',$macb);
+    }
+/*=================== Thêm thông báo ===============================*/    
+    public function ThemThongBao($macb){
+        $ma = $this->MaTB_tutang();
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky'); 
         //Lấy danh sách nhóm thực hiện trong hk niên khóa hiện tại
         $dsnhomth = DB::table('nhom_thuc_hien as nth')->distinct()->select('nth.manhomthuchien')
                     ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
@@ -57,10 +67,9 @@ class QlthongbaoController extends Controller
                     ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                     ->where('nk.nam',$nam)->where('nk.hocky',$hk)
                     ->where('hp.macb',$macb)
-                    ->get();
-        
-        return view('giangvien.quan-ly-thong-bao')->with('dsthongbao',$dsthongbao)->with('macb',$macb)
-            ->with('ma',$ma)->with('dsnhomth',$dsnhomth);
+                    ->get();  
+        return view('giangvien.them-thong-bao')->with('ma',$ma)->with('macb',$macb)
+            ->with('dsnhomth',$dsnhomth);
     }
 /*=================== Lưu Thêm thông báo ===============================*/  
     public function LuuThemThongBao(Request $req){

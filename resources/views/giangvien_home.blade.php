@@ -109,22 +109,20 @@
                             </li>                                 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Họ tên (macb)
+                                    Thông tin giảng viên
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('giangvien/thongtingv/2134')}}">Thông tin giảng viên</a></li>
+                                    <li><a href="{{asset('giangvien/thongtingv/2134')}}">Thông tin cá nhân</a></li>
                                     <li class="divider"></li>                           
                                     <li><a href="{{asset('giangvien/doimatkhaugv/2134')}}">Đổi mật khẩu</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{{asset('/dangnhap')}}">Đăng xuất</a></li> 
                                 </ul>
                             </li>
                             
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li> 
-                                <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px; margin-right: 40px;">
+                                <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px;">
                                      <img src="{{Asset('public/images/search-icon(4).png')}}">
                                 </button>
                                 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -145,7 +143,12 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>                        
+                            </li>  
+                            <li style="margin-right: 15px;">
+                                <a href="{{asset('/dangnhap')}}">
+                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                                </a>
+                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/container -->

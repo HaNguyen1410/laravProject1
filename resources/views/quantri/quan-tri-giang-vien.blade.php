@@ -113,7 +113,7 @@
                         <td align="center">{{$gvhp->hocky}}</td>
                         <td align='center'>
                             <a onclick="return confirm('Rút giảng viên **{{$rw->hoten}}** khỏi nhóm HP **{{$gvhp->tennhomhp}}?');" href='danhsachgv/xoagvkhoihocphan/{{$gvhp->manhomhp}}'>
-                                <img src="{{asset('images/Document-Delete-icon.png')}}"/>
+                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>
                     </tr>

@@ -13,45 +13,6 @@
 <div class="container">
     <div class="row">
         <h4 style="display:block; float:left; color:blue; font-weight: bold;">BẢNG TIÊU CHÍ ĐÁNH GIÁ KẾT QUẢ NIÊN LUẬN</h4>    
-        <div class="col-md-12" style="margin-bottom: 20px; display:block; float:left;" align="center">
-            <form action="{{action('QdtieuchiController@LuuThemTieuChi')}}" method="post" name="frmDoiMatKhau" class="form-horizontal"> 
-                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                    <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">Thêm tiêu chí đánh giá</h3>
-                    <table class="table table-bordered" align="center" style="width:800px;">
-                        <tr>
-                            <th>Mã cán bộ:</th>
-                            <td>
-                                <input type="text" name="txtMaCB" value="2134" style="width: 60%; text-align: center;" class="form-control" readonly=""/>
-                            </td>
-                            <th>Mã tiêu chí:</th>
-                            <td>                                 
-                                <input style="width:35%; text-align: center;" type="text" name="txtMaTC" value="{{$ma}}" class="form-control" readonly=""/> 
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Nội dung đánh giá:</th>
-                            <td colspan="3">
-                                 <textarea class="form-control" rows="3" name="txtNoiDungTC"></textarea>
-                                 <p style='color:red;'>{{$errors->first('txtNoiDungTC')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Mức điểm:</th>
-                            <td colspan="3">
-                                <input type="text" name="txtMucDiem" value="" class="form-control" /> 
-                                <p style='color:red;'>{{$errors->first('txtMucDiem')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" align="center">
-                                <button type="submit" name="btnThem" class="btn btn-primary" style="width: 20%;">
-                                    <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
-                                </button>                                                              
-                            </td>
-                        </tr>
-                    </table>       
-            </form>
-        </div>
         <div class="col-md-12" style="display:block; float:left;">
             <table class="table table-bordered" style="width: 800px" align="center">
                 <tr>
@@ -71,13 +32,13 @@
                             @endforeach
                         </select>
                     </th>
-<!--                    <th>
+                    <th>
                         <a href="2134/themtieuchi">
                             <button type="button" class="btn btn-primary" style="width:60%">
-                                <img src="{{asset('images/add-icon.png')}}"> Thêm
+                                <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                            </button>
                         </a>
-                    </th>-->
+                    </th>
                 </tr>
             </table>            
         </div>   

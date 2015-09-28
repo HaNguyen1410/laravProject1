@@ -15,7 +15,7 @@
         /*========================== Quy điểm số ra điểm chữ ====================*/ 
                 function diemchu($d){
                     if($d<=0 && $d<4){
-                        return F;
+                        return 'F';
                     }
                     else if($d<=4 || $d<=4.4){
                         return 'D';
@@ -58,9 +58,15 @@
                     <input style="width:30%; text-align: center; font-weight: bold;" type='text' name='' value='{{$dsdt->manhomthuchien}}' class='form-control' readonly=""/>
                 </td>
             </tr>
+            <tr>
+                <th colspan='2'>Cán bộ hướng dẫn:</th>
+                <td colspan='4'>
+                    <label style="color: #00c; font-weight: bold">{{$tengv->hoten}}</label>
+                </td>
+            </tr>
             <tr>  
-                <th>Đề tài:</th>
-                <td colspan='5'><input type='text' name='' value='{{$dsdt->tendt}}' class='form-control' readonly=""/></td>
+                <th colspan='2'>Đề tài:</th>
+                <td colspan='4'><input type='text' name='' value='{{$dsdt->tendt}}' class='form-control' readonly=""/></td>
             </tr>
          </table>
 
@@ -69,7 +75,7 @@
                 <th rowspan="2" width="1%">STT</th>
                 <th rowspan="2" width="8%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="{{$n=count($tieuchi)}}" width="30%">Hệ số</th>
+                <th colspan="{{$n=count($tieuchi)}}" width="30%">Tiêu chí - Điểm tối đa</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>    
                 <th rowspan="2" width="20%">Nhận xét</th> 
@@ -79,10 +85,8 @@
                     <th></th>
                 @elseif(count($tieuchi) > 0)
                     @foreach($tieuchi as $tc)
-                        <th width="2%">
-                            <a data-toggle="tooltip" data-placement="top" title="Mã tiêu chí: [{{$tc->matc}}]">
-                                {{$tc->heso}}
-                            </a>
+                        <th width="4%">
+                            [{{$tc->matc}}] - {{$tc->heso}}
                         </th>
                     @endforeach 
                 @endif                                                  
@@ -99,17 +103,13 @@
                     @elseif(count($tieuchi) > 0)
                         @foreach($dsdiem as $diem) 
                             @if($diem->mssv == $sv->mssv)
-                                <td>{{$diem->diem}}</td>
+                                <td align="center">{{$diem->diem}}</td>
                             @endif
                         @endforeach 
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                                @if($tong->tongdiem == null)
-                                    <td></td>
-                                @elseif($tong->tongdiem != null)
-                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
-                                @endif                                    
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>                                
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>                                                                 
                             @endif                        
                         @endforeach
                     @endif   

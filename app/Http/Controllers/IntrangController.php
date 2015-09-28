@@ -64,6 +64,7 @@ class IntrangController extends Controller
     }
 /*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
     public function InBangDiemSV($mssv){
+        $tensv = DB::table('sinh_vien')->select('mssv','hoten')->where('mssv',$mssv)->first();
         $manhom = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien'); 
         $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','hp.tennhomhp')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
@@ -100,7 +101,8 @@ class IntrangController extends Controller
                 ->value('hocky');
         $date = date('Y-m-d');//Carbon::now();
         $view =  \View::make('sinhvien.in-bang-diem-sv', 
-                compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'dstieuchi', 'dssv', 'dsdiem', 'tongdiem','nhanxet'));
+                compact('nam', 'hk','date', 'manhom', 'gv', 'tendt', 'dstieuchi', 'dssv', 'dsdiem', 
+                        'tongdiem','nhanxet','tensv'));
         $pdf = \App::make('dompdf.wrapper');
 //        $pdf->loadHTML($view);
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');

@@ -23,6 +23,7 @@ class DiemController extends Controller
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->where('radt.manhomthuchien',$manth)
                 ->value('dt.macb');
+        $tengv = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
         $hk_nk = DB::table('nien_khoa as nk')->distinct()
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
@@ -60,7 +61,7 @@ class DiemController extends Controller
                 ->whereIn('mssv', $masv)
                 ->get();
         
-        return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tieuchi',$tieuchi)
+        return view('sinhvien.xem-diem')->with('hk_nk',$hk_nk)->with('tengv',$tengv)->with('tieuchi',$tieuchi)
             ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem)->with('tongdiem',$tongdiem)
             ->with('nhanxet',$nhanxet);            
     }   

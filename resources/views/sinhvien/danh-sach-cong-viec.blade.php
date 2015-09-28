@@ -18,7 +18,7 @@
                     type: 'bar'
                 },
                 title: {
-                    text: 'Biểu độ thể hiện thời gian thực hiện của cả nhóm'
+                    text: 'Biểu độ thể hiện "số tuần" thực hiện của cả nhóm'
                 },
                 xAxis: {
                     categories: ['Kế hoạch', 'Thực tế']
@@ -26,7 +26,7 @@
                 yAxis: {
                     min: 0,
                     title: {
-                        text: 'Số ngày thực hiện'
+                        text: 'Số tuần thực hiện'
                     }
                 },
                 legend: {
@@ -55,7 +55,7 @@
                 },
 
                 title: {
-                    text: 'Biểu đồ thể hiện thời gian thực hiện của mỗi sinh viên'
+                    text: 'Biểu đồ thể hiện "số tuần" thực hiện của mỗi sinh viên'
                 },
 
                 xAxis: {
@@ -66,7 +66,7 @@
                     allowDecimals: false,
                     min: 0,
                     title: {
-                        text: 'Số ngày thực hiện'
+                        text: 'Số tuần thực hiện'
                     }
                 },
 

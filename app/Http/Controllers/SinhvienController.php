@@ -21,6 +21,11 @@ class SinhvienController extends Controller
 /*============================= Hiển thị thông tin của 1 sinh viên ========================================*/
     public function HienThiSV($masv){
         $sinhvien = Sinhvien::find($masv);
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
         $hp = DB::table('chia_nhom as chn')->select('hp.tennhomhp')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->where('chn.mssv',$masv)
@@ -51,10 +56,16 @@ class SinhvienController extends Controller
                         ->get();
                    
         return view('sinhvien.thong-tin-sinh-vien')->with('sv',$sinhvien)->with('hp',$hp)
-                ->with('dstv',$dstv)->with('ttgv',$ttgv)->with('nhomth',$nhomth)
+                ->with('nam',$nam)->with('hk',$hk)->with('dstv',$dstv)->with('ttgv',$ttgv)->with('nhomth',$nhomth)
                 ->with('detainhom',$detainhom)->with('dsthongbao',$dsthongbao);
     }
-/*=========================== Sinh viên tự cập nhật thông tin ==============================================*/    
+/*=========================== Thêm thông tin các kỹ năng ==============================================*/   
+    public function CapNhatKyNang($mssv){
+        $sinhvien = Sinhvien::find($mssv);
+        
+        return view('sinhvien.cap-nhat-thong-tin-ky-nang')->with('sv',$sinhvien);
+    }
+/*=========================== Sinh viên Lưu thêm thông tin các kỹ năng ==============================================*/    
     public function LuuCapNhatThongTin(Request $request){
         $post = $request->all();
         $v = \Validator::make($request->all(),

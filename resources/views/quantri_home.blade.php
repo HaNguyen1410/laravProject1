@@ -65,20 +65,19 @@
                             </li>
                             <li class="dropdown">
                                 <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Họ và tên (macb)
+                                    Thông tin quản trị
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('quantri/thongtinqt/9876')}}">Thông tin giảng viên</a></li>
+                                    <li><a href="{{asset('quantri/thongtinqt/9876')}}">Thông tin cá nhân</a></li>
                                     <li class="divider"></li>                           
-                                    <li><a href="{{asset('quantri/doimatkhauqt/9876')}}">Đổi mật khẩu</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="{{asset('dangnhap')}}">Đăng xuất</a></li> 
+                                    <li><a href="{{asset('quantri/doimatkhauqt/9876')}}">Đổi mật khẩu</a></li>                                    
                                 </ul>
                             </li>
                         </ul>
-<!--                        
+                       
                         <ul class="nav navbar-nav navbar-right">
+ <!--                            
                             <li> 
                                 <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bs-example-modal-lg" style="padding: 0px 0px; margin-top: 5px; margin-right: 40px;">
                                      <img src="{{asset('public/images/search-icon(4).png')}}">
@@ -101,8 +100,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>                        
-                        </ul>-->
+                            </li> -->   
+                            <li style="margin-right: 15px;">
+                                <a href="{{asset('/dangnhap')}}">
+                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                                </a>
+                            </li>
+                        </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/container -->
             </nav>

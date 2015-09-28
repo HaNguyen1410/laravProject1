@@ -100,7 +100,9 @@ Route::group(['prefix'=>'giangvien'], function(){
     /*======= QUY ĐỊNH TIÊU CHÍ CHẤM ĐIỂM ==========*/
     Route::group(['prefix'=>'dstieuchi'],function(){
         route::get('{macb}','QdtieuchiController@DSTieuChi');
-        route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
+        /*  * Thêm tiêu chí đánh giá * */
+        route::get('{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
+        route::post('luuthemttc','QdtieuchiController@LuuThemTieuChi');
          /*  * Cập nhật tiêu chí đánh giá * */
         route::get('{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
         route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
@@ -115,8 +117,10 @@ Route::group(['prefix'=>'giangvien'], function(){
     });
     /*======= Quản lý TÀI LIỆU ==========*/
     Route::group(['prefix'=>'khotailieu'],function(){
-        route::get('{macb}','QltailieuController@KhoTaiLieu');
+        route::get('{macb}','QltailieuController@KhoTaiLieu');        
         route::get('{macb}/khotailieuchitiet/{manth}','QltailieuController@KhoTaiLieuChiTiet');
+        /*============== Đánh giá tài liệu ===========*/
+        route::get('{macb}/khotailieuchitiet/{manth}/danhgiatailieu/{matl}','QltailieuController@DanhGiaTaiLieu');
         route::post('luudanhgia','QltailieuController@LuuDanhGia');
     });
     /*======= QUẢN LÝ ĐỀ TÀI ==========*/
@@ -152,7 +156,9 @@ Route::group(['prefix'=>'giangvien'], function(){
     /*======= QUẢN LÝ THÔNG BÁO ==========*/
     Route::group(['prefix'=>'quanlythongbao'],function(){
         route::get('{macb}','QlthongbaoController@QuanLyThongBao');
-        route::post('luuthemthongbao','QlthongbaoController@LuuThemThongBao');
+        /*======== Thêm thông báo ===========*/
+        route::get('{macb}/themthongbao','QlthongbaoController@ThemThongBao');
+        route::post('luuthemthongbao','QlthongbaoController@LuuThemThongBao');        
         /*======== Cập nhật thông báo ===========*/
         route::get('{macb}/capnhatthongbao/{matb}','QlthongbaoController@CapNhatThongBao');
         route::post('luucapnhatthongbao','QlthongbaoController@LuuCapNhatThongBao');
@@ -168,6 +174,7 @@ Route::group(['prefix'=>'giangvien'], function(){
 /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
 Route::get('sinhvien/thongtinsv/{mssv}','SinhvienController@HienThiSV');
 Route::get('sinhvien/thongtinsv/{mssv}/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
+Route::get('sinhvien/thongtinsv/{mssv}/capnhatkynang','SinhvienController@CapNhatKyNang');
 Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
 //Route::get('sinhvien/thongtinsv/{mssv}/xemtaptin/{tentaptin}','SinhvienController@XemTapTin');
 /*======= Trang xem công việc được giao ==========*/

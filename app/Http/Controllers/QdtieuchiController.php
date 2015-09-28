@@ -53,10 +53,10 @@ class QdtieuchiController extends Controller
         return redirect('giangvien/dstieuchi/2134');      
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
-//    public function ThemTieuChi($macb){ 
-//        $ma = $this->matc_tutang();
-//        return view('giangvien.them-tieu-chi')->with('ma',$ma);
-//    }
+    public function ThemTieuChi($macb){ 
+        $ma = $this->matc_tutang();
+        return view('giangvien.them-tieu-chi')->with('ma',$ma);
+    }
     
     public function LuuThemTieuChi(Request $req){
         $post = $req->all();
