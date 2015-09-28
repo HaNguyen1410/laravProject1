@@ -14,11 +14,13 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class PhancvController extends Controller
 {
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
-    public function DanhSachCV($mssv){
+    public function DanhSachCV(){
+        $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
@@ -65,7 +67,8 @@ class PhancvController extends Controller
         }       
     }
 /*========= Danh sách quản lý phân công nhiệm vụ ==============*/   
-   public function DSPhanCV($mssv){
+   public function DSPhanCV(){
+       $mssv = \Auth::user()->taikhoan;
        $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
        $tiendonhom = DB::table('nhom_thuc_hien')->where('manhomthuchien','=',$manth)->first();
        //Lấy tên đề tài của 1 nhóm
@@ -83,7 +86,8 @@ class PhancvController extends Controller
                ->with('dscvchinh',$dscvchinh);
    }
 /*========= Xóa công việc chính ==============*/    
-    public function XoacvChinh($mssv,$macv){
+    public function XoacvChinh($macv){
+        $mssv = \Auth::user()->taikhoan;
         $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv',$macv)->get();
         if(count($dscvphu) > 0){
             \Session::flash('ThongBao','Phải xóa công việc phụ thuộc trước!');
@@ -100,8 +104,9 @@ class PhancvController extends Controller
         }        
     }
 /*========= Thêm công việc chính ==============*/ 
-     public function ThemcvChinh($masv){
-         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
+     public function ThemcvChinh(){
+         $mssv = \Auth::user()->taikhoan;
+         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
@@ -110,6 +115,7 @@ class PhancvController extends Controller
          return view('sinhvien.them-cong-viec')->with('dstv',$dstv)->with('manth',$manth)
              ->with('ma',$ma);
      }
+/*========= LƯU Thêm công việc chính ==============*/ 
      public function LuuThemcvChinh(Request $req){
          $post = $req->all();
          $v = \Validator::make($req->all(),
@@ -152,13 +158,14 @@ class PhancvController extends Controller
              $ch1 = DB::table('cong_viec')->insert($data1);
              $ch2 = DB::table('thuc_hien')->insert($data2);
              if($ch1 > 0 && $ch2 > 0){
-                 return redirect('sinhvien/phancv/1111317');
+                 return redirect('sinhvien/phancv');
              }
          }
      }
 /*========= Cập nhật công việc chính ==============*/ 
-     public function CapNhatcvChinh($masv,$macv){
-         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
+     public function CapNhatcvChinh($macv){
+         $mssv = \Auth::user()->taikhoan;
+         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
@@ -205,16 +212,19 @@ class PhancvController extends Controller
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
              if($ch >0){
-                 return redirect('sinhvien/phancv/1111317');
+                 return redirect('sinhvien/phancv');
              }
          }
      }
+/*========= Xóa công việc chính ==============*/  
+     
 /*****************
  * ########## CÔNG VIỆC CHI TIẾT (công việc phụ thuộc) #############
  * *************
  */
 /*========= Danh sách phân công chi tiết (công việc phụ thuộc) ==============*/ 
-    public function DSPhanChiTiet($mssv,$macv){
+    public function DSPhanChiTiet($macv){
+        $mssv = \Auth::user()->taikhoan;
         $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv','=',$macv)->get();
         $cvchinh = DB::table('cong_viec')->where('macv','=',$macv)
                 ->first();
@@ -222,7 +232,8 @@ class PhancvController extends Controller
             ->with('cvchinh',$cvchinh);        
     }
 /*========= Xóa chi tiết (công việc phụ thuộc) ==============*/    
-    public function XoacvPhu($mssv,$macv,$macvphu){
+    public function XoacvPhu($macv,$macvphu){
+        $mssv = \Auth::user()->taikhoan;
         $Xoath = DB::table('thuc_hien')->where('macv',$macvphu)->delete();
         $Xoacv = DB::table('cong_viec')->where('macv',$macvphu)->delete();
         
@@ -233,7 +244,8 @@ class PhancvController extends Controller
         }
     }
 /*========= Thêm công việc chi tiết (cv phụ) ==============*/ 
-     public function ThemcvPhu($mssv,$macv){
+     public function ThemcvPhu($macv){
+         $mssv = \Auth::user()->taikhoan;
          $ma = $this->macvphuthuoc_tutang($macv);
          $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
@@ -286,14 +298,15 @@ class PhancvController extends Controller
              $ch1 = DB::table('cong_viec')->insert($data1);
              $ch2 = DB::table('thuc_hien')->insert($data2);
              if($ch1 >0 && $ch2 > 0){
-                 return redirect('sinhvien/phancongchitiet/1111317/'.$post['txtMacvChinh']);
+                 return redirect('sinhvien/phancongchitiet/'.$post['txtMacvChinh']);
              }
          }             
      }
 /*========= Cập nhật công việc chi tiết (cv phụ) ==============*/ 
-     public function CapNhatcvPhu($masv,$macv,$macvphu){
+     public function CapNhatcvPhu($macv,$macvphu){
+         $mssv = \Auth::user()->taikhoan;
          $cv = DB::table('cong_viec')->where('macv',$macvphu)->first();
-         $manth = DB::table('chia_nhom')->where('mssv',$masv)->value('manhomthuchien');
+         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
@@ -340,7 +353,7 @@ class PhancvController extends Controller
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
              if($ch >0){
-                 return redirect('sinhvien/phancongchitiet/1111317/'.$post['txtMacvChinh']);
+                 return redirect('sinhvien/phancongchitiet/'.$post['txtMacvChinh']);
              }
          }
      }

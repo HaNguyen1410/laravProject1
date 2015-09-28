@@ -186,7 +186,7 @@
                     
                 @endforeach
                 <tr>
-                    <td colspan="9" align="center">{!! $dscv->setPath('../danhsachcv/1111317')->render() !!}</td>
+                    <td colspan="9" align="center">{!! $dscv->setPath('danhsachcv')->render() !!}</td>
                 </tr> 
             </table> 
         </div>  <!-- /class="col-md-12" -->  

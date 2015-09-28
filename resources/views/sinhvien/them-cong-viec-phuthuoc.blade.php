@@ -20,8 +20,9 @@
                     <tr>
                         <th width="10%">Mã công việc:</th>
                         <td>
-                            <input type='text' name='txtMaNhomNL' value="{{$manth}}"/>
-                            <input type='text' name='txtMacvChinh' value="{{$macvchinh}}"/>
+                            <!-- Lấy manth và macvchinh -->
+                            <input type='hidden' name='txtMaNhomNL' value="{{$manth}}"/>
+                            <input type='hidden' name='txtMacvChinh' value="{{$macvchinh}}"/>
                             <input style="width:40%; text-align:center;" type="text" name="txtMaCV" value="{{$ma}}" class="form-control" readonly=""/>
                         </td>
                         <th width="10%">Tên công việc:</th>
@@ -112,10 +113,10 @@
                         <td></td>
                         <td colspan="3" align="center">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
-                                <img src="{{asset('images/save-as-icon.png')}}"> Thêm công việc
+                                <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm công việc
                             </button>&nbsp;&nbsp;
                             <a href="../{{$macvchinh}}" class="btn btn-warning" style="width:20%;">
-                                <img src="{{asset('images/delete-icon.png')}}"> Hủy bỏ
+                                <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                            
                         </td>
                     </tr>

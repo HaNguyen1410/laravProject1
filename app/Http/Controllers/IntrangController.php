@@ -15,6 +15,7 @@ use View,
     Session,
     PDF;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class IntrangController extends Controller
 {
@@ -27,7 +28,8 @@ class IntrangController extends Controller
         return $pdf->stream("DanhSachSV.pdf");
     }
 /*====================== Sinh viên In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
-    public function InChiTietDeTaiSV($mssv,$madt){        
+    public function InChiTietDeTaiSV($madt){ 
+        $mssv = \Auth::user()->taikhoan;
         $tencb = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
@@ -50,7 +52,7 @@ class IntrangController extends Controller
         return $pdf->stream($tendt.".pdf");
     }   
 /*====================== In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
-    public function InChiTietDeTai($macb,$madt){
+    public function InChiTietDeTai($macb,$madt){        
         $tencb = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
         $nk = DB::table('nien_khoa as nk')->select('nk.nam','nk.hocky')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
@@ -70,7 +72,8 @@ class IntrangController extends Controller
         return $pdf->stream($tendt.".pdf");
     }
 /*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
-    public function InBangDiemSV($mssv){
+    public function InBangDiemSV(){
+        $mssv = \Auth::user()->taikhoan;
         $tensv = DB::table('sinh_vien')->select('mssv','hoten')->where('mssv',$mssv)->first();
         $manhom = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien'); 
         $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','hp.tennhomhp')

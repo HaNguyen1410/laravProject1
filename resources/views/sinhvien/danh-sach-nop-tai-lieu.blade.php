@@ -24,7 +24,7 @@
             <lable style="margin-left: 30px; color: #00008b; font-size: 13pt;">{{$tendt}}</lable>
         </div>  
         <div align="right">
-            <a href="{{$mssv}}/noptailieu">
+            <a href="danhsachnoptailieu/noptailieu">
                 <button type="button" class="btn btn-primary" style="width:12%; margin-right: 20px; ">
                     <img src="{{asset('public/images/add-icon.png')}}"> Nộp tài liệu
                </button>

@@ -49,7 +49,7 @@
                                     {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
                                 </label> 
                             @elseif($tb->dinhkemtb != "")
-                            <a href="../../thongbao/{{$tb->dinhkemtb}}" target="_blank" style="color: #e74c3c; padding-left: 20px;">
+                            <a href="../public/thongbao/{{$tb->dinhkemtb}}" target="_blank" style="color: #e74c3c; padding-left: 20px;">
                                     {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
                                 </a>
                             @endif
@@ -104,7 +104,7 @@
                             <td><label>Tên đề tài:</label></td>
                             <td style="color:blue;" colspan="3">
                                 @if($detainhom->taptindinhkem != "")
-                                    <a href="../../public/mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
+                                    <a href="../public/mota_detai/{{$detainhom->taptindinhkem}}" target="_blank" style="color:darkblue;">
                                         <img src="{{asset('public/images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
                                         {{$detainhom->tendt}}
                                     </a>
@@ -191,7 +191,7 @@
                             <td><label>Kỹ năng công nghệ:</label></td>
                             <td style="color:blue;" colspan="2">{{$sv->kynangcongnghe}}</td>  
                             <td rowspan="3" align="center">
-                                <a href="1111317/capnhatkynang">
+                                <a href="thongtinsv/capnhatkynang">
                                     <button type="button" class="btn btn-default">
                                         Cập nhật <img src="{{asset('public/images/user-edit-icon.png')}}"/>
                                     </button> 
@@ -213,7 +213,7 @@
                         <tr>
                             <td align="center">
                                  @if($sv->hinhdaidien != "")
-                                        <img width='200px' src='../../public/hinhdaidien/{{$sv->hinhdaidien}}'>
+                                        <img width='200px' src='../public/hinhdaidien/{{$sv->hinhdaidien}}'>
                                  @else
                                         <img src="{{asset('public/images/User-image.png')}}">
                                  @endif                                        

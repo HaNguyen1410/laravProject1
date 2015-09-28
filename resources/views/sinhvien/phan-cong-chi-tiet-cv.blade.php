@@ -23,7 +23,7 @@
             <div class="col-md-12" style="background-color:#dff0d8; margin-bottom: 20px; padding: 8px;">
                 <label style="color: darkblue; font-size: 13pt;">Thuộc công việc:</label>
                 <label style="color: #F65D20;">
-                    <a href="{{asset('sinhvien/phancv/1111317')}}">
+                    <a href="{{asset('sinhvien/phancv')}}">
                         <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
                     </a>
                 </label>
@@ -75,7 +75,7 @@
                             <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
                                 <img src="{{asset('public/images/edit-icon.png')}}"/>
                             </a>&nbsp
-                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="../1111317/{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
+                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

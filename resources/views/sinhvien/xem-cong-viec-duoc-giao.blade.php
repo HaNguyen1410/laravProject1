@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align="center">CÔNG VIỆC ĐƯỢC GIAO</h3><br>
+            <h3 style="color: darkblue; font-weight: bold;" align="center">CÔNG VIỆC ĐƯỢC GIAO</h3><br>            
         </div>          
         <div class="col-md-12">
                     <table class="table table-bordered" border="0" width="1000px" cellpadding="0px" cellspacing="0px" align='center' id="bang1">

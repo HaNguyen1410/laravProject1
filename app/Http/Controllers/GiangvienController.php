@@ -92,13 +92,13 @@ class GiangvienController extends Controller
     }
 /*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
     public function DoiHinhDaiDienGV(Request $req){        
-        $macb = Input::get('txtMaCB');
+        $macb = \Auth::user()->taikhoan;
         $hoten = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
 
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'fHinh' => 'required|image|mimes:jpg,png'
+                    'fHinh' => 'required|image'
                 ]
             );
         if($v->fails()){

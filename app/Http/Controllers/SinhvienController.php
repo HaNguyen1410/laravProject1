@@ -15,12 +15,14 @@ use View,
     Session,
     Hash;
 use App\Sinhvien;
+use App\Http\Controllers\Auth;
 
 class SinhvienController extends Controller
 {
 /*============================= Hiển thị thông tin của 1 sinh viên ========================================*/
-    public function HienThiSV($masv){
-        $sinhvien = Sinhvien::find($masv);
+    public function HienThiSV(){
+        $mssv = \Auth::user()->taikhoan;
+        $sinhvien = Sinhvien::find($mssv);
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -28,9 +30,9 @@ class SinhvienController extends Controller
                 ->value('hocky');
         $hp = DB::table('chia_nhom as chn')->select('hp.tennhomhp')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
-                ->where('chn.mssv',$masv)
+                ->where('chn.mssv',$mssv)
                 ->first();
-        $manth = DB::table('chia_nhom')->where('mssv','=',$masv)->value('manhomthuchien');        
+        $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');        
         $dstv = DB::table('sinh_vien as sv')
             ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
             ->where('chn.manhomthuchien',$manth)
@@ -60,7 +62,8 @@ class SinhvienController extends Controller
                 ->with('detainhom',$detainhom)->with('dsthongbao',$dsthongbao);
     }
 /*=========================== Thêm thông tin các kỹ năng ==============================================*/   
-    public function CapNhatKyNang($mssv){
+    public function CapNhatKyNang(){
+        $mssv = \Auth::user()->taikhoan;
         $sinhvien = Sinhvien::find($mssv);
         
         return view('sinhvien.cap-nhat-thong-tin-ky-nang')->with('sv',$sinhvien);
@@ -87,13 +90,16 @@ class SinhvienController extends Controller
             );
             $capnhat = DB::table('sinh_vien')->where('mssv',$post['txtMaSV'])->update($data);
             
-                return redirect('sinhvien/thongtinsv/1111317');          
+                return redirect('sinhvien/thongtinsv');          
         }       
     }
     
 /*============================= Công việc được giao của 1 sinh viên ========================================*/
-    public function CongViecSV($masv,$hoten,$manth)
+    public function CongViecSV()
     {
+        $mssv = \Auth::user()->taikhoan;
+        $hoten = \Auth::user()->name;
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
        $dsDuocGiao = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                                  ,'cv.sogio_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien')
@@ -104,10 +110,11 @@ class SinhvienController extends Controller
                ->where('cv.giaocho','like',$hoten)->orwhere('cv.giaocho','like','cả nhóm')
                ->get();
         
-        return view('sinhvien.xem-cong-viec-duoc-giao')->with('dscv',$dsDuocGiao);
+        return view('sinhvien.xem-cong-viec-duoc-giao')->with('dscv',$dsDuocGiao)->with('hoten',$hoten);
     }
 /*=========================== Đổi mật khẩu Sinh Viên ==============================================*/   
-    public function DoiMatKhauSV($masv){
+    public function DoiMatKhauSV(){
+        $masv = \Auth::user()->taikhoan;
         $row = DB::table('sinh_vien')->where('mssv',$masv)->first();
         return view('sinhvien.doi-mat-khau-sv')->with('sv', $row);
     } 
@@ -135,19 +142,19 @@ class SinhvienController extends Controller
                     ->update('password',Hash::make($req->txtMatKhauMoi1));
             
             if($ch > 0){
-               return redirect('sinhvien/thongtinsv/1111317'); 
+               return redirect('sinhvien/thongtinsv'); 
             }
         }
     }
 /*=============================== (UPLOAD hình) Đổi hình đại diện ===============================*/
     public function DoiHinhDaiDienSV(Request $req){
-        $masv = Input::get('txtMaSV');
-        $hoten = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
+        $mssv = \Auth::user()->taikhoan;
+        $hoten = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
         
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'fHinh' => 'required|image|mimes:jpg,png'
+                    'fHinh' => 'required|image'
                 ]
             );
         if($v->fails()){
@@ -163,15 +170,15 @@ class SinhvienController extends Controller
             // Đặt lại tên file vừa upload lên
             $gvctrl = new GiangvienController();
             $tachten = $gvctrl->lay_ten($hoten);               
-            $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $masv)) . '.' . $extension;
+            $fileName = $tachten . str_replace("/", "", str_replace(" ", "", $mssv)) . '.' . $extension;
 
             //Lưu vào CSDL
-            $cn = DB::table('sinh_vien')->where('mssv',$masv)->update(['hinhdaidien' => $fileName]);
+            $cn = DB::table('sinh_vien')->where('mssv',$mssv)->update(['hinhdaidien' => $fileName]);
             // Chuyển file upload vào thư mục lưu trữ đã đặt trươc đó
             $upload_success = $file->move($luuden, $fileName);
 
             if ($upload_success) {
-                return Redirect('sinhvien/doimatkhausv/1111317')->with('message', 'Upload hình đại diện thành công!');
+                return Redirect('sinhvien/doimatkhausv')->with('message', 'Upload hình đại diện thành công!');
             }
         }
         

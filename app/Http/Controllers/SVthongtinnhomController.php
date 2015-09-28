@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use App\Http\Controllers\Auth;
 
 class SVthongtinnhomController extends Controller
 {
@@ -33,7 +34,8 @@ class SVthongtinnhomController extends Controller
             return  $mamoi = $pre .=$so;        
     }   
 /*====================  ======================*/
-    public function ThemThongTinNhom($mssv){
+    public function ThemThongTinNhom(){
+        $mssv = \Auth::user()->taikhoan;
         $thongtindt = DB::table('chia_nhom as chn')
                 ->select('gv.macb','gv.hoten','dt.tendt')
                 ->join('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
@@ -64,7 +66,7 @@ class SVthongtinnhomController extends Controller
         );
         $ch = DB::table('nhom_thuc_hien')->where('manhomthuchien',$_POST['txtMaNhomNL'])
                 ->update($data);
-        return redirect('sinhvien/themthongtinnhom/1111317');
+        return redirect('sinhvien/themthongtinnhom');
     }
 
 }//END Class DangkydtController

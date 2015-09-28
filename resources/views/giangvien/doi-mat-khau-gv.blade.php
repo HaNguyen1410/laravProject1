@@ -16,7 +16,7 @@
             <div align="center">
                 <br><br><br/>
                 @if($gv->hinhdaidien != "")
-                <img width='100px' src='../../public/hinhdaidien/{{$gv->hinhdaidien}}'>
+                <img width='100px' src='../public/hinhdaidien/{{$gv->hinhdaidien}}'>
                 @else
                     <img src="{{asset('public/images/User-image.png')}}">
                 @endif
@@ -24,7 +24,6 @@
             <form action="{{action('GiangvienController@DoiHinhDaiDienGV')}}" method="post" enctype="multipart/form-data" name="frmDoiHinhDaiDien" class="form-horizontal">
                 <input type='hidden' name='_token' value="<?= csrf_token();?>"/>
                 <div align="center">
-                    <input type="text" name="txtMaCB" value="{{$gv->macb}}" readonly="" />
                     <input type="file" name="fHinh" id="fHinh" /><br> 
                     <p style='color:red;'>{{$errors->first('fHinh')}}</p>
                     <button type="submit" class="btn btn-success" style="width:30%;">

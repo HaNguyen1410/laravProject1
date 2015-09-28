@@ -153,7 +153,7 @@ class ChianhomController extends Controller
                         ]
                     );
                
-             return redirect('giangvien/chianhom/2134');            
+             return redirect('giangvien/chianhom');            
         }
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/

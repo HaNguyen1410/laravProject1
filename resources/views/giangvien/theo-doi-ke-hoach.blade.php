@@ -70,7 +70,7 @@
                             <td align='center'>{{$stt+1}}</td>
                             <td align='center'>{{$dtn->manhomthuchien}}</td>
                             <td>
-                               <a href='cvchinh/{{$dtn->manhomthuchien}}'>
+                               <a href='theodoikehoach/cvchinh/{{$dtn->manhomthuchien}}'>
                                     {{$dtn->tendt}}
                                 </a>  
                             </td>

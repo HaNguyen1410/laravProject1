@@ -1,6 +1,6 @@
-@extends('giangvien_home')
+@extends('sinhvien_home')
 
-@section('content_gv')
+@section('content_sv')
 
     <style type="text/css">
         th{
@@ -28,8 +28,8 @@
                         <td>
                              <select class="form-control" name="cbGiaiDoan">
                                     <option value="">-- Chọn tên công việc --</option>  
-                                @foreach($dsgiaidoan as $giaidoan)
-                                    <option value="{{$giaidoan->magd}}">{{$giaidoan->tengd}}</option>  
+                                @foreach($dscvchinh as $cv)
+                                    <option value="{{$cv->macv}}">{{$cv->congviec}}</option>  
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbGiaiDoan')}}</p>
@@ -38,7 +38,6 @@
                     <tr>
                         <th>Tài liệu:</th>
                         <td colspan="4">
-                             <input type="text" name="txtMaSV" value="{{$mssv}}"/>
                              <input type="file" id="fTaiLieu" name="fTaiLieu" style="width:60%;"/> 
                              <p style='color:red;'>{{$errors->first('fTaiLieu')}}</p>
                         </td>

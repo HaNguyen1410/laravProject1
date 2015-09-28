@@ -35,7 +35,7 @@
                         <td align="center">{{$stt+1}}</td>
                         <td></td>
                         <td>
-                            <a href="../../../../tailieu/{{$tl->tentl}}" style="color: #2ca02c" data-toggle="tooltip" data-placement="bottom" title="Kích thước tập tin: {{$tl->kichthuoc}}">
+                            <a href="../../../public/tailieu/{{$tl->tentl}}" style="color: #2ca02c" data-toggle="tooltip" data-placement="bottom" title="Kích thước tập tin: {{$tl->kichthuoc}}">
                                 {{$tl->tentl}}
                             </a>                            
                         </td>

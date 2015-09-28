@@ -58,7 +58,7 @@
                                 <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 20%;">
                                     <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu 
                                 </button>&nbsp;&nbsp;
-                                <a href="../../thongtinsv/1111317" class="btn btn-warning" style="width:20%;">
+                                <a href="../thongtinsv" class="btn btn-warning" style="width:20%;">
                                     <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                                 </a>                                  
                             </td>                                  

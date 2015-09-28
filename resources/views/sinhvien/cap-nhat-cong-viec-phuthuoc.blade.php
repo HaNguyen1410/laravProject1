@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 style="color: darkblue; font-weight: bold;">
-                    Cập nhật công việc phụ thuộc việc: <label></label> 
+                    Cập nhật công việc phụ thuộc việc: <label>{{$macvchinh}}</label> 
                 </h3>
                 <form action="{{action('PhancvController@LuuCapNhatcvPhu')}}" method="post" >
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
@@ -22,7 +22,8 @@
                         <tr>
                             <th width="10%">Mã công việc:</th>
                             <td>
-                                <input type="text" name="txtMacvChinh" value="{{$macvchinh}}" class="form-control"/>
+                                <!-- Lấy macvchinh đưa vào Input -->
+                                <input type="hidden" name="txtMacvChinh" value="{{$macvchinh}}" class="form-control"/>
                                 <input type="text" name="txtMaCV" value="{{$cv->macv}}" class="form-control" readonly=""/>
                             </td>
                             <th width="10%">Tên công việc:</th>

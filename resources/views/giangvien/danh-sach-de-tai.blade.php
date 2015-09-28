@@ -52,7 +52,7 @@
                             </select>
                         </td>
                         <td>
-                            <a href="themdetai">
+                            <a href="danhsachdetai/themdetai">
                                 <button type="button" name="" class="btn btn-primary">
                                     <img src="{{asset('public/images/add-icon.png')}}">Thêm đề tài
                                 </button>
@@ -104,13 +104,13 @@
                             </td>
                             @if($dt->taptindinhkem != "")
                                 <td>
-                                    <a href="../../public/mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
+                                    <a href="../public/mota_detai/{{$dt->taptindinhkem}}" align='center' target="_blank">
                                         <img src="{{asset('public/images/Filetype-PDF-icon.png')}}"/>
                                     </a>                            
                                 </td>
                             @elseif($dt->taptindinhkem == "")
                                 <td style="vertical-align: middle;">
-                                    <a href="{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
+                                    <a href="danhsachdetai/{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
                                         Chi tiết
                                     </a>
                                 </td>
@@ -128,10 +128,10 @@
                             @endforeach -->
                             <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
                             <td align='center'>
-                                <a href="capnhatdetai/{{$dt->madt}}">
+                                <a href="danhsachdetai/capnhatdetai/{{$dt->madt}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp
-                                <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">
+                                <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="danhsachdetai/xoadt/{{$dt->madt}}">
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
                             </td>
@@ -139,7 +139,7 @@
                     @endforeach
                 @endif
                 <tr>
-                    <td colspan="10" align="center">{!! $dsdt->setPath('../danhsachdetai/2134')->render() !!}</td>
+                    <td colspan="10" align="center">{!! $dsdt->setPath('danhsachdetai')->render() !!}</td>
                 </tr> 
             </table>
         </div>

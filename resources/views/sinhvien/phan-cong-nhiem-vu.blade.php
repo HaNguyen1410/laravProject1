@@ -50,7 +50,7 @@
                         <input type="text" name="txtTenDT" value="{{$tendt->tendt}}" readonly="" class="form-control">
                     </th>
                     <th width="10%" style="text-align: right;">
-                        <a href="{{asset('sinhvien/phancv/1111317/themcvchinh')}}">
+                        <a href="{{asset('sinhvien/phancv/themcvchinh')}}">
                             <button type="button" name="btnThem" class="btn btn-primary">
                             <img src="{{asset('public/images/add-icon.png')}}">Thêm công việc
                             </button>
@@ -85,7 +85,7 @@
                             
                         </td>
                         <td>
-                            <a href="../phancongchitiet/1111317/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
+                            <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
                                 {{$cv->congviec}}
                             </a>
                         </td>
@@ -103,7 +103,7 @@
                             </div> 
                         </td>
                         <td align='center'>
-                            <a href="1111317/capnhatcvchinh/{{$cv->macv}}">
+                            <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
                                 <img src="{{asset('public/images/edit-icon.png')}}"/>
                             </a>&nbsp &nbsp &nbsp
                             <a href="">

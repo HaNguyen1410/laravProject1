@@ -82,6 +82,7 @@ class DetaiController extends Controller
     } 
     
     public function LuuThemDeTai(Request $req){
+        $macb = \Auth::user()->taikhoan;
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -96,7 +97,7 @@ class DetaiController extends Controller
         {            
             $data1 = array(
                     'madt'          => $_POST['txtMaDeTai'],
-                    'macb'          => $_POST['txtMaCB'],
+                    'macb'          => $macb,
                     'tendt'         => $_POST['txtTenDeTai'],
                     'songuoitoida'  => $_POST['txtSoNguoi'],
                     'motadt'        => $_POST['txtMoTa'],
@@ -107,7 +108,7 @@ class DetaiController extends Controller
                 );  
             $ch1 = DB::table('de_tai')->insert($data1);
             if($ch1 > 0){
-                return redirect('giangvien/danhsachdetai/2134');                
+                return redirect('giangvien/danhsachdetai');                
             }                      
         }
     }
@@ -137,6 +138,7 @@ class DetaiController extends Controller
     } 
     
     public function LuuCapNhatDeTai(Request $req){
+         $macb = \Auth::user()->taikhoan;
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -151,7 +153,7 @@ class DetaiController extends Controller
         {
             $data = array(
                     'madt'          => $_POST['txtMaDeTai'],
-                    'macb'          => $_POST['txtMaCB'],
+                    'macb'          => $macb,
                     'tendt'         => $_POST['txtTenDeTai'],
                     'songuoitoida'  => $_POST['txtSoNguoi'],
                     'motadt'        => $_POST['txtMoTa'],
@@ -163,12 +165,13 @@ class DetaiController extends Controller
             $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);            
             
             if($ch > 0){
-                return redirect('giangvien/danhsachdetai/2134');
+                return redirect('giangvien/danhsachdetai');
             }
         }
     }
 /*================= Upload tập tin mô tả đề tài ========================*/
     public function UploadMoTaDeTai(Request $req){
+         $macb = \Auth::user()->taikhoan;
         $post = $req->all();
         $dt = DB::table('de_tai')->where('madt',$post['txtMaDT'])->first();
         $v = \Validator::make($req->all(),
@@ -197,7 +200,7 @@ class DetaiController extends Controller
                 DB::table('de_tai')->insert(                    
                             [
                                 'madt'          => $_POST['txtMaDT'],
-                                'macb'          => $_POST['txtMaCB'],
+                                'macb'          => $macb,
                                 'tendt'         => $_POST['txtTenDeTai'],
                                 'taptindinhkem' => $tenbandau,
                                 'ngaytao'       => Carbon::now()
@@ -211,10 +214,10 @@ class DetaiController extends Controller
             Session::flash('success', 'Upload tập tin thành công!'); 
             
             if($upload_file && count($dt) == 0){                
-                return redirect('giangvien/danhsachdetai/2134/themdetai');
+                return redirect('giangvien/danhsachdetai/themdetai');
             }
             else if($upload_file && count($dt) > 0){
-                 return redirect('giangvien/danhsachdetai/'.$post['txtMaCB'].'/capnhatdetai/'.$post['txtMaDT']);
+                 return redirect('giangvien/danhsachdetai/capnhatdetai/'.$post['txtMaDT']);
             }
         }
         

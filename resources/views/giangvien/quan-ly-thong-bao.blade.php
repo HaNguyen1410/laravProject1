@@ -59,7 +59,7 @@
                                 <td>{{$tb->noidungtb}}</td>
                                 @if($tb->dinhkemtb != "")
                                     <td>
-                                        <a href="../../thongbao/{{$tb->dinhkemtb}}" align='center' target="_blank">
+                                        <a href="../public/thongbao/{{$tb->dinhkemtb}}" align='center' target="_blank">
                                             <img src="{{asset('public/images/file-pdf-icon.png')}}"/>
                                         </a>                            
                                     </td>
@@ -79,10 +79,10 @@
                                     @endif
                                 </td>
                                 <td align='center'>
-                                    <a href="capnhatthongbao/{{$tb->matb}}">
+                                    <a href="quanlythongbao/capnhatthongbao/{{$tb->matb}}">
                                         <img src="{{asset('public/images/edit-icon.png')}}"/>
                                     </a>&nbsp
-                                    <a onclick="return confirm('Thông báo **{{$tb->matb}}** sẽ bị xóa?');" href="xoathongbao/{{$tb->matb}}">
+                                    <a onclick="return confirm('Thông báo **{{$tb->matb}}** sẽ bị xóa?');" href="quanlythongbao/xoathongbao/{{$tb->matb}}">
                                         <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                     </a>
                                 </td>

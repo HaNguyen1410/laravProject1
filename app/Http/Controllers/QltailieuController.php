@@ -124,7 +124,8 @@ class QltailieuController extends Controller
         }
     }
     /*========================= Sinh viên nộp tài liệu =============================*/
-    public function DanhSachNopTaiLieu($mssv){
+    public function DanhSachNopTaiLieu(){
+        $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $tendt = DB::table('de_tai as dt')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
@@ -143,13 +144,22 @@ class QltailieuController extends Controller
                         ->with('dstailieu',$dstailieu)->with('mssv',$mssv);
     }
 /*========================= UPLOAD TÀI LIỆU =============================*/
-    public function NopTaiLieu($mssv){
+    public function NopTaiLieu(){
+        $mssv = \Auth::user()->taikhoan;
         $matl = $this->matl_tutang();
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $dscvchinh = DB::table('cong_viec as cv')->select()
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('th.manhomthuchien',$manth)
+                ->where('cv.phuthuoc_cv','=',0)
+                ->get();
         
-        return view('sinhvien.nop-tai-lieu')->with('mssv',$mssv)->with('matl',$matl);
+        return view('sinhvien.nop-tai-lieu')->with('matl',$matl)
+            ->with('dscvchinh',$dscvchinh);
     }
     /*========================= Lưu UPLOAD TÀI LIỆU =============================*/
     public function LuuNopTaiLieu(Request $req){
+        $mssv = \Auth::user()->taikhoan;
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -172,7 +182,7 @@ class QltailieuController extends Controller
                         [
                             'matl'        => $_POST['txtMaTL'],
                             'tentl'       => $tenbandau,
-                            'mssv'        => $_POST['txtMaSV'],
+                            'mssv'        => $mssv,
                             'macv'        => $_POST['cbTenCV'],
                             'kichthuoc'   => $kichthuoc_mb,
                             'mota'        => $_POST['txtMoTa'],
@@ -187,12 +197,13 @@ class QltailieuController extends Controller
             $upload_success = $taptin->move($luuden, $tenbandau);
             
             if ($upload_success) {
-                return Redirect('sinhvien/noptailieu/1111317')->with('message', 'Gửi tài liệu thành công!');
+                return Redirect('sinhvien/danhsachnoptailieu/noptailieu')->with('message', 'Gửi tài liệu thành công!');
             }
         }
     }
  /*======================== Xóa tài liệu nào đó ========================*/
-    public function XoaTaiLieu($mssv,$matl){
+    public function XoaTaiLieu($matl){
+        $mssv = \Auth::user()->taikhoan;
         $del1 = DB::table('tai_lieu')->where('matl',$matl)->delete();
         $del2 = DB::table('danh_gia')->where('matl',$matl)->delete();
         

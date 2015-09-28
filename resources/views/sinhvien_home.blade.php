@@ -61,36 +61,45 @@
                         </button>
                     </div>               
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{asset('sinhvien/themthongtinnhom/1111317')}}" data-toggle="tooltip" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
-                                    Thêm thông tin nhóm
-                                </a>
-                            </li>                           
+                        <ul class="nav navbar-nav">                       
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Quản lý công việc
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{asset('sinhvien/danhsachcv/1111317')}}">Danh sách các công việc</a></li>
+                                    <li><a href="{{asset('sinhvien/themthongtinnhom')}}" data-toggle="tooltip" data-placement="bottom" title="Thêm các thông tin lịch họp, mô tả thực hiện đề tài">
+                                            Thêm thông tin nhóm
+                                        </a>
+                                    </li>
                                     <li class="divider"></li>                                
-                                    <li><a href="{{asset('sinhvien/phancv/1111317')}}">Phân công việc</a></li>
+                                    <li><a href="{{asset('sinhvien/phancv')}}">Phân công việc</a></li>
                                     <li class="divider"></li>                             
-                                    <li><a href="{{asset('sinhvien/danhsachnoptailieu/1111317')}}">Nộp tài liệu</a></li>                               
+                                    <li><a href="{{asset('sinhvien/danhsachnoptailieu')}}">Nộp tài liệu</a></li>                               
                                 </ul>
-                            </li>                        
-                            <li><a href="{{asset('sinhvien/xemdiem/1111317')}}">Xem điểm</a></li>
+                            </li>        
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Thông tin nhóm
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{asset('sinhvien/danhsachcv')}}">Danh sách các công việc</a></li>                                    
+                                    <li class="divider"></li>    
+                                    <li><a href="{{asset('sinhvien/xemdiem')}}">Xem điểm</a></li>                                                       
+                                </ul>
+                            </li>                           
                             <li class="dropdown active">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     Thông tin sinh viên
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role='menu'>  
-                                    <li><a href="{{asset('sinhvien/thongtinsv/1111317')}}">Thông tin cá nhân</a></li>
+                                    <li><a href="{{asset('sinhvien/thongtinsv')}}">Thông tin cá nhân</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="{{asset('sinhvien/xemviecduocgiao/1111317/Phạm Thúy Ngọc/NTH02')}}">Xem công việc</a></li>
+                                    <li><a href="{{asset('sinhvien/xemviecduocgiao')}}">Xem công việc</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="{{asset('sinhvien/doimatkhausv/1111317')}}">Đổi mật khẩu</a></li>
+                                    <li><a href="{{asset('sinhvien/doimatkhausv')}}">Đổi mật khẩu</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -118,9 +127,16 @@
                                     </div>
                                 </div>
                             </li> 
-                            <li style="margin-right: 15px;">
-                                <a href="{{asset('/dangnhap')}}">
-                                    <lable style="font-weight: bold;">Họ và tên </lable>(Đăng xuất)
+                            <li>
+                                <a>
+                                    <lable style="font-weight: bold; color: #00008b;">
+                                        {!! Auth::user()->name !!} - {!! Auth::user()->taikhoan !!}
+                                    </lable>
+                                </a>
+                            </li>
+                            <li style="margin-right: 15px;">                                
+                                <a href="{{asset('dangxuat')}}">
+                                    (Đăng xuất)
                                 </a>
                             </li>
                         </ul>

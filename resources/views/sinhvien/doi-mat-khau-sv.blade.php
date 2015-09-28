@@ -16,7 +16,7 @@
             <div align="center">
                 <br><br><br/>
                  @if($sv->hinhdaidien != "")
-                    <img width='100px' src='../../public/hinhdaidien/{{$sv->hinhdaidien}}'>
+                    <img width='100px' src='../public/hinhdaidien/{{$sv->hinhdaidien}}'>
                 @else
                     <img src="{{asset('public/images/User-image.png')}}">
                 @endif
@@ -24,7 +24,6 @@
             <form action="{{action('SinhvienController@DoiHinhDaiDienSV')}}" enctype="multipart/form-data" method="post" class="form-horizontal">
                 <input type='hidden' name='_token' value="<?= csrf_token();?>"/>
                 <div align="center">
-                    <input type="text" name="txtMaSV" value="{{$sv->mssv}}" readonly="" />
                     <input type="file" name="fHinh" id="fHinh" /><br> 
                     <p style='color:red;'>{{$errors->first('fHinh')}}</p>
                     <button type="submit" class="btn btn-success" style="width:30%;">
@@ -83,7 +82,7 @@
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width: 20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập Nhật
                             </button>
-                            <a href="?cn=ttsv" class="btn btn-warning" style="width:20%;">
+                            <a href="thongtinsv" class="btn btn-warning" style="width:20%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                                    
                         </td>
