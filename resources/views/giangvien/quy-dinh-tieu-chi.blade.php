@@ -33,7 +33,7 @@
                         </select>
                     </th>
                     <th>
-                        <a href="themtieuchi">
+                        <a href="dstieuchi/themtieuchi">
                             <button type="button" class="btn btn-primary" style="width:60%">
                                 <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                            </button>
@@ -73,7 +73,7 @@
                             <td align='center'>{{$tc->ngaytao}}</td>
                             <td align='center'>
                                 <a href="capnhattieuchi/{{$tc->matc}}"><img src="{{asset('public/images/edit-icon.png')}}"></a>&nbsp
-                                <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="xoatieuchi/{{$tc->matc}}">
+                                <a onclick="return confirm('Tiêu chí {{$tc->matc}} sẽ bị xóa?');" href="dstieuchi/xoatieuchi/{{$tc->matc}}">
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
                             </td>    

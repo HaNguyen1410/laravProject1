@@ -32,7 +32,7 @@ class TheodoikehoachController extends Controller
         $macb = \Auth::user()->taikhoan;
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
-                        'nth.lichhop','nth.sotuan_thucte','nth.tiendo')
+                        'nth.lichhop','nth.sotuan_thucte','nth.sotuan_kehoach','nth.tiendo')
                 ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                 ->join('sinh_vien as sv', 'chn.mssv','=','sv.mssv')
                 ->join('ra_de_tai as radt','nth.manhomthuchien','=','radt.manhomthuchien')
@@ -59,13 +59,7 @@ class TheodoikehoachController extends Controller
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->join('nhom_thuc_hien as nth','chn.manhomthuchien','=','nth.manhomthuchien')
                 ->where('chn.manhomthuchien',$manth)
-                ->get();
-        $dscvchinh = DB::table('nhom_thuc_hien as nth')
-                ->join('thuc_hien as th','nth.manhomthuchien','=','th.manhomthuchien')
-                ->join('cong_viec as cv','th.macv','=','cv.macv')
-                ->where('nth.manhomthuchien',$manth)
-                ->where('cv.phuthuoc_cv','=',0)
-                ->get();
+                ->get();        
         $tendt = DB::table('ra_de_tai as radt')->select('dt.tendt')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->first(); 
@@ -75,11 +69,19 @@ class TheodoikehoachController extends Controller
                 ->whereIn('chn.manhomthuchien',$dsmanhom)
                 ->value('sv.hoten');
         $giolam = $this->GioLam($tensv);
+        $dstuan = DB::table('thuc_hien as th')->select('th.tuan')->distinct()
+                ->where('th.manhomthuchien',$manth)                
+                ->get();
+        $dscv = DB::table('thuc_hien as th')->distinct()
+                ->join('cong_viec as cv','th.macv','=','cv.macv')
+                ->where('th.manhomthuchien',$manth)
+                ->get();
  
-        return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dscvchinh',$dscvchinh)
-            ->with('manth',$manth)->with('tendt',$tendt)->with('giolam',$giolam);
+        return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dstuan',$dstuan)
+            ->with('dscv',$dscv)->with('manth',$manth)->with('tendt',$tendt)->with('giolam',$giolam);
     }
 /*======================= Theo dõi các công việc phụ thuộc của 1 công việc chính ==========================*/
+/*
     public function CVPhuThuoc($manth,$macv){ 
         $tencvchinh = DB::table('cong_viec as cv')
                 ->join('thuc_hien as th','cv.macv','=','th.macv')
@@ -90,6 +92,8 @@ class TheodoikehoachController extends Controller
                 ->get();
         return view('giangvien.ke-hoach-cv-phuthuoc')->with('dscvphu',$dscvphu)->with('tencvchinh',$tencvchinh);
     }
+ *
+ */
 /*============================ DUYỆT ĐỀ TÀI =====================================*/   
     public function LuuDuyetDeTai(){
         

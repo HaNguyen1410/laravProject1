@@ -1,12 +1,10 @@
+
+
 @if($tong->tongdiem == null)
     <td></td>
 @elseif($tong->tongdiem != null)                                  
     <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
 @endif 
-
-==============================================
-
-
 
 ==========================================================================
 function kt_radio(){
@@ -28,6 +26,13 @@ function kt_radio(){
                     return false;
                 }
             }
+==============================================
+
+ <div class="progress" style="width:50%;"> 
+                        <div class="progress-bar" role="progressbar" aria-valuenow="{{$tuan->tiendo}}" aria-valuemin='0' aria-valuemax='100' style="width:<?=$tuan->tiendo?>% ">  
+                              {{$tuan->tiendo}}%
+                        </div>  
+                    </div>
 =================================
 <td align="center" colspan="5">                                                  
     @foreach($dstensv as $sv)

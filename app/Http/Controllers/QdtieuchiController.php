@@ -53,7 +53,7 @@ class QdtieuchiController extends Controller
         
         \Session::flash('ThongBao','Xóa thành công!');       
             
-        return redirect('giangvien/dstieuchi/2134');      
+        return redirect('giangvien/dstieuchi');      
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
     public function ThemTieuChi(){

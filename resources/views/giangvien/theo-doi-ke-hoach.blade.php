@@ -55,7 +55,8 @@
                     <th width="10%">Trưởng nhóm</th>
                     <th width="18%">Tổ chức nhóm</th>
                     <th width="8%">Lịch họp</th>
-                    <th width="6%">Số giờ làm dự án</th>
+                    <th width="6%">Số tuần kế hoạch</th>
+                    <th width="6%">Số tuần làm dự án</th>                    
                     <th width="8%">Trạng thái(%)</th>
                 </tr>
                 @if(count($dsdtnhom) == 0)
@@ -101,6 +102,7 @@
                                    }                                    
                                ?>    
                             </td>
+                            <td align='center'>{{$dtn->sotuan_kehoach}}</td>
                             <td align='center'>{{$dtn->sotuan_thucte}}</td>
                             <td>
                                 <div class="progress">
