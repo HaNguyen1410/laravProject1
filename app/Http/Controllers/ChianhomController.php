@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class ChianhomController extends Controller
 {
@@ -36,7 +37,8 @@ class ChianhomController extends Controller
         } 
     }   
 /*====================  ======================*/
-    public function ChiaNhomNL($macb,Request $req){
+    public function ChiaNhomNL(Request $req){
+        $macb = \Auth::user()->taikhoan;
         //Nếu selectbox có giá trị manhp thì lấy manhp
         //$mahp = $req->cbNhomHP;
  
@@ -155,7 +157,8 @@ class ChianhomController extends Controller
         }
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/
-    public function XoaSVTrongNhom($macb,$mssv){
+    public function XoaSVTrongNhom($mssv){
+        $macb = \Auth::user()->taikhoan;
         $manth = DB::Table('nhom_thuc_hien as nth')
                 ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                 ->where('chn.mssv',$mssv)

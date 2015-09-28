@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class DetaiController extends Controller
 {
@@ -28,7 +29,8 @@ class DetaiController extends Controller
         }      
     }
 /*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/
-    public function DsDeTai($macb){
+    public function DsDeTai(){
+        $macb = \Auth::user()->taikhoan;
         $dsdt = DB::table('de_tai')->where('macb',$macb)->paginate(5);
 //
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
@@ -56,7 +58,8 @@ class DetaiController extends Controller
         }
     }
 /*=========================== Thêm đề tài ==============================================*/ 
-    public function ThemDeTai($macb){
+    public function ThemDeTai(){
+        $macb = \Auth::user()->taikhoan;
         $ma = $this->madt_tutang();
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -109,7 +112,8 @@ class DetaiController extends Controller
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
-    public function CapNhatDeTai($macb,$madt){
+    public function CapNhatDeTai($madt){
+        $macb = \Auth::user()->taikhoan;
         $row = DB::table('de_tai')->where('madt',$madt)->first();
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');

@@ -89,57 +89,71 @@
                     <th rowspan="2" width="4%">Điểm chữ</th>   
                 </tr>
                 <tr>
-                    @foreach($tieuchi as $tc)
-                        <th width="2%">
-                            <input type="text" name="txtMaTC[]" value="[{{$tc->matc}}]" size="1" style="text-align: center; border: 0px; background-color: #F5F5F5; height: 25px;" class="form-control" readonly=""/>
-                            {{$tc->heso}}
-                        </th>
-                    @endforeach                                   
+                    @if(count($tieuchi) == 0)
+                            <th colspan="{{count($tieuchi)}}" align="center">
+                                <label style="color: #e74c3c;"> Chưa có tiêu chí đánh giá nào!</label> 
+                            </th>
+                    @elseif (count($tieuchi) > 0)
+                        @foreach($tieuchi as $tc)
+                            <th width="2%">
+                                <input type="text" name="txtMaTC[]" value="[{{$tc->matc}}]" size="1" style="text-align: center; border: 0px; background-color: #F5F5F5; height: 25px;" class="form-control" readonly=""/>
+                                {{$tc->heso}}
+                            </th>
+                        @endforeach  
+                    @endif
                 </tr>
-                @foreach($dssv as $stt => $sv)
+                @if(count($dssv) == 0)
                     <tr>
-                        <td align="center">{{$stt+1}}</td>
-                        <td align="center">
-                            @foreach($tendt as $dt)
-                                @if($dt->manhomthuchien == $sv->manhomthuchien)
-                                    <a href="" style="color: blueviolet; font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="{{$dt->tendt}}">
-                                         {{$sv->manhomthuchien}}
-                                    </a>
-                                @endif
-                            @endforeach
+                        <td colspan="8" align="center">
+                            <label style="color: #e74c3c;"> Chưa có sinh viên nào!</label> 
                         </td>
-                        <td align="center">
-                            <input type="text" name="txtMaSV[]" size="6" style="border: 0px; background-color: #dff0d8; text-align: center;" value="{{$sv->mssv}}" readonly=""/>
-                        </td>
-                        <td>{{$sv->hoten}}</td>                        
-                        @foreach($dsdiem as $diem) 
-                            @if($diem->mssv == $sv->mssv && $diem->diem != null)
-                                <td align="center">
-                                    <input type="text" name="txtDiem[]" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
-                                </td> 
-                            @elseif($diem->mssv == $sv->mssv && $diem->diem == null)
-                                <td align="center">
-                                    <input type="text" name="txtDiem[]" value="" style="text-align:center; vertical-align: middle;" size="1" />
-                                </td>
-                            @endif                                             
-                        @endforeach     
-                        @foreach($nhanxet as $nx)
-                             @if($nx->mssv == $sv->mssv)  
-                                <td><textarea class="form-control" name="txtNhanXet[]">{{$nx->nhanxet}}</textarea></td>  
-                             @endif  
-                        @endforeach
-                        @foreach($tongdiem as $tong)                             
-                            @if($tong->mssv == $sv->mssv)                             
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
-                                @if($tong->tongdiem == null)
-                                    <td></td>
-                                @elseif($tong->tongdiem != null)
-                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
-                                @endif 
-                            @endif                      
-                        @endforeach 
                     </tr>
-                @endforeach   
+                @elseif (count($dssv) > 0)
+                    @foreach($dssv as $stt => $sv)
+                        <tr>
+                            <td align="center">{{$stt+1}}</td>
+                            <td align="center">
+                                @foreach($tendt as $dt)
+                                    @if($dt->manhomthuchien == $sv->manhomthuchien)
+                                        <a href="" style="color: blueviolet; font-weight: bold" data-toggle="tooltip" data-placement="bottom" title="{{$dt->tendt}}">
+                                             {{$sv->manhomthuchien}}
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td align="center">
+                                <input type="text" name="txtMaSV[]" size="6" style="border: 0px; background-color: #dff0d8; text-align: center;" value="{{$sv->mssv}}" readonly=""/>
+                            </td>
+                            <td>{{$sv->hoten}}</td>                        
+                            @foreach($dsdiem as $diem) 
+                                @if($diem->mssv == $sv->mssv && $diem->diem != null)
+                                    <td align="center">
+                                        <input type="text" name="txtDiem[]" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
+                                    </td> 
+                                @elseif($diem->mssv == $sv->mssv && $diem->diem == null)
+                                    <td align="center">
+                                        <input type="text" name="txtDiem[]" value="" style="text-align:center; vertical-align: middle;" size="1" />
+                                    </td>
+                                @endif                                             
+                            @endforeach     
+                            @foreach($nhanxet as $nx)
+                                 @if($nx->mssv == $sv->mssv)  
+                                    <td><textarea class="form-control" name="txtNhanXet[]">{{$nx->nhanxet}}</textarea></td>  
+                                 @endif  
+                            @endforeach
+                            @foreach($tongdiem as $tong)                             
+                                @if($tong->mssv == $sv->mssv)                             
+                                    <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                                    @if($tong->tongdiem == null)
+                                        <td></td>
+                                    @elseif($tong->tongdiem != null)
+                                        <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                    @endif 
+                                @endif                      
+                            @endforeach 
+                        </tr>
+                    @endforeach  
+                @endif
             </table> 
             <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>

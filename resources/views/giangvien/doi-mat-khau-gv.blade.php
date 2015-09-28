@@ -84,7 +84,7 @@
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>
                             &nbsp;&nbsp;
-                            <a href="{{asset('giangvien/thongtingv/'.Auth::user()->taikhoan)}}" class="btn btn-warning" style="width:20%;">
+                            <a href="{{asset('giangvien/thongtingv')}}" class="btn btn-warning" style="width:20%;">
                                 <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                             </a>                              
                         </td>

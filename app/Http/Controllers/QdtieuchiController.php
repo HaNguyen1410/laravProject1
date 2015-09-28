@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class QdtieuchiController extends Controller
 {
@@ -28,7 +29,8 @@ class QdtieuchiController extends Controller
         }     
     }
 /*====================== Lấy danh sách các tiêu chí đánh giá của 1 cán bộ ====================================*/
-    public function DSTieuChi($macb){
+    public function DSTieuChi(){
+        $macb = \Auth::user()->taikhoan;
         $ma = $this->matc_tutang();
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
@@ -43,7 +45,8 @@ class QdtieuchiController extends Controller
         ->with('hocky',$hocky)->with('ma',$ma);
     }
 /*========= Xóa Tiêu chí đánh giá ==============*/    
-    public function XoaTieuChi($macb,$matc){
+    public function XoaTieuChi($matc){
+        $macb = \Auth::user()->taikhoan;
         $Xoaqd = DB::table('quy_dinh')->where('matc',$matc)->delete();
         $Xoad = DB::table('chitiet_diem')->where('matc',$matc)->delete();
         $Xoatc = DB::table('tieu_chi_danh_gia')->where('matc',$matc)->delete();
@@ -53,7 +56,8 @@ class QdtieuchiController extends Controller
         return redirect('giangvien/dstieuchi/2134');      
     }
 /*========================= Thêm tiêu chí đánh giá ========================*/
-    public function ThemTieuChi($macb){ 
+    public function ThemTieuChi(){
+        $macb = \Auth::user()->taikhoan;
         $ma = $this->matc_tutang();
         return view('giangvien.them-tieu-chi')->with('ma',$ma);
     }
@@ -105,7 +109,8 @@ class QdtieuchiController extends Controller
         }
     }
 /*========================= Cập nhật tiêu chí đánh giá ========================*/
-    public function CapNhatTieuChi($macb,$matc){
+    public function CapNhatTieuChi($matc){
+        $macb = \Auth::user()->taikhoan;
       //Hiển thị thông tin của 1 tiêu chí nào đó     
         $tc = DB::table('tieu_chi_danh_gia as dg')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')

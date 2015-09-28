@@ -94,49 +94,49 @@ Route::get('thongtingv','GiangvienController@ThongTin_gv');
 
 Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     /*======= Trang THÔNG TIN giảng viên ==========*/
-    Route::get('thongtingv/{macb}','GiangvienController@ThongTinGV');
+    Route::get('thongtingv','GiangvienController@ThongTinGV');
     /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
-    Route::get('doimatkhaugv/{macb}','GiangvienController@DoiMatKhauGV');
+    Route::get('doimatkhaugv','GiangvienController@DoiMatKhauGV');
     Route::post('luudoimatkhaugv','GiangvienController@LuuDoiMatKhauGV');
     route::post('doihinhdaidiengv','GiangvienController@DoiHinhDaiDienGV');
     /*======= QUY ĐỊNH TIÊU CHÍ CHẤM ĐIỂM ==========*/
-    Route::group(['prefix'=>'dstieuchi'],function(){
-        route::get('{macb}','QdtieuchiController@DSTieuChi');
+    route::get('dstieuchi','QdtieuchiController@DSTieuChi');
+    Route::group(['prefix'=>''],function(){
         /*  * Thêm tiêu chí đánh giá * */
-        route::get('{macb}/themtieuchi','QdtieuchiController@ThemTieuChi');
+        route::get('themtieuchi','QdtieuchiController@ThemTieuChi');
         route::post('luuthemttc','QdtieuchiController@LuuThemTieuChi');
          /*  * Cập nhật tiêu chí đánh giá * */
-        route::get('{macb}/capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
+        route::get('capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
         route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');
         /* *  Xóa thông tiêu chí đánh giá  *  */
-        Route::get('{macb}/xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
+        Route::get('xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
     });
     /*========= NHẬP ĐIỂM ==========*/
-    Route::group(['prefix'=>'nhapdiem'],function(){
-        Route::get('{macb}','DiemController@NhapDiem');
+    Route::get('nhapdiem','DiemController@NhapDiem');
+    Route::group(['prefix'=>'nhapdiem'],function(){       
         Route::post('luunhapdiem','DiemController@LuuNhapDiem');
         route::get('{macb}/inbangdiemgv','IntrangController@InBangDiemGV');
     });
     /*======= Quản lý TÀI LIỆU ==========*/
-    Route::group(['prefix'=>'khotailieu'],function(){
-        route::get('{macb}','QltailieuController@KhoTaiLieu');        
-        route::get('{macb}/khotailieuchitiet/{manth}','QltailieuController@KhoTaiLieuChiTiet');
+    route::get('khotailieu','QltailieuController@KhoTaiLieu');
+    Route::group(['prefix'=>'khotailieu'],function(){        
+        route::get('khotailieuchitiet/{manth}','QltailieuController@KhoTaiLieuChiTiet');
         /*============== Đánh giá tài liệu ===========*/
-        route::get('{macb}/khotailieuchitiet/{manth}/danhgiatailieu/{matl}','QltailieuController@DanhGiaTaiLieu');
+        route::get('khotailieuchitiet/{manth}/danhgiatailieu/{matl}','QltailieuController@DanhGiaTaiLieu');
         route::post('luudanhgia','QltailieuController@LuuDanhGia');
     });
     /*======= QUẢN LÝ ĐỀ TÀI ==========*/
+    Route::get('danhsachdetai','DetaiController@DsDeTai');
     Route::group(['prefix'=>'danhsachdetai'],function(){
-        Route::get('{macb}','DetaiController@DsDeTai');
         Route::get('xoadt/{madt}','DetaiController@XoaDeTai');
-        Route::get('{macb}/inchitietdetai/{madt}','IntrangController@InChiTietDeTai');
+        Route::get('inchitietdetai/{madt}','IntrangController@InChiTietDeTai');
            /*  * Thêm đề tài mới chỉ gồm tên và tập tin đính kèm*/
         Route::post('uploadmotadetai','DetaiController@UploadMoTaDeTai');
                   /*  * Thêm đề tài mới */
-        Route::get('{macb}/themdetai','DetaiController@ThemDeTai');
+        Route::get('themdetai','DetaiController@ThemDeTai');
         Route::post('luuthemdetai','DetaiController@LuuThemDeTai');
                  /*  * Cập nhật đề tài */
-        Route::get('{macb}/capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
+        Route::get('capnhatdetai/{madt}','DetaiController@CapNhatDeTai');
         Route::post('luucapnhatdetai','DetaiController@LuuCapNhatDeTai');
     });
     /*============= CHIA NHÓM NIÊN LUẬN - GIAO ĐỀ TÀI CHO MỖI NHÓM ===================*/
@@ -144,28 +144,28 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
      * {mahp?} : dấu ? thể hiện rằng biến 'mahp' có hay không url vẫn chạy
      */
     Route::group(['prefix'=>'chianhom'],function(){
-        route::get('{macb}/{mahp?}','ChianhomController@ChiaNhomNL');
+        route::get('{mahp?}','ChianhomController@ChiaNhomNL');
         route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
-        route::get('{macb}/xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
+        route::get('xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
     });
     /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/
+    route::get('theodoikehoach', 'TheodoikehoachController@TheoDoiKH');
     Route::group(['prefix'=>'theodoikehoach'],function(){
-        route::get('{macb}', 'TheodoikehoachController@TheoDoiKH');
         route::get('cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
         route::get('cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
     });
     //route::post('giangvien/theodoikehoach/{macb}/{mahp}', 'TheodoikehoachController@TheoDoiKH');
     /*======= QUẢN LÝ THÔNG BÁO ==========*/
+    route::get('quanlythongbao','QlthongbaoController@QuanLyThongBao');
     Route::group(['prefix'=>'quanlythongbao'],function(){
-        route::get('{macb}','QlthongbaoController@QuanLyThongBao');
         /*======== Thêm thông báo ===========*/
-        route::get('{macb}/themthongbao','QlthongbaoController@ThemThongBao');
+        route::get('themthongbao','QlthongbaoController@ThemThongBao');
         route::post('luuthemthongbao','QlthongbaoController@LuuThemThongBao');        
         /*======== Cập nhật thông báo ===========*/
-        route::get('{macb}/capnhatthongbao/{matb}','QlthongbaoController@CapNhatThongBao');
+        route::get('capnhatthongbao/{matb}','QlthongbaoController@CapNhatThongBao');
         route::post('luucapnhatthongbao','QlthongbaoController@LuuCapNhatThongBao');
         /*======= Xóa Thông báo ==========*/
-        Route::get('{macb}/xoathongbao/{matb}','QlthongbaoController@XoaThongBao');
+        Route::get('xoathongbao/{matb}','QlthongbaoController@XoaThongBao');
     });
 });   
 

@@ -46,7 +46,7 @@
                                 <button type="submit" name="btnThem" class="btn btn-primary" style="width: 20%;">
                                     <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm
                                 </button> 
-                                <a href="{{asset('giangvien/dstieuchi/2134')}}" class="btn btn-warning" style="width:20%;">
+                                <a href="{{asset('giangvien/dstieuchi')}}" class="btn btn-warning" style="width:20%;">
                                     <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                                 </a> 
                             </td>                            

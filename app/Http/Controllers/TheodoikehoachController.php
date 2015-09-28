@@ -13,6 +13,7 @@ use View,
     Input,
     Mail,
     Session;
+use App\Http\Controllers\Auth;
 
 class TheodoikehoachController extends Controller
 {
@@ -27,7 +28,8 @@ class TheodoikehoachController extends Controller
         return $tonggio;
     }
 /*================== Danh sách đề tài thực hiện ======================*/   
-    public function TheoDoiKH($macb){
+    public function TheoDoiKH(){
+        $macb = \Auth::user()->taikhoan;
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
                         'nth.lichhop','nth.sogio_thucte','nth.tiendo')

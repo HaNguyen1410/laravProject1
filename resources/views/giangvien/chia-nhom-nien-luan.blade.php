@@ -25,6 +25,7 @@
                 }
                 document.getElementById('frChiaNhom').method = 'post';
                 document.getElementById('frChiaNhom').action = "{{action('ChianhomController@LuuChiaNhomNL')}}";
+                //In url mang theo mã nhóm hp
                 return true;
                 
             }
@@ -165,7 +166,7 @@
                             @endif
                         </td>
                         <td align="center" >
-                            <a onclick="return confirm('Xóa sinh viên **{{$svnhom->hoten}}** ra khỏi nhóm {{$svnhom->manhomthuchien}}?');" href="2134/xoasvtrongnhom/{{$svnhom->mssv}}">
+                            <a onclick="return confirm('Xóa sinh viên **{{$svnhom->hoten}}** ra khỏi nhóm {{$svnhom->manhomthuchien}}?');" href="xoasvtrongnhom/{{$svnhom->mssv}}">
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

@@ -27,7 +27,7 @@
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">Quản lý các thông báo</h3> 
             <div style="margin-bottom: 15px;" align="right">
-                <a href="2134/themthongbao">
+                <a href="quanlythongbao/themthongbao">
                     <button type="button" name="" class="btn btn-primary">
                         <img src="{{asset('public/images/add-icon.png')}}">Thêm thông báo
                     </button>
@@ -48,7 +48,7 @@
                 </tr>                                  
                     @if(count($dsthongbao) == 0)
                         <tr>
-                            <td colspan="9" align="center">
+                            <td colspan="10" align="center">
                                 <label style="color: #e74c3c;"> Chưa có thông báo nào!</label> 
                             </td>
                         </tr>
@@ -79,10 +79,10 @@
                                     @endif
                                 </td>
                                 <td align='center'>
-                                    <a href="2134/capnhatthongbao/{{$tb->matb}}">
+                                    <a href="capnhatthongbao/{{$tb->matb}}">
                                         <img src="{{asset('public/images/edit-icon.png')}}"/>
                                     </a>&nbsp
-                                    <a onclick="return confirm('Thông báo **{{$tb->matb}}** sẽ bị xóa?');" href="2134/xoathongbao/{{$tb->matb}}">
+                                    <a onclick="return confirm('Thông báo **{{$tb->matb}}** sẽ bị xóa?');" href="xoathongbao/{{$tb->matb}}">
                                         <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                     </a>
                                 </td>

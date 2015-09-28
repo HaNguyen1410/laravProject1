@@ -52,7 +52,7 @@
                             </select>
                         </td>
                         <td>
-                            <a href="2134/themdetai">
+                            <a href="themdetai">
                                 <button type="button" name="" class="btn btn-primary">
                                     <img src="{{asset('public/images/add-icon.png')}}">Thêm đề tài
                                 </button>
@@ -128,7 +128,7 @@
                             @endforeach -->
                             <td align='center' style="vertical-align: middle;">{{$dt->trangthai}}</td>
                             <td align='center'>
-                                <a href="{{$dt->macb}}/capnhatdetai/{{$dt->madt}}">
+                                <a href="capnhatdetai/{{$dt->madt}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp
                                 <a onclick="return confirm('Đề tài **{{$dt->tendt}}** sẽ bị xóa?');" href="xoadt/{{$dt->madt}}">

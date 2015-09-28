@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class QlthongbaoController extends Controller
 {
@@ -37,7 +38,8 @@ class QlthongbaoController extends Controller
         }
     }
     /*=================== Quản lý thông báo ===============================*/    
-    public function QuanLyThongBao($macb){
+    public function QuanLyThongBao(){
+        $macb = \Auth::user()->taikhoan;
         $dsthongbao = DB::table('thong_bao as tb')
                         ->select('tb.matb','tb.noidungtb','tb.dinhkemtb','tb.batdautb','tb.ketthuctb','tb.ngaytao',
                                 'tb.ngaysua','tb.donghethong','ntb.manhomthuchien')
@@ -53,7 +55,8 @@ class QlthongbaoController extends Controller
         return view('giangvien.quan-ly-thong-bao')->with('dsthongbao',$dsthongbao)->with('macb',$macb);
     }
 /*=================== Thêm thông báo ===============================*/    
-    public function ThemThongBao($macb){
+    public function ThemThongBao(){
+        $macb = \Auth::user()->taikhoan;
         $ma = $this->MaTB_tutang();
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -125,7 +128,8 @@ class QlthongbaoController extends Controller
         }
     }
 /*=================== Cập nhật thông báo ===============================*/  
-    public function CapNhatThongBao($macb,$matb){
+    public function CapNhatThongBao($matb){
+        $macb = \Auth::user()->taikhoan;
         $tb = DB::table('thong_bao')->where('matb',$matb)->first();
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -192,7 +196,8 @@ class QlthongbaoController extends Controller
         }
     }
 /*================= Xóa thông báo ========================================*/
-    public function XoaThongBao($macb,$matb){
+    public function XoaThongBao($matb){
+        $macb = \Auth::user()->taikhoan;
         $delete = DB::table('thong_bao')->where('macb',$macb)->where('matb',$matb)->delete();
         $delete2 = DB::table('nhan_thong_bao')->where('matb',$matb)->delete();
         if($delete > 0 && $delete2 > 0){

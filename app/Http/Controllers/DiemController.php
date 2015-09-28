@@ -13,11 +13,13 @@ use View,
     Input,
     Mail,
     Session;
+use App\Http\Controllers\Auth;
 
 class DiemController extends Controller
 { 
 /*=========================== Danh sách điểm nhóm ==============================================*/
-    public function XemDiem($mssv){
+    public function XemDiem(){
+        $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $macb = DB::table('ra_de_tai as radt')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
@@ -66,7 +68,8 @@ class DiemController extends Controller
             ->with('nhanxet',$nhanxet);            
     }   
 /*=========================== Nhập điểm nhóm ==============================================*/
-    public function NhapDiem($macb){   
+    public function NhapDiem(){   
+        $macb = \Auth::user()->taikhoan;
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -168,7 +171,7 @@ class DiemController extends Controller
 //           
 //        }
           
-//        return redirect('giangvien/nhapdiem/2134');
+//        return redirect('giangvien/nhapdiem');
     }
     
 //2 Hàm bên dưới vì chưa biết gọi qua View như thế nào nên => không sài tới

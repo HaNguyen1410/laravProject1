@@ -14,6 +14,7 @@ use View,
     Mail,
     Session;
 use Carbon\Carbon;
+use App\Http\Controllers\Auth;
 
 class QltailieuController extends Controller
 {
@@ -38,8 +39,8 @@ class QltailieuController extends Controller
         
     }
 /*========================= Giảng viên quản lý tài liệu =============================*/
-    public function KhoTaiLieu($macb){
-        //
+    public function KhoTaiLieu(){
+        $macb = \Auth::user()->taikhoan;
         $dsdt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','chn.manhomthuchien','sv.hoten')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
@@ -62,7 +63,8 @@ class QltailieuController extends Controller
         return view('giangvien.kho-tai-lieu')->with('dsdt',$dsdt)->with('tailieu',$tailieu);
     }
 /*========================= Giảng viên quản lý tài liệu chi tiết=============================*/
-    public function KhoTaiLieuChiTiet($macb,$manth){
+    public function KhoTaiLieuChiTiet($manth){
+        $macb = \Auth::user()->taikhoan;
         $dt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','dt.macb')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->where('radt.manhomthuchien',$manth)
@@ -79,7 +81,8 @@ class QltailieuController extends Controller
                      ->with('macb',$macb)->with('manth',$manth);
     }
 /*==================== Nhận xét về 1 tài liệu =======================*/
-    public function DanhGiaTaiLieu($macb,$manth,$matl){       
+    public function DanhGiaTaiLieu($manth,$matl){   
+        $macb = \Auth::user()->taikhoan;
         $dt = DB::table('de_tai as dt')->select('dt.madt','dt.tendt','dt.macb')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->where('radt.manhomthuchien',$manth)

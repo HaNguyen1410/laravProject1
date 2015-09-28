@@ -32,7 +32,8 @@ class GiangvienController extends Controller
     }
     
 /*=========================== Xem thông tin giảng viên theo mã cán bộ ==============================================*/     
-    public function ThongTinGV($macb){
+    public function ThongTinGV(){
+        $macb = \Auth::user()->taikhoan;
         $giangvien = Giangvien::find($macb);
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -53,7 +54,8 @@ class GiangvienController extends Controller
         return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien)->with('nhomhp',$nhomhp);
     }
 /*=========================== Đổi mật khẩu Giảng Viên ==============================================*/   
-    public function DoiMatKhauGV($macb){
+    public function DoiMatKhauGV(){        
+        $macb = \Auth::user()->taikhoan;
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
         return view('giangvien.doi-mat-khau-gv')->with('gv', $row);
     } 
@@ -119,7 +121,7 @@ class GiangvienController extends Controller
             $upload_success = $file->move($luuden, $fileName);
 
             if ($upload_success) {
-                return Redirect('giangvien/doimatkhaugv/2134')->with('message', 'Upload hình đại diện thành công!');
+                return Redirect('giangvien/doimatkhaugv')->with('message', 'Upload hình đại diện thành công!');
             }
         }
     }

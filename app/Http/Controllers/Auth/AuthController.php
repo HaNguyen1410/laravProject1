@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use Validator,
     Session;
+use App\Http\Middleware;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\DangnhapRequest;
 use App\Giangvien;
 use Illuminate\Contracts\Auth\Guard;
@@ -29,7 +31,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers;
     
-//    protected $redirectAfterLogout = 'dangnhap';
+    protected $redirectAfterLogout = 'dangnhap';
 
     /**
      * Create a new authentication controller instance.
@@ -94,14 +96,17 @@ class AuthController extends Controller
                 return redirect()->intended();
             }else{
 //                echo "Thất bại: ".$this->auth->user();
-                return redirect()->back();
+                return redirect()->back()->withErrors('Email hoặc mật khẩu không đúng!');
             }              
     }
 /*=============== Hiển thị giao diện đăng nhập =====================*/    
-    public function DangXuat(){
-//        \Auth::logout();
-        Session::flush();
-        return redirect()->guest('dangnhap');
-//        return view('giaodienchung.dang-nhap');
+    public function DangXuat(Request $request){
+//        Session::flush();
+//        $request->session()->flush();
+//        return redirect()->guest('dangnhap');
+        
+        \Auth::logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : Middleware::handle());
     }    
 }
