@@ -160,7 +160,7 @@ class ChianhomController extends Controller
                     'txtNgayKetThucKH' =>'required|date',
                     'txtSoTuanKH'      =>'required|numeric', 
                     'chkThanhVien'     =>'required',
-//                  'rdNhomTruong'     =>'sometimes|required'
+                    'rdNhomTruong'     =>'required'
                 ]
         );       
         if($v->fails()){
