@@ -101,7 +101,7 @@
                                    }                                    
                                ?>    
                             </td>
-                            <td align='center'>{{$dtn->sogio_thucte}}</td>
+                            <td align='center'>{{$dtn->sotuan_thucte}}</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$dtn->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $dtn->tiendo; ?>%">
