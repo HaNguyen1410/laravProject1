@@ -130,7 +130,7 @@
                     <tr>
                         <th>Trong tuần:</th>
                         <td>
-                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" placeholder="Nhập theo dạng: 1-3" class="form-control"/>
+                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" placeholder="Theo dạng: 1-3 từ tuần 1 đến 3 hoặc 4" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>

@@ -72,7 +72,7 @@
                     <tr>                        
                         <th>Trong tuần:</th>
                         <td>
-                            <input type="text" name="txtTuan" value=""  placeholder="Nhập dạng: 1-4 nếu làm từ tuần 1 đến 4 hoặc 1" class="form-control"/>
+                            <input type="text" name="txtTuan" value=""  placeholder="Theo dạng: 1-3 từ tuần 1 đến 3 hoặc 4" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
