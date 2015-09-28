@@ -25,8 +25,12 @@
                 <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
                 <div class="progress" style="width:70%">
                     <?php 
-                        $tuan = ($tiendonhom->sotuan_thucte*100)/$tiendonhom->sotuan_kehoach; 
-                        $t = round($tuan,1);      
+                        $tuancvchinh = $tuancv->tuan;
+                        $tachtuan = explode('-', $tuancvchinh);
+                        $n = count($tachtuan);
+                        $tuanhientai = $tachtuan[$n-1];
+                        $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
+                        $t = round($tuankh,1);      
                         if($t > 0 && $t <= 70){
                             $antoan = $t;
                             $canhbao = 0;
@@ -47,10 +51,10 @@
                       {{$antoan}}% Complete (success)
                     </div>
                     <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
-                      {{$canhbao}}% Complete (warning)
+                      {{$canhbao}}% (warning)
                     </div>
                     <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
-                      <span class="sr-only">{{$nguyhiem}}% Complete (danger)</span>
+                      {{$nguyhiem}}% (danger)
                     </div>
                 </div>
                 <!-- thanh tiến độ côg việc -->

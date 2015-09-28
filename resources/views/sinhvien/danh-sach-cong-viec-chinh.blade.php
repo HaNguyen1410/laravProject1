@@ -10,43 +10,7 @@
         }
     </style>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
-    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/exporting.js')}}"></script>   
-    <script type="text/javascript">
-        $(function () {
-            $('#container1').highcharts({
-                chart: {
-                    type: 'bar'
-                },
-                title: {
-                    text: 'Biểu độ thể hiện "số tuần" thực hiện của cả nhóm'
-                },
-                xAxis: {
-                    categories: ['Kế hoạch', 'Thực tế']
-                },
-                yAxis: {
-                    min: 0,
-                    title: {
-                        text: 'Số tuần thực hiện'
-                    }
-                },
-                legend: {
-                    reversed: true
-                },
-                plotOptions: {
-                    series: {
-                        stacking: 'normal'
-                    }
-                },
-                series: [{
-                    name: 'Chưa hoàn thành',
-                    data: [4, 3]
-                }, {
-                    name: 'Hoàn thành',
-                    data: [2, 3]
-                }]
-            });
-        });
-    </script>
+    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/exporting.js')}}"></script>
     <script type="text/javascript">    
       $(function () {
             $('#container2').highcharts({
@@ -83,9 +47,9 @@
                         stacking: 'normal'
                     }
                 },
-
+                
                 series: [{
-                    name: 'Tổng tuần làm kế hoạch',
+                    name: 'Tổng tuần làm kế hoạch {{$manth}}',
                     data: [5, 3, 4, 7, 2],
                     stack: 'male'
                 }, {
@@ -94,11 +58,11 @@
                     stack: 'male'
                 }, {
                     name: 'Tổng tuần làm thực tế',
-                    data: [2, 5, 6, 2, 1],
+                    data: [6, 5, 6, 2, 1],
                     stack: 'female'
                 }, {
                     name: 'Đã làm thực tế',
-                    data: [3, 0, 4, 4, 3],
+                    data: [7, 0, 4, 4, 3],
                     stack: 'female'
                 }]
             });
@@ -108,13 +72,61 @@
 <div class="container">         
 
     <div class="row">
-        <h3 style="color: darkblue; font-weight: bold;" align="center">DANH SÁCH CÔNG VIỆC CHÍNH (GIAI ĐOẠN) TRONG NHÓM</h3><br> 
-        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
-            <div id="container1" style="min-width: 310px; height: 300px; margin: 0 auto"></div>
-        </div>
+        <h4 style="color: darkblue; font-weight: bold;" align="center">
+            Danh sách công việc chính (giai đoạn) (Mã nhóm: {{$manth}})
+        </h4><br>         
     <!-- Sơ đồ tiến độ công việc theo tuần -->    
         <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
-            <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="container2" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+        </div>
+    <!---->
+        <div class="col-md-12"> 
+            <h4 style="color: darkblue; font-weight: bold;">
+                Thanh tiến trình thể hiện tiến độ thời gian và công việc của cả nhóm
+            </h4>
+            <!-- thanh tiến độ thời gian thực hiện -->
+            <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
+            <div class="progress" style="width:70%">
+                <?php 
+                    $tuancvchinh = $tuancv->tuan;
+                    $tachtuan = explode('-', $tuancvchinh);
+                    $n = count($tachtuan);
+                    $tuanhientai = $tachtuan[$n-1];
+                    $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
+                    $t = round($tuankh,1);      
+                    if($t > 0 && $t <= 70){
+                        $antoan = $t;
+                        $canhbao = 0;
+                        $nguyhiem = 0;
+                    }
+                    else if($t > 70 && $t <= 90){
+                        $antoan = 70;
+                        $canhbao = $t-70;
+                        $nguyhiem = 0;
+                    }
+                    else if($t > 90 && $t <= 100){
+                        $antoan = 70;
+                        $canhbao = 20;
+                        $nguyhiem = $t - 90;
+                    }
+                ?>
+                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
+                  {{$antoan}}% Complete (success) {{$tuanhientai}}
+                </div>
+                <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
+                  {{$canhbao}}% (warning)
+                </div>
+                <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
+                  {{$nguyhiem}}% (danger)
+                </div>
+            </div>
+            <!-- thanh tiến độ côg việc -->
+            <lable style="display: block; float: left; width: 27%;">Công việc hoàn thành: &nbsp;</lable>
+            <div class="progress" style="width:70%">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$tiendonhom->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width: <?= $tiendonhom->tiendo?>%;">
+                  {{$tiendonhom->tiendo}}% Complete (success)
+                </div>
+            </div>
         </div>
         <div class="col-md-12">
             <table class="table table-bordered table-striped" border="0" width="800px" cellpadding="0px" cellspacing="0px" align='center'>

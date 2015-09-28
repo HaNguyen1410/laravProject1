@@ -21,7 +21,16 @@ class PhancvController extends Controller
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCVChinh(){
         $mssv = \Auth::user()->taikhoan;
-        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');        
+        $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo')
+               ->where('manhomthuchien','=',$manth)->first();
+    //lấy tuần hiện tại chính là tuần làm công việc có mã cv lớn nhất
+        $tuancv = DB::table('cong_viec as cv')->select('th.tuan')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('cv.phuthuoc_cv','=',0)
+                ->where('th.manhomthuchien',$manth)
+                ->orderBy('cv.macv','desc')
+                ->first();
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                         ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sotuan_thucte','cv.phuthuoc_cv'
@@ -35,7 +44,8 @@ class PhancvController extends Controller
                ->paginate(5);
                //->get();
         
-        return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom);
+        return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom)
+            ->with('tiendonhom',$tiendonhom)->with('manth',$manth)->with('tuancv',$tuancv);
     }
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCV($macvphu){
@@ -92,6 +102,13 @@ class PhancvController extends Controller
        $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
        $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo')
                ->where('manhomthuchien','=',$manth)->first();
+       //lấy tuần hiện tại chính là tuần làm công việc có mã cv lớn nhất
+        $tuancv = DB::table('cong_viec as cv')->select('th.tuan')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('cv.phuthuoc_cv','=',0)
+                ->where('th.manhomthuchien',$manth)
+                ->orderBy('cv.macv','desc')
+                ->first();
        //Lấy tên đề tài của 1 nhóm
        $tendt = DB::table('de_tai as dt')
                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
@@ -104,7 +121,7 @@ class PhancvController extends Controller
                ->where('cv.phuthuoc_cv','=',0)->get();
       // 
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
-               ->with('dscvchinh',$dscvchinh)->with('manth',$manth);
+               ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv);
    }
 /*========= Xóa công việc chính ==============*/    
     public function XoacvChinh($macv){
