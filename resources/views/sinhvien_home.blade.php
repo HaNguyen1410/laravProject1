@@ -100,13 +100,13 @@
                                     <?php
                                         $mssv = Auth::user()->taikhoan;
                                         $tenhinh = DB::table('sinh_vien')->where('mssv',$mssv)->value('hinhdaidien');
-                                        if($tenhinh == ""){
-                                            echo "<img src='../public/images/User-image.png' width='20px' height='20px'>";
-                                        }
-                                        else if($tenhinh != ""){
-                                            echo "<img src='../public/hinhdaidien/".$tenhinh."' width='20px' height='20px'>";
-                                        }
-                                    ?>                                    
+                                    ?>
+                                        @if($tenhinh == "")
+                                           <img src="{{asset('public/images/User-image.png')}}" width='20px' height='20px'>                                        
+                                        @elseif($tenhinh != "")
+                                            <img src="{{asset('public/hinhdaidien/'.$tenhinh)}}" width='20px' height='20px'>
+                                        @endif
+                                                                        
                                     <lable style="font-weight: bold; color: #00008b;">
                                         {!! Auth::user()->name !!}
                                     </lable>

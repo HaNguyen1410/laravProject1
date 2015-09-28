@@ -19,13 +19,13 @@
                 <table class="table table-bordered" width="800px" cellpadding="15px" cellspacing="0px">
                     <tr>
                         <th width="10%">Mã công việc:</th>
-                        <td>
+                        <td width="20%">
                             <!-- Lấy mã nhóm thực hiện -->
                             <input type='hidden' name='txtMaNhomNL' value="{{$manth}}"/>
                             <input style="width:40%;text-align: center;" type="text" name="txtMaCV" value="{{$ma}}" class="form-control" readonly=""/>
                         </td>
                         <th width="10%">Tên công việc:</th>
-                        <td>
+                        <td width="20%">
                             <input type="text" name="txtTenCV" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
                         </td>
@@ -44,13 +44,19 @@
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td colspan="3">
+                        <td>
                             <select name='cbGiaoCho' class="form-control">
+                                <option value="Cả nhóm">Cả nhóm</option>
                                 @foreach($dstv as $tv)
                                 <option value="{{$tv->hoten}}">{{$tv->hoten}}</option>
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
+                        </td>
+                        <th>Trong tuần:</th>
+                        <td>
+                            <input type="text" name="txtTuan" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -77,7 +83,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Số giờ thực tế</th>
+                        <th>Số tuần thực tế</th>
                         <td>
                             <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>

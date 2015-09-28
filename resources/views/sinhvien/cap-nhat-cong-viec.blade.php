@@ -38,11 +38,11 @@
                 <table class="table table-bordered" width="800px" cellpadding="15px" cellspacing="0px" id="bang1">
                     <tr>
                         <th width="10%">Mã công việc:</th>
-                        <td>
+                        <td width="20%">
                             <input style="width:30%;" type="text" name="txtMaCV" value="{{$ndcv->macv}}" class="form-control" readonly="">
                         </td>
                         <th width="10%">Tên công việc:</th>
-                        <td colspan="3">
+                        <td width="20%">
                             <input type="text" name="txtTenCV" value="{{$ndcv->congviec}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
                         </td>
@@ -73,13 +73,19 @@
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td colspan="3">                                    
+                        <td>                                    
                             <select name='cbGiaoCho' class="form-control">
+                                <option value="Cả nhóm">Cả nhóm</option>
                                 @foreach($dstv as $tv)
                                 <option value="{{$tv->mssv}}">{{$tv->hoten}}</option>
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
+                        </td>
+                        <th>Trong tuần:</th>
+                        <td>
+                            <input type="text" name="txtTuan" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -126,7 +132,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Số giờ thực tế</th>
+                        <th>Số tuần thực tế</th>
                         <td>
                             <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="{{$ndcv->sotuan_thucte}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>

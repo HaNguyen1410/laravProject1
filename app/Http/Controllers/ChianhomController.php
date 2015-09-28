@@ -35,12 +35,16 @@ class ChianhomController extends Controller
             else 
                 return  $mamoi = $pre .=$so;   
         } 
-    }   
-/*====================  ======================*/
-    public function ChiaNhomNL(Request $req){
+    }  
+/* ============== Lấy nhóm HP ============== */
+    public function LayNhomHP(){
+        $ma = Input::get('cbNhomHP');
+        return redirect('giangvien/chianhom/'.$ma);
+    }
+    /*====================  ======================*/
+    public function ChiaNhomNL(){
         $macb = \Auth::user()->taikhoan;
         //Nếu selectbox có giá trị manhp thì lấy manhp
-        //$mahp = $req->cbNhomHP;
  
         //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
         $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
@@ -51,12 +55,18 @@ class ChianhomController extends Controller
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->where('hp.macb',$macb)
                 ->value('nk.hocky');
-        //Lấy mã nhóm HP của năm hiện tại mà cán bộ phụ trách
-        $mahp = DB::table('nhom_hocphan as hp')
+    //Lấy giá trị một đoạn của chuỗi url
+        $var = \Request::segment(3);
+        if($var == null){
+            //Lấy mã nhóm HP của năm hiện tại mà cán bộ phụ trách
+            $mahp = DB::table('nhom_hocphan as hp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('hp.macb',$macb)
                 ->where('nk.nam',$namcb)->where('nk.hocky',$hkcb)
                 ->value('hp.manhomhp');
+        }
+        else $mahp = $var;
+        
         $dsmahp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
@@ -87,7 +97,6 @@ class ChianhomController extends Controller
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('dt.macb',$macb)
-                ->where('hp.manhomhp',$mahp)
                 ->where('nk.nam',$namcb)
                 ->where('nk.hocky',$hkcb)
                 ->where('chn.manhomthuchien','<>',"")
@@ -110,50 +119,57 @@ class ChianhomController extends Controller
     public function LuuChiaNhomNL(Request $req){
         $manth = $this->manth_tutang();
         $post = $req->all();
-//        $v = \Validator::make($req->all(),
-//                [
-//                    'cbDeTai'          =>'required',
-//                    'txtNgayBatDauKH'  =>'required|date',
-//                    'txtNgayKetThucKH' =>'required|date',
-//                    'chk'              =>'required',
-//                    //'rdNhomTruong'  =>'required'
-//                ]
-//        );
-//        if($v->fails()){
-//            return redirect()->back()->withErrors($v->errors());
-//        }
-//        else
+        $v = \Validator::make($req->all(),
+                [
+                    'cbDeTai'          =>'required',
+                    'txtNgayBatDauKH'  =>'required|date',
+                    'txtNgayKetThucKH' =>'required|date',
+                    'txtSoTuanKH'      =>'required|numeric', 
+                    'chkThanhVien'     =>'required',
+                    'rdNhomTruong'     =>'sometimes|required'
+                ]
+        );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else
         {
-            $masv_checked = Input::get('chk'); //trả về 1 mảng mssv 
+            $masv_checked = Input::get('chkThanhVien'); //trả về 1 mảng mssv 
                 // has -> true nếu giá trị hiện tại có giá trị và không rỗng
             
             /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
             //$nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
             
-            $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
-//            return $masv_checked.$nhomtruong;
-//              return count($masv_checked);               
-            $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
-                            ->update([                        
-                                    'manhomthuchien'=>$manth,
-                                    'nhomtruong'=>$nhomtruong
-                               ]);
-            $ch2 = DB::table('ra_de_tai')->insert(
-                    [
-                        'madt'           => $_POST['cbDeTai'],
-                        'manhomthuchien' => $manth
-                    ]
-                );
-            $ch3 = DB::table('nhom_thuc_hien')->insert(
-                        [                            
-                            'manhomthuchien'      => $manth,
-                            'ngaybatdau_kehoach'  => $_POST['txtNgayBatDauKH'],
-                            'ngayketthuc_kehoach' => $_POST['txtNgayKetThucKH'],
-                            'ngaytao'             => Carbon::now()
-                        ]
-                    );
-               
-             return redirect('giangvien/chianhom');            
+            $nt = Input::get('rdNhomTruong'); //Lấy mảng các radio.
+            
+            for($i = 0; $i < $nt; $i++){                
+                $nhomtruong[$i] = isset($nt[$i]) ? 1 : 0;    
+                return $nhomtruong[$i];
+//                $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
+//                                ->update([                        
+//                                        'manhomthuchien'=>$manth,
+//                                        'nhomtruong'=>$nhomtruong[$i]
+//                                   ]);
+            }
+//              return $masv_checked.$nhomtruong;                
+//              return count($masv_checked); 
+//            $ch2 = DB::table('ra_de_tai')->insert(
+//                    [
+//                        'madt'           => $_POST['cbDeTai'],
+//                        'manhomthuchien' => $manth
+//                    ]
+//                );
+//            $ch3 = DB::table('nhom_thuc_hien')->insert(
+//                        [                            
+//                            'manhomthuchien'      => $manth,
+//                            'ngaybatdau_kehoach'  => $_POST['txtNgayBatDauKH'],
+//                            'ngayketthuc_kehoach' => $_POST['txtNgayKetThucKH'],
+//                            'sotuan_kehoach'      => $_POST['txtSoTuanKH'],
+//                            'ngaytao'             => Carbon::now()
+//                        ]
+//                    );
+//               
+//             return redirect('giangvien/chianhom');            
         }
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/

@@ -34,9 +34,9 @@
              <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                  <tr>
                     <th width="1%">STT</th>
-                    <th width="4%">Giai Đoạn</th>
+                    <th width="6%">Công việc chính</th>
                     <th width="8%">Tên tập tin</th>
-                    <th width="15%">Mô tả</th>                    
+                    <th width="12%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
                     <th width="10%">Tác giả</th>
                     <th width="15%">Nhận xét</th>
@@ -53,9 +53,9 @@
                     @foreach($dstailieu as $stt => $tl)
                         <tr>
                             <td align="center">{{$stt+1}}</td>
-                            <td>
-                                <a style="color: #006400;" data-toggle="tooltip" data-placement="bottom" title="">                                    
-                                    
+                            <td align="center">
+                                <a style="color: blue;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->congviec}}">                                    
+                                    <label>{{$tl->macv}}</label>
                                 </a>
                             </td>
                             <td>
@@ -64,10 +64,16 @@
                                 </a>
                             </td>
                             <td>{{$tl->mota}}</td>
-                            <td>{{$tl->ngaycapnhat}}</td>
+                            <td>
+                                <a style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Tuần: {{$tl->tuan}}">                                    
+                                    <label>{{$tl->ngaycapnhat}}</label>
+                                </a> 
+                            </td>
                             <td>{{$tl->hoten}}</td>
                             <td><p style="color: #000080;">{{$tl->nd_danhgia}}</p></td>
-                            <td>{{$tl->ngaydanhgia}}</td>
+                            <td align="center">
+                                {{$tl->ngaydanhgia}}                                                               
+                            </td>
                             <td align="center">
                                 <a href="">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>

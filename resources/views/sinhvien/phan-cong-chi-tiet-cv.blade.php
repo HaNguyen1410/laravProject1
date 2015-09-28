@@ -28,7 +28,7 @@
                     </a>
                 </label>
                  <a href="{{$cvchinh->macv}}/themcvphu" style="margin-left: 40%;">
-                    <button type="button" name="btnThem" class="btn btn-primary" style="width:20%;">
+                    <button type="button" name="btnThem" class="btn btn-primary" style="width:15%;">
                     <img src="{{asset('public/images/add-icon.png')}}">Thêm công việc
                     </button>
                  </a>
@@ -40,6 +40,7 @@
                     <th rowspan="2" width="3%">ID</th>
                     <th rowspan="2" width="15%%">Tên công việc</th>
                     <th rowspan="2" width="15%">Giao cho</th>
+                    <th rowspan="2" width="4%">Tuần</th>
                     <th colspan="3" width="20%">Thực tế</th>
                     <th rowspan="2" width="20%">Chi tiết công việc</th>
                     <th rowspan="2" width="8%">Tiến độ</th>
@@ -52,17 +53,18 @@
                 </tr>
                 @foreach($dscvphu as $stt => $cvphu)
                     <tr>
-                        <td>{{$stt+1}}</td>
-                        <td>{{$cvphu->macv}}</td>
+                        <td align="center">{{$stt+1}}</td>
+                        <td align="center">{{$cvphu->macv}}</td>
                         <td>
                             <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cvphu->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cvphu->ngaybatdau_kehoach}}">
                                 {{$cvphu->congviec}}
                             </a>                            
                         </td>
                         <td>{{$cvphu->giaocho}}</td>
-                        <td>{{$cvphu->ngaybatdau_thucte}}</td>
-                        <td>{{$cvphu->ngayketthuc_thucte}}</td>
-                        <td>{{$cvphu->sotuan_thucte}}</td>
+                        <td align="center">{{$cvphu->tuan}}</td>
+                        <td align="center">{{$cvphu->ngaybatdau_thucte}}</td>
+                        <td align="center">{{$cvphu->ngayketthuc_thucte}}</td>
+                        <td align="center">{{$cvphu->sotuan_thucte}}</td>
                         <td>{{$cvphu->noidungthuchien}}</td>  
                         <td>
                             <div class="progress">

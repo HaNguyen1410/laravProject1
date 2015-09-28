@@ -49,6 +49,7 @@ class DetaiController extends Controller
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaDeTai($madt){
+        $delete2 = DB::table('ra_de_tai')->where('madt',$madt)->delete();
         $delete = DB::table('de_tai')->where('madt',$madt)->delete();
         $tendt = DB::table('de_tai')->where('madt',$madt)->value('tendt');
         \Session::flash('ThongBao','Xóa '.$tendt.' thành công!');

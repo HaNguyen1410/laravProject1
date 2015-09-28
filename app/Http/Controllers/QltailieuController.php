@@ -133,7 +133,7 @@ class QltailieuController extends Controller
                 ->value('dt.tendt');
         $dstailieu = DB::table('tai_lieu as tl')->distinct()
                 ->select('tl.matl','tl.macv','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
-                        'cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten')
+                        'cv.congviec','dg.nd_danhgia','dg.ngaydanhgia','sv.hoten','th.tuan')
                 ->leftjoin('danh_gia as dg','dg.matl','=','tl.matl')
                 ->join('cong_viec as cv','cv.macv','=','tl.macv')
                 ->join('thuc_hien as th','cv.macv','=','th.macv')

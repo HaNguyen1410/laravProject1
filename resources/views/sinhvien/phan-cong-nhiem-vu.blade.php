@@ -23,9 +23,9 @@
             <div class="col-md-12"> 
                 <!-- thanh tiến độ thời gian thực hiện -->
                 <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" style="width: 35%">
-                      35% Complete (success)
+                <div class="progress" style="width:50%">
+                    <div class="progress-bar progress-bar-success" style="width: 20%">
+                      20% Complete (success)
                     </div>
                     <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: 20%">
                       20% Complete (warning)
@@ -36,13 +36,15 @@
                 </div>
                 <!-- thanh tiến độ côg việc -->
                 <lable style="display: block; float: left; width: 27%;">Công việc hoàn thành: &nbsp;</lable>
-                <div class="progress">
+                <div class="progress" style="width:50%">
                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$tiendonhom->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width: <?= $tiendonhom->tiendo?>%;">
                       {{$tiendonhom->tiendo}}%
                     </div>
                 </div>
-            </div>
-            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+            </div><br><br><br><br>
+            <h4 style="color:red; font-weight: bold; border: 2px solid #dff0d8; background-color: #dff0d8; width: 60%">
+                <?php echo Session::get('ThongBao'); ?>
+            </h4>
             <table class="table" width="800px" cellpadding="0px" cellspacing="0px" id="bang1">
                 <tr>
                     <th width="8%">Tên đề tài:</th>
@@ -64,6 +66,7 @@
                     <th rowspan="2" width="3%">ID</th>
                     <th rowspan="2" width="15%">Tên công việc</th>
                     <th rowspan="2" width="10%">Giao cho</th>
+                    <th rowspan="2" width="4%">Tuần</th>
                     <th rowspan="2" width="10%">Trạng thái</th>
                     <th colspan="3" width="15%">Thực tế</th>
                     <th rowspan="2" width="3%">Phụ thuộc</th>
@@ -77,7 +80,7 @@
                 </tr>
                 @foreach($dscvchinh as $stt => $cv)
                     <tr>
-                        <td>{{$stt+1}}</td>
+                        <td align="center">{{$stt+1}}</td>
                         <td>
                             <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
                                 {{$cv->macv}}
@@ -90,11 +93,12 @@
                             </a>
                         </td>
                         <td>{{$cv->giaocho}}</td>
-                        <td>{{$cv->trangthai}}</td>
-                        <td>{{$cv->ngaybatdau_thucte}}</td>
-                        <td>{{$cv->ngayketthuc_thucte}}</td>
-                        <td>{{$cv->sotuan_thucte}}</td>
-                        <td>{{$cv->phuthuoc_cv}}</td>
+                        <td align="center">{{$cv->tuan}}</td>
+                        <td align="center">{{$cv->trangthai}}</td>
+                        <td align="center">{{$cv->ngaybatdau_thucte}}</td>
+                        <td align="center">{{$cv->ngayketthuc_thucte}}</td>
+                        <td align="center">{{$cv->sotuan_thucte}}</td>
+                        <td align="center">{{$cv->phuthuoc_cv}}</td>
                         <td>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
@@ -106,7 +110,7 @@
                             <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
                                 <img src="{{asset('public/images/edit-icon.png')}}"/>
                             </a>&nbsp &nbsp &nbsp
-                            <a href="">
+                            <a href="phancv/xoacvchinh/{{$cv->macv}}">
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>
                         </td>

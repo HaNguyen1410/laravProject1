@@ -143,8 +143,9 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     /*
      * {mahp?} : dấu ? thể hiện rằng biến 'mahp' có hay không url vẫn chạy
      */
+    route::get('chianhom/{mahp?}','ChianhomController@ChiaNhomNL');
     Route::group(['prefix'=>'chianhom'],function(){
-        route::get('{mahp?}','ChianhomController@ChiaNhomNL');
+        route::post('laynhomhp','ChianhomController@LayNhomHP');
         route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
         route::get('xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
     });

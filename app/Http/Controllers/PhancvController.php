@@ -91,16 +91,16 @@ class PhancvController extends Controller
         $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv',$macv)->get();
         if(count($dscvphu) > 0){
             \Session::flash('ThongBao','Phải xóa công việc phụ thuộc trước!');
+            return redirect('sinhvien/phancv');
         }
         else{
             $Xoath = DB::table('thuc_hien')->where('macv',$macv)->delete();
             $Xoacv = DB::table('cong_viec')->where('macv',$macv)->delete();
 
             \Session::flash('ThongBao','Xóa thành công!');
-            if($Xoath && $Xoacv){
-                //return $delete; $delete = 1 sau khi thuc hiện xóa
-                return redirect('sinhvien/phancv/1111317/');
-            } 
+            
+            return redirect('sinhvien/phancv');
+            
         }        
     }
 /*========= Thêm công việc chính ==============*/ 
@@ -225,7 +225,9 @@ class PhancvController extends Controller
 /*========= Danh sách phân công chi tiết (công việc phụ thuộc) ==============*/ 
     public function DSPhanChiTiet($macv){
         $mssv = \Auth::user()->taikhoan;
-        $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv','=',$macv)->get();
+        $dscvphu = DB::table('cong_viec as cv')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('cv.phuthuoc_cv','=',$macv)->get();
         $cvchinh = DB::table('cong_viec')->where('macv','=',$macv)
                 ->first();
         return view('sinhvien.phan-cong-chi-tiet-cv')->with('dscvphu', $dscvphu)
@@ -240,7 +242,7 @@ class PhancvController extends Controller
         \Session::flash('ThongBao','Xóa thành công!');
         if($Xoath && $Xoacv){
             //return $delete; $delete = 1 sau khi thuc hiện xóa
-            return redirect('sinhvien/phancongchitiet/1111317/'.$macv);
+            return redirect('sinhvien/phancongchitiet/'.$macv);
         }
     }
 /*========= Thêm công việc chi tiết (cv phụ) ==============*/ 
