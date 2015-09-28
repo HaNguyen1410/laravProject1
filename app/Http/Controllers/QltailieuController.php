@@ -179,6 +179,7 @@ class QltailieuController extends Controller
             //Đổi kích thước file từ bytes sang Kb
             $kichthuoc_mb = $kichthuoc/(1024);
             //$extension = Input::file('fTaiLieu')->getClientOriginalExtension();
+            //Lấy tên và cả đuôi của tập tin
             $tenbandau = Input::file('fTaiLieu')->getClientOriginalName(); 
             DB::table('tai_lieu')->insert(
                         [

@@ -63,10 +63,22 @@ class QuantriController extends Controller
 //        $database = \Config::get('database.connections.mysql.database');
 //        $ten = date("YmdHis") . '.sql';//$database ."-" . 
 //        $backupPath = storage_path() . "\dumps\\";
-//        $exitCode = Artisan::call('db:restore'); 
-        
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',2)
+        $v = \Validator::make($req->all(),
+                    [
+                        'fTenCSDL' => 'required|mimes:sql'
+                    ]
+        );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else
+        {
+            $tenbandau = Input::file('fTenCSDL')->getClientOriginalName(); 
+            $exitCode = Artisan::call('db:restore '.$tenbandau); 
+            return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',2)
                 ->with('phuchoi',0);
+        }
+        
     }
 /******************
  * ######## Quản trị Giảng Viên  ###########

@@ -124,9 +124,8 @@
                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
                                           {{$sv->mssv}}
                                     </a> 
-                                   : <input type="checkbox" name="chkThanhVien[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp                                      
-
-                                      Nhóm trưởng: <input type="radio" name="rdNhomTruong"/><br>                                   
+                                    : <input type="checkbox" name="chkThanhVien[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp
+                                    Nhóm trưởng: <input type="radio" name="rdNhomTruong[]" value="{{$sv->mssv}}"/><br> 
                                 </div> 
                             @endforeach                                
                         </td>

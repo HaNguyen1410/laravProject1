@@ -73,7 +73,7 @@ class ChianhomController extends Controller
                 ->where('hp.macb',$macb)->get();
         //Lấy những sinh viên chưa có nhóm thực hiện niên luận
         $dstensv = DB::table('chia_nhom as chn')->distinct()
-                ->select('chn.mssv','sv.hoten')
+                ->select('chn.mssv','sv.hoten','chn.nhomtruong')
                 ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
                 ->where('chn.manhomhp','=',$mahp)
                 ->where('chn.manhomthuchien','=',"")
@@ -141,17 +141,32 @@ class ChianhomController extends Controller
 //           return $masv_checked.$nhomtruong;                
 //           return count($masv_checked); 
             
-            /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
-//            $nhomtruong = $req->has('rdNhomTruong') == FALSE ? 1 : 0; 
-//             $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
-//            return var_dump(Input::get('rdNhomTruong'));
+            /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has
+             * Khi không có value
+             *              
+            $nhomtruong = $req->has('rdNhomTruong') == FALSE ? 1 : 0; 
+             $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
+            return var_dump(Input::get('rdNhomTruong'));             * 
+             */
+            $nhomtruong = Input::get('rdNhomTruong');   
+            $check_ntruong = implode('',$nhomtruong);
             
-            $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
+            for($i = 0; $i < count($masv_checked); $i++){
+                if($check_ntruong == $masv_checked[$i]){
+                    $ch = DB::table('chia_nhom')->where('mssv',$nhomtruong)
                             ->update([                        
-                                    'manhomthuchien'=>$manth,
-                                    'nhomtruong'=>$req->has('rdNhomTruong') == FALSE ? 1 : 0
-                               ]);            
-            
+                                    'manhomthuchien' => $manth,
+                                    'nhomtruong'     => 1
+                                ]);  
+                }
+                else if($nhomtruong != $masv_checked[$i]){
+                    $ch = DB::table('chia_nhom')->where('mssv','<>',$check_ntruong)->whereIn('mssv',$masv_checked)
+                            ->update([                        
+                                    'manhomthuchien' => $manth,
+                                    'nhomtruong'     => 0
+                                ]); 
+                }                
+            }                       
             $ch2 = DB::table('ra_de_tai')->insert(
                     [
                         'madt'           => $_POST['cbDeTai'],

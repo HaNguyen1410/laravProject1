@@ -150,17 +150,19 @@ class DiemController extends Controller
 //        return $matc;          
 
         for($j = 0; $j < count($masv); $j++){   
-            for($i = 0; $i < count($matc); $i++){
-                for($d = 0; $d < count($diem); $d++){  
-                    echo $masv[$j]." - ".$matc[$i]." - ".$diem[$d]."<br>";
+            echo $masv[$j]."<br>";
+        }    
+        for($i = 0; $i < count($matc); $i++){
+                echo $matc[$i]."<br>";
+         } 
+        for($d = 0; $d < count($diem); $d++){  
+                echo $diem[$d]."<br>";
+        }
 //                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
 //                        ->update(
 //                                ['diem' => $diem[$d]]
-//                           );  
-                         
-                }
-            } 
-        }     
+//                           );
+        
 //        for($s = 0; $s < count($masv); $s++){
 //            for($nx = 0; $nx < count($nhanxet); $nx++){
 //                echo $masv[$s]."->".$nx.". ".$nhanxet[$nx]."<br>";
