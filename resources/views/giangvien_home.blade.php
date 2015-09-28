@@ -112,7 +112,19 @@
                             </li>                                 
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    Thông tin giảng viên
+                                    <?php
+                                        $macb = Auth::user()->taikhoan;
+                                        $tenhinh = DB::table('giang_vien')->where('macb',$macb)->value('hinhdaidien');
+                                        if($tenhinh == ""){
+                                            echo "<img src='../public/images/User-image.png' width='20px' height='20px'>";
+                                        }
+                                        else if($tenhinh != ""){
+                                            echo "<img src='../public/hinhdaidien/".$tenhinh."' width='20px' height='20px'>";
+                                        }
+                                    ?>  
+                                    <lable style="font-weight: bold; color: #00008b;">
+                                        {!! Auth::user()->name !!}
+                                    </lable>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
@@ -146,14 +158,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>  
-                            <li>
-                                <a>
-                                    <lable style="font-weight: bold; color: #00008b;">
-                                        {!! Auth::user()->name !!} - {!! Auth::user()->taikhoan !!}
-                                    </lable>
-                                </a>
-                            </li>
+                            </li> 
                             <li style="margin-right: 15px;">                                
                                 <a href="{{asset('dangxuat')}}">
                                     (Đăng xuất)
