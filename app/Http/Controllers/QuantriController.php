@@ -48,14 +48,25 @@ class QuantriController extends Controller
             return $so = (int)$ma + 1;
         }     
     }   
- /*====================== Sao lưu phục hồi CSDL ====================================*/
+/*====================== SAO LƯU CSDL ====================================*/
     public function SaoLuuCSDL(Request $req){
 //        $database = \Config::get('database.connections.mysql.database');
 //        $ten = date("YmdHis") . '.sql';//$database ."-" . 
 //        $backupPath = storage_path() . "\dumps\\";
         $exitCode = Artisan::call('db:backup'); 
         
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',0);
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',0)
+            ->with('phuchoi',2);
+    }
+/*====================== PHỤC HỒI CSDL ====================================*/
+    public function PhucHoiCSDL(Request $req){
+//        $database = \Config::get('database.connections.mysql.database');
+//        $ten = date("YmdHis") . '.sql';//$database ."-" . 
+//        $backupPath = storage_path() . "\dumps\\";
+//        $exitCode = Artisan::call('db:restore'); 
+        
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',2)
+                ->with('phuchoi',0);
     }
 /******************
  * ######## Quản trị Giảng Viên  ###########

@@ -44,13 +44,17 @@ Route::get('dangxuat', 'Auth\AuthController@DangXuat');
 //});
 Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
     Route::get('thongtinqt','QuantriController@ThongTinQT');
+     /* ========= Đổi mật khẩu và hình đại diện ==========*/
     Route::get('doimatkhauqt','QuantriController@DoiMatKhauQT');
     Route::post('luudoimatkhauqt','QuantriController@LuuDoiMatKhauQT');
-    Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT');
+    Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT'); 
+    /* ========= SAO LƯU PHỤC HỒI CSDL ==========*/
     Route::get('saoluu', function () {
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('giatri',1);
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',1)
+            ->with('phuchoi',1);
     });
     Route::post('saoluucsdl','QuantriController@SaoLuuCSDL');
+    Route::post('phuchoicsdl','QuantriController@PhucHoiCSDL');
 /*
  * ######## Quản trị Giảng Viên ##################
  */
