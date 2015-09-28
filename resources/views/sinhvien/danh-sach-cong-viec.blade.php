@@ -90,30 +90,38 @@
                     <th width="7%">Tiến độ (%)</th>
                     <th width="20%">Nội dung công việc</th>
                 </tr>
-                @foreach($dscv as $stt => $cv) 
+                @if(count($dscv) == 0)
                     <tr>
-                        <td align="center">{{$cv->tuan}}</td>
-                        <td align="center">{{$cv->macv}}</td>
-                        <td>
-                            <a href="?cn=kehoach" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
-                                {{$cv->congviec}}
-                            </a>
+                        <td colspan="10" align="center">
+                            <label style="color: #e74c3c;"> Chưa có công việc nào được phân công!</label> 
                         </td>
-                        <td align="center">{{$cv->trangthai}}</td>
-                        <td>{{$cv->giaocho}}</td>
-                        <td align="center">{{$cv->ngaybatdau_thucte}}</td>
-                        <td align="center">{{$cv->ngayketthuc_thucte}}</td>
-                        <td align="center">{{$cv->sotuan_thucte}}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td>{{$cv->noidungthuchien}}</td>
-                     </tr>          
-                @endforeach
+                    </tr>
+                @elseif(count($dscv) > 0)
+                    @foreach($dscv as $stt => $cv) 
+                        <tr>
+                            <td align="center">{{$cv->tuan}}</td>
+                            <td align="center">{{$cv->macv}}</td>
+                            <td>
+                                <a href="?cn=kehoach" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
+                                    {{$cv->congviec}}
+                                </a>
+                            </td>
+                            <td align="center">{{$cv->trangthai}}</td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td align="center">{{$cv->ngaybatdau_thucte}}</td>
+                            <td align="center">{{$cv->ngayketthuc_thucte}}</td>
+                            <td align="center">{{$cv->sotuan_thucte}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td>{{$cv->noidungthuchien}}</td>
+                         </tr>          
+                    @endforeach
+                @endif
             </table> 
         </div>  <!-- /class="col-md-12" -->  
     </div> <!-- /row -->

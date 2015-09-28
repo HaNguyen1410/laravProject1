@@ -13,7 +13,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">Thêm công việc</h3> 
+            <h3 style="color: darkblue; font-weight: bold;">
+                <a href="{{asset('sinhvien/phancv')}}">Phân công việc</a>  
+                    &Gt;
+                Thêm công việc
+            </h3> 
             <form action="{{action('PhancvController@LuuThemcvChinh')}}" method="post">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" width="800px" cellpadding="15px" cellspacing="0px">
@@ -59,40 +63,17 @@
                                 </div>
                             <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
                         </td>
-                        <th>Trong tuần:</th>
-                        <td>
-                            <input type="text" name="txtTuan" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th width="20%">Nội dung công việc:</th>
-                        <td colspan="4">
-                            <textarea name="txtNoiDungViec" rows="2" cols="2" class="ckeditor"></textarea>
-                            <p style='color:red;'>{{$errors->first('txtNoiDungViec')}}</p>
-                            <script language="javascript">
-                                CKEDITOR.replace( 'txtNoiDungViec',
-                                {
-                                    skin : 'kama',
-                                    extraPlugins : 'uicolor',
-                                    uiColor: '#eeeeee',
-                                    toolbar : [['Font'],
-                                        ['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'], 
-                                        ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
-                                        ['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote'],
-                                        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
-                                        ['Link','Unlink','Anchor', 'NumberedList','BulletedList','-','Outdent','Indent'],
-                                        ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
-                                    ['Style', 'FontFormat', 'FontName', 'FontSize']]
-                                });
-                            </script>                            
-                        </td>
-                    </tr>
-                    <tr>
                         <th>Số tuần thực tế</th>
                         <td>
-                            <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
+                            <input type="text" id="txtTuanThucTe" name="txtTuanThucTe" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                        </td>
+                    </tr>
+                    <tr>                        
+                        <th>Trong tuần:</th>
+                        <td>
+                            <input type="text" name="txtTuan" value=""  placeholder="Nhập dạng: 1-4 nếu làm từ tuần 1 đến 4 hoặc 1" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
                         <td colspan="2">
@@ -120,6 +101,29 @@
                             <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
                         </td>
                     </tr>
+                    <tr>
+                        <th width="20%">Nội dung công việc:</th>
+                        <td colspan="4">
+                            <textarea name="txtNoiDungViec" rows="2" cols="2" class="ckeditor"></textarea>
+                            <p style='color:red;'>{{$errors->first('txtNoiDungViec')}}</p>
+                            <script language="javascript">
+                                CKEDITOR.replace( 'txtNoiDungViec',
+                                {
+                                    skin : 'kama',
+                                    extraPlugins : 'uicolor',
+                                    uiColor: '#eeeeee',
+                                    toolbar : [['Font'],
+                                        ['Cut','Copy','Paste','PasteText','PasteWord','-','Print','SpellCheck'], 
+                                        ['Bold','Italic','Underline','StrikeThrough','-','Subscript','Superscript'],
+                                        ['OrderedList','UnorderedList','-','Outdent','Indent','Blockquote'],
+                                        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyFull'],
+                                        ['Link','Unlink','Anchor', 'NumberedList','BulletedList','-','Outdent','Indent'],
+                                        ['Image', 'Flash', 'Table', 'Rule', 'Smiley', 'SpecialChar'],
+                                    ['Style', 'FontFormat', 'FontName', 'FontSize']]
+                                });
+                            </script>                            
+                        </td>
+                    </tr>                    
                     <tr>
                         <td></td>
                         <td colspan="4" align="center">

@@ -21,11 +21,11 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" border="1" width="800px" cellpadding="15px" cellspacing="0px" align='center' id="dangky">
                     <tr>
-                        <th>Mã cán bộ:</th>
+                        <th  width='15%'>Mã cán bộ:</th>
                         <td width="15%">
                             <input type="text" id="txtMaCB" name="txtMaCB" value="{{$thongtindt->macb}}" style="text-align: center;" class="form-control" readonly="true"/>
                         </td>
-                        <th width="20%">Họ và tên cán bộ hướng dẫn:</th>
+                        <th width="15%">Họ và tên cán bộ hướng dẫn:</th>
                         <td>
                             <input type="text" name="txtTen" value="{{$thongtindt->hoten}}" class="form-control" readonly="true"/>
                         </td>                        
@@ -35,7 +35,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width='15%' valign='middle'>Đề tài được giao:</th>
+                        <th valign='middle'>Đề tài được giao:</th>
                         <td align='center' colspan="5">
                             <input type="text" name="" value="{{$thongtindt->tendt}}" class="form-control" readonly=""/>
                         </td>
@@ -43,35 +43,35 @@
                     <tr>
                         <th>Ngày họp nhóm:</th>
                         <td colspan="5">                          
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 2</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S2"/>                            
                             </div>   
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 3</label>  &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S3"/>                            
                             </div> 
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 4</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S4"/>                            
                             </div>   
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 5</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S5"/>                            
                             </div>
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 6</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S6"/>                            
                             </div>   
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 7</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S7"/>                            
                             </div>
                          <!-- Chọn buổi chiều -->
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Chiều thứ 2</label> &nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="C2"/>                            
                             </div>   
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Chiều thứ 3</label>  &nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="C3"/>                            
                             </div> 
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Chiều thứ 4</label> &nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="C4"/>                            
                             </div>   
-                            <div style="padding: 2px 2px 2px 43px; display: block; float: left;">  
+                            <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Chiều thứ 5</label> &nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="C5"/>                            
                             </div>
                             <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
@@ -80,6 +80,7 @@
                             <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Chiều thứ 7</label> &nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="C7"/>                            
                             </div>
+                            <p style='color:red;'>{{$errors->first('chkBuoiHop')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -110,6 +111,30 @@
                             ?>                        
                         </td>
                     </tr>
+                    <tr>
+                        <th>Ngày bắt đầu (thực tế):</th>
+                        <td colspan="2" width="30%">
+                            <input type="text" id="txtNgayBatDauThucTe" name="txtNgayBatDauThucTe" value="{{$nhom->ngaybatdau_thucte}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtNgayBatDauThucTe')}}</p>
+                        </td>
+                        <th width="18%">Ngày kết thúc (thực tế):</th>
+                        <td colspan="2" width="30%">
+                            <input type="text" id="txtNgayKTThucTe" name="txtNgayKTThucTe" value="{{$nhom->ngayketthuc_thucte}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtNgayKTThucTe')}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Số tuần thực tế</th>
+                        <td colspan="2">
+                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$nhom->sotuan_thucte}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                        </td>
+                        <th>Tiến độ (%):</th>
+                        <td colspan="2">
+                            <input type="text" name="txtTienDo" value="{{$nhom->tiendo}}" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
+                        </td>
+                    </tr> 
                     <tr>
                         <th>Tổ chức nhóm:</th>
                         <td align='center' colspan="5">

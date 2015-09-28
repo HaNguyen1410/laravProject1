@@ -9,7 +9,7 @@
                 background-color: #dff0d8;
             }
     </style>
-    
+<!--    
     <script src="{{Asset('public/scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
     <script type="text/javascript">
         /*window.onerror = function(errorMsg) {
@@ -28,11 +28,16 @@
         });
         /*$('#datetimepicker').datetimepicker({step: 10});*/
     </script>   
-    
+-->
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">Cập nhật công việc</h3> 
+            <h3 style="color: darkblue; font-weight: bold;">
+                <a href="{{asset('sinhvien/phancv')}}">Phân công việc</a>  
+                    &Gt;
+                Cập nhật công việc
+            </h3> 
             <form action="{{action('PhancvController@LuuCapNhatcvChinh')}}" method="post" >
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" width="800px" cellpadding="15px" cellspacing="0px" id="bang1">
@@ -85,14 +90,14 @@
                                 <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
                                     <a>Cả nhóm</a>
                                        : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
-                                </div>
+                                </div><br>
                             <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
                         </td>
-                        <th>Trong tuần:</th>
+                        <th>Số tuần thực tế</th>
                         <td>
-                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" placeholder="Nhập theo dạng: 1-3" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
-                        </td>
+                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$ndcv->sotuan_thucte}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                        </td>                        
                     </tr>
                     <tr>
                         <th>Được giao cho:</th>
@@ -100,6 +105,40 @@
                             <label style="color: #006400; font-weight: bold;">{{$ndcv->giaocho}}</label>
                         </td>
                     </tr>
+                    <tr>
+                        <th>Trạng thái</th>
+                        <td>
+                            <select class="form-control" size="1" name="cbTrangThai">
+                                <option value="{{$ndcv->trangthai}}" selected="">{{$ndcv->trangthai}}</option>
+                                <option value="Đang làm">Đang làm</option>
+                                <option value="Sắp làm">Sắp làm</option>
+                                <option value="Hoàn thành">Hoàn thành</option>
+                            </select>
+<!--                            <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>                        -->
+                        </td>
+                        <th width="13%">Độ ưu tiên:</th>
+                        <td colspan="2" >
+                            <select class="form-control" size="1" name="cbUuTien">
+                                <option value="{{$ndcv->uutien}}" selected="">{{$ndcv->uutien}}</option>
+                                <option value="Cao">Cao</option>
+                                <option value="Trung bình">Trung bình</option>
+                                <option value="Thấp">Thấp</option>
+                            </select>
+                            <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trong tuần:</th>
+                        <td>
+                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" placeholder="Nhập theo dạng: 1-3" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
+                        </td>
+                        <th>Tiến độ (%):</th>
+                        <td colspan="2">
+                            <input type="text" name="txtTienDo" value="{{$ndcv->tiendo}}" class="form-control">
+                            <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
+                        </td>
+                    </tr> 
                     <tr>
                         <th width="20%">Nội dung công việc:</th>
                         <td colspan="4">
@@ -122,39 +161,7 @@
                                 });
                             </script>
                         </td>
-                    </tr>
-                    <tr>
-                        <th>Trạng thái</th>
-                        <td>
-                            <select class="form-control" size="1" name="cbTrangThai">
-                                <option value="Đang làm">Đang làm</option>
-                                <option value="Sắp làm">Sắp làm</option>
-                                <option value="Hoàn thành">Hoàn thành</option>
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
-                        </td>
-                        <th width="13%">Độ ưu tiên:</th>
-                        <td colspan="2" >
-                            <select class="form-control" size="1" name="cbUuTien">
-                                <option value="Cao">Cao</option>
-                                <option value="Trung bình">Trung bình</option>
-                                <option value="Thấp">Thấp</option>
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Số tuần thực tế</th>
-                        <td>
-                            <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="{{$ndcv->sotuan_thucte}}" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
-                        </td>
-                        <th>Tiến độ (%):</th>
-                        <td colspan="2">
-                            <input type="text" name="txtTienDo" value="{{$ndcv->tiendo}}" class="form-control">
-                            <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
-                        </td>
-                    </tr> 
+                    </tr>                    
                     <tr>
                         <td colspan="5" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">

@@ -78,44 +78,52 @@
                     <th>Kết thúc</th>
                     <th>Số tuần</th>
                 </tr>
-                @foreach($dscvchinh as $stt => $cv)
+                @if(count($dscvchinh) == 0)
                     <tr>
-                        <td align="center">{{$stt+1}}</td>
-                        <td>
-                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
-                                {{$cv->macv}}
-                            </a>
-                            
-                        </td>
-                        <td>
-                            <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
-                                {{$cv->congviec}}
-                            </a>
-                        </td>
-                        <td>{{$cv->giaocho}}</td>
-                        <td align="center">{{$cv->tuan}}</td>
-                        <td align="center">{{$cv->trangthai}}</td>
-                        <td align="center">{{$cv->ngaybatdau_thucte}}</td>
-                        <td align="center">{{$cv->ngayketthuc_thucte}}</td>
-                        <td align="center">{{$cv->sotuan_thucte}}</td>
-                        <td align="center">{{$cv->phuthuoc_cv}}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td align='center'>
-                            <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
-                                <img src="{{asset('public/images/edit-icon.png')}}"/>
-                            </a>&nbsp &nbsp &nbsp
-                            <a href="phancv/xoacvchinh/{{$cv->macv}}">
-                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
-                            </a>
+                        <td colspan="13" align="center">
+                            <label style="color: #e74c3c;"> Chưa có công việc nào được phân công!</label> 
                         </td>
                     </tr>
-                @endforeach
+                @elseif(count($dscvchinh) > 0)
+                    @foreach($dscvchinh as $stt => $cv)
+                        <tr>
+                            <td align="center">{{$stt+1}}</td>
+                            <td>
+                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
+                                    {{$cv->macv}}
+                                </a>
+
+                            </td>
+                            <td>
+                                <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
+                                    {{$cv->congviec}}
+                                </a>
+                            </td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td align="center">{{$cv->tuan}}</td>
+                            <td align="center">{{$cv->trangthai}}</td>
+                            <td align="center">{{$cv->ngaybatdau_thucte}}</td>
+                            <td align="center">{{$cv->ngayketthuc_thucte}}</td>
+                            <td align="center">{{$cv->sotuan_thucte}}</td>
+                            <td align="center">{{$cv->phuthuoc_cv}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$cv->tiendo}}%</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td align='center'>
+                                <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
+                                    <img src="{{asset('public/images/edit-icon.png')}}"/>
+                                </a>&nbsp &nbsp &nbsp
+                                <a onclick="return confirm('Công việc **{{$cv->macv}}** sẽ bị xóa?');" href="phancv/xoacvchinh/{{$cv->macv}}">
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </table>
         </div>
     </div> <!-- /row -->

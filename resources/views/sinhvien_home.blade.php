@@ -28,6 +28,17 @@
                   dateFormat: "yy-mm-dd",
               });
             });
+            
+            $(function() {
+              $( "#txtNgayBatDauThucTe" ).datepicker({
+                  dateFormat: "yy-mm-dd",
+              });
+            });
+            $(function() {
+              $( "#txtNgayKTThucTe" ).datepicker({
+                  dateFormat: "yy-mm-dd",
+              });
+            });
         </script>
                 
         <script type="text/javascript">

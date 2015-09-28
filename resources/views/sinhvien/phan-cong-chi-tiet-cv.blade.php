@@ -51,38 +51,46 @@
                     <th>Kết thúc</th>
                     <th>Số tuần</th>
                 </tr>
-                @foreach($dscvphu as $stt => $cvphu)
+                @if(count($dscvphu) == 0)
                     <tr>
-                        <td align="center">{{$stt+1}}</td>
-                        <td align="center">{{$cvphu->macv}}</td>
-                        <td>
-                            <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cvphu->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cvphu->ngaybatdau_kehoach}}">
-                                {{$cvphu->congviec}}
-                            </a>                            
-                        </td>
-                        <td>{{$cvphu->giaocho}}</td>
-                        <td align="center">{{$cvphu->tuan}}</td>
-                        <td align="center">{{$cvphu->ngaybatdau_thucte}}</td>
-                        <td align="center">{{$cvphu->ngayketthuc_thucte}}</td>
-                        <td align="center">{{$cvphu->sotuan_thucte}}</td>
-                        <td>{{$cvphu->noidungthuchien}}</td>  
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cvphu->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cvphu->tiendo; ?>%">
-                                    <span style='color:brown;'>{{$cvphu->tiendo}}%</span>
-                                </div>
-                            </div> 
-                        </td>
-                        <td align='center'>
-                            <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
-                                <img src="{{asset('public/images/edit-icon.png')}}"/>
-                            </a>&nbsp
-                            <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
-                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
-                            </a>
+                        <td colspan="11" align="center">
+                            <label style="color: #e74c3c;"> Chưa có công việc nào được phân công!</label> 
                         </td>
                     </tr>
-                @endforeach
+                @elseif(count($dscvphu) > 0)
+                    @foreach($dscvphu as $stt => $cvphu)
+                        <tr>
+                            <td align="center">{{$stt+1}}</td>
+                            <td align="center">{{$cvphu->macv}}</td>
+                            <td>
+                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cvphu->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cvphu->ngaybatdau_kehoach}}">
+                                    {{$cvphu->congviec}}
+                                </a>                            
+                            </td>
+                            <td>{{$cvphu->giaocho}}</td>
+                            <td align="center">{{$cvphu->tuan}}</td>
+                            <td align="center">{{$cvphu->ngaybatdau_thucte}}</td>
+                            <td align="center">{{$cvphu->ngayketthuc_thucte}}</td>
+                            <td align="center">{{$cvphu->sotuan_thucte}}</td>
+                            <td>{{$cvphu->noidungthuchien}}</td>  
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cvphu->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cvphu->tiendo; ?>%">
+                                        <span style='color:brown;'>{{$cvphu->tiendo}}%</span>
+                                    </div>
+                                </div> 
+                            </td>
+                            <td align='center'>
+                                <a href="{{$cvchinh->macv}}/capnhatcvphu/{{$cvphu->macv}}">
+                                    <img src="{{asset('public/images/edit-icon.png')}}"/>
+                                </a>&nbsp
+                                <a onclick="return confirm('Công việc **{{$cvphu->macv}}** sẽ bị xóa?');" href="{{$cvchinh->macv}}/xoacvphu/{{$cvphu->macv}}">
+                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </table>     
         </div>
     </div> <!-- /row -->

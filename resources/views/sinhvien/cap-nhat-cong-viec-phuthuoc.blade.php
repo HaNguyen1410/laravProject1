@@ -14,6 +14,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 style="color: darkblue; font-weight: bold;">
+                    <a href="{{asset('sinhvien/phancv/phancongchitiet/'.$macvchinh)}}">Phân công việc phụ</a>  
+                    &Gt;
                     Cập nhật công việc phụ thuộc việc: <label>{{$macvchinh}}</label> 
                 </h3>
                 <form action="{{action('PhancvController@LuuCapNhatcvPhu')}}" method="post" >
@@ -59,19 +61,57 @@
                         <tr>
                             <th>Giao cho:</th>
                             <td>
-                                <select name='cbGiaoCho' class="form-control">
+                                <select name='cbGiaoCho' class="form-control">                                    
                                     @foreach($dstv as $tv)
-                                    <option value="{{$tv->hoten}}">{{$tv->hoten}}</option>
+                                        @if($cv->giaocho == $tv->hoten)
+                                            <option value="{{$cv->giaocho}}" selected="">{{$cv->giaocho}}</option>                                       
+                                        @elseif($cv->giaocho != $tv->hoten)
+                                            <option value="{{$tv->hoten}}">{{$tv->hoten}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                                 <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
                             </td>
-                            <th>Trong tuần:</th>
+                            <th>Số tuần thực tế</th>
                             <td>
-                                <input type="text" name="txtTuan" value="{{$cv->tuan}}" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
+                                <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$cv->sotuan_thucte}}" class="form-control"/>
+                                <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
                             </td>
                         </tr>
+                        <tr>
+                            <th>Trong tuần:</th>
+                            <td>
+                                <input type="text" name="txtTuan" value="{{$cv->tuan}}" placeholder="Nhập dạng: 1-4 nếu làm từ tuần 1 đến 4 hoặc 1" class="form-control"/>
+                                <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
+                            </td>
+                            <th>Tiến độ (%):</th>
+                            <td>
+                                <input type="text" name="txtTienDo" value="{{$cv->tiendo}}" class="form-control">
+                                <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trạng thái</th>
+                            <td>
+                                <select class="form-control" size="1" name="cbTrangThai">
+                                    <option value="{{$cv->trangthai}}" selected="">{{$cv->trangthai}}</option>                                        
+                                    <option value="Đang làm">Đang làm</option>
+                                    <option value="Sắp làm">Sắp làm</option>
+                                    <option value="Hoàn thành">Hoàn thành</option>
+                                </select>
+                                <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
+                            </td>  
+                            <th width="13%">Độ ưu tiên:</th>
+                            <td>
+                                <select class="form-control" size="1" name="cbUuTien">
+                                    <option value="{{$cv->uutien}}" selected="">{{$cv->uutien}}</option>
+                                    <option value="Cao">Cao</option>
+                                    <option value="Trung bình">Trung bình</option>
+                                    <option value="Thấp">Thấp</option>
+                                </select>
+                                <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
+                            </td>
+                        </tr> 
                         <tr>
                             <th width="20%">Nội dung công việc:</th>
                             <td colspan="3">
@@ -94,39 +134,7 @@
                                     });
                                 </script>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>Số giờ thực tế</th>
-                            <td>
-                                <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$cv->sotuan_thucte}}" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
-                            </td>
-                            <th>Tiến độ (%):</th>
-                            <td>
-                                <input type="text" name="txtTienDo" value="{{$cv->tiendo}}" class="form-control">
-                                <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>Trạng thái</th>
-                            <td>
-                                <select class="form-control" size="1" name="cbTrangThai">
-                                    <option value="Đang làm">Đang làm</option>
-                                    <option value="Sắp làm">Sắp làm</option>
-                                    <option value="Hoàn thành">Hoàn thành</option>
-                                </select>
-                                <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
-                            </td>  
-                            <th width="13%">Độ ưu tiên:</th>
-                            <td>
-                                <select class="form-control" size="1" name="cbUuTien">
-                                    <option value="Cao">Cao</option>
-                                    <option value="Trung bình">Trung bình</option>
-                                    <option value="Thấp">Thấp</option>
-                                </select>
-                                <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
-                            </td>
-                        </tr>                     
+                        </tr>                                            
                         <tr>
                             <td></td>
                             <td colspan="3" align="center">

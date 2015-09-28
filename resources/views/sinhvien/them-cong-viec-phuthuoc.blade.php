@@ -13,7 +13,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">Thêm việc phụ thuộc công việc</h3> 
+            <h3 style="color: darkblue; font-weight: bold;">
+                <a href="{{asset('sinhvien/phancv/phancongchitiet/'.$macvchinh)}}">Phân công việc phụ</a>  
+                    &Gt;
+                Thêm việc phụ thuộc công việc
+            </h3> 
             <form action="{{action('PhancvController@LuuThemcvPhu')}}" method="post">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" width="800px" cellpadding="15px" cellspacing="0px" id="bang1">
@@ -32,12 +36,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="10%">Ngày thực hiện:</th>
+                        <th>Ngày bắt đầu (kế hoạch):</th>
                         <td width="30%">
                            <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
                            <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
                         </td>
-                        <th width="10%">Ngày kết thúc:</th>
+                        <th>Ngày kết thúc (kế hoạch):</th>
                         <td width="30%">
                             <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
@@ -55,8 +59,40 @@
                         </td>
                         <th>Trong tuần:</th>
                         <td>
-                            <input type="text" name="txtTuan" value="" class="form-control"/>
+                            <input type="text" name="txtTuan" value="" placeholder="Nhập dạng: 1-4 nếu làm từ tuần 1 đến 4 hoặc 1" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Số tuần thực tế</th>
+                        <td>
+                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                        </td>
+                        <th>Tiến độ (%):</th>
+                        <td>
+                            <input type="text" id="txtTienDo" name="txtTienDo" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
+                        </td>
+                    </tr>
+                    <tr>                            
+                        <th>Trạng thái</th>
+                        <td>
+                            <select class="form-control" size="1" name="cbTrangThai">
+                                <option value="Đang làm">Đang làm</option>
+                                <option value="Sắp làm">Sắp làm</option>
+                                <option value="Hoàn thành">Hoàn thành</option>
+                            </select>
+                            <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
+                        </td>
+                        <th>Độ ưu tiên:</th>
+                        <td>
+                            <select class="form-control" size="1" name="cbUuTien">
+                                <option value="Cao">Cao</option>
+                                <option value="Trung bình">Trung bình</option>
+                                <option value="Thấp">Thấp</option>
+                            </select>
+                            <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -81,39 +117,7 @@
                                 });
                             </script>
                         </td>
-                    </tr>
-                    <tr>
-                        <th>Số tuần thực tế</th>
-                        <td>
-                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
-                        </td>
-                        <th>Tiến độ (%):</th>
-                        <td>
-                            <input type="text" id="txtTienDo" name="txtTienDo" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
-                        </td>
-                    </tr>
-                    <tr>                            
-                        <th>Trạng thái</th>
-                        <td>
-                            <select class="form-control" size="1" name="cbTrangThai">
-                                <option value="1">Đang làm</option>
-                                <option value="2">Sắp làm</option>
-                                <option value="3">Hoàn thành</option>
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
-                        </td>
-                        <th width="13%">Độ ưu tiên:</th>
-                        <td>
-                            <select class="form-control" size="1" name="cbUuTien">
-                                <option value="Cao">Cao</option>
-                                <option value="Trung bình">Trung bình</option>
-                                <option value="Thấp">Thấp</option>
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbUuTien')}}</p>
-                        </td>
-                    </tr>
+                    </tr>                    
                     <tr>
                         <td></td>
                         <td colspan="3" align="center">
