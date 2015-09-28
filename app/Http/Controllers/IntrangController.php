@@ -19,14 +19,6 @@ use App\Http\Controllers\Auth;
 
 class IntrangController extends Controller
 {
-/*======================== Quản trị In Danh sách sinh viên ==================================*/    
-    public function InDanhSachSV($macbqt,$mahp){
-        $view = \View::make('quantri.in-danh-sach-sinh-vien');
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
-       
-        return $pdf->stream("DanhSachSV.pdf");
-    }
 /*====================== Sinh viên In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
     public function InChiTietDeTaiSV($madt){ 
         $mssv = \Auth::user()->taikhoan;

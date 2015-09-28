@@ -69,19 +69,21 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
  /*
  * ######## Quản trị Sinh Viên ##################
  */
-    Route::get('sinhvien','QuantriController@DanhSachSV');
-    Route::group(['prefix'=>'sinhvien'],function(){
-    /*======= Trang thêm sinh viên mới==========*/
-        Route::get('themsv','QuantriController@ThemSV');
-        Route::post('luuthemsv','QuantriController@LuuThemSV');
-    /*======= Cập nhật thông tin sinh viên ==========*/    
-        Route::get('capnhatsv/{masv}','QuantriController@CapNhatSV');
-        Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
-    /*======= Xóa thông tin sinh viên ==========*/
-        Route::get('xoasv/{masv}','QuantriController@XoaSV');
-    /*=========== In danh sách sinh viên =============*/
-        Route::get('indanhsachsinhvien/{macbqt}/{mahp}','IntrangController@InDanhSachSV');
-    });
+    Route::get('sinhvien/{mahp?}','QuantriController@DanhSachSV');
+    route::post('sinhvien/laynhomhp','QuantriController@LayNhomHP');
+    Route::group(['prefix'=>'sinhvien/{mahp?}'],function(){
+        /*======= Trang thêm sinh viên mới==========*/
+            Route::get('themsv','QuantriController@ThemSV');
+            Route::post('luuthemsv','QuantriController@LuuThemSV');
+        /*======= Cập nhật thông tin sinh viên ==========*/    
+            Route::get('capnhatsv/{masv}','QuantriController@CapNhatSV');
+            Route::post('luucapnhatsv','QuantriController@LuuCapNhatSV');
+        /*======= Xóa thông tin sinh viên ==========*/
+            Route::get('xoasv/{masv}','QuantriController@XoaSV');
+        /*=========== In danh sách sinh viên =============*/
+            Route::get('indanhsachsinhvien/{macbqt}','QuantriController@InDanhSachSV');
+        });
+        
 });
 
 /**********************

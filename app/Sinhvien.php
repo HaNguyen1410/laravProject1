@@ -26,6 +26,7 @@ class Sinhvien extends Model
         'kinhnghiem',
         'matkhau',
         'ngaytao',
-        'khoa'
+        'khoa',
+        'nguoitao'
     ];
 }

@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-8">
-            <h3 style="color: darkblue; font-weight: bold;">THÊM NGƯỜI DÙNG</h3>      
+            <h3 style="color: darkblue; font-weight: bold;">THÊM GIẢNG VIÊN</h3>      
             <form action="{{action('QuantriController@LuuThemGV')}}" method="post" name="frmThemGV" class="form-horizontal">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center'>

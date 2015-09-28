@@ -13,29 +13,35 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 style="color: darkblue; font-weight: bold;">DANH SÁCH SINH VIÊN</h4>
-            <div style="display:block; float: left;">
-                <form action="" method="post">
-                    <table class="table table-bordered" style="width: 900px" align="left">                    
+            <div>
+                <form action="{{action('QuantriController@LayNhomHP')}}" method="post">
+                    <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+                    <table class="table table-bordered" style="width: 1000px" align="center">                    
                         <tr>
-                            <th align="right">Năm học:</th>
-                            <th>
-                                <select class="form-control" name='cbNamHoc'>
+                            <th align="right" width="10%">Năm học:</th>
+                            <th width="16%">
+<!--                                <select class="form-control" name='cbNamHoc'>
                                     @foreach($namhoc as $nk)
                                     <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
                                     @endforeach
-                                </select>
+                                </select>-->
+                                <input type="text" name="txtNamHoc" value="{{$namht}}" style="text-align: center" class="form-control" readonly=""/>
                             </th>
-                            <th align="right">Học kỳ:</th>
-                            <th>
-                                <select class="form-control" name='cbHocKy'>
+                            <th align="right" width="8%">Học kỳ:</th>
+                            <th width="10%">
+<!--                                <select class="form-control" name='cbHocKy'>
                                     @foreach($hocky as $nk)
-                                    <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                                        @if($nk->hocky == 3)
+                                            <option value="{{$nk->hocky}}">Hè</option>                                         
+                                        @else
+                                            <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>
+                                        @endif  
                                     @endforeach
-                                </select>
+                                </select>-->
+                                <input type="text" name="txtHocKy" value="{{$hkht}}" style="text-align: center" class="form-control" readonly=""/>
                             </th>
-                            <th align="right">Nhóm học phần:</th>
-                            <th>
+                            <th align="right" width="10%">Nhóm học phần:</th>
+                            <th width="12%">
                                 <select class="form-control" name='cbNhomHP'>
                                         <option value="0">Tất cả</option>
                                     @foreach($dshp as $hp)
@@ -43,8 +49,13 @@
                                     @endforeach
                                 </select>
                             </th>
-                            <th>                            
-                                <a href="sinhvien/indanhsachsinhvien/2134" target="_blank">
+                            <th width="15%">
+                                <button type="submit" class="btn btn-success" style="width:100%">
+                                    Liệt kê
+                                </button>
+                            </th>
+                            <th width="15%">                            
+                                <a href="{{asset('quantri/sinhvien/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
                                     <button type="button" name="" class="btn btn-success">
                                         <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                                     </button>
@@ -53,14 +64,18 @@
                         </tr>
                     </table> 
                 </form> 
-            </div>    
-            <div align="right" style="margin-top: 20px;">
-                <a href="sinhvien/themsv">
-                    <button type="button" class="btn btn-primary" style="width:12%;">
+            </div>
+            <h4 style="color: darkblue; font-weight: bold; display:block; float: left;">
+                DANH SÁCH SINH VIÊN
+            </h4>  
+            <div align="right">
+                <a href="{{asset('quantri/sinhvien/themsv')}}">
+                    <button type="submit" class="btn btn-primary" style="width:12%;">
                         <img src="{{asset('public/images/add-icon.png')}}"> Thêm
                    </button>
                 </a>
-            </div>        
+            </div> 
+                  
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
@@ -70,62 +85,74 @@
                     <th width="15%">Email</th>
                     <th width="4%">Nhóm HP</th>
                     <th width="8%">Mã nhóm thực hiện đề tài</th>
-                    <th>Người tạo</th> 
+                    <!--<th>Người tạo</th>--> 
                     <th>Ngày tạo</th>
                     <th>Nhóm trưởng</th>
                     <th>Khóa</th>
                     <th width=6%>Chức năng</th>
                 </tr>
-                @foreach($dssv as $stt => $rw)
-                    <tr>
-                        <td align='center'>
-                            <?php 
-                                if(isset($_GET['page'])){
-                                    $p = 10*($_GET['page']-1);
-                                    echo $stt+1+$p;
-                                }else
-                                    echo $stt+1;
-                            ?>
-                        </td>
-                        <td align='center'>
-                            <a href="" style="color: seagreen; font-weight: bold;" data-toggle="tooltip" data-placement="top" title="Ngày sinh: {{$rw->ngaysinh}}">
-                                {{$rw->mssv}}                            
-                            </a>                            
-                        </td>
-                        <td>
-                            <a href="" data-toggle="tooltip" data-placement="top" title="Khóa Học: K{{$rw->khoahoc}}">
-                                {{$rw->hoten}}                                
-                            </a>
-                        </td>
-                        <td>{{$rw->email}}</td>
-                        <td align='center'>{{$rw->tennhomhp}}</td>
-                        <td align='center'>{{$rw->manhomthuchien}}</td>
-                        <td align='center'>...</td>
-                        <td align='center' width="8%">{{$rw->ngaytao}}</td>
-                        <td width="5%" align='center'>
-                            @if($rw->nhomtruong == 1)
-                                <img src="{{asset('public/images/check.png')}}"/>
-                            @else
-                                <img src="{{asset('public/images/uncheck.png')}}"/>
-                            @endif
-                        </td>
-                        <td align='center' width="5%">
-                            @if($rw->khoa == 1)
-                                <img src="{{asset('public/images/Lock.png')}}"/>
-                            @elseif($rw->khoa == 0)
-                                <img src="{{asset('public/images/Unlock.png')}}"/>
-                            @endif
-                        </td>
-                        <td align='center'>
-                            <a href="sinhvien/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
-                            <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
-                                <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
-                            </a>
-                        </td>
-                    </tr>   
-                @endforeach
+                    @if(count($dssv) == 0)
+                        <tr>
+                            <td colspan="10" align="center">
+                                <label style="color: #e74c3c;"> Chưa có sinh viên nào!</label> 
+                            </td>
+                        </tr>
+                    @elseif (count($dssv) > 0)
+                        @foreach($dssv as $stt => $rw)
+                            <tr>
+                                <td align='center'>
+                                    <?php 
+                                        if(isset($_GET['page'])){
+                                            $p = 10*($_GET['page']-1);
+                                            echo $stt+1+$p;
+                                        }else
+                                            echo $stt+1;
+                                    ?>
+                                </td>
+                                <td align='center'>
+                                    <a href="" style="color: seagreen; font-weight: bold;" data-toggle="tooltip" data-placement="top" title="Ngày sinh: {{$rw->ngaysinh}}">
+                                        {{$rw->mssv}}                            
+                                    </a>                            
+                                </td>
+                                <td>
+                                    <a href="" data-toggle="tooltip" data-placement="top" title="Khóa Học: K{{$rw->khoahoc}}">
+                                        {{$rw->hoten}}                                
+                                    </a>
+                                </td>
+                                <td>{{$rw->email}}</td>
+                                <td align='center'>{{$rw->tennhomhp}}</td>
+                                <td align='center'>{{$rw->manhomthuchien}}</td>
+                                <!--<td align='center'>...</td>-->
+                                <td align='center' width="8%">{{$rw->ngaytao}}</td>
+                                <td width="5%" align='center'>
+                                    @if($rw->nhomtruong == 1)
+                                        <img src="{{asset('public/images/check.png')}}"/>
+                                    @else
+                                        <img src="{{asset('public/images/uncheck.png')}}"/>
+                                    @endif
+                                </td>
+                                <td align='center' width="5%">
+                                    @if($rw->khoa == 1)
+                                        <img src="{{asset('public/images/Lock.png')}}"/>
+                                    @elseif($rw->khoa == 0)
+                                        <img src="{{asset('public/images/Unlock.png')}}"/>
+                                    @endif
+                                </td>
+                                <td align='center'>
+                                    @if($mahp == null)
+                                        <a href="sinhvien/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                                    @elseif($mahp != null)
+                                        <a href="../sinhvien/{{$mahp}}/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                                    @endif
+                                    <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
+                                        <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
+                                    </a>
+                                </td>
+                            </tr>   
+                        @endforeach
+                    @endif
                 <tr>
-                    <td colspan="11" align="center">{!! $dssv->setPath('sinhvien')->render() !!}</td>
+                    <td colspan="11" align="center">{!! $dssv->setPath('../sinhvien/'.$mahp)->render() !!}</td>
                 </tr>      
            </table>
 

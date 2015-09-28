@@ -13,36 +13,41 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h4 style="display:block; float: left; color: darkblue; font-weight: bold;">DANH SÁCH GIẢNG VIÊN</h4>
             <div class="col-md-12" style="display:block; float:left;">
-                <table class="table table-bordered" style="width: 800px" align="center">
+                <table class="table table-bordered" style="width: 600px" align="center">
                     <tr>
                         <th align="right">Năm học:</th>
-                        <th>
-                            <select class="form-control" name='cbNamHoc'>
+                        <th width="25%">
+<!--                            <select class="form-control" name='cbNamHoc'>
                                 @foreach($namhoc as $nk)
                                 <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
                                 @endforeach
-                            </select>
+                            </select>-->
+                            <input type="text" name="txtNamHoc" value="{{$namht}}" style="text-align: center" class="form-control" readonly=""/>
                         </th>
                         <th align="right">Học kỳ:</th>
-                        <th>
-                            <select class="form-control" name='cbHocKy'>
+                        <th width="18%">
+<!--                            <select class="form-control" name='cbHocKy'>
                                 @foreach($hocky as $nk)
                                     <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
                                 @endforeach
-                            </select>
-                        </th>
-                        <th>
-                            <a href="giangvien/themgv">
-                                <button type="button" class="btn btn-primary" style="width:60%">
-                                    <img src="{{asset('public/images/add-icon.png')}}"> Thêm
-                               </button>
-                            </a>
+                            </select>-->
+                            <input type="text" name="txtHocKy" value="{{$hkht}}" style="text-align: center" class="form-control" readonly=""/>
                         </th>
                     </tr>
                 </table>            
             </div>
+            <h4 style="color: darkblue; font-weight: bold; display:block; float: left; margin-left: 20px;">
+                DANH SÁCH GIẢNG VIÊN
+            </h4>  
+            <div align="right">
+                <a href="giangvien/themgv">
+                    <button type="button" class="btn btn-primary" style="width:12%; margin-right: 20px;">
+                        <img src="{{asset('public/images/add-icon.png')}}"> Thêm
+                   </button>
+                </a>
+            </div>
+                            
             <div class="col-md-12">
                 <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
                 <table class="table table-bordered table-striped" >
@@ -51,7 +56,7 @@
                         <th>Mã cán bộ</th>
                         <th>Họ và tên</th>
                         <th>Email</th>
-                        <th>Người tạo</th> 
+                        <!--<th>Người tạo</th>--> 
                         <th>Ngày tạo</th>
                         <th>Khóa</th>
                         <th width=8%>Chức năng</th>
@@ -70,7 +75,7 @@
                             <td align='center'>{{$rw->macb}}</td>
                             <td>{{$rw->hoten}}</td>
                             <td>{{$rw->email}}</td>
-                            <td>...</td>
+                            <!--<td>...</td>-->
                             <td align='center'>{{$rw->ngaytao}}</td>
                             <td align='center'>
                                 @if($rw->khoa == 1)

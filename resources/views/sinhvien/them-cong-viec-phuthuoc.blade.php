@@ -45,13 +45,18 @@
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td colspan="3">
+                        <td>
                             <select name='cbGiaoCho' class="form-control">
                                 @foreach($dstv as $tv)
                                 <option value="{{$tv->hoten}}">{{$tv->hoten}}</option>
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
+                        </td>
+                        <th>Trong tuần:</th>
+                        <td>
+                            <input type="text" name="txtTuan" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -78,9 +83,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Số giờ thực tế</th>
+                        <th>Số tuần thực tế</th>
                         <td>
-                            <input type="text" id="txtGioThucTe" name="txtGioThucTe" value="" class="form-control"/>
+                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>

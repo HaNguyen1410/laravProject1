@@ -26,6 +26,7 @@ class Giangvien extends Model implements AuthenticatableContract, CanResetPasswo
         'matkhau',
         'ngaytao',
         'khoa',
-        'quantri'
+        'quantri',
+        'nguoitao'
     ];
 }

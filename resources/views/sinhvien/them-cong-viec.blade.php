@@ -25,7 +25,7 @@
                             <input style="width:40%;text-align: center;" type="text" name="txtMaCV" value="{{$ma}}" class="form-control" readonly=""/>
                         </td>
                         <th width="10%">Tên công việc:</th>
-                        <td width="20%">
+                        <td colspan="2" width="20%">
                             <input type="text" name="txtTenCV" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
                         </td>
@@ -37,21 +37,27 @@
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
                         </td>
                         <th width="10%">Ngày kết thúc:</th>
-                        <td width="30%">
+                        <td colspan="2" width="30%">
                             <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td>
-                            <select name='cbGiaoCho' class="form-control">
-                                <option value="Cả nhóm">Cả nhóm</option>
-                                @foreach($dstv as $tv)
-                                <option value="{{$tv->hoten}}">{{$tv->hoten}}</option>
-                                @endforeach
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
+                        <td colspan="2">
+                            @foreach($dstv as $tv)
+                                <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
+                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$tv->hoten}}">
+                                           {{$tv->mssv}}
+                                     </a>
+                                       : <input type="checkbox" name="chkGiaoCho[]" value="{{$tv->hoten}}"/> 
+                                </div>   
+                            @endforeach
+                                <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
+                                    <a>Cả nhóm</a>
+                                       : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
+                                </div>
+                            <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
                         </td>
                         <th>Trong tuần:</th>
                         <td>
@@ -61,7 +67,7 @@
                     </tr>
                     <tr>
                         <th width="20%">Nội dung công việc:</th>
-                        <td colspan="3">
+                        <td colspan="4">
                             <textarea name="txtNoiDungViec" rows="2" cols="2" class="ckeditor"></textarea>
                             <p style='color:red;'>{{$errors->first('txtNoiDungViec')}}</p>
                             <script language="javascript">
@@ -89,7 +95,7 @@
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
-                        <td>
+                        <td colspan="2">
                             <input type="text" id="txtTienDo" name="txtTienDo" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
                         </td>
@@ -105,7 +111,7 @@
                             <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
                         </td>
                          <th width="13%">Độ ưu tiên:</th>
-                        <td>
+                         <td colspan="2">
                             <select class="form-control" size="1" name="cbUuTien">
                                 <option value="Cao">Cao</option>
                                 <option value="Trung bình">Trung bình</option>
@@ -116,7 +122,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td colspan="3" align="center">
+                        <td colspan="4" align="center">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm công việc
                             </button>&nbsp;&nbsp;

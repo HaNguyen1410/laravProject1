@@ -123,7 +123,7 @@ class PhancvController extends Controller
                 'txtTenCV'          => 'required',
                 'txtNgayBatDauKH'   => 'required|date',
                 'txtNgayKetThucKH'  => 'required|date',
-                'cbGiaoCho'         => 'required',
+                'chkGiaoCho'        => 'required',
                 'txtNoiDungViec'    => 'required',
                 'txtGioThucTe'      => 'required|numeric',
                 'txtTienDo'         => 'required|numeric',
@@ -135,10 +135,12 @@ class PhancvController extends Controller
              return redirect()->back()->withErrors($v->errors());
          }
          else{
+             $masv_checked = Input::get('chkGiaoCho'); //Trả về 1 mảng mã số sv
+             $chuoima = implode(', ', $masv_checked);
              $data1 = array(
                     'macv'                 => $_POST['txtMaCV'],
                     'congviec'             => $_POST['txtTenCV'],
-                    'giaocho'              => $_POST['cbGiaoCho'],
+                    'giaocho'              => $chuoima,
                     'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     //'ngaybatdau_thucte',
@@ -153,7 +155,8 @@ class PhancvController extends Controller
              );
              $data2 = array(
                  'manhomthuchien' => $_POST['txtMaNhomNL'],
-                 'macv'           => $_POST['txtMaCV']
+                 'macv'           => $_POST['txtMaCV'],
+                 'tuan'           => $_POST['txtTuan']
              );
              $ch1 = DB::table('cong_viec')->insert($data1);
              $ch2 = DB::table('thuc_hien')->insert($data2);
@@ -170,7 +173,9 @@ class PhancvController extends Controller
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->where('chn.manhomthuchien',$manth)
                 ->get();
-         $ndcv = DB::table('cong_viec')->where('macv',$macv)->first();
+         $ndcv = DB::table('cong_viec as cv')
+                 ->join('thuc_hien as th','cv.macv','=','th.macv')
+                 ->where('cv.macv',$macv)->first();
          return view('sinhvien.cap-nhat-cong-viec')->with('dstv',$dstv)->with('ndcv',$ndcv);
      }
      public function LuuCapNhatcvChinh(Request $req){
@@ -182,7 +187,7 @@ class PhancvController extends Controller
                     'txtNgayKetThucKH'      => 'required|date',
                     'txtNgayBatDauThucTe'   => 'required|date',
                     'txtNgayKTThucTe'       => 'required|date',                     
-                    'cbGiaoCho'             => 'required',
+                    'chkGiaoCho'            => 'required',
                     'txtNoiDungViec'        => 'required',
                     'txtGioThucTe'          => 'required|numeric',
                     'txtTienDo'             => 'required|numeric',
@@ -194,10 +199,12 @@ class PhancvController extends Controller
              return redirect()->back()->withErrors($v->errors());
          }
          else{
+             $masv_checked = Input::get('chkGiaoCho'); //Trả về 1 mảng mã số sv
+             $chuoima = implode(', ', $masv_checked);
              $data = array(
                     'macv'                 => $_POST['txtMaCV'],
                     'congviec'             => $_POST['txtTenCV'],
-                    'giaocho'              => $_POST['cbGiaoCho'],
+                    'giaocho'              => $chuoima,
                     'ngaybatdau_kehoach'   => $_POST['txtNgayBatDauKH'],
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
@@ -211,9 +218,12 @@ class PhancvController extends Controller
                     'ngaytao'              => Carbon::now()
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
-             if($ch >0){
-                 return redirect('sinhvien/phancv');
-             }
+             $ch2 = DB::table('thuc_hien')->where('macv',$post['txtMaCV'])->update(
+                        [
+                            'tuan' => $_POST['txtTuan']
+                        ]
+                     );
+            return redirect('sinhvien/phancv');
          }
      }
 /*========= Xóa công việc chính ==============*/  
@@ -285,7 +295,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'   => $_POST['txtNgayKetThucKH'],
                     //'ngaybatdau_thucte',
                     //'ngayketthuc_thucte',
-                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'         => $_POST['txtTuanThucTe'],
                     'phuthuoc_cv'          => $_POST['txtMacvChinh'],
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
@@ -295,19 +305,22 @@ class PhancvController extends Controller
              );
              $data2 = array(
                  'manhomthuchien' => $_POST['txtMaNhomNL'],
-                 'macv'           => $_POST['txtMaCV']
+                 'macv'           => $_POST['txtMaCV'],
+                 'tuan'           => $_POST['txtTuan']
              );
              $ch1 = DB::table('cong_viec')->insert($data1);
              $ch2 = DB::table('thuc_hien')->insert($data2);
-             if($ch1 >0 && $ch2 > 0){
+//             if($ch1 >0 && $ch2 > 0){
                  return redirect('sinhvien/phancongchitiet/'.$post['txtMacvChinh']);
-             }
+//             }
          }             
      }
 /*========= Cập nhật công việc chi tiết (cv phụ) ==============*/ 
      public function CapNhatcvPhu($macv,$macvphu){
          $mssv = \Auth::user()->taikhoan;
-         $cv = DB::table('cong_viec')->where('macv',$macvphu)->first();
+         $cv = DB::table('cong_viec as cv')
+                 ->join('thuc_hien as th','cv.macv','=','th.macv')
+                 ->where('cv.macv',$macvphu)->first();
          $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
          $dstv = DB::table('sinh_vien as sv')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
@@ -327,7 +340,7 @@ class PhancvController extends Controller
                     'txtNgayKTThucTe'       => 'required|date',                     
                     'cbGiaoCho'             => 'required',
                     'txtNoiDungViec'        => 'required',
-                    'txtGioThucTe'          => 'required|numeric',
+                    'txtTuanThucTe'         => 'required|numeric',
                     'txtTienDo'             => 'required|numeric',
                     'cbTrangThai'           => 'required',
                     'cbUuTien'              => 'required'
@@ -345,7 +358,7 @@ class PhancvController extends Controller
                     'ngayketthuc_kehoach'  => $_POST['txtNgayKetThucKH'],
                     'ngaybatdau_thucte'    => $_POST['txtNgayBatDauThucTe'],
                     'ngayketthuc_thucte'   => $_POST['txtNgayKTThucTe'],
-                    'sotuan_thucte'         => $_POST['txtGioThucTe'],
+                    'sotuan_thucte'        => $_POST['txtTuanThucTe'],
                     'phuthuoc_cv'          => $_POST['txtMacvChinh'],
                     'uutien'               => $_POST['cbUuTien'],
                     'trangthai'            => $_POST['cbTrangThai'],
@@ -354,6 +367,7 @@ class PhancvController extends Controller
                     'ngaytao'              => Carbon::now(),
              );
              $ch = DB::table('cong_viec')->where('macv',$post['txtMaCV'])->update($data);
+             
              if($ch >0){
                  return redirect('sinhvien/phancongchitiet/'.$post['txtMacvChinh']);
              }

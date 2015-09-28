@@ -42,7 +42,7 @@
                             <input style="width:30%;" type="text" name="txtMaCV" value="{{$ndcv->macv}}" class="form-control" readonly="">
                         </td>
                         <th width="10%">Tên công việc:</th>
-                        <td width="20%">
+                        <td colspan="2" width="20%">
                             <input type="text" name="txtTenCV" value="{{$ndcv->congviec}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTenCV')}}</p>
                         </td>
@@ -54,7 +54,7 @@
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
                         </td>
                         <th width="18%">Ngày kết thúc (kế hoạch):</th>
-                        <td width="30%">
+                        <td colspan="2" width="30%">
                             <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="{{$ndcv->ngayketthuc_kehoach}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
@@ -66,31 +66,43 @@
                             <p style='color:red;'>{{$errors->first('txtNgayBatDauThucTe')}}</p>
                         </td>
                         <th width="18%">Ngày kết thúc (thực tế):</th>
-                        <td width="30%">
+                        <td colspan="2" width="30%">
                             <input type="text" id="txtNgayKTThucTe" name="txtNgayKTThucTe" value="{{$ndcv->ngaybatdau_thucte}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKTThucTe')}}</p>
                         </td>
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td>                                    
-                            <select name='cbGiaoCho' class="form-control">
-                                <option value="Cả nhóm">Cả nhóm</option>
-                                @foreach($dstv as $tv)
-                                <option value="{{$tv->mssv}}">{{$tv->hoten}}</option>
-                                @endforeach
-                            </select>
-                            <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
+                        <td colspan="2">
+                            @foreach($dstv as $tv)
+                                <div style="padding: 2px 2px 2px 20px; display: block; float: left;">
+                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$tv->hoten}}">
+                                           {{$tv->mssv}}
+                                     </a>
+                                       : <input type="checkbox" name="chkGiaoCho[]" value="{{$tv->hoten}}"/> 
+                                </div>   
+                            @endforeach
+                                <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
+                                    <a>Cả nhóm</a>
+                                       : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
+                                </div>
+                            <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
                         </td>
                         <th>Trong tuần:</th>
                         <td>
-                            <input type="text" name="txtTuan" value="" class="form-control"/>
+                            <input type="text" name="txtTuan" value="{{$ndcv->tuan}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                     </tr>
                     <tr>
+                        <th>Được giao cho:</th>
+                        <td colspan="4">
+                            <label style="color: #006400; font-weight: bold;">{{$ndcv->giaocho}}</label>
+                        </td>
+                    </tr>
+                    <tr>
                         <th width="20%">Nội dung công việc:</th>
-                        <td colspan="3">
+                        <td colspan="4">
                             <textarea name="txtNoiDungViec" rows="2" cols="2" class="ckeditor">{{$ndcv->noidungthuchien}}</textarea>
                             <p style='color:red;'>{{$errors->first('txtNoiDungViec')}}</p>
                             <script language="javascript">
@@ -122,7 +134,7 @@
                             <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>
                         </td>
                         <th width="13%">Độ ưu tiên:</th>
-                        <td>
+                        <td colspan="2" >
                             <select class="form-control" size="1" name="cbUuTien">
                                 <option value="Cao">Cao</option>
                                 <option value="Trung bình">Trung bình</option>
@@ -138,14 +150,13 @@
                             <p style='color:red;'>{{$errors->first('txtGioThucTe')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
-                        <td>
+                        <td colspan="2">
                             <input type="text" name="txtTienDo" value="{{$ndcv->tiendo}}" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
                         </td>
                     </tr> 
                     <tr>
-                        <td></td>
-                        <td colspan="3" align="center">
+                        <td colspan="5" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;

@@ -91,7 +91,7 @@ class ChianhomController extends Controller
                 ->get();      
         //Lấy tên đề tài của các nhóm trong hoc kỳ niên khóa của cán bộ đang dạy
         $detainhom = DB::table('de_tai as dt')->distinct()->orderBy('chn.manhomthuchien','asc')
-                ->select('dt.tendt','dt.taptindinhkem','chn.manhomthuchien')
+                ->select('dt.tendt','dt.taptindinhkem','chn.manhomthuchien','hp.tennhomhp')
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
@@ -113,7 +113,7 @@ class ChianhomController extends Controller
         return view('giangvien.chia-nhom-nien-luan')->with('dstensv',$dstensv)->with('dsmahp',$dsmahp)
             ->with('dsdetai',$dsdetai)->with('dsNhom',$dsNhom)->with('detainhom',$detainhom)
                 ->with('namcb',$namcb)->with('hkcb',$hkcb)->with('macb',$macb)
-            ->with('manth',$manth);           
+            ->with('manth',$manth)->with('mahp',$mahp);           
     }
 /*==================== Lưu chia nhóm thành viên ======================*/
     public function LuuChiaNhomNL(Request $req){
@@ -126,7 +126,7 @@ class ChianhomController extends Controller
                     'txtNgayKetThucKH' =>'required|date',
                     'txtSoTuanKH'      =>'required|numeric', 
                     'chkThanhVien'     =>'required',
-                    'rdNhomTruong'     =>'sometimes|required'
+//                  'rdNhomTruong'     =>'sometimes|required'
                 ]
         );
         if($v->fails()){
@@ -135,41 +135,38 @@ class ChianhomController extends Controller
         else
         {
             $masv_checked = Input::get('chkThanhVien'); //trả về 1 mảng mssv 
-                // has -> true nếu giá trị hiện tại có giá trị và không rỗng
+            return var_dump($masv_checked);
+                // has -> true nếu giá trị hiện tại có giá trị và không rỗng          
+//           return $masv_checked.$nhomtruong;                
+//           return count($masv_checked); 
             
             /*******Xem lại khi check một lần không reset trình duyệt thì nó lấy 2 check -> Input::has*/
-            //$nhomtruong = Input::has('rdNhomTruong') == TRUE ? 0 : 1; 
+//            $nhomtruong = $req->has('rdNhomTruong') == FALSE ? 1 : 0; 
+             $nhomtruong = isset($_POST['rdNhomTruong']) ? 1 : 0; 
             
-            $nt = Input::get('rdNhomTruong'); //Lấy mảng các radio.
+            $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
+                            ->update([                        
+                                    'manhomthuchien'=>$manth,
+                                    'nhomtruong'=>$nhomtruong
+                               ]);            
             
-            for($i = 0; $i < $nt; $i++){                
-                $nhomtruong[$i] = isset($nt[$i]) ? 1 : 0;    
-                return $nhomtruong[$i];
-//                $ch = DB::table('chia_nhom')->whereIn('mssv',$masv_checked)
-//                                ->update([                        
-//                                        'manhomthuchien'=>$manth,
-//                                        'nhomtruong'=>$nhomtruong[$i]
-//                                   ]);
-            }
-//              return $masv_checked.$nhomtruong;                
-//              return count($masv_checked); 
-//            $ch2 = DB::table('ra_de_tai')->insert(
-//                    [
-//                        'madt'           => $_POST['cbDeTai'],
-//                        'manhomthuchien' => $manth
-//                    ]
-//                );
-//            $ch3 = DB::table('nhom_thuc_hien')->insert(
-//                        [                            
-//                            'manhomthuchien'      => $manth,
-//                            'ngaybatdau_kehoach'  => $_POST['txtNgayBatDauKH'],
-//                            'ngayketthuc_kehoach' => $_POST['txtNgayKetThucKH'],
-//                            'sotuan_kehoach'      => $_POST['txtSoTuanKH'],
-//                            'ngaytao'             => Carbon::now()
-//                        ]
-//                    );
-//               
-//             return redirect('giangvien/chianhom');            
+            $ch2 = DB::table('ra_de_tai')->insert(
+                    [
+                        'madt'           => $_POST['cbDeTai'],
+                        'manhomthuchien' => $manth
+                    ]
+                );
+            $ch3 = DB::table('nhom_thuc_hien')->insert(
+                        [                            
+                            'manhomthuchien'      => $manth,
+                            'ngaybatdau_kehoach'  => $_POST['txtNgayBatDauKH'],
+                            'ngayketthuc_kehoach' => $_POST['txtNgayKetThucKH'],
+                            'sotuan_kehoach'      => $_POST['txtSoTuanKH'],
+                            'ngaytao'             => Carbon::now()
+                        ]
+                    );
+               
+             return redirect('giangvien/chianhom');            
         }
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/
@@ -199,7 +196,7 @@ class ChianhomController extends Controller
         $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
         \Session::flash('ThongBao','Xóa --'.$tensv.'-- thành công!');
         
-        return redirect('giangvien/chianhom/'.$macb);         
+        return redirect('giangvien/chianhom');         
     }
 
     

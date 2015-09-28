@@ -115,9 +115,9 @@
                                            {{$sv->mssv}}
                                        </a>
                                        : <input type="checkbox" name="chkThanhVien[]" value="{{$sv->mssv}}"/>&nbsp&nbsp&nbsp
-                                       Nhóm trưởng: <input type="radio" name="rdNhomTruong[]" value=""/><br>   
-                                </div>                                                                
-                             @endforeach                                
+                                       Nhóm trưởng: <input type="radio" name="rdNhomTruong"/><br>
+                                </div> 
+                            @endforeach                                
                         </td>
                     </tr>
                     <tr>
@@ -136,22 +136,28 @@
             </form>            
         </div>   
         <div class="col-md-12">
-            <h4 style="color: darkblue; font-weight: bold; text-align: center;">Danh sách đề tài của mỗi nhóm</h4>
+            <h4 style="color: darkblue; font-weight: bold; text-align: center;">
+                Danh sách đề tài của mỗi nhóm trong các nhóm Học Phần
+            </h4>
             <table class="table table-bordered" style="max-width: 900px;" align='center' id="bang2">
                 <tr>
                     <th width="4%">STT</th>
                     <th width="8%">Mã nhóm</th>
+                    <th width="6%">Mã nhóm HP</th>
                     <th>Tên đề tài</th>
                 </tr>
                 @foreach($detainhom as $stt => $dt)
                     <tr>
                         <td>{{$stt+1}}</td>
                         <td>{{$dt->manhomthuchien}}</td>
-                            <td>{{$dt->tendt}}</td>
+                        <td align='center'>{{$dt->tennhomhp}}</td>
+                        <td>{{$dt->tendt}}</td>
                     </tr>                        
                 @endforeach
             </table>           
-             <h4 style="color: darkblue; font-weight: bold; text-align: center;">Danh sách các nhóm đã chia</h4>
+             <h4 style="color: darkblue; font-weight: bold; text-align: center;">
+                 Danh sách các nhóm đã chia của nhóm HP: {{$tenhp = DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp')}}
+             </h4>
              <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered" style="max-width:900px" align='center' id="bang2">
                 <tr>
@@ -172,9 +178,9 @@
                         <td width="25%">{{$svnhom->hoten}}</td>
                         <td align="center">
                             @if($svnhom->nhomtruong == 0)                            
-                                <a href=""><input type="image" src="{{asset('public/images/uncheck.png')}}" /></a>
+                                <input type="image" src="{{asset('public/images/uncheck.png')}}" />
                             @else
-                                <a href=""><input type="image" src="{{asset('public/images/check.png')}}"/></a>
+                                <input type="image" src="{{asset('public/images/check.png')}}"/>
                             @endif
                         </td>
                         <td align="center" >
