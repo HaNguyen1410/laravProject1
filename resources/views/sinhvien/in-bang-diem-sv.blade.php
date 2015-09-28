@@ -55,6 +55,9 @@ and open the template in the editor.
     <body>
         <table style="width:100%">
             <tr>
+                <td width="10%" align="right">
+                    <img src="http://localhost/laravProject1/public/images/logo-ctu.jpg" width="70px" height="70px"/>
+                </td>
                 <td>
                     <div>
                         <label>Bộ Giáo Dục Và Đào Tạo</label><br>
@@ -126,7 +129,7 @@ and open the template in the editor.
                         @endforeach
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                            <td align="center" style="color: #FF0000; font-weight: bold"><?php echo round($tong->tongdiem,2);?></td>
                                 @if($tong->tongdiem == null)
                                     <td></td>
                                 @elseif($tong->tongdiem != null)

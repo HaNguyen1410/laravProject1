@@ -52,29 +52,56 @@
     ?>
 <div class="container">
     <div class="row">
-    <div class="col-md-12">
-        <h3 style="color: darkblue; font-weight: bold;">BẢNG GHI ĐIỂM NIÊN LUẬN</h3>  
-        <table class="table table-bordered" style="width:900px" align='center'>
-            <tr>
-                <th width='8%'>Năm học:</th>                
-                <td width='15%'>
-                    <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$nam}}' class='form-control' readonly=""/>
-                </td>
-                <th width='8%'>Học kỳ:</th>
-                <td width='10%'>
-                    <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk}}' class='form-control' readonly=""/>
-                </td>              
-                <th width='12%'>Tên học phần:</th>
-                <th width="10%">
-                    <select name="cbNhomNL" class="form-control" style="width:90%">
-                        <option value="">Tất cả</option>
-                        @foreach($dshp as $hp)
-                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
-                        @endforeach
-                    </select>
-                </td>
-            </tr>   
-         </table>
+    <div class="col-md-12">  <br>      
+        <form action="{{action('DiemController@LayMaNhomHP')}}" method="post">
+            <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+            <table class="table table-bordered" style="width:900px" align='center'>
+                <tr>
+                    <th width='8%'>Năm học:</th>                
+                    <td width='15%'>
+                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$nam}}' class='form-control' readonly=""/>
+                    </td>
+                    <th width='8%'>Học kỳ:</th>
+                    <td width='10%'>
+                        <input style="text-align: center; font-weight: bold;" type='text' name='' value='{{$hk}}' class='form-control' readonly=""/>
+                    </td>              
+                    <th width='12%'>Tên học phần:</th>                
+                    <td width="10%">
+                        <select class="form-control" name='cbNhomHP'>
+                            @if($mahp == null || $mahp == 0)
+                                <option value="0" selected="">Tất cả</option>
+                                @foreach($dshp as $hp)
+                                    <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>
+                                @endforeach 
+                            @elseif($mahp != null)
+                                <option value="0">Tất cả</option>
+                                @foreach($dshp as $hp)
+                                    @if($mahp == $hp->manhomhp)
+                                        <option value="{{$hp->manhomhp}}" selected="">{{$hp->tennhomhp}}</option>
+                                    @else
+                                        <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option> 
+                                    @endif
+                                @endforeach   
+                            @endif
+                        </select>
+                    </td>
+                    <th width="15%">
+                        <button type="submit" class="btn btn-success" style="width:100%">
+                            Liệt kê
+                        </button>
+                    </th>
+                </tr>   
+             </table>
+        </form>
+        <h3 style="color: darkblue; font-weight: bold;">
+            BẢNG GHI ĐIỂM NIÊN LUẬN 
+            (Nhóm HP: <?php 
+                            if($mahp == 0 || $mahp == NULL)
+                                echo "Tất cả";
+                            else if($mahp != 0 || $mahp != NULL)
+                                echo DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp');
+                      ?>)
+        </h3> 
         <form name="frmNhapDiem" action="{{action('DiemController@LuuNhapDiem')}}" method="post"> 
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
@@ -104,7 +131,7 @@
                 </tr>
                 @if(count($dssv) == 0)
                     <tr>
-                        <td colspan="8" align="center">
+                        <td colspan="11" align="center">
                             <label style="color: #e74c3c;"> Chưa có sinh viên nào!</label> 
                         </td>
                     </tr>
@@ -161,16 +188,21 @@
                         <button onclick="return kt_diem();" type="submit" class="btn btn-info" style="width: 50%;">
                             <img src="{{asset('public/images/excel-icon.png')}}"> Nhập từ Exel...
                         </button> 
+                    </td>          
+                    <td>
+                        @if($mahp == null || $mahp == 0)                            
+                                <button onclick="return confirm('Vui lòng chọn nhóm HP!')" type="button" name="" class="btn btn-success" style="width: 50%;">
+                                    <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                </button>                           
+                        @elseif($mahp != null || $mahp != 0)
+                            <a href="2134/inbangdiemgv/{{$mahp}}" target="_blank">
+                                <button type="button" name="" class="btn btn-success" style="width: 50%;">
+                                    <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                </button>
+                            </a>
+                        @endif
                     </td>
                     <td>
-                        <a href="2134/inbangdiemgv" target="_blank">
-                            <button type="button" name="" class="btn btn-success" style="width: 50%;">
-                                <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
-                            </button>
-                        </a>
-
-                    </td>
-                    <td align="right">
                         <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 55%;">
                             <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu dữ liệu
                         </button>                            

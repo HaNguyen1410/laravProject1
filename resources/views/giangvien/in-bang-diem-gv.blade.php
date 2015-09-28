@@ -52,6 +52,9 @@ and open the template in the editor.
     <body>
         <table style="width:100%">
             <tr>
+                <td width="10%" align="right">
+                    <img src="http://localhost/laravProject1/public/images/logo-ctu.jpg" width="70px" height="70px"/>
+                </td>
                 <td>
                     <div>
                         <label>Bộ Giáo Dục Và Đào Tạo</label><br>
@@ -75,7 +78,11 @@ and open the template in the editor.
         <table border="0" style="width:100%" padding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <td>Họ và tên cán bộ:<label style="color: #00c; font-weight: bold"> {{$tencb->hoten}} ({{$tencb->macb}}) </label></td>
-                <td width="30%">Nhóm HP:</td>
+                <td width="30%">Nhóm HP:
+                    <label style="color: #00c; font-weight: bold">
+                        {{DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp')}}
+                    </label>
+                </td>
             </tr>
         </table><br>
         <h3 align="center">Danh sách điểm</h3>
@@ -108,7 +115,7 @@ and open the template in the editor.
                    @endforeach
                     @foreach($tongdiem as $tong) 
                         @if($tong->mssv == $sv->mssv)
-                            <td align="center" style="color: #FF0000; font-weight: bold">{{$tong->tongdiem}}</td>
+                            <td align="center" style="color: #FF0000; font-weight: bold"><?php echo round($tong->tongdiem,2);?></td>
                             @if($tong->tongdiem == null)
                                 <td></td>
                             @elseif($tong->tongdiem != null)

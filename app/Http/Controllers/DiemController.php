@@ -67,6 +67,11 @@ class DiemController extends Controller
             ->with('dsdt',$dsdt)->with('dssv',$dssv)->with('dsdiem',$dsdiem)->with('tongdiem',$tongdiem)
             ->with('nhanxet',$nhanxet);            
     }   
+/*============== Lấy Mã nhóm HP khi chọn selectbox =============*/
+    public function LayMaNhomHP(){
+        $mahp = Input::get('cbNhomHP');
+        return redirect('giangvien/nhapdiem/'.$mahp);           
+    }
 /*=========================== Nhập điểm nhóm ==============================================*/
     public function NhapDiem(){   
         $macb = \Auth::user()->taikhoan;
@@ -90,11 +95,24 @@ class DiemController extends Controller
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
                 ->get();
-        $dsNhomth = DB::table('chia_nhom as chn')->distinct()
-                ->select('chn.manhomthuchien')
-                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
-                ->where('hp.macb',$macb)
-                ->lists('chn.manhomthuchien');
+    //Lấy mã hp trên url khi chọn liệt kê    
+        $mahp = \Request::segment(3);
+        if($mahp == null || $mahp == 0){          
+             $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                    ->select('chn.manhomthuchien')
+                    ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                    ->where('hp.macb',$macb)
+                    ->lists('chn.manhomthuchien');
+        }
+        else if($mahp != null || $mahp != 0)
+        {
+            $dsNhomth = DB::table('chia_nhom as chn')->distinct()
+                    ->select('chn.manhomthuchien')
+                    ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                    ->where('chn.manhomhp',$mahp)
+                    ->where('hp.macb',$macb)
+                    ->lists('chn.manhomthuchien');
+        }
         $dssv = DB::table('sinh_vien as sv')->orderBy('chn.manhomthuchien','asc')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
@@ -132,7 +150,7 @@ class DiemController extends Controller
         return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
                 ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem)
-                ->with('nhanxet',$nhanxet);
+                ->with('nhanxet',$nhanxet)->with('mahp',$mahp);
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){

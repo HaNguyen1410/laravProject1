@@ -119,13 +119,13 @@ class IntrangController extends Controller
     }
 
 /*====================== Giảng viên in bảng điểm của 1 nhóm hp hoặc tất cả các hp mà gv dạy =====================*/    
-    public function InBangDiemGV($macb){
+    public function InBangDiemGV($macb,$mahp){
         $tencb = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
         $tieuchi = $this->LayDSTieuChi($macb);
-        $dssv = $this->LayDSNhomSV($macb);
-        $dsdiem = $this->LayDSDiem($macb);
-        $tongdiem = $this->LayTongDiem($macb); 
-        $nhanxet = $this->LayNhanXet($macb);
+        $dssv = $this->LayDSNhomSV($macb,$mahp);
+        $dsdiem = $this->LayDSDiem($macb,$mahp);
+        $tongdiem = $this->LayTongDiem($macb,$mahp); 
+        $nhanxet = $this->LayNhanXet($macb,$mahp);
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -133,7 +133,7 @@ class IntrangController extends Controller
                 ->value('hocky');
         $date = date('Y-m-d');//Carbon::now();
         $view =  \View::make('giangvien.in-bang-diem-gv', 
-                compact('nam', 'hk','tencb','tieuchi', 'dssv', 'dsdiem', 'tongdiem', 'date', 'macb', 'nhanxet'));
+                compact('nam', 'hk','tencb','tieuchi', 'dssv', 'dsdiem', 'tongdiem', 'date', 'macb', 'nhanxet','mahp'));
         $pdf = \App::make('dompdf.wrapper');
 //        $pdf->loadHTML($view);
          $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
@@ -152,10 +152,11 @@ class IntrangController extends Controller
         return $tieuchi;
     }
 /*====================== Lấy dữ danh sách nhóm thực hiện =============================*/   
-    public function LayDSNhomSV($macb){
+    public function LayDSNhomSV($macb,$mahp){
         $dsNhomth = DB::table('chia_nhom as chn')->distinct()
                 ->select('chn.manhomthuchien')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.manhomhp',$mahp)
                 ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
         $dssv = DB::table('sinh_vien as sv')->orderBy('chn.manhomthuchien','asc')
@@ -168,10 +169,11 @@ class IntrangController extends Controller
         return $dssv;
     } 
 /*====================== Lấy dữ danh sách điểm của mỗi sinh viên =============================*/  
-    public function LayDSDiem($macb){
+    public function LayDSDiem($macb,$mahp){
         $dsNhomth = DB::table('chia_nhom as chn')->distinct()
                 ->select('chn.manhomthuchien')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.manhomhp',$mahp)
                 ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
         //Lấy 1 mảng mssv của 1 nhóm thực hiện
@@ -192,10 +194,11 @@ class IntrangController extends Controller
         return $dsdiem;
     }
 /*====================== Tổng điểm =============================*/  
-    public function LayTongDiem($macb){
+    public function LayTongDiem($macb,$mahp){
         $dsNhomth = DB::table('chia_nhom as chn')->distinct()
                 ->select('chn.manhomthuchien')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.manhomhp',$mahp)
                 ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
         //Lấy 1 mảng mssv của 1 nhóm thực hiện
@@ -211,9 +214,10 @@ class IntrangController extends Controller
         return $tongdiem;
     }
 /*====================== Lấy nhận xét =============================*/
-    public function LayNhanXet($macb){
+    public function LayNhanXet($macb,$mahp){
         $dsmasv = DB::table('chia_nhom as chn')->select('chn.mssv','chn.nhanxet')
                 ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.manhomhp',$mahp)
                 ->where('hp.macb',$macb)
                 ->lists('chn.mssv');
         $dsNhanXet = DB::table('chia_nhom')->select('mssv','nhanxet')

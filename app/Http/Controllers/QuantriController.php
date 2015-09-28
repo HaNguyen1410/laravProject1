@@ -373,7 +373,7 @@ class QuantriController extends Controller
  * ########## Quản trị Sinh Viên #############
  * *******************
  */
-/*============== Lấy năm, học kỳ khi chọn selectbox =============*/
+/*============== Lấy Mã nhóm HP khi chọn selectbox =============*/
     public function LayNhomHP(){
         $mahp = Input::get('cbNhomHP');
         return redirect('quantri/sinhvien/'.$mahp);           

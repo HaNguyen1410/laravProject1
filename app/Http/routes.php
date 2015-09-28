@@ -118,10 +118,11 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
         Route::get('xoatieuchi/{matc}','QdtieuchiController@XoaTieuChi');
     });
     /*========= NHẬP ĐIỂM ==========*/
-    Route::get('nhapdiem','DiemController@NhapDiem');
+    Route::get('nhapdiem/{mahp?}','DiemController@NhapDiem');
+    Route::post('nhapdiem/laymanhomhp','DiemController@LayMaNhomHP');
     Route::group(['prefix'=>'nhapdiem'],function(){       
         Route::post('luunhapdiem','DiemController@LuuNhapDiem');
-        route::get('{macb}/inbangdiemgv','IntrangController@InBangDiemGV');
+        route::get('{macb}/inbangdiemgv/{mahp}','IntrangController@InBangDiemGV');
     });
     /*======= Quản lý TÀI LIỆU ==========*/
     route::get('khotailieu','QltailieuController@KhoTaiLieu');
