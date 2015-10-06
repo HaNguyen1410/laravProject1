@@ -57,17 +57,18 @@
                                     <li class="divider"></li>
                                     <li><a href="{{asset('quantri/sinhvien')}}">Sinh viên</a></li>
                                 </ul>
-                            </li>                           
-                            <li>
-                                <a href="{{asset('quantri/saoluu')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
-                                    Sao lưu
+                            </li> 
+                            <li class="dropdown">
+                                <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Quản lý CSDL
+                                    <span class="caret"></span>
                                 </a>
-                            </li>
-                            <li>
-                                <a href="{{asset('quantri/phuchoi')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
-                                    Phục hồi
-                                </a>
-                            </li>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{asset('quantri/saoluu')}}">Sao lưu</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="{{asset('quantri/phuchoi')}}">Phục hồi</a></li>
+                                </ul>
+                            </li> 
                             <li class="dropdown">
                                 <a href="?cn=ttgv" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <?php

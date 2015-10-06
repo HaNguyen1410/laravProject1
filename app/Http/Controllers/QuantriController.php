@@ -62,7 +62,9 @@ class QuantriController extends Controller
             else if($_POST['txtTenCSDL'] != null){
                 $gv = new GiangvienController();
                 $tenkhongdau = $gv->bo_dau_cau($req->txtTenCSDL);
-                $backupFileName = $tenkhongdau . "_" . date("Y-m-d_H-i-s") . '.sql';    
+                $tenfile = str_replace(" ", "", $tenkhongdau);
+                
+                $backupFileName = $tenfile . "_" . date("Y-m-d_H-i-s") . '.sql';    
             }
         //Đường dẫn chạy mysqldump trong xampp của MySQL.
             $path = "C:\\xampp\mysql\bin\mysqldump"; 
@@ -77,7 +79,7 @@ class QuantriController extends Controller
                 $exitCode = Artisan::call('db:backup'); Không lấy được tên file cscl đã lưu để đưa ra view
          */        
         
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',0)->with('phuchoi',2)
+        return view('quantri.sao-luu-du-lieu')->with('saoluu',0)
             ->with('tenfile',$backupFileName);                    
     }
 /*====================== PHỤC HỒI CSDL ====================================*/
@@ -88,27 +90,33 @@ class QuantriController extends Controller
     //        $password = \Config::get('database.connections.mysql.password');
         $v = \Validator::make($req->all(),
                     [
-                        'fTenCSDL' => 'required|mimes:sql'
+                        'fTenCSDL' => 'required' // |mimes:sql
                     ]
         );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
-        }
+        }        
         else
         {
-            $backupPath = Input::file('fTenCSDL')->getRealPath();
-            $tenbandau = Input::file('fTenCSDL')->getClientOriginalName();
-            $gv = new GiangvienController();
-            $tenkhongdau = $gv->bo_dau_cau($tenbandau); 
-            $backupFileName = $tenkhongdau . "_" . date("Y-m-d_H-i-s") . '.sql';
-        //Đường dẫn chạy mysqldump trong xampp của MySQL.
-            $path = "C:\\xampp\mysql\bin\mysqldump"; 
-        //without password
-            $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath . $backupFileName;
-//            system($command); 
-            
-            return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',2)
-                ->with('phuchoi',0)->with('backupPath',$backupPath)->with('command',$command);
+            $tenfile = Input::file('fTenCSDL');
+            $backupPath = pathinfo($tenfile->getRealPath(),PATHINFO_DIRNAME);
+//            $backupPath = $tenfile->getPathName();
+            $tenfile_dachon = Input::file('fTenCSDL')->getClientOriginalName();
+            $extension = Input::file('fTenCSDL')->getClientOriginalExtension();
+            if($extension != "sql"){
+                \Session::flash('ThongBao','Vui lòng chọn file có đuôi .sql !');
+                return Redirect::to('quantri/phuchoi');
+            }
+            else{
+                //Đường dẫn chạy mysqldump trong xampp của MySQL.
+                $path = "C:\\xampp\mysql\bin\mysqldump"; 
+            //without password
+                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath."\\". $tenfile_dachon;
+                system($command); 
+
+                return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)->with('extension',$extension)
+                        ->with('backupPath',$backupPath)->with('command',$command);
+            }        
         }      
     }
 /******************

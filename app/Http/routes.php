@@ -50,8 +50,7 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
     Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT'); 
     /* ========= SAO LƯU PHỤC HỒI CSDL ==========*/
     Route::get('saoluu', function () {
-        return view('quantri.sao-luu-du-lieu')->with('saoluu',1)
-            ->with('phuchoi',1);
+        return view('quantri.sao-luu-du-lieu')->with('saoluu',1);
     });
     Route::post('saoluucsdl','QuantriController@SaoLuuCSDL');
      /* ========= PHỤC HỒI CSDL ==========*/
