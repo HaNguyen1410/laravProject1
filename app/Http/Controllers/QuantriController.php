@@ -62,7 +62,8 @@ class QuantriController extends Controller
             else if($_POST['txtTenCSDL'] != null){
                 $gv = new GiangvienController();
                 $tenkhongdau = $gv->bo_dau_cau($req->txtTenCSDL);
-            //Loại bỏ các khoảng trắng trong tên nhập vào    
+            //Loại bỏ các khoảng trắng trong tên nhập vào từ Input (textbox) 
+            //vì tên file có khoảng trắng thì lệnh không thực thi được   
                 $tenfile = str_replace(" ", "", $tenkhongdau);
                 
                 $backupFileName = $tenfile . "_" . date("Y-m-d_H-i-s") . '.sql';    
