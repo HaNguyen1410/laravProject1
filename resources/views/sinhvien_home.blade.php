@@ -145,11 +145,12 @@
                                                 <h4 class="modal-title" id="myLargeModalLabel" style="color: darkblue; font-weight: bold;">Thanh tìm kiếm</h4>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="" id="" method="post" class="form-inline" align="center">                         
-                                                     <input type="text" name="" id="" value="" class="form-control" style="width: 90%">
-                                                     <button type="button" class="btn btn-info" style="padding: 0px 0px;">
-                                                         <img src="{{Asset('public/images/Search.png')}}">
-                                                     </button>                                         
+                                                <form action="{{action('TimkiemController@SVTimKiem')}}" method="post" class="form-inline" align="center">                         
+                                                    <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
+                                                    <input type="text" id="txtTimKiem" name="txtTimKiem" value="" placeholder="Nhập họ và tên sinh viên cần tìm" class="form-control" style="width: 90%">
+                                                    <button type="submit" class="btn btn-info" style="padding: 0px 0px;">
+                                                        <img src="{{Asset('public/images/Search.png')}}">
+                                                    </button>                                         
                                                 </form>                                                
                                             </div>
                                         </div>

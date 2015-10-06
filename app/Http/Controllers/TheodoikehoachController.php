@@ -70,8 +70,9 @@ class TheodoikehoachController extends Controller
                 ->value('sv.hoten');
         $giolam = $this->GioLam($tensv);
         $dstuan = DB::table('thuc_hien as th')->select('th.tuan')->distinct()
-                ->where('th.manhomthuchien',$manth)                
-                ->get();
+                ->where('th.manhomthuchien',$manth) 
+                ->paginate(2);
+                //->get();
         $dscv = DB::table('thuc_hien as th')->distinct()
                 ->join('cong_viec as cv','th.macv','=','cv.macv')
                 ->where('th.manhomthuchien',$manth)

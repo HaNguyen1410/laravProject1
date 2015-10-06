@@ -3,16 +3,18 @@
 @section('content_quantri')
 
     <style type="text/css">
-        td:first-child{
+        th{
             text-align: right;
             color: black;
+            background-color: #dff0d8;
         }
     </style>
 
   
 <div class="container">
     <div class="row">
-        <div class="col-md-4">  <!-- Upload file danh sách gv  -->                      
+<!--        
+        <div class="col-md-4">   Upload file danh sách gv                        
             <h3 style="color: darkblue; font-weight: bold;">CẬP NHẬT DANH SÁCH</h3><br>                    
             <div align="center"><input type="file"  />Chọn hình</div><br>
             <div align="center">
@@ -21,31 +23,33 @@
                 </button>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8"></div>
+-->
+        <div class="col-md-12" align="center">    
             <h3 style="color: darkblue; font-weight: bold;">CẬP NHẬT GIẢNG VIÊN</h3>
             <form action="{{action('QuantriController@LuuCapNhatGV')}}" method="post" class="form-horizontal">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                <table class="table" cellpadding="0px" cellspacing="0px" align='center'>
+                <table class="table" cellpadding="0px" cellspacing="0px" align='center' style="width:700px;">
                     <tr>
-                        <td>Năm học:</td>
+                        <th>Năm học:</th>
                         <td>
 <!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
                             <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
                         </td>
-                        <td width="10%" align="right" style="color:darkblue;">Học kỳ:</td>
+                        <th width="10%" align="right" style="color:darkblue;">Học kỳ:</th>
                         <td>
                             <input type="text" name="txtNamHoc" value="{{$hk}}" class="form-control" readonly="" style="text-align: center;"/>
                         </td>
                     </tr> 
                     <tr>
-                        <td width="30%">Mã cán bộ:</td>
+                        <th>Mã cán bộ:</th>
                         <td>
                             <input type="text" name="txtMaCB" size="2" value="{{$gv->macb}}" class="form-control" readonly="true"/> 
                             <p style='color:red;'>{{$errors->first('txtMaCB')}}</p>
                         </td>
-                        <td width='20%' align='right' style="color:darkblue;">
-                            <label>Mở tài khoản:</label>
-                        </td>
+                        <th width='20%'>
+                            Mở tài khoản:
+                        </th>
                         <td>
                             <?php
                             if ($gv->khoa == 0) {
@@ -57,14 +61,14 @@
                         </td>    
                     </tr>
                     <tr>
-                        <td>Họ và tên:</td>
+                        <th>Họ và tên:</th>
                         <td colspan="3">
                             <input type="text" name="txtHoTen" size="2" value="{{$gv->hoten}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtHoTen')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Giới tính:</td>
+                        <th>Giới tính:</th>
                         <td colspan="3">
                             <?php
                             $gtNam = strcasecmp($gv->gioitinh, 'Nam');
@@ -80,28 +84,28 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Ngày sinh:</td>
+                        <th>Ngày sinh:</th>
                         <td colspan="3">
                             <input type="text" id="txtNgaySinh" name="txtNgaySinh" value="{{$gv->ngaysinh}}" class="form-control" /> 
                             <p style='color:red;'>{{$errors->first('txtNgaySinh')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Email:</td>
+                        <th>Email:</th>
                         <td colspan="3">
                             <input type="text" name="txtEmail" value="{{$gv->email}}" class="form-control"/> 
                             <p style='color:red;'>{{$errors->first('txtEmail')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Số điện thoại:</td>
+                        <th>Số điện thoại:</th>
                         <td colspan="3">
                             <input type="text" name="txtSDT" value="{{$gv->sdt}}" class="form-control"/> 
                             <p style='color:red;'>{{$errors->first('txtSDT')}}</p>
                         </td>
                     </tr>
                     <tr>
-                        <td>Nhóm học phần:</td>
+                        <th>Nhóm học phần:</th>
                         <td colspan="3">
                             @foreach($dshp as $hp)
                                 @if($gv_hp == $hp->manhomhp)
@@ -114,7 +118,7 @@
                         </td>                          
                     </tr>  
                     <tr>
-                        <td>Mật khẩu mới:</td>
+                        <th>Mật khẩu mới:</th>
                         <td colspan="3">
                             <input type="password" id="txtMatKhauMoi1" name="txtMatKhauMoi1" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtMatKhauMoi1')}}</p>
@@ -135,8 +139,7 @@
                         </td>
                     </tr> -->
                     <tr>
-                        <td></td>
-                        <td colspan="4">
+                        <td colspan="4" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;

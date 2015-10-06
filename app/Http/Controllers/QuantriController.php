@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use App\Config\database;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Console\Command;
+use App\Config\database;
 use DB;
 use View,
     Response,
@@ -50,19 +51,41 @@ class QuantriController extends Controller
     }   
 /*====================== SAO LƯU CSDL ====================================*/
     public function SaoLuuCSDL(Request $req){
-//        $database = \Config::get('database.connections.mysql.database');
-//        $ten = date("YmdHis") . '.sql';//$database ."-" . 
-//        $backupPath = storage_path() . "\dumps\\";
-        $exitCode = Artisan::call('db:backup'); 
+            $host = \Config::get('database.connections.mysql.host');
+            $database = \Config::get('database.connections.mysql.database');
+            $username = \Config::get('database.connections.mysql.username');
+    //        $password = \Config::get('database.connections.mysql.password');
+            $backupPath = storage_path() . "\dumps\\";
+            if($_POST['txtTenCSDL'] == null){
+                $backupFileName = date("Y-m-d_H-i-s") . '.sql';
+            }
+            else if($_POST['txtTenCSDL'] != null){
+                $gv = new GiangvienController();
+                $tenkhongdau = $gv->bo_dau_cau($req->txtTenCSDL);
+                $backupFileName = $tenkhongdau . "_" . date("Y-m-d_H-i-s") . '.sql';    
+            }
+        //Đường dẫn chạy mysqldump trong xampp của MySQL.
+            $path = "C:\\xampp\mysql\bin\mysqldump"; 
+        //without password
+            $command = $path . " -h " .$host. " -u " .$username. " " .$database." > " .$backupPath . $backupFileName;
+            system($command); 
+        /*Cách 2 để chạy lệnh sao lưu CSDL
+            exec($path . " -h " .$host. " -u " .$username. " " .$database." > " .$backupPath . $backupFileName);
+        */  
+      
+        /* Cách 3 để chạy lệnh sao lưu dùng Artian
+                $exitCode = Artisan::call('db:backup'); Không lấy được tên file cscl đã lưu để đưa ra view
+         */        
         
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',0)
-            ->with('phuchoi',2);
+        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',0)->with('phuchoi',2)
+            ->with('tenfile',$backupFileName);                    
     }
 /*====================== PHỤC HỒI CSDL ====================================*/
     public function PhucHoiCSDL(Request $req){
-//        $database = \Config::get('database.connections.mysql.database');
-//        $ten = date("YmdHis") . '.sql';//$database ."-" . 
-//        $backupPath = storage_path() . "\dumps\\";
+            $host = \Config::get('database.connections.mysql.host');
+            $database = \Config::get('database.connections.mysql.database');
+            $username = \Config::get('database.connections.mysql.username');
+    //        $password = \Config::get('database.connections.mysql.password');
         $v = \Validator::make($req->all(),
                     [
                         'fTenCSDL' => 'required|mimes:sql'
@@ -73,12 +96,20 @@ class QuantriController extends Controller
         }
         else
         {
-            $tenbandau = Input::file('fTenCSDL')->getClientOriginalName(); 
-            $exitCode = Artisan::call('db:restore '.$tenbandau); 
+            $backupPath = Input::file('fTenCSDL')->getRealPath();
+            $tenbandau = Input::file('fTenCSDL')->getClientOriginalName();
+            $gv = new GiangvienController();
+            $tenkhongdau = $gv->bo_dau_cau($tenbandau); 
+            $backupFileName = $tenkhongdau . "_" . date("Y-m-d_H-i-s") . '.sql';
+        //Đường dẫn chạy mysqldump trong xampp của MySQL.
+            $path = "C:\\xampp\mysql\bin\mysqldump"; 
+        //without password
+            $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath . $backupFileName;
+//            system($command); 
+            
             return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',2)
-                ->with('phuchoi',0);
-        }
-        
+                ->with('phuchoi',0)->with('backupPath',$backupPath)->with('command',$command);
+        }      
     }
 /******************
  * ######## Quản trị Giảng Viên  ###########

@@ -57,10 +57,15 @@
                                     <li class="divider"></li>
                                     <li><a href="{{asset('quantri/sinhvien')}}">Sinh viên</a></li>
                                 </ul>
-                            </li> 
-                           
-                            <li><a href="{{asset('quantri/saoluu')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
+                            </li>                           
+                            <li>
+                                <a href="{{asset('quantri/saoluu')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
                                     Sao lưu
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{asset('quantri/phuchoi')}}" data-toggle="tooltip" data-placement="bottom" title="Sao lưu phục hồi dữ liệu">
+                                    Phục hồi
                                 </a>
                             </li>
                             <li class="dropdown">

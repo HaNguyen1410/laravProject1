@@ -49,7 +49,7 @@
                                     {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
                                 </label> 
                             @elseif($tb->dinhkemtb != "")
-                            <a href="../public/thongbao/{{$tb->dinhkemtb}}" target="_blank" style="color: #e74c3c; padding-left: 20px;">
+                                <a href="../public/thongbao/{{$tb->dinhkemtb}}" target="_blank" style="color: #e74c3c; padding-left: 20px;">
                                     {{$stt + 1}}. {{$tb->noidungtb}} (Từ {{$tb->batdautb}} đến {{$tb->ketthuctb}})
                                 </a>
                             @endif
@@ -109,7 +109,7 @@
                                         {{$detainhom->tendt}}
                                     </a>
                                 @elseif($detainhom->taptindinhkem == "")
-                                    <a href="{{$sv->mssv}}/inchitietdetaisv/{{$detainhom->madt}}" target="_blank" style="color:darkblue;">
+                                    <a href="thongtinsv/inchitietdetaisv/{{$detainhom->madt}}" target="_blank" style="color:darkblue;">
                                         <img src="{{asset('public/images/doc-pdf-icon.png')}}"/>&nbsp;&nbsp;
                                         {{$detainhom->tendt}}
                                     </a>

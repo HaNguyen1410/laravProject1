@@ -50,10 +50,14 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
     Route::post('doihinhdaidienqt','QuantriController@DoiHinhDaiDienQT'); 
     /* ========= SAO LƯU PHỤC HỒI CSDL ==========*/
     Route::get('saoluu', function () {
-        return view('quantri.sao-luu-phuc-hoi-du-lieu')->with('saoluu',1)
+        return view('quantri.sao-luu-du-lieu')->with('saoluu',1)
             ->with('phuchoi',1);
     });
     Route::post('saoluucsdl','QuantriController@SaoLuuCSDL');
+     /* ========= PHỤC HỒI CSDL ==========*/
+    Route::get('phuchoi', function () {
+        return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',1);
+    });
     Route::post('phuchoicsdl','QuantriController@PhucHoiCSDL');
 /*
  * ######## Quản trị Giảng Viên ##################
@@ -184,11 +188,16 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
  * *************************
  */
 Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
+    /*======= Hiển Trang TÌM KIẾM ==========*/
+    route::post('ketquatimkiem','TimkiemController@SVTimKiem');
     /*======= Hiển thị TRANG THÔNG TIN SINH VIÊN ==========*/
     Route::get('thongtinsv','SinhvienController@HienThiSV');
-    Route::get('thongtinsv/inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
-    Route::get('thongtinsv/capnhatkynang','SinhvienController@CapNhatKyNang');
-    Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
+    Route::group(['prefix'=>'thongtinsv'],function(){
+        Route::get('inchitietdetaisv/{madt}','IntrangController@InChiTietDeTaiSV');
+        Route::get('capnhatkynang','SinhvienController@CapNhatKyNang');
+        Route::post('luucapnhatthongtin','SinhvienController@LuuCapNhatThongTin');
+    });
+    
     /*======= Trang xem công việc được giao ==========*/
     Route::get('xemviecduocgiao','SinhvienController@CongViecSV');
     /*======= TRANG ĐỔI MẬT KHẨU SINH VIÊN ==========*/

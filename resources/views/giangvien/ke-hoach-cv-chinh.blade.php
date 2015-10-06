@@ -264,6 +264,9 @@
                      </table>
                 </div>             
              @endforeach
+             <div class="col-md-12" align="center">
+                 {!! $dstuan->setPath($manth)->render() !!}
+             </div>
         </div>
     </div>
 </div>

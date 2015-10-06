@@ -3,7 +3,7 @@
 @section('content_quantri')      
        
 <div class="container">
-    <div class="row">
+    <div class="row">        
         <div class="col-md-6" align="center">            
                 <h4 style="color: darkblue; font-weight: bold;">SAO LƯU CSDL</h4>
                 <form action="{{action('QuantriController@SaoLuuCSDL')}}" method="post">
@@ -15,15 +15,17 @@
                     </button>
                                       
                 </form>  <br>  
-                <div style="background-color: #B0E0E6;">                    
-                    @if($saoluu == 0)
+                
+                 
+                <div style="background-color: #B0E0E6;">   
+                    @if($saoluu == 0)  
                         <lable style="color: #006400; font-weight: bold;">
                             <img src="{{asset('public/images/accept-icon.png')}}"/>
                             Sao lưu CSDL thành công!
                         </lable>
-<!--                        <a href="../storage/dumps/">
+                        <a href="../storage/dumps/{{$tenfile}}">
                             <lable style="color: #860000; font-weight: bold;">Tải về</lable>
-                        </a>-->
+                        </a>
                     @endif
                 </div>                                 
         </div>
@@ -40,6 +42,8 @@
                 </form>  <br>  
                 <div style="background-color: #B0E0E6;">                    
                     @if($phuchoi == 0)
+                    <p>{{$backupPath}}</p>
+                    <p>{{$command}}</p>
                         <lable style="color: #006400; font-weight: bold;">
                             <img src="{{asset('public/images/accept-icon.png')}}"/>
                             Phục hồi CSDL thành công!
