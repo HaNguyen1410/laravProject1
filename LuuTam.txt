@@ -1,11 +1,4 @@
 
-
-@if($tong->tongdiem == null)
-    <td></td>
-@elseif($tong->tongdiem != null)                                  
-    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
-@endif 
-
 ==========================================================================
 function kt_radio(){
                   var isOK = false;
