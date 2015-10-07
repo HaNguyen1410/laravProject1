@@ -10,6 +10,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Console\Command;
 use App\Config\database;
+use Illuminate\Support\Facades\File;
 use DB;
 use View,
     Response,
@@ -102,7 +103,7 @@ class QuantriController extends Controller
 //            $backupPath = base_path();
 //            $backupPath = pathinfo($tenfile->getRealPath(),PATHINFO_DIRNAME);
 //            $backupPath = $tenfile->getPathName();
-            $backupPath = storage_path() . "\phuchoicsdl\\";"";
+            $pathToFile = storage_path() . "\phuchoicsdl\\";"";
             $tenfile_dachon = Input::file('fTenCSDL')->getClientOriginalName();
             
             $extension = Input::file('fTenCSDL')->getClientOriginalExtension();
@@ -125,11 +126,13 @@ class QuantriController extends Controller
                  *   ->with('backupPath',$backupPath)->with('command',$command)
                  */
             //without password
-                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon;
-                exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon);
+                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$pathToFile. $tenfile_dachon;
+                $kq = exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$pathToFile. $tenfile_dachon);
                 
+                $pathfile = $luuden.$tenfile_dachon;
+                File::delete($pathfile);
                 return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)
-                        ->with('command',$command);
+                        ->with('kq',$kq)->with('command',$command);
             }        
         }      
     }
