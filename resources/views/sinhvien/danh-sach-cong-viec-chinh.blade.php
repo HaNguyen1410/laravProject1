@@ -94,7 +94,7 @@
                     $tuanhientai = $tachtuan[$n-1];
                     $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
                     $t = round($tuankh,1);      
-                    if($t > 0 && $t <= 70){
+                    if($t >= 0 && $t <= 70){
                         $antoan = $t;
                         $canhbao = 0;
                         $nguyhiem = 0;
@@ -107,11 +107,11 @@
                     else if($t > 90 && $t <= 100){
                         $antoan = 70;
                         $canhbao = 20;
-                        $nguyhiem = $t - 90;
+                        $nguyhiem = $t-90;
                     }
                 ?>
-                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
-                  {{$antoan}}% Complete (success) {{$tuanhientai}}
+                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">                  
+                    {{$antoan}}% Complete (success) {{$tuanhientai}}
                 </div>
                 <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
                   {{$canhbao}}% (warning)

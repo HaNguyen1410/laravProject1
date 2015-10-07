@@ -29,7 +29,7 @@ and open the template in the editor.
             (Học kỳ: <lable style="color: #00c;">{{$nk->hocky}}</lable> - Năm học: <lable style="color: #00c;">{{$nk->nam}})</lable>
         </div>
         <br>
-        <table border="1" style="width:100%" cellpadding="1px 1px" cellspacing="0px 0px">
+        <table border="0" style="width:100%" cellpadding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <th width="20%">Họ và tên cán bộ:</th>
                 <td>

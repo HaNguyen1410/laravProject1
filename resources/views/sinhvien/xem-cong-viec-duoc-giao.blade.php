@@ -37,7 +37,7 @@
                         </tr>                            
                             @foreach($dscv as $stt => $cv)
                                 @if($cv->phuthuoc_cv == "0")
-                                    <tr style="background-color: #FFEFD5;">
+                                    <tr style="background-color: #F0F8FF;">
                                         <td align="center">{{$stt + 1}}</td>
                                         <td align="center">{{$cv->tuan}}</td>
                                         <td>
@@ -61,7 +61,7 @@
                                         </td>
                                     </tr>
                                 @elseif($cv->phuthuoc_cv != "0")
-                                    <tr style="background-color: #FFFFE0;">
+                                    <tr style="background-color: #FFFFFF;">
                                         <td align="center">{{$stt + 1}}</td>  
                                         <td align="center">{{$cv->tuan}}</td>
                                         <td>

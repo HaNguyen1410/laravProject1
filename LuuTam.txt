@@ -1,5 +1,4 @@
-//Loại bỏ các khoảng trắng trong tên nhập vào từ Input (textbox) 
-            //vì tên file có khoảng trắng thì lệnh không thực thi được 
+
 ==========================================================================
 function kt_radio(){
                   var isOK = false;

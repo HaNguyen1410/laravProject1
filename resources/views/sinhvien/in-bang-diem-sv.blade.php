@@ -103,18 +103,18 @@ and open the template in the editor.
             </tr>
         </table><br>
         <h3 align="center">Danh sách điểm</h3>
-        <table border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">            
+        <table class="table table-bordered" border="1" style="width:100%"  padding="1px 1px" cellspacing="0px 0px">            
             <tr>
                 <th rowspan="2" width="8%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="{{count($dstieuchi)}}" width="15%">Hệ số</th>
+                <th colspan="{{count($dstieuchi)}}" width="15%">Tiêu chí - Điểm tối đa</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>   
                 <th rowspan="2" width="20%">Nhận xét</th>                 
             </tr>
             <tr>
                @foreach($dstieuchi as $tc)
-                    <th width="2%">{{$tc->heso}}</th>
+                    <th width="2%">[{{$tc->matc}}] - {{$tc->heso}}</th>
                @endforeach
             </tr>
             @foreach($dssv as $sv)               
@@ -146,6 +146,22 @@ and open the template in the editor.
                  @endif
             @endforeach         
         </table><br>
+        <table class="table table-bordered" style="width: 600px;">
+            <tr>
+                <th width="2%">STT</th>
+                <th width="10%">Mã tiêu chí</th>
+                <th width="50%">Nội dung đánh giá</th>
+                <th width="10%">Mức điểm tối đa</th>                        
+            </tr>
+            @foreach($dstieuchi as $stt => $tc)
+                <tr>
+                    <td align='center'>{{$stt+1}}</td>
+                    <td align='center' style="color: brown; font-weight: bold;">[{{$tc->matc}}]</td>
+                    <td>{{$tc->noidungtc}}</td>
+                    <td align='center'>{{$tc->heso}}</td>
+                </tr>
+            @endforeach                              
+        </table><br><br>
         <table border="0" style="width:500px;" align="right" padding="1px 1px" cellspacing="0px 0px">
             <tr>
                 <td align="center">

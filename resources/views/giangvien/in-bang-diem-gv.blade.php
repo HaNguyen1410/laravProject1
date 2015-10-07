@@ -92,14 +92,14 @@ and open the template in the editor.
                 <th rowspan="2" width="6%">Mã nhóm</th>
                 <th rowspan="2" width="7%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
-                <th colspan="{{count($tieuchi)}}" width="14%">Hệ số</th>
+                <th colspan="{{count($tieuchi)}}" width="14%">Tiêu chí - Điểm tối đa</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>   
                 <th rowspan="2" width="20%">Nhận xét</th>                        
             </tr>
             <tr>
                @foreach($tieuchi as $tc)
-                    <th width='2%'>{{$tc->heso}}</th>
+                    <th width="4%">[{{$tc->matc}}] - {{$tc->heso}}</th>
                @endforeach
             </tr>
             @foreach($dssv as $stt => $sv) 
@@ -130,6 +130,22 @@ and open the template in the editor.
                     @endforeach
                 </tr>
             @endforeach        
-        </table>
+        </table><br>
+        <table class="table table-bordered" style="width: 600px;">
+            <tr>
+                <th width="2%">STT</th>
+                <th width="10%">Mã tiêu chí</th>
+                <th width="50%">Nội dung đánh giá</th>
+                <th width="10%">Mức điểm tối đa</th>                        
+            </tr>
+            @foreach($tieuchi as $stt => $tc)
+                <tr>
+                    <td align='center'>{{$stt+1}}</td>
+                    <td align='center' style="color: brown; font-weight: bold;">[{{$tc->matc}}]</td>
+                    <td>{{$tc->noidungtc}}</td>
+                    <td align='center'>{{$tc->heso}}</td>
+                </tr>
+            @endforeach                              
+        </table><br><br>
     </body>
 </html>
