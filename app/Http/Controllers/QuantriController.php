@@ -128,7 +128,9 @@ class QuantriController extends Controller
             //without password
                 $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$pathToFile. $tenfile_dachon;
                 $kq = exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$pathToFile. $tenfile_dachon);
-                
+            
+            //Sau khi phục hồi CSDL thành công thì thực hiện 
+            //xóa filecsdl cần phục hồi đã upload vào thư mục storage/phuchoicsdl    
                 $pathfile = $luuden.$tenfile_dachon;
                 File::delete($pathfile);
                 return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)

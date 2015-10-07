@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <th>Giao cho:</th>
-                        <td colspan="2">
+                        <td colspan="3">
                             @foreach($dstv as $tv)
                                 <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
                                      <a href="" data-toggle="tooltip" data-placement="top" title="{{$tv->hoten}}">
@@ -62,12 +62,7 @@
                                        : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
                                 </div>
                             <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
-                        </td>
-                        <th>Số tuần thực tế</th>
-                        <td>
-                            <input type="text" id="txtTuanThucTe" name="txtTuanThucTe" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
-                        </td>
+                        </td>                        
                     </tr>
                     <tr>                        
                         <th>Trong tuần:</th>

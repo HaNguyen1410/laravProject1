@@ -64,7 +64,7 @@
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
                     </tr>
-                    <tr>
+<!--                    <tr>
                         <th width="10%">Ngày bắt đầu (thực tế):</th>
                         <td width="30%">
                             <input type="text" id="txtNgayBatDauThucTe" name="txtNgayBatDauThucTe" value="{{$ndcv->ngaybatdau_thucte}}" class="form-control"/>
@@ -75,7 +75,7 @@
                             <input type="text" id="txtNgayKTThucTe" name="txtNgayKTThucTe" value="{{$ndcv->ngaybatdau_thucte}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKTThucTe')}}</p>
                         </td>
-                    </tr>
+                    </tr>-->
                     <tr>
                         <th>Giao cho:</th>
                         <td colspan="2">
@@ -93,10 +93,10 @@
                                 </div><br>
                             <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
                         </td>
-                        <th>Số tuần thực tế</th>
+                        <th>Tuần làm lại:</th>
                         <td>
-                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$ndcv->sotuan_thucte}}" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                            <input type="text" id="txtGioThucTe" name="txtTuanLamLai" value="{{$ndcv->tuan_lamlai}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanLamLai')}}</p>
                         </td>                        
                     </tr>
                     <tr>

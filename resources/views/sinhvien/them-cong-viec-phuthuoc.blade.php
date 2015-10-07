@@ -64,10 +64,14 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Số tuần thực tế</th>
+                        <th>
+                            <label title="(Nếu công việc chính được làm lại và phải thêm công việc khác với lần trước)">
+                                Tuần làm lại:
+                            </label>
+                        </th>
                         <td>
-                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
+                            <input type="text" id="txtGioThucTe" name="txtTuanLamLai" value="" placeholder="Theo dạng: 1-3 từ tuần 1 đến 3 hoặc 4" class="form-control"/>
+                            <!--<p style='color:red;'>{{$errors->first('txtTuanLamLai')}}</p>-->
                         </td>
                         <th>Tiến độ (%):</th>
                         <td>

@@ -25,11 +25,12 @@
                         <tr>
                             <th width="1%">STT</th>
                             <th width="1%">Tuần</th>
+                            <th width="2%">Tuần làm lại</th>
                             <th width="15%">Công việc</th>
                             <th width="10%">Giao cho</th>
                             <th width="6%">Ngày bắt đầu</th>
                             <th width="6%">Hạn hoàn tất</th>
-                            <th width="4%">Số tuần</th>
+                            <!--<th width="4%">Số tuần</th>-->
                             <th width="4%">Phụ thuộc</th>
                             <th width="5%">Độ ưu tiên</th>
                             <th width="5%">Trạng thái</th>
@@ -40,6 +41,7 @@
                                     <tr style="background-color: #F0F8FF;">
                                         <td align="center">{{$stt + 1}}</td>
                                         <td align="center">{{$cv->tuan}}</td>
+                                        <td align="center"></td>
                                         <td>
                                             <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
                                                 {{$cv->congviec}}
@@ -48,7 +50,7 @@
                                         <td>{{$cv->giaocho}}</td>
                                         <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
                                         <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                                        <td align="center">{{$cv->sotuan_thucte}}</td>
+                                        <!--<td align="center">{{$cv->sotuan_thucte}}</td>-->
                                         <td align="center">{{$cv->phuthuoc_cv}}</td>
                                         <td align="center">{{$cv->uutien}}</td>
                                         <td align="center">{{$cv->trangthai}}</td>
@@ -64,6 +66,7 @@
                                     <tr style="background-color: #FFFFFF;">
                                         <td align="center">{{$stt + 1}}</td>  
                                         <td align="center">{{$cv->tuan}}</td>
+                                        <td align="center"></td>
                                         <td>
                                             <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
                                                 {{$cv->congviec}}
@@ -72,7 +75,7 @@
                                         <td>{{$cv->giaocho}}</td>
                                         <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
                                         <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                                        <td align="center">{{$cv->sotuan_thucte}}</td>
+                                        <!--<td align="center">{{$cv->sotuan_thucte}}</td>-->
                                         <td align="center">{{$cv->phuthuoc_cv}}</td>
                                         <td align="center">{{$cv->uutien}}</td>
                                         <td align="center">{{$cv->trangthai}}</td>

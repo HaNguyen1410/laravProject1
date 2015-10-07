@@ -31,7 +31,7 @@
                         $tuanhientai = $tachtuan[$n-1];
                         $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
                         $t = round($tuankh,1);      
-                        if($t > 0 && $t <= 70){
+                        if($t >= 0 && $t <= 70){
                             $antoan = $t;
                             $canhbao = 0;
                             $nguyhiem = 0;
@@ -86,12 +86,12 @@
             <table class="table table-hover table-striped" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="2%">STT</th>
-                    <th rowspan="2" width="3%">ID</th>
                     <th rowspan="2" width="15%">Tên công việc</th>
                     <th rowspan="2" width="10%">Giao cho</th>
                     <th rowspan="2" width="4%">Tuần</th>
-                    <th rowspan="2" width="10%">Trạng thái</th>
-                    <th colspan="3" width="15%">Thực tế</th>
+                    <th rowspan="2" width="3%">Tuần làm lại</th>
+                    <th rowspan="2" width="8%">Trạng thái</th>
+                    <th colspan="3" width="18%">Kế hoạch</th>
                     <th rowspan="2" width="3%">Phụ thuộc</th>
                     <th rowspan="2" width="6%">Tiến độ<br>(%)</th>
                     <th rowspan="2" width="6%">Thao tác</th>
@@ -110,24 +110,27 @@
                 @elseif(count($dscvchinh) > 0)
                     @foreach($dscvchinh as $stt => $cv)
                         <tr>
-                            <td align="center">{{$stt+1}}</td>
-                            <td>
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cv->ngaybatdau_kehoach}}">
-                                    {{$cv->macv}}
-                                </a>
-
+                            <td rowspan="2" style="vertical-align: middle;"  align="center">
+                                <?php 
+                                    if(isset($_GET['page'])){
+                                        $p = 5*($_GET['page']-1);
+                                        echo $stt+1+$p;
+                                    }else
+                                        echo $stt+1;
+                                ?>
                             </td>
                             <td>
-                                <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Nội dung thực hiện: {{$cv->noidungthuchien}}">
+                                <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
                                     {{$cv->congviec}}
                                 </a>
                             </td>
                             <td>{{$cv->giaocho}}</td>
                             <td align="center">{{$cv->tuan}}</td>
+                            <td align="center">{{$cv->tuan_lamlai}}</td>
                             <td align="center">{{$cv->trangthai}}</td>
-                            <td align="center">{{$cv->ngaybatdau_thucte}}</td>
-                            <td align="center">{{$cv->ngayketthuc_thucte}}</td>
-                            <td align="center">{{$cv->sotuan_thucte}}</td>
+                            <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
+                            <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
+                            <td align="center">{{$cv->sotuan_kehoach}}</td>
                             <td align="center">{{$cv->phuthuoc_cv}}</td>
                             <td>
                                 <div class="progress">
@@ -136,7 +139,7 @@
                                     </div>
                                 </div> 
                             </td>
-                            <td align='center'>
+                            <td rowspan="2" style="vertical-align: middle;" align='center'>
                                 <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp &nbsp &nbsp
@@ -145,7 +148,16 @@
                                 </a>
                             </td>
                         </tr>
+                        <tr>
+                            <td colspan="9">
+                                <label style="color: darkblue;">Nội dung thực hiện:</label><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
+                            </td>
+                        </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="12" align="center">{!! $dscvchinh->setPath('phancv')->render() !!}</td>
+                    </tr> 
                 @endif
             </table>
         </div>

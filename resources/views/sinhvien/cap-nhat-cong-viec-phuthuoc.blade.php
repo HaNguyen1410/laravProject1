@@ -47,18 +47,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <th width="10%">Ngày bắt đầu (thực tế):</th>
-                            <td width="30%">
-                               <input type="text" id="txtNgayBatDauThucTe" name="txtNgayBatDauThucTe" value="{{$cv->ngaybatdau_thucte}}" class="form-control"/>
-                               <p style='color:red;'>{{$errors->first('txtNgayBatDauThucTe')}}</p>
-                            </td>
-                            <th width="18%">Ngày kết thúc (thực tế):</th>
-                            <td width="30%">
-                                <input type="text" id="txtNgayKTThucTe" name="txtNgayKTThucTe" value="{{$cv->ngayketthuc_thucte}}" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtNgayKTThucTe')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Giao cho:</th>
                             <td>
                                 <select name='cbGiaoCho' class="form-control">                                    
@@ -72,17 +60,17 @@
                                 </select>
                                 <p style='color:red;'>{{$errors->first('cbGiaoCho')}}</p>
                             </td>
-                            <th>Số tuần thực tế</th>
-                            <td>
-                                <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$cv->sotuan_thucte}}" class="form-control"/>
-                                <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
-                            </td>
-                        </tr>
-                        <tr>
                             <th>Trong tuần:</th>
                             <td>
                                 <input type="text" name="txtTuan" value="{{$cv->tuan}}" placeholder="Theo dạng: 1-3 từ tuần 1 đến 3 hoặc 4"  class="form-control"/>
                                 <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Tuần làm lại:</th>
+                            <td>
+                                <input type="text" name="txtTuanLamLai" value="{{$cv->tuan_lamlai}}" placeholder="Theo dạng: 1-3 từ tuần 1 đến 3 hoặc 4"  class="form-control"/>
+                                <p style='color:red;'>{{$errors->first('txtTuanLamLai')}}</p>
                             </td>
                             <th>Tiến độ (%):</th>
                             <td>
