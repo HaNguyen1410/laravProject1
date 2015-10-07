@@ -168,8 +168,8 @@ class QltailieuController extends Controller
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'cbTenCV'  => 'required',
-                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm'
+                    'cbGiaiDoan'  => 'required',
+                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm,zip,rar'
                 ]
             );
         if($v->fails()){
@@ -189,7 +189,7 @@ class QltailieuController extends Controller
                             'matl'        => $_POST['txtMaTL'],
                             'tentl'       => $tenbandau,
                             'mssv'        => $mssv,
-                            'macv'        => $_POST['cbTenCV'],
+                            'macv'        => $_POST['cbGiaiDoan'],
                             'kichthuoc'   => $kichthuoc_mb,
                             'mota'        => $_POST['txtMoTa'],
                             'ngaycapnhat' => Carbon::now()
@@ -205,6 +205,8 @@ class QltailieuController extends Controller
             if ($upload_success) {
                 return Redirect::to('sinhvien/danhsachnoptailieu')->with('BaoThem', 'Gửi tài liệu thành công!');
             }
+            else
+                return $upload_success;
         }
     }
 /*=================== Cập nhật nộp tài liệu =========================*/
@@ -222,7 +224,7 @@ class QltailieuController extends Controller
 //        $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm'
+                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm,zip,rar'
                 ]
             );
         if($v->fails()){

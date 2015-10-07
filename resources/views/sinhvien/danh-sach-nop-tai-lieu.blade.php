@@ -31,12 +31,12 @@
             </a>
         </div> 
         <div class="col-md-12">   
-            <p style="color: blue; font-weight: bold;">{{ Session::get('BaoThem') }}</p>
-            <p style="color: blue; font-weight: bold;">{{ Session::get('BaoCapNhat') }}</p>
+            <p style="color: #006400; font-weight: bold;">{{ Session::get('BaoThem') }}</p>
+            <p style="color: #006400; font-weight: bold;">{{ Session::get('BaoCapNhat') }}</p>
              <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                  <tr>
                     <th width="1%">STT</th>
-                    <th width="6%">Mã công việc chính</th>
+                    <th width="10%">Giai đoạn</th>
                     <th width="8%">Tên tập tin</th>
                     <th width="12%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
@@ -55,8 +55,8 @@
                         <tr>
                             <td align="center">{{$stt+1}}</td>
                             <td align="center">
-                                <a style="color: blue;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->congviec}}">                                    
-                                    <label>{{$tl->macv}}</label>
+                                <a style="color: blue;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->macv}}">                                    
+                                    <label>{{$tl->congviec}}</label>
                                 </a>
                             </td>
                             <td>
@@ -84,11 +84,11 @@
                          <tr>
                              <td colspan="6">
                                  <label style="color: darkblue;">Nhận xét của giảng viên:</label><br>
-                                <p style="color: #000080;">{{$tl->nd_danhgia}}</p>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$tl->nd_danhgia}}
                             </td>
-                            <td colspan="2" style="color: darkblue;">
-                                <label>Ngày nhận xét:</label><br>
-                                {{$tl->ngaydanhgia}}                                                               
+                            <td colspan="2">
+                                <label style="color: darkblue;">Ngày nhận xét:</label><br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$tl->ngaydanhgia}}                                                               
                             </td>
                          </tr>
                     @endforeach

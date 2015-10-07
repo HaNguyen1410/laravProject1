@@ -230,9 +230,9 @@
                                          <td align='center'>{{$cv->sotuan_thucte}}</td>
                                       </tr>
                                       <tr style="background-color: #FFFFE0;">                                         
-                                          <td colspan='78'>
+                                          <td colspan='8'>
                                             <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
-                                            {{$cv->noidungthuchien}}
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
                                           </td> 
                                       </tr>
                                 @elseif($cv->phuthuoc_cv != "0")
@@ -253,9 +253,9 @@
                                          <td align='center'>{{$cv->sotuan_thucte}}</td>
                                       </tr>
                                       <tr>                                         
-                                          <td colspan='78'>
+                                          <td colspan='8'>
                                             <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
-                                            {{$cv->noidungthuchien}}
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
                                           </td> 
                                       </tr>
                                 @endif
