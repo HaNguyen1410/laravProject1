@@ -23,11 +23,11 @@
                     <th width="1%">STT</th>
                     <th width="6%">Mã công việc chính</th>
                     <th width="8%">Tên tập tin</th>
-                    <th width="12%">Mô tả</th>                    
+                    <th width="15%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
                     <th width="10%">Người nộp</th>
                     <th width="15%">Thực hiện</th>
-                    <th width="6%">Thao tác</th>
+                    <th width="4%">Thao tác</th>
                  </tr> 
                  @if(count($dstailieu) == 0)
                     <tr>
@@ -52,7 +52,7 @@
                             <td>{{$tl->mota}}</td>
                             <td>
                                 <a style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Tuần: {{$tl->tuan}}">                                    
-                                    <label style="color: black;">{{$tl->ngaycapnhat}}</label>
+                                    <label style="color: #2ca02c">{{$tl->ngaycapnhat}}</label>
                                 </a> 
                             </td>
                             <td>{{$tl->hoten}}</td> 
