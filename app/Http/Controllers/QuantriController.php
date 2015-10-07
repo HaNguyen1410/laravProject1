@@ -74,8 +74,7 @@ class QuantriController extends Controller
             system($command); 
         /*Cách 2 để chạy lệnh sao lưu CSDL
             exec($path . " -h " .$host. " -u " .$username. " " .$database." > " .$backupPath . $backupFileName);
-        */  
-      
+        */
         /* Cách 3 để chạy lệnh sao lưu dùng Artian
                 $exitCode = Artisan::call('db:backup'); Không lấy được tên file cscl đã lưu để đưa ra view
          */        
@@ -91,7 +90,7 @@ class QuantriController extends Controller
     //        $password = \Config::get('database.connections.mysql.password');
         $v = \Validator::make($req->all(),
                     [
-                        'fTenCSDL' => 'required' // |mimes:sql
+                        'fTenCSDL' => 'required' // 
                     ]
         );
         if($v->fails()){
@@ -103,11 +102,12 @@ class QuantriController extends Controller
 //            $backupPath = base_path();
 //            $backupPath = pathinfo($tenfile->getRealPath(),PATHINFO_DIRNAME);
 //            $backupPath = $tenfile->getPathName();
-            $backupPath = storage_path() . "\phuhoicsdl\\";"";
+            $backupPath = storage_path() . "\phuchoicsdl\\";"";
             $tenfile_dachon = Input::file('fTenCSDL')->getClientOriginalName();
+            
             $extension = Input::file('fTenCSDL')->getClientOriginalExtension();
         //Đưa file vừa upload vào thư mục storage/phuhoicsdl
-            $luuden = public_path() . '/phuchoicsdl/';    
+            $luuden = storage_path() . '/phuchoicsdl/';    
             $upload_success = $tenfile->move($luuden, $tenfile_dachon);
         //Kiểm tra file upload lên có phải là đuôi .sql không    
             if($extension != "sql"){
@@ -115,14 +115,20 @@ class QuantriController extends Controller
                 return Redirect::to('quantri/phuchoi');
             }
             else{
-                //Đường dẫn chạy mysqldump trong xampp của MySQL.
-                $path = "C:\\xampp\mysql\bin\mysqldump"; 
+                //Đường dẫn chạy mysql trong xampp của MySQL.
+                $path = "C:\\xampp\mysql\bin\mysql"; 
+                /* Cách 1:
+                 * $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon;
+                 * $command2 = $path . " -h " .$host. " -u " .$username." -p ".$password." " .$database." < " .$backupPath. $tenfile_dachon
+                 * system($command);
+                 * 
+                 *   ->with('backupPath',$backupPath)->with('command',$command)
+                 */
             //without password
-                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon;
-                $kq = system($command); 
-
-                return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)->with('extension',$extension)
-                        ->with('backupPath',$backupPath)->with('command',$command)->with('kq',$kq);
+                $kq = exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon);
+                
+                return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)
+                        ->with('kq',$kq);
             }        
         }      
     }
