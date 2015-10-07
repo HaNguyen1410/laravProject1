@@ -14,54 +14,37 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">Danh sách các đề tài</h3> 
-            <div class="bg-success">
-                <table class="table table-bordered" cellpadding="15px" cellspacing="10px">
-                    <tr>  
-                        <td align="right">Năm học:</td>
-                        <td width="14%">
-                            <select class="form-control" name='cbNamHoc'>
-                                @foreach($namhoc as $nk)
-                                <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
-                                @endforeach
-                            </select>
-                        </td>
-                        <td align="right">Học kỳ:</td>
-                        <td width="10%">
-                            <select class="form-control" name='cbHocKy'>
-                                @foreach($hocky as $nk)
-                                <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
-                                @endforeach
-                            </select>
-                        </td>
-                        <td align="right">Nhóm học phần:</td>
-                        <td>
-                            <select class="form-control" name='cbNhomHP'>
-                                @foreach($nhomhp as $hp)
-                                <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
-                                @endforeach
-                            </select>
-                        </td>
-                        <td align="right">Trạng thái:</td>
-                        <td>
-                            <select class="form-control">
-                                <option value="-1">Tất cả</option>
-                                <option value="Chưa thực hiện">Chưa thực hiện</option>
-                                <option value="Đang thực hiện">Đang thực hiện</option>
-                                <option value="Hoàn thành">Hoàn thành</option>
-                            </select>
-                        </td>
-                        <td>
-                            <a href="danhsachdetai/themdetai">
-                                <button type="button" name="" class="btn btn-primary">
-                                    <img src="{{asset('public/images/add-icon.png')}}">Thêm đề tài
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                </table> 
-            </div> <!-- /bg-success -->
-            
+            <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">Danh sách các đề tài</h3>            
+            <table class="table table-bordered" style="width:700px;" align="center">
+                <tr>  
+                    <th align="right">Năm học:</th>
+                    <td width="20%">
+<!--                        <select class="form-control" name='cbNamHoc'>
+                            @foreach($namhoc as $nk)
+                            <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
+                            @endforeach
+                        </select>-->
+                        <input type="text" name="txtNam" value="{{$namcb}}" style="text-align:center;" class="form-control" readonly=""/>
+                    </td>
+                    <th align="right">Học kỳ:</th>
+                    <td width="15%">
+<!--                        <select class="form-control" name='cbHocKy'>
+                            @foreach($hocky as $nk)
+                            <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
+                            @endforeach
+                        </select>-->
+                        <input type="text" name="txtHocKy" value="{{$hkcb}}" style="text-align:center;" class="form-control" readonly=""/>
+                    </td>
+                    <td align="center">
+                        <a href="danhsachdetai/themdetai">
+                            <button type="button" name="" class="btn btn-primary">
+                                <img src="{{asset('public/images/add-icon.png')}}">Thêm đề tài
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </table> 
+                        
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
             <table class="table table-bordered table-hover" width="800px">
                 <tr>

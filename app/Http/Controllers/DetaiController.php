@@ -32,7 +32,17 @@ class DetaiController extends Controller
     public function DsDeTai(){
         $macb = \Auth::user()->taikhoan;
         $dsdt = DB::table('de_tai')->where('macb',$macb)->paginate(5);
-//
+    //Lấy năm và học kỳ hiện tại
+        //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
+        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.nam');
+        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.hocky');
+    //Mảng năm và học kỳ
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
@@ -45,7 +55,8 @@ class DetaiController extends Controller
                     ->rightjoin('de_tai as dt','radt.madt','=','dt.madt')
                     ->get();
         return view('giangvien.danh-sach-de-tai')->with('dsdt',$dsdt)->with('nhomhp',$nhomhp)
-                    ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('nhomth',$nhomth);
+                    ->with('namhoc',$namhoc)->with('hocky',$hocky)->with('nhomth',$nhomth)
+            ->with('namcb',$namcb)->with('hkcb',$hkcb);
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaDeTai($madt){
