@@ -64,8 +64,7 @@ class QuantriController extends Controller
                 $tenkhongdau = $gv->bo_dau_cau($req->txtTenCSDL);
             //Loại bỏ các khoảng trắng trong tên nhập vào từ Input (textbox) 
             //vì tên file có khoảng trắng thì lệnh không thực thi được  
-                $tenfile = str_replace(" ", "", $tenkhongdau);
-                
+                $tenfile = str_replace(" ", "", $tenkhongdau);                
                 $backupFileName = $tenfile . "_" . date("Y-m-d_H-i-s") . '.sql';    
             }
         //Đường dẫn chạy mysqldump trong xampp của MySQL.
@@ -99,12 +98,18 @@ class QuantriController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }        
         else
-        {
-            $tenfile = Input::file('fTenCSDL');
-            $backupPath = pathinfo($tenfile->getRealPath(),PATHINFO_DIRNAME);
+        {                    
+            $tenfile = Input::file('fTenCSDL');            
+//            $backupPath = base_path();
+//            $backupPath = pathinfo($tenfile->getRealPath(),PATHINFO_DIRNAME);
 //            $backupPath = $tenfile->getPathName();
+            $backupPath = storage_path() . "\phuhoicsdl\\";"";
             $tenfile_dachon = Input::file('fTenCSDL')->getClientOriginalName();
             $extension = Input::file('fTenCSDL')->getClientOriginalExtension();
+        //Đưa file vừa upload vào thư mục storage/phuhoicsdl
+            $luuden = public_path() . '/phuchoicsdl/';    
+            $upload_success = $tenfile->move($luuden, $tenfile_dachon);
+        //Kiểm tra file upload lên có phải là đuôi .sql không    
             if($extension != "sql"){
                 \Session::flash('ThongBao','Vui lòng chọn file có đuôi .sql !');
                 return Redirect::to('quantri/phuchoi');
@@ -113,11 +118,11 @@ class QuantriController extends Controller
                 //Đường dẫn chạy mysqldump trong xampp của MySQL.
                 $path = "C:\\xampp\mysql\bin\mysqldump"; 
             //without password
-                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath."\\". $tenfile_dachon;
-                system($command); 
+                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon;
+                $kq = system($command); 
 
                 return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)->with('extension',$extension)
-                        ->with('backupPath',$backupPath)->with('command',$command);
+                        ->with('backupPath',$backupPath)->with('command',$command)->with('kq',$kq);
             }        
         }      
     }
