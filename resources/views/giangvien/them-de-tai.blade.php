@@ -89,11 +89,12 @@
                         </td>
                         <th colspan="2">Trạng thái</th>
                         <td colspan="2">
-                            <select class="form-control" name="cbmTrangThai">
+<!--                            <select class="form-control" name="cbmTrangThai">
                                 <option value="Chưa làm">Chưa làm</option>
                                 <option value="Đang làm">Đang làm</option>
                                 <option value="Đã hoàn thành">Đã hoàn thành</option>                                        
-                            </select> 
+                            </select> -->
+                            <input type="text" name="txtTrangThai" value="Chưa làm" class="form-control" readonly=""/>
                         </td>
                     </tr>                                            
                     <tr>

@@ -115,7 +115,7 @@ class DetaiController extends Controller
                     'motadt'        => $_POST['txtMoTa'],
                     'congnghe'      => $_POST['txtCongNghe'],
                     'ghichudt'      => $_POST['txtGhiChu'],
-                    'trangthai'     => $_POST['cbmTrangThai'],
+                    'trangthai'     => $_POST['txtTrangThai'],
                     'ngaytao'       => Carbon::now(),
                 );  
             $ch1 = DB::table('de_tai')->insert($data1);
@@ -176,9 +176,9 @@ class DetaiController extends Controller
             );
             $ch = DB::table('de_tai')->where('madt',$post['txtMaDeTai'])->update($data);            
             
-            if($ch > 0){
+//            if($ch > 0){
                 return redirect('giangvien/danhsachdetai');
-            }
+//            }
         }
     }
 /*================= Upload tập tin mô tả đề tài ========================*/
@@ -215,6 +215,7 @@ class DetaiController extends Controller
                                 'macb'          => $macb,
                                 'tendt'         => $_POST['txtTenDeTai'],
                                 'taptindinhkem' => $tenbandau,
+                                'trangthai'     => "Chưa làm",
                                 'ngaytao'       => Carbon::now()
                             ]
                         );

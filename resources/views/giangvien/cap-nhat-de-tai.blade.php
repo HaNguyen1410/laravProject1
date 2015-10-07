@@ -89,22 +89,29 @@
                         <th width="8%">Trạng thái</th>
                         <td colspan="4">
                             <?php
-                                $chuath = strcasecmp($dt->trangthai, 'Chưa làm');
-                                $dangth = strcasecmp($dt->trangthai, 'Đang làm');
-                                $ht = strcasecmp($dt->trangthai, 'Hoàn thành');
-                                if ($chuath == 0 && $dangth != 0 && $ht != 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện' checked='true'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
+                                if($dt->trangthai != null){
+                                    $chuath = strcasecmp($dt->trangthai, 'Chưa làm');
+                                    $dangth = strcasecmp($dt->trangthai, 'Đang làm');
+                                    $ht = strcasecmp($dt->trangthai, 'Hoàn thành');
+                                    if ($chuath == 0 && $dangth != 0 && $ht != 0) {
+                                        echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa làm' checked='true'/> &nbsp&nbsp&nbsp&nbsp";
+                                        echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang làm'/>&nbsp&nbsp&nbsp&nbsp";
+                                        echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
+                                    } elseif ($chuath != 0 && $dangth == 0 && $ht != 0) {
+                                        echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa làm'/> &nbsp&nbsp&nbsp&nbsp";
+                                        echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang làm' checked='true'/>&nbsp&nbsp&nbsp&nbsp";
+                                        echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
+                                    }elseif ($chuath != 0 && $dangth != 0 && $ht == 0) {
+                                        echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa làm'/> &nbsp&nbsp&nbsp&nbsp";
+                                        echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang làm'/>&nbsp&nbsp&nbsp&nbsp";
+                                        echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành' checked='true'/>";
+                                    }
+                                }else if($dt->trangthai == "" || $dt->trangthai == null){
+                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa làm'/> &nbsp&nbsp&nbsp&nbsp";
+                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang làm' checked='true'/>&nbsp&nbsp&nbsp&nbsp";
                                     echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
-                                } elseif ($chuath != 0 && $dangth == 0 && $ht != 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện' checked='true'/>&nbsp&nbsp&nbsp&nbsp";
-                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành'/>";
-                                }elseif ($chuath != 0 && $dangth != 0 && $ht == 0) {
-                                    echo "Chưa thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Chưa thực hiện'/> &nbsp&nbsp&nbsp&nbsp";
-                                    echo "Đang thực hiện: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Đang thực hiện'/>&nbsp&nbsp&nbsp&nbsp";
-                                    echo "Hoàn thành: <input type='radio' name='rdTrangThai' id='rdTrangThai' value='Hoàn thành' checked='true'/>";
                                 }
+                                    
                             ?>
                         </td>
                     </tr>                                           

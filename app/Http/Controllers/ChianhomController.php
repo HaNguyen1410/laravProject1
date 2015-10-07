@@ -215,7 +215,10 @@ class ChianhomController extends Controller
                             'ngaytao'             => Carbon::now()
                         ]
                     );
-               
+        //Cập nhật trạng thái đề tài Đang làm
+            $ch4 = DB::table('de_tai')->where('madt',$_POST['cbDeTai'])
+                    ->update(['trangthai' => "Đang làm"]);
+            
              return redirect('giangvien/chianhom');            
         }
     }
