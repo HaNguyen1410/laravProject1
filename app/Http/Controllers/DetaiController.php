@@ -55,7 +55,7 @@ class DetaiController extends Controller
         \Session::flash('ThongBao','Xóa '.$tendt.' thành công!');
         if($delete){
             //return $delete; $delete = 1 sau khi thuc hiện xóa
-            return redirect('giangvien/danhsachdetai/2134');
+            return redirect('giangvien/danhsachdetai');
         }
     }
 /*=========================== Thêm đề tài ==============================================*/ 

@@ -22,7 +22,7 @@
                 <table class="table table-bordered" style="width: 900px;" align="center">
                     <tr>
                         <th>Giai đoạn:</th>
-                        <td colspan="3"></td>
+                        <td colspan="3"><label style="color: #006400;">{{$tailieu->congviec}}</label></td>
                     </tr>
                     <tr>
                         <th>Mã cán bộ:</th>

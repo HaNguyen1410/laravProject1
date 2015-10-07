@@ -71,10 +71,12 @@ class QltailieuController extends Controller
                 ->where('radt.manhomthuchien',$manth)
                 ->first();
         $dstailieu = DB::table('tai_lieu as tl')
-                ->select('tl.matl','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
-                        'dg.nd_danhgia','dg.ngaydanhgia','cv.giaocho')
+                ->select('tl.matl','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
+                        'dg.nd_danhgia','dg.ngaydanhgia','cv.macv','cv.congviec','cv.giaocho','th.tuan'
+                        ,'sv.hoten')
                 ->leftjoin('thuc_hien as th','tl.macv','=','th.macv')
                 ->leftjoin('danh_gia as dg','tl.matl','=','dg.matl')
+                ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
                 ->join('cong_viec as cv','tl.macv','=','cv.macv')
                 ->where('th.manhomthuchien',$manth)
                 ->get();
@@ -88,8 +90,9 @@ class QltailieuController extends Controller
                 ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
                 ->where('radt.manhomthuchien',$manth)
                 ->first();        
-        $tailieu = DB::table('tai_lieu as tl')->select('tl.matl','tl.tentl','dg.nd_danhgia')
+        $tailieu = DB::table('tai_lieu as tl')->select('tl.matl','tl.tentl','dg.nd_danhgia','cv.congviec')
                 ->join('danh_gia as dg','tl.matl','=','dg.matl')
+                ->join('cong_viec as cv','tl.macv','=','cv.macv')
                 ->where('dg.matl',$matl)
                 ->first();
         return view('giangvien.danh-gia-tai-lieu')->with('macb',$macb)->with('tailieu',$tailieu)
@@ -121,7 +124,7 @@ class QltailieuController extends Controller
                         ]
                     );
             
-            return redirect('giangvien/khotailieu/'.$post['txtMaCB'].'/khotailieuchitiet/'.$manth);
+            return redirect('giangvien/khotailieu/khotailieuchitiet/'.$manth);
         }
     }
     /*========================= Sinh viên nộp tài liệu =============================*/
