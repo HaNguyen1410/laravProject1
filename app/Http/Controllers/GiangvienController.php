@@ -51,7 +51,8 @@ class GiangvienController extends Controller
                 ->where('hp.macb',$macb)
                 ->get();  
         
-        return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien)->with('nhomhp',$nhomhp);
+        return view('giangvien.thong-tin-giang-vien')->with('gv',$giangvien)->with('nhomhp',$nhomhp)
+            ->with('nam',$nam)->with('hk',$hk);
     }
 /*=========================== Đổi mật khẩu Giảng Viên ==============================================*/   
     public function DoiMatKhauGV(){        

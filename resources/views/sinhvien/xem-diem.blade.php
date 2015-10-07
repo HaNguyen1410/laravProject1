@@ -75,6 +75,7 @@
                 <th rowspan="2" width="1%">STT</th>
                 <th rowspan="2" width="8%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
+                <th rowspan="2" width="1%">Nhóm trưởng</th>
                 <th colspan="{{$n=count($tieuchi)}}" width="30%">Tiêu chí - Điểm tối đa</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>    
@@ -96,6 +97,11 @@
                     <td align="center">{{$stt+1}}</td>
                     <td align="center">{{$sv->mssv}}</td>
                     <td>{{$sv->hoten}}</td>
+                    <td align="center">
+                        @if($sv->nhomtruong == 1)
+                            <img src="{{asset('public/images/check.png')}}"/>
+                        @endif
+                    </td>
                     @if(count($tieuchi) == 0)
                         <td></td>
                         <td></td>

@@ -18,8 +18,11 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN GIẢNG VIÊN</h3><br>
-        </div>               
+            <h3 style="color: darkblue; font-weight: bold;" align="center">THÔNG TIN GIẢNG VIÊN</h3>
+        </div>   
+        <div align="center">
+            (Học kỳ: <lable style="color: #00c; font-weight: bold;">{{$hk}}</lable> - Năm học: <lable style="color: #00c; font-weight: bold;">{{$nam}})</lable>
+        </div><br>
         <div class="row">
                 <div class="col-md-9 col-md-push-3">
                     <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>

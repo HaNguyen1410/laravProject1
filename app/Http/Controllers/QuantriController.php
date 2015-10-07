@@ -146,10 +146,15 @@ class QuantriController extends Controller
     public function ThongTinQT(){
         $macb = \Auth::user()->taikhoan;
         $giangvien = Giangvien::find($macb);
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
         $tennhomhp = DB::table('giang_vien as gv')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
                 ->value('tennhomhp');
-        return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien)->with('hp',$tennhomhp);
+        return view('quantri.thong-tin-quan-tri-vien')->with('gv',$giangvien)->with('hp',$tennhomhp)
+            ->with('nam',$nam)->with('hk',$hk);
     }
  /*=========================== Đổi mật khẩu ==============================================*/   
     public function DoiMatKhauQT(){

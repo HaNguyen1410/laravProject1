@@ -161,7 +161,7 @@ class IntrangController extends Controller
                 ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
         $dssv = DB::table('sinh_vien as sv')->orderBy('chn.manhomthuchien','asc')
-                ->select('chn.manhomthuchien', 'sv.mssv','sv.hoten')
+                ->select('chn.manhomthuchien', 'sv.mssv','sv.hoten','chn.nhomtruong')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
                 ->whereIn('chn.manhomthuchien',$dsNhomth)
                 ->where('chn.manhomthuchien','<>',"")
