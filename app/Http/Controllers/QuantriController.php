@@ -125,10 +125,11 @@ class QuantriController extends Controller
                  *   ->with('backupPath',$backupPath)->with('command',$command)
                  */
             //without password
-                $kq = exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon);
+                $command = $path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon;
+                exec($path . " -h " .$host. " -u " .$username. " " .$database." < " .$backupPath. $tenfile_dachon);
                 
                 return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)
-                        ->with('kq',$kq);
+                        ->with('command',$command);
             }        
         }      
     }
