@@ -66,6 +66,7 @@ class IntrangController extends Controller
 /*====================== Sinh viên in bảng điểm của cả nhóm làm cùng 1 đề tài =============================*/    
     public function InBangDiemSV(){
         $mssv = \Auth::user()->taikhoan;
+        $mahp = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomhp');
         $tensv = DB::table('sinh_vien')->select('mssv','hoten')->where('mssv',$mssv)->first();
         $manhom = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien'); 
         $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','hp.tennhomhp')
@@ -82,10 +83,10 @@ class IntrangController extends Controller
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
                 ->where('chn.mssv',$mssv)
                 ->value('hp.macb');
-        $dstieuchi = $this->LayDSTieuChi($macb);
-        $dssv = $this->LayDSNhomSV($macb);
-        $dsdiem = $this->LayDSDiem($macb);
-        $tongdiem = $this->LayTongDiem($macb);
+        $dstieuchi = $this->LayDSTieuChi($macb,$mahp);
+        $dssv = $this->LayDSNhomSV($macb,$mahp);
+        $dsdiem = $this->LayDSDiem($macb,$mahp);
+        $tongdiem = $this->LayTongDiem($macb,$mahp);
        //Lấy 1 mảng mssv của 1 nhóm thực hiện
         $masv = DB::table('sinh_vien as sv')->select('chn.mssv')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
