@@ -11,7 +11,7 @@
             background-color: #dff0d8;
         }
     </style>
-    <link rel="stylesheet" href="{{Asset('public/scripts/Highcharts-4.1.7/api/css/font-awesome.css')}}">
+    <!--<link rel="stylesheet" href="{{Asset('public/scripts/Highcharts-4.1.7/api/css/font-awesome.css')}}">-->
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script>
@@ -21,7 +21,11 @@
             // Create the chart
             $('#container1').highcharts({
                 chart: {
-                    type: 'column'
+                    type: 'column',
+                    style: {
+                        fontFamily: 'Verdana, Arial, Helvetica, sans-serif',
+                        color: "red"
+                    }
                 },
                 title: {
                     text: 'Tiến độ các công việc chính của nhóm "{{$manth}}"'
@@ -40,6 +44,9 @@
                 },
                 legend: {
                     enabled: false
+                },
+                credits: {
+                    enabled: false //Bỏ đường link highchart.com dưới sơ đồ
                 },
                 plotOptions: {
                     series: {
@@ -76,7 +83,7 @@
                 drilldown: {
                     activeAxisLabelStyle: {
                         textDecoration: 'none',
-                        fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
+                        fontFamily: 'Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
                     },
                     activeDataLabelStyle: {
                         textDecoration: 'none',
@@ -146,7 +153,7 @@
                     }
                 ?>
                 <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">                  
-                    {{$antoan}}% Complete (success) {{$tuanhientai}}
+                    {{$antoan}}% Complete (success) 
                 </div>
                 <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
                   {{$canhbao}}% (warning)

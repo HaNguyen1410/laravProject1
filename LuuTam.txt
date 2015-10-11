@@ -25,6 +25,7 @@ function kt_radio(){
                 }
             }
 ==========================================
+fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
 =======================================
 
    
