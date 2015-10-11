@@ -30,6 +30,16 @@ class TheodoikehoachController extends Controller
 /*================== Danh sách đề tài thực hiện ======================*/   
     public function TheoDoiKH(){
         $macb = \Auth::user()->taikhoan;
+         //Lấy năm và học kỳ hiện tại
+        //Lấy học kỳ niên khóa sau cùng của 1 cán bộ
+        $namcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.nam');
+        $hkcb = DB::table('nien_khoa as nk')->orderBy('nam','desc')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('hp.macb',$macb)
+                ->value('nk.hocky');
         $dsdtnhom = DB::table('nhom_thuc_hien as nth')
                 ->select('nth.manhomthuchien','dt.tendt','sv.hoten','nth.tochucnhom',
                         'nth.lichhop','nth.sotuan_thucte','nth.sotuan_kehoach','nth.tiendo')
@@ -49,6 +59,7 @@ class TheodoikehoachController extends Controller
                 ->join('giang_vien as gv','hp.macb','=','gv.macb')
                 ->where('hp.macb',$macb)->get();
         return view('giangvien.theo-doi-ke-hoach')->with('dsdtnhom',$dsdtnhom)->with('nhomhp',$nhomhp)
+                 ->with('namcb',$namcb)->with('hkcb',$hkcb)
                     ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/

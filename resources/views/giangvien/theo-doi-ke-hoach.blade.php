@@ -19,32 +19,34 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold;">Theo dõi kế hoạch thực hiện đề tài</h3> 
-            <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
+            <table class="table table-bordered" style="width: 500px" align="center">
                 <tr>
-                    <th align="right">Năm học:</th>
-                    <th width="20%">
-                        <select class="form-control" name='cbNamHoc'>
+                    <th width="20%" align="right">Năm học:</th>
+                    <th>
+<!--                        <select class="form-control" name='cbNamHoc'>
                             @foreach($namhoc as $nk)
                             <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
                             @endforeach
-                        </select>
+                        </select>-->
+                        <input type="text" name="txtNam" value="{{$namcb}}" style="text-align:center;" class="form-control" readonly=""/>
                     </th>
-                    <th align="right">Học kỳ:</th>
-                    <th width="10%">
-                        <select class="form-control" name='cbHocKy'>
+                    <th width="15%" align="right">Học kỳ:</th>
+                    <th>
+<!--                        <select class="form-control" name='cbHocKy'>
                             @foreach($hocky as $nk)
                             <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
                             @endforeach
-                        </select>
+                        </select>-->
+                       <input type="text" name="txtHocKy" value="{{$hkcb}}" style="text-align:center;" class="form-control" readonly=""/> 
                     </th>
-                    <th align="right">Nhóm học phần:</th>
+<!--                    <th align="right">Nhóm học phần:</th>
                     <th>
                         <select class="form-control" name='cbNhomHP'>
                             @foreach($nhomhp as $hp)
                             <option value="{{$hp->manhomhp}}">{{$hp->tennhomhp}}</option>  
                             @endforeach
                         </select>
-                    </th>
+                    </th>-->
                 </tr>
             </table>
             <table class="table table-bordered table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
