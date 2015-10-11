@@ -29,7 +29,7 @@
                     <th width="15%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>
                     <th width="10%">Người nộp</th>
-                    <th width="15%">Thực hiện</th>
+                    <th width="15%">Sinh viên thực hiện</th>
                     <th width="4%">Thao tác</th>
                  </tr> 
                  @if(count($dstailieu) == 0)
@@ -54,7 +54,13 @@
                             </td>
                             <td>{{$tl->mota}}</td>
                             <td>
-                                <a style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Tuần: {{$tl->tuan}}">                                    
+                                <?php
+                                    if($tl->tuan_lamlai == "")
+                                        $tuan = $tl->tuan;
+                                    else if($tl->tuan_lamlai != "")
+                                        $tuan = $tl->tuan_lamlai;                                
+                                ?>
+                                <a style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Tuần: {{$tuan}}">                                    
                                     <label style="color: #2ca02c">{{$tl->ngaycapnhat}}</label>
                                 </a> 
                             </td>

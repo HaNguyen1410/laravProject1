@@ -165,7 +165,7 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     route::get('theodoikehoach', 'TheodoikehoachController@TheoDoiKH');
     Route::group(['prefix'=>'theodoikehoach'],function(){
         route::get('cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
-        route::get('cvphuthuoc/{manth}/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
+        route::get('cvchinh/{manth}/cvphuthuoc/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
     });
     //route::post('giangvien/theodoikehoach/{macb}/{mahp}', 'TheodoikehoachController@TheoDoiKH');
     /*======= QUẢN LÝ THÔNG BÁO ==========*/

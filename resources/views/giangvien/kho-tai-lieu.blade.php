@@ -26,7 +26,7 @@
                     <th width="8%">Mã nhóm</th>
                     <th width="18%">Nhóm trưởng</th>
                     <th width="10%">Ngày đăng mới nhất</th>
-                    <th width="50%">Ghi chú</th>
+                    <th width="50%">Mô tả tài liệu</th>
                 </tr>
                  @if(count($dsdt) == 0)
                     <tr>
@@ -47,7 +47,7 @@
                                 </a> 
                             </td>
                             <td align="center">{{$dt->manhomthuchien}}</td>
-                            <td>{{$dt->hoten}}</td>                       
+                            <td>{{$dt->hoten}}</td>                             
                             @foreach($tailieu as $tl) 
                                 @if($dt->manhomthuchien == $tl->manhomthuchien)
                                     <td>{{$tl->ngaycapnhat}}</td>

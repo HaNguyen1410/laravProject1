@@ -154,7 +154,7 @@
                     <th width="2%">STT</th>
                     <th width="10%">MSSV</th>
                     <th width="20%">Các thành viên</th>
-                    <th width="10%">Số giờ thực hiện dự án</th>
+                    <!--<th width="10%">Số giờ thực hiện dự án</th>-->
                     <th width="5%">Trưởng nhóm</th>
                 </tr>         
                 @foreach($dstv as $stt => $tv)
@@ -162,7 +162,7 @@
                     <td style="vertical-align: middle; text-align: center;" rowspan="2">{{$stt+1}}</td>
                     <td align='center'>{{$tv->mssv}}</td>
                     <td align='center'>{{$tv->hoten}}</td>
-                    <td align='center'></td>
+                    <!--<td align='center'></td>-->
                     <td align='center'>
                         @if($tv->nhomtruong == 1)
                             <img src="{{asset('public/images/check.png')}}"/>
@@ -197,76 +197,51 @@
                         <tr>
                             <th rowspan='2' width='2%'>ID</th>
                             <th rowspan='2' width='15%'>Công việc</th>
-                            <th rowspan='2' width='15%'>Giao cho</th>
+                            <th rowspan='2' width='15%'>Giao cho</th>  
+                            <th rowspan='2' width='4%'>Tuần làm lại</th>
                             <th rowspan='2' width='15%'>Ngày tạo</th>
                             <th rowspan='2' width='8%'>Trạng thái</th>
+                            <th rowspan='2' width='8%'>Tiến độ</th>
                             <th colspan='2' width='15%'>Kế hoạch</th>
-                            <th colspan='3' width='25%'>Thực tế</th>
                         </tr>
                         <tr>
                            <th>Bắt đầu</th>
                            <th>Kết thúc</th>
-                           <th>Bắt đầu</th>
-                           <th>Kết thúc</th>
-                           <th>Số tuần</th>
                         </tr>
                         @foreach($dscv as $cv)
                             @if($cv->tuan == $tuan->tuan)  
-                                @if($cv->phuthuoc_cv == "0")
-                                      <tr style="background-color: #FFFFE0;">
-                                         <td rowspan="2" align='center' style="vertical-align: middle; font-weight: bold;">
-                                             {{$cv->macv}}
-                                         </td>
-                                         <td rowspan="2"  style="vertical-align: middle; font-weight: bold;">
-                                             {{$cv->congviec}}
-                                         </td>
-                                         <td>{{$cv->giaocho}}</td>
-                                         <td align='center'>{{$cv->ngaytao}}</td>
-                                         <td align='center'>{{$cv->trangthai}}</td>
-                                         <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
-                                         <td align='center'>{{$cv->ngayketthuc_kehoach}}</td> 
-                                         <td align='center'>{{$cv->ngaybatdau_thucte}}</td>
-                                         <td align='center'>{{$cv->ngayketthuc_thucte}}</td>                            
-                                         <td align='center'>{{$cv->sotuan_thucte}}</td>
-                                      </tr>
-                                      <tr style="background-color: #FFFFE0;">                                         
-                                          <td colspan='8'>
-                                            <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
-                                          </td> 
-                                      </tr>
-                                @elseif($cv->phuthuoc_cv != "0")
-                                    <tr>
-                                         <td rowspan="2" align='center' style="vertical-align: middle; font-weight: bold;">
-                                             {{$cv->macv}}
-                                         </td>
-                                         <td rowspan="2"  style="vertical-align: middle; font-weight: bold;">
-                                             {{$cv->congviec}}
-                                         </td>
-                                         <td>{{$cv->giaocho}}</td>
-                                         <td align='center'>{{$cv->ngaytao}}</td>
-                                         <td align='center'>{{$cv->trangthai}}</td>
-                                         <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
-                                         <td align='center'>{{$cv->ngayketthuc_kehoach}}</td> 
-                                         <td align='center'>{{$cv->ngaybatdau_thucte}}</td>
-                                         <td align='center'>{{$cv->ngayketthuc_thucte}}</td>                            
-                                         <td align='center'>{{$cv->sotuan_thucte}}</td>
-                                      </tr>
-                                      <tr>                                         
-                                          <td colspan='8'>
-                                            <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
-                                          </td> 
-                                      </tr>
-                                @endif
+                                <tr>
+                                    <td rowspan="2" align='center' style="vertical-align: middle; font-weight: bold;">
+                                        {{$cv->macv}}
+                                    </td>
+                                    <td rowspan="2"  style="vertical-align: middle; font-weight: bold;">
+                                        <a href="{{$manth}}/cvphuthuoc/{{$cv->macv}}">{{$cv->congviec}}</a>                                        
+                                    </td>
+                                    <td>{{$cv->giaocho}}</td>
+                                    <td align='center'>{{$cv->tuan_lamlai}}</td>
+                                    <td align='center'>{{$cv->ngaytao}}</td>
+                                    <td align='center'>{{$cv->trangthai}}</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                                <span style="color:brown;">{{$cv->tiendo}}%</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
+                                    <td align='center'>{{$cv->ngayketthuc_kehoach}}</td>   
+                                 </tr>
+                                 <tr>                                         
+                                     <td colspan='8'>
+                                       <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
+                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
+                                     </td> 
+                                 </tr>
                             @endif
                         @endforeach 
                      </table>
                 </div>             
-             @endforeach
-             <div class="col-md-12" align="center">
-                 {!! $dstuan->setPath($manth)->render() !!}
-             </div>
+             @endforeach             
         </div>
     </div>
 </div>

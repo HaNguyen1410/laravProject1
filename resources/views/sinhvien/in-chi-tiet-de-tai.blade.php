@@ -16,8 +16,8 @@ and open the template in the editor.
                 margin-right: 50px;            
             }            
             th{
-                background-color: #9acfea;
                 text-align: right;
+                width: 30%
             }
             @page {size: landscape;}
         </style>
@@ -29,9 +29,9 @@ and open the template in the editor.
             (Học kỳ: <lable style="color: #00c;">{{$nk->hocky}}</lable> - Năm học: <lable style="color: #00c;">{{$nk->nam}})</lable>
         </div>
         <br>
-        <table border="1" style="width:100%" cellpadding="1px 1px" cellspacing="0px 0px">
+        <table border="0" style="width:100%" cellpadding="1px 1px" cellspacing="0px 0px">
             <tr>
-                <th width="20%">Họ và tên cán bộ:</th>
+                <th>Họ và tên cán bộ:</th>
                 <td>
                     <label style="color: #00c; font-weight: bold; margin-left: 10px;"> 
                         {{$tencb->hoten}} ({{$tencb->macb}})
@@ -41,7 +41,7 @@ and open the template in the editor.
             <tr>
                 <th>Tên đề tài:</th>
                 <td>
-                    <label style="color: #00c; margin-left: 10px;"> 
+                    <label style="color: #00c; margin-left: 10px; font-weight: bold;"> 
                         {{$detai->tendt}}
                     </label>
                 </td>
@@ -49,25 +49,30 @@ and open the template in the editor.
             <tr>
                 <th>Số sinh viên thực hiện (tối đa):</th>
                 <td>
-                    <label style="color: #00c; margin-left: 10px; font-weight: bold;"> 
+                    <label style="color: #00c; margin-left: 10px;"> 
                         {{$detai->songuoitoida}} Người.
                     </label>
                 </td>
             </tr>
         </table><br>
         <h3 style="text-align: center; font-weight: bold;">Thông tin chi tiết</h3>
-        <table border="1" style="width:100%; margin-left: -15px;" cellpadding="4px 8px" cellspacing="0px 0px">            
+        <table border="0" style="width:800px;" cellpadding="4px 8px" cellspacing="0px 0px">            
             <tr>
-                <th width="20%">Mô tả đề tài:</th>
-                <td>{{$detai->motadt}}</td>                                       
+                <td>
+                    <label style="color: blue; font-weight: bold;">Mô tả đề tài:</label><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$detai->motadt}}
+                </td>                                       
             </tr>
-            <tr>
-                <th width="10%">Công nghệ thực hiện:</th>
-                <td>{{$detai->congnghe}}</td>                                       
+            <tr><td>
+                    <label style="color: blue; font-weight: bold;">Công nghệ thực hiện:</label><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$detai->congnghe}}
+                </td>                                       
             </tr>   
             <tr>
-                <th width="10%">Lưu ý:</th>
-                <td>{{$detai->ghichudt}}</td>                                       
+                <td>
+                    <label style="color: blue; font-weight: bold;">Lưu ý:</label><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{$detai->ghichudt}}
+                </td>                                       
             </tr> 
         </table>
     </body>

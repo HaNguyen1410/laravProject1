@@ -71,8 +71,8 @@
                             <td align='center'>{{$stt+1}}</td>
                             <td align='center'>{{$dtn->manhomthuchien}}</td>
                             <td>
-                               <a href='theodoikehoach/cvchinh/{{$dtn->manhomthuchien}}'>
-                                    {{$dtn->tendt}}
+                               <a style="font-weight: bold;" href='theodoikehoach/cvchinh/{{$dtn->manhomthuchien}}'>
+                                   {{$dtn->tendt}}
                                 </a>  
                             </td>
                             <td>{{$dtn->hoten}}</td>
@@ -91,12 +91,12 @@
                                        $bc = strcasecmp($kytu, 'C');
                                        if($bs == 0){
                                            echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
-                                               "<label style='color:green;'>Sáng thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                               "Sáng thứ ".$ngay_so." &nbsp;&nbsp;".                           
                                             "</div>";
                                        }
                                        else if($bc == 0){
                                            echo "<div style='padding: 0px 0px; display: block; float: left;'>".  
-                                                   "<label style='color:green;'>Chiều thứ ".$ngay_so."</label> &nbsp;&nbsp;".                           
+                                                   "Chiều thứ ".$ngay_so." &nbsp;&nbsp;".                           
                                                 "</div>";                                        
                                        }
                                    }                                    

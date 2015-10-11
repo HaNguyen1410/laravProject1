@@ -20,57 +20,8 @@ function kt_radio(){
                 }
             }
 ==============================================
---Trang sinh viên -> kết quả tìm kiếm --
-@foreach($dscv as $stt => $cv)
-                                @if($cv->phuthuoc_cv == "0")
-                                    <tr style="background-color: #FFEFD5;">
-                                        <td align="center">{{$stt + 1}}</td>
-                                        <td align="center">{{$cv->tuan}}</td>
-                                        <td>
-                                            <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
-                                                {{$cv->congviec}}
-                                            </a>                                            
-                                        </td>
-                                        <td>{{$cv->giaocho}}</td>
-                                        <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
-                                        <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                                        <td align="center">{{$cv->sotuan_thucte}}</td>
-                                        <td align="center">{{$cv->phuthuoc_cv}}</td>
-                                        <td align="center">{{$cv->uutien}}</td>
-                                        <td align="center">{{$cv->trangthai}}</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
-                                                </div>
-                                            </div>                                          
-                                        </td>
-                                    </tr>
-                                @elseif($cv->phuthuoc_cv != "0")
-                                    <tr style="background-color: #FFFFE0;">
-                                        <td align="center">{{$stt + 1}}</td>  
-                                        <td align="center">{{$cv->tuan}}</td>
-                                        <td>
-                                            <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
-                                                {{$cv->congviec}}
-                                            </a>
-                                        </td>
-                                        <td>{{$cv->giaocho}}</td>
-                                        <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
-                                        <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                                        <td align="center">{{$cv->sotuan_thucte}}</td>
-                                        <td align="center">{{$cv->phuthuoc_cv}}</td>
-                                        <td align="center">{{$cv->uutien}}</td>
-                                        <td align="center">{{$cv->trangthai}}</td>
-                                        <td>
-                                            <div class="progress">
-                                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                                    <span style='color:brown;'>{{$cv->tiendo}}%</span>
-                                                </div>
-                                            </div>                                          
-                                        </td>
-                                    </tr>
-                                @endif
-                            @endforeach
-=================================
+<div class="col-md-12" align="center">
+    {!! $dstuan->setPath($manth)->render() !!}
+</div>
+
 

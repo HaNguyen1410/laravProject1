@@ -56,7 +56,7 @@ class QltailieuController extends Controller
                 ->lists('chn.manhomthuchien');
         $tailieu = DB::table('tai_lieu as tl')                
                 ->select('th.manhomthuchien','tl.mota','tl.ngaycapnhat')
-                ->join('thuc_hien as th','tl.macv','=','th.macv')
+                ->leftjoin('thuc_hien as th','tl.macv','=','th.macv')
                 ->whereIn('th.manhomthuchien',$dsnhom)
                 ->orderBy('tl.ngaycapnhat','desc')
                 ->groupBy('th.manhomthuchien')
@@ -74,7 +74,7 @@ class QltailieuController extends Controller
         $dstailieu = DB::table('tai_lieu as tl')
                 ->select('tl.matl','tl.mssv','tl.tentl','tl.kichthuoc','tl.mota','tl.ngaycapnhat',
                         'dg.nd_danhgia','dg.ngaydanhgia','cv.macv','cv.congviec','cv.giaocho','th.tuan'
-                        ,'sv.hoten')
+                        ,'th.tuan_lamlai','sv.hoten')
                 ->leftjoin('thuc_hien as th','tl.macv','=','th.macv')
                 ->leftjoin('danh_gia as dg','tl.matl','=','dg.matl')
                 ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
