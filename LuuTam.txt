@@ -1,4 +1,4 @@
-
+<!--Hiển thị mảng tên nhóm HP {{var_dump($nhomhp)}}-->
 ==========================================================================
 function kt_radio(){
                   var isOK = false;

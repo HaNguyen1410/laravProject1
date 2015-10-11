@@ -69,14 +69,14 @@
                         </tr>
                         <tr>   
                             <th>Đính kèm:</th>
-                            <td>
+                            <td colspan="3">
                                 <input type="file" name="fDinhKemTB"/>
                                 <p style='color:red;'>{{$errors->first('fDinhKemTB')}}</p>
                             </td>
-                            <th>Đóng hệ thống:</th>
+<!--                            <th>Đóng hệ thống:</th>
                             <td>
                                 <input type="checkbox" name="chkDongNop" value="" style="margin-left: 10px; margin-right: 10px"/>                               
-                            </td>                            
+                            </td>                            -->
                         </tr>
                         <tr>
                             <td colspan="4" align="center">

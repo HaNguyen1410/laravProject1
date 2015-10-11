@@ -39,12 +39,24 @@
                                 <input type="text" name="txtMaTB" value="{{$tb->matb}}" style=" width: 90px; text-align: center; color: #006400; font-weight: bold; display: block; float: left;"  class="form-control" readonly=""/>                               
                             </td> 
                             <th>Nhóm thực hiện:</th>
-                            <td>
+                            <td>                               
                                 <select class="form-control" name="cbNhomNL">
-                                    <option value="Tất cả">Tất cả</option>
-                                    @foreach($dsnhomth as $nhom)
-                                        <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>                                        
-                                    @endforeach
+                                @foreach($dsnhomth as $nhom)
+                                    @if($ntb->manhomthuchien == "Tất cả")
+                                        <option value="Tất cả" selected="">Tất cả</option>
+                                        @foreach($dsnhomth as $nhom)
+                                            <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>              
+                                        @endforeach                                                        
+                                    @elseif($ntb->manhomthuchien == $nhom->manhomthuchien)
+                                        <option value="{{$ntb->manhomthuchien}}" selected="">{{$ntb->manhomthuchien}}</option>
+                                        <option value="Tất cả">Tất cả</option>
+                                        @foreach($dsnhomth as $nhom) 
+                                            @if($ntb->manhomthuchien != $nhom->manhomthuchien)
+                                                <option value="{{$nhom->manhomthuchien}}">{{$nhom->manhomthuchien}}</option>
+                                            @endif 
+                                        @endforeach                              
+                                    @endif
+                                @endforeach
                                 </select>
                             </td>                            
                         </tr>
@@ -69,18 +81,18 @@
                         </tr>
                         <tr>
                             <th>Đính kèm:</th>
-                            <td>
+                            <td colspan="3">
                                 <input type="file" name="fDinhKemTB"/>
                                 <p style='color:red;'>{{$errors->first('fDinhKemTB')}}</p>
                             </td>
-                            <th>Đóng hệ thống:</th>
+<!--                            <th>Đóng hệ thống:</th>
                             <td align="center">
                                 @if($tb->donghethong == 1)
                                     <input type="checkbox" name="chkDongNop" value="1" checked="true" style="margin-left: 10px; margin-right: 10px"/>
                                 @elseif($tb->donghethong == 0)
                                     <input type="checkbox" name="chkDongNop" value="0" style="margin-left: 10px; margin-right: 10px"/>
                                 @endif
-                            </td>                            
+                            </td>                            -->
                         </tr>
                         <tr>
                             <td colspan="4" align="center">

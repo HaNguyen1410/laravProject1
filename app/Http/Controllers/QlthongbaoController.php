@@ -80,8 +80,8 @@ class QlthongbaoController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtNoiDungTB'  => 'required',
-                    'txtBatDauNop'  => 'required|date',
-                    'txtKetThucNop' => 'required|date',
+//                    'txtBatDauNop'  => 'required|date',
+//                    'txtKetThucNop' => 'required|date',
                     'fDinhKemTB'    => 'mimes:pdf,doc,docx,ppt,pptm,xls,xlsm'
                 ]
             );
@@ -106,7 +106,7 @@ class QlthongbaoController extends Controller
                     'dinhkemtb'   => $tenbandau,
                     'batdautb'    => $_POST['txtBatDauNop'],
                     'ketthuctb'   => $_POST['txtKetThucNop'],
-                    'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
+//                    'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
                     'ngaytao'     => Carbon::now()
                 ]
             );
@@ -123,7 +123,7 @@ class QlthongbaoController extends Controller
             }
             
             if($ch2 > 0 && $ch > 0){
-                return redirect('giangvien/quanlythongbao/2134');
+                return redirect('giangvien/quanlythongbao');
             }
         }
     }
@@ -131,6 +131,7 @@ class QlthongbaoController extends Controller
     public function CapNhatThongBao($matb){
         $macb = \Auth::user()->taikhoan;
         $tb = DB::table('thong_bao')->where('matb',$matb)->first();
+        $ntb = DB::table('nhan_thong_bao')->where('matb',$matb)->first();
         //Lấy năm học và học kỳ hiện tại      
         $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
         $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
@@ -145,7 +146,7 @@ class QlthongbaoController extends Controller
                     ->where('hp.macb',$macb)
                     ->get();
         return view('giangvien.cap-nhat-thong-bao')->with('macb',$macb)->with('tb',$tb)
-            ->with('dsnhomth',$dsnhomth)->with('macb',$macb);
+            ->with('dsnhomth',$dsnhomth)->with('macb',$macb)->with('ntb',$ntb);
     } 
 /*=================== Lưu Cập nhật thông báo ===============================*/  
     public function LuuCapNhatThongBao(Request $req){
@@ -153,15 +154,15 @@ class QlthongbaoController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtNoiDungTB'  => 'required',
-                    'txtBatDauNop'  => 'required|date',
-                    'txtKetThucNop' => 'required|date',
+//                    'txtBatDauNop'  => 'required|date',
+//                    'txtKetThucNop' => 'required|date',
                     'fDinhKemTB'    => 'mimes:pdf,doc,docx,ppt,pptm,xls,xlsm'
                 ]
             );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
-        else{
+        else{            
             $luuden = public_path().'/thongbao/';
             $taptin = Input::file('fDinhKemTB');
             if($taptin != null){
@@ -177,7 +178,7 @@ class QlthongbaoController extends Controller
                             'dinhkemtb'     => $tenbandau,
                             'batdautb'    => $_POST['txtBatDauNop'],
                             'ketthuctb'   => $_POST['txtKetThucNop'],
-                            'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
+//                            'donghethong' => isset($_POST['chkDongNop']) ? 1 : 0,
                             'ngaysua'     => Carbon::now()              
                         ]   
                     );
@@ -191,7 +192,7 @@ class QlthongbaoController extends Controller
                 $upload_tb = $taptin->move($luuden, $tenbandau);
             }
                  
-            return redirect('giangvien/quanlythongbao/2134');
+            return redirect('giangvien/quanlythongbao');
             
         }
     }
@@ -201,7 +202,7 @@ class QlthongbaoController extends Controller
         $delete = DB::table('thong_bao')->where('macb',$macb)->where('matb',$matb)->delete();
         $delete2 = DB::table('nhan_thong_bao')->where('matb',$matb)->delete();
         if($delete > 0 && $delete2 > 0){
-            return redirect('giangvien/quanlythongbao/2134');
+            return redirect('giangvien/quanlythongbao');
         }
     }
 

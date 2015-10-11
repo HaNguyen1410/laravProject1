@@ -1,6 +1,6 @@
-@extends('sinhvien_home')
+@extends('giangvien_home')
 
-@section('content_sv')
+@section('content_gv')
  
     <style type="text/css">
         th{
@@ -13,12 +13,12 @@
 <div class="container">         
 
     <div class="row">
-        @if(Session::has('ThongBao') && count($manth_svdangtim) == 0)
+        @if(Session::has('ThongBao') && count($sv) == 0)
             <div class="alert alert-info" style="color: red;">
                 {{ Session::get('ThongBao') }} <br>
                 <label style="color: black;">{{$hoten}}({{$mssv}}) - Của nhóm HP: {{$hp_sv}}</label>
             </div>
-        @elseif(count($manth_svdangtim) != 0)
+        @elseif(count($sv) != 0)
             <div class="col-md-12">            
                 <h3 style="color: darkblue; font-weight: bold;" align="center">
                     Kết quả tìm kiếm

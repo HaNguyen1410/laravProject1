@@ -43,7 +43,7 @@
                     <th width="8%">Thời hạn kết thúc</th>
                     <th width="8%">Ngày tạo</th>
                     <th width="8%">Ngày sửa</th>
-                    <th width="8%">Đóng hệ thống</th>
+                    <!--<th width="8%">Đóng hệ thống</th>-->
                     <th width="8%">Thao tác</th>
                 </tr>                                  
                     @if(count($dsthongbao) == 0)
@@ -71,13 +71,13 @@
                                 <td align="center">{{$tb->ketthuctb}}</td>
                                 <td align="center">{{$tb->ngaytao}}</td>
                                 <td align="center">{{$tb->ngaysua}}</td>
-                                <td align='center'>
+<!--                                <td align='center'>
                                     @if($tb->donghethong == 1)
                                         <img src="{{asset('public/images/lock.png')}}"/>
                                     @elseif ($tb->donghethong == 0)   
                                         <img src="{{asset('public/images/Unlock.png')}}"/>
                                     @endif
-                                </td>
+                                </td>-->
                                 <td align='center'>
                                     <a href="quanlythongbao/capnhatthongbao/{{$tb->matb}}">
                                         <img src="{{asset('public/images/edit-icon.png')}}"/>

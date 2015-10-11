@@ -98,10 +98,12 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
  * ***********************
  */
 Route::get('vidu','GiangvienController@ViDu');
-/*======= Hiển thị trang thông tin giảng viên ==========*/
+/*======= VÍ DỤ Hiển thị trang thông tin giảng viên ==========*/
 Route::get('thongtingv','GiangvienController@ThongTin_gv');
 
 Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
+    /*======= Hiển Trang TÌM KIẾM ==========*/
+    route::post('ketquatimkiem','TimkiemController@GVTimKiem');
     /*======= Trang THÔNG TIN giảng viên ==========*/
     Route::get('thongtingv','GiangvienController@ThongTinGV');
     /*======= Trang ĐỔI MẬT KHẨU giảng viên ==========*/
