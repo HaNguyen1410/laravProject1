@@ -59,7 +59,7 @@
                     <th width="8%">Lịch họp</th>
                     <th width="6%">Số tuần kế hoạch</th>
                     <th width="6%">Số tuần làm dự án</th>                    
-                    <th width="8%">Trạng thái(%)</th>
+                    <th width="8%">Tiến độ(%)</th>
                 </tr>
                 @if(count($dsdtnhom) == 0)
                     <tr>

@@ -70,9 +70,9 @@
                     data: [
                         @foreach($dscv as $cv)
                             {
-                                name: "{{$cv->congviec}}",
+                                name: "<?php echo $cv->congviec; ?>",
                                 y: {{$cv->tiendo}},
-                                drilldown: "{{$cv->congviec}}"                        
+                                drilldown: "<?php echo $cv->congviec; ?>"                        
                             },
                         @endforeach
                     ]                 
@@ -91,12 +91,12 @@
                     series: [
                         @foreach($dscv as $cv)
                             {
-                                name: "{{$cv->congviec}}",
-                                id: "{{$cv->congviec}}",
+                                name: "<?php echo $cv->congviec; ?>",
+                                id: "<?php echo $cv->congviec; ?>",
                                 data: [
                                     @foreach($dscvphu as $cvphu)
                                         @if($cvphu->phuthuoc_cv == $cv->macv)
-                                            ["{{$cvphu->congviec}}", {{$cvphu->tiendo}}],
+                                            ["<?php echo $cv->congviec; ?>", {{$cvphu->tiendo}}],
                                         @endif
                                     @endforeach
                                 ] 
