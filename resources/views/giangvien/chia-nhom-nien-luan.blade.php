@@ -85,7 +85,7 @@
                         <th width="12%">  
                             @if($mahp == null || $mahp == 0)
                                 <button onclick="return confirm('Vui lòng chọn nhóm HP muốn in!');" type="button" name="" class="btn btn-success">
-                                    <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                    <img src="{{asset('public/images/printer-icon.png')}}"> In danh sách
                                 </button>
                             @elseif($mahp != null)
                                 <a href="{{asset('giangvien/chianhom/'.$mahp.'/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank">
