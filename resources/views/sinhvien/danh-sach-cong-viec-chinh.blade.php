@@ -2,7 +2,8 @@
 
 @section('content_sv')
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-utf-8" />
     <style type="text/css">
         th{
             text-align: center;
@@ -10,10 +11,12 @@
             background-color: #dff0d8;
         }
     </style>
+    <link rel="stylesheet" href="{{Asset('public/scripts/Highcharts-4.1.7/api/css/font-awesome.css')}}">
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script>
-    <script type="text/javascript">
+    
+    <script type="text/javascript" charset="UTF-8">
         $(function (transactiosn) {
             // Create the chart
             $('#container1').highcharts({
@@ -43,10 +46,14 @@
                         borderWidth: 0,
                         dataLabels: {
                             enabled: true,
-                            format: '{point.y:.1f}%'
+                            format: '{point.y:.1f}%',
+                            color: 'green',
+                            style: {
+                                fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
+                            }                            
                         }
                     }
-                },
+                },                
 
                 tooltip: {
                     headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
@@ -67,6 +74,16 @@
                     ]                 
                 }],
                 drilldown: {
+                    activeAxisLabelStyle: {
+                        textDecoration: 'none',
+                        fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
+                    },
+                    activeDataLabelStyle: {
+                        textDecoration: 'none',
+                        fontStyle: 'italic',
+                        color: 'black',
+                        fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
+                    },
                     series: [
                         @foreach($dscv as $cv)
                             {
@@ -94,7 +111,7 @@
             DANH SÁCH CÔNG VIỆC CHÍNH (GIAI ĐOẠN) (Mã nhóm: {{$manth}})
         </h3><br>         
     <!-- Sơ đồ tiến độ công việc chính-->    
-        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px; font-family: sans-serif">
+        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
             <div id="container1" style="min-width: 200px; max-width: 900px; height: 350px; margin: 0 auto"></div>
         </div>
     <!-- Thanh tiến trình thời gian và tiến độ công việc cả nhóm -->
