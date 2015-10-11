@@ -2,6 +2,7 @@
 
 @section('content_sv')
 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <style type="text/css">
         th{
             text-align: center;
@@ -10,74 +11,91 @@
         }
     </style>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/highcharts.js')}}"></script>
-    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/exporting.js')}}"></script>
-    <script type="text/javascript">    
-      $(function () {
-            $('#container2').highcharts({
+    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
+    <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script>
+    <script type="text/javascript">
+        $(function () {
+            // Create the chart
+            $('#container1').highcharts({
                 chart: {
                     type: 'column'
                 },
-
                 title: {
-                    text: 'Biểu đồ thể hiện tiến độ các công việc chính theo tuần'
+                    text: 'Tiến độ các công việc chính của nhóm "{{$manth}}"'
                 },
-
+                subtitle: {
+                    text: 'Nhấp chuột vào cột để xem tiến độ của các công việc phụ thuộc'
+                },
                 xAxis: {
-                    categories: ['GD1', 'GD2', 'GD3', 'GD4', 'GD5']
+                    type: 'category'
                 },
-
                 yAxis: {
-                    allowDecimals: false,
-                    min: 0,
                     title: {
-                        text: 'Số tuần thực hiện'
+                        text: 'Tiến độ thực hiện công việc chính (%)'
+                    }
+
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    series: {
+                        borderWidth: 0,
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.y:.1f}%'
+                        }
                     }
                 },
 
                 tooltip: {
-                    formatter: function () {
-                        return '<b>' + this.x + '</b><br/>' +
-                            this.series.name + ': ' + this.y + '<br/>' +
-                            'Total: ' + this.point.stackTotal;
-                    }
+                    headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                    pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
                 },
 
-                plotOptions: {
-                    column: {
-                        stacking: 'normal'
-                    }
-                },
-                
                 series: [{
-                    name: 'Tổng tuần làm kế hoạch {{$manth}}',
-                    data: [5, 3, 4, 7, 2],
-                    stack: 'male'
-                }, {
-                    name: 'Đã làm kế hoạch',
-                    data: [3, 4, 4, 2, 5],
-                    stack: 'male'
-                }, {
-                    name: 'Tổng tuần làm thực tế',
-                    data: [6, 5, 6, 2, 1],
-                    stack: 'female'
-                }, {
-                    name: 'Đã làm thực tế',
-                    data: [7, 0, 4, 4, 3],
-                    stack: 'female'
-                }]
+                    name: "Công việc chính",
+                    colorByPoint: true,
+                    data: [
+                        @foreach($dscv as $cv)
+                            {
+                                name: "{{$cv->congviec}}",
+                                y: {{$cv->tiendo}},
+                                drilldown: "{{$cv->congviec}}"                        
+                            },
+                        @endforeach
+                    ]                 
+                }],
+                drilldown: {
+                    series: [
+                        @foreach($dscv as $cv)
+                            {
+                                name: "{{$cv->congviec}}",
+                                id: "{{$cv->congviec}}",
+                                data: [
+                                    @foreach($dscvphu as $cvphu)
+                                        @if($cvphu->phuthuoc_cv == $cv->macv)
+                                            ["{{$cvphu->congviec}}", {{$cvphu->tiendo}}],
+                                        @endif
+                                    @endforeach
+                                ] 
+                            },
+                        @endforeach                
+                    ],
+                }
             });
-        });
+        });     
     </script>
 
 <div class="container">         
 
     <div class="row">
-        <h4 style="color: darkblue; font-weight: bold;" align="center">
-            Danh sách công việc chính (giai đoạn) (Mã nhóm: {{$manth}})
-        </h4><br>         
+        <h3 style="color: darkblue; font-weight: bold;" align="center">
+            DANH SÁCH CÔNG VIỆC CHÍNH (GIAI ĐOẠN) (Mã nhóm: {{$manth}})
+        </h3><br>         
     <!-- Sơ đồ tiến độ công việc theo tuần -->    
         <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
-            <div id="container2" style="min-width: 300px; height: 400px; margin: 0 auto"></div>
+            <div id="container1" style="min-width: 200px; max-width: 900px; height: 350px; margin: 0 auto"></div>
         </div>
     <!---->
         <div class="col-md-12"> 
@@ -154,7 +172,7 @@
                         <tr>
                             <td align="center">{{$cv->macv}}</td>
                             <td align="center">{{$cv->tuan}}</td>
-                            <td align="center"></td>
+                            <td align="center">{{$cv->tuan_lamlai}}</td>
                             <td>
                                 <a href="{{asset('sinhvien/danhsachcvchinh/danhsachcv/'.$cv->macv)}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cv->ngaybatdau_kehoach}} -> Kết thúc kế hoạch:{{$cv->ngayketthuc_kehoach}}">                                
                                     {{$cv->congviec}}

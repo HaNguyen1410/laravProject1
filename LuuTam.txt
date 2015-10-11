@@ -1,5 +1,10 @@
 <!--Hiển thị mảng tên nhóm HP {{var_dump($nhomhp)}}-->
-==========================================================================
+================================================================================
+
+<div class="col-md-12" align="center">
+    {!! $dstuan->setPath($manth)->render() !!}
+</div>
+========================================
 function kt_radio(){
                   var isOK = false;
             // Kiểm tra tùy chọn Nhóm trưởng bằng cách duyệt các phần tử trong mảng
@@ -19,9 +24,10 @@ function kt_radio(){
                     return false;
                 }
             }
-==============================================
-<div class="col-md-12" align="center">
-    {!! $dstuan->setPath($manth)->render() !!}
-</div>
+==========================================
+
+=======================================
+
+   
 
 

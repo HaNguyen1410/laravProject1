@@ -34,7 +34,7 @@ class PhancvController extends Controller
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                         ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sotuan_thucte','cv.phuthuoc_cv'
-                         ,'cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien','th.tuan')
+                         ,'cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien','th.tuan','th.tuan_lamlai')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
@@ -43,9 +43,13 @@ class PhancvController extends Controller
                ->where('cv.phuthuoc_cv','=',0)
                ->paginate(5);
                //->get();
+        $dscvphu = DB::table('cong_viec')->select('macv','congviec','tiendo','phuthuoc_cv')
+                ->where('phuthuoc_cv','<>',0)
+                ->get();
         
         return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom)
-            ->with('tiendonhom',$tiendonhom)->with('manth',$manth)->with('tuancv',$tuancv);
+            ->with('tiendonhom',$tiendonhom)->with('manth',$manth)->with('tuancv',$tuancv)
+            ->with('dscvphu',$dscvphu);
     }
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCV($macvphu){
@@ -54,7 +58,7 @@ class PhancvController extends Controller
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                         ,'cv.ngaybatdau_thucte','cv.ngayketthuc_thucte','cv.sotuan_thucte','cv.phuthuoc_cv'
-                         ,'cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien','th.tuan')
+                         ,'cv.uutien','cv.trangthai','cv.tiendo','cv.noidungthuchien','th.tuan','th.tuan_lamlai')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
