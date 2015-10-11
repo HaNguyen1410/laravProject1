@@ -166,7 +166,7 @@
                 <tr>
                     <th width="4%">STT</th>
                     <th width="8%">Mã nhóm</th>
-                    <th width="6%">Mã nhóm HP</th>
+                    <th width="6%">Tên nhóm HP</th>
                     <th>Tên đề tài</th>
                 </tr>
                 @foreach($detainhom as $stt => $dt)

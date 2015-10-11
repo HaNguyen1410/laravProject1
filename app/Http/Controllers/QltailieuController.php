@@ -49,15 +49,16 @@ class QltailieuController extends Controller
                 ->where('dt.macb',$macb)
                 ->where('chn.nhomtruong','=',1)
                 ->get();
-        //Lấy danh sách mã nhóm mà cán bộ này hướng dẫn
+        //Lấy danh sách mã nhóm thực hiện đề tài mà cán bộ này hướng dẫn
         $dsnhom = DB::table('nhom_hocphan as hp')->select('chn.manhomthuchien')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('hp.macb',$macb)
                 ->lists('chn.manhomthuchien');
         $tailieu = DB::table('tai_lieu as tl')                
-                ->select('th.manhomthuchien','tl.mota',
-                        DB::raw('min(tl.ngaycapnhat) as ngaycapnhat,th.manhomthuchien'))
+                ->select('th.manhomthuchien','tl.mota','tl.ngaycapnhat')
                 ->join('thuc_hien as th','tl.macv','=','th.macv')
                 ->whereIn('th.manhomthuchien',$dsnhom)
+                ->orderBy('tl.ngaycapnhat','desc')
                 ->groupBy('th.manhomthuchien')
                 ->get();
         
@@ -78,6 +79,7 @@ class QltailieuController extends Controller
                 ->leftjoin('danh_gia as dg','tl.matl','=','dg.matl')
                 ->join('sinh_vien as sv','tl.mssv','=','sv.mssv')
                 ->join('cong_viec as cv','tl.macv','=','cv.macv')
+                ->orderBy('tl.ngaycapnhat','desc')
                 ->where('th.manhomthuchien',$manth)
                 ->get();
         return view('giangvien.kho-tai-lieu-chi-tiet')->with('dt',$dt)->with('dstailieu',$dstailieu)

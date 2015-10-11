@@ -92,6 +92,7 @@ and open the template in the editor.
                 <th rowspan="2" width="6%">Mã nhóm</th>
                 <th rowspan="2" width="7%">MSSV</th>
                 <th rowspan="2" width="15%">Họ và tên</th>
+                <th rowspan="2" width="6%">Nhóm trưởng</th>
                 <th colspan="{{count($tieuchi)}}" width="14%">Tiêu chí - Điểm tối đa</th>
                 <th rowspan="2" width="4%">Tổng điểm</th>
                 <th rowspan="2" width="4%">Điểm chữ</th>   
@@ -108,6 +109,11 @@ and open the template in the editor.
                     <td align="center">{{$sv->manhomthuchien}}</td>
                     <td align="center">{{$sv->mssv}}</td>
                     <td>{{$sv->hoten}}</td>
+                    <td align="center">
+                        @if($sv->nhomtruong == 1)
+                            <img src="http://localhost/laravProject1/public/images/tick-icon-small.png"/>
+                        @endif
+                    </td>
                     @foreach($dsdiem as $diem)
                         @if($diem->mssv == $sv->mssv)
                             <td align="center">{{$diem->diem}}</td>

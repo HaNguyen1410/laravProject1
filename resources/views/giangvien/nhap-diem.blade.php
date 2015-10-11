@@ -110,10 +110,11 @@
                     <th rowspan="2" width="3%">Mã nhóm</th>
                     <th rowspan="2" width="1%">Mã số sinh viên</th>
                     <th rowspan="2" width="12%">Họ và tên</th>
+                    <th rowspan="2" width="2%">Nhóm trưởng</th>
                     <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí - [Điểm tối đa]</th> 
                     <th rowspan="2" width="20%">Nhận xét</th>
-                    <th rowspan="2" width="4%">Tổng điểm</th>
-                    <th rowspan="2" width="4%">Điểm chữ</th>   
+                    <th rowspan="2" width="3%">Tổng điểm</th>
+                    <th rowspan="2" width="3%">Điểm chữ</th>   
                 </tr>
                 <tr>
                     @if(count($tieuchi) == 0)
@@ -151,7 +152,12 @@
                             <td align="center">
                                 <input type="text" name="txtMaSV[]" size="6" style="border: 0px; background-color: #dff0d8; text-align: center;" value="{{$sv->mssv}}" readonly=""/>
                             </td>
-                            <td>{{$sv->hoten}}</td>                            
+                            <td>{{$sv->hoten}}</td> 
+                            <td align="center">
+                                @if($sv->nhomtruong == 1)
+                                    <img src="http://localhost/laravProject1/public/images/tick-icon-small.png"/>
+                                @endif
+                            </td>
                             @foreach($dsdiem as $diem)                                    
                                 @if($diem->mssv == $sv->mssv && $diem->diem != null)
                                     <td align="center">

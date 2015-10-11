@@ -13,7 +13,10 @@
 <div class="container">   
     <div class="row">  
         <!-- Bảng các tài liệu đã được chỉnh sửa -->
-        <h3 style="color: darkblue; font-weight: bold;">&nbsp;&nbsp;Chi tiết tài liệu dự án: </h3>
+        <h3 style="color: darkblue; font-weight: bold;">&nbsp;&nbsp;
+            <a href="{{asset('giangvien/khotailieu')}}">Kho tài liệu</a>  
+                &Gt;
+            Chi tiết tài liệu dự án: </h3>
          <label style="font-size: 15pt; font-weight: bold; color: #2ca02c; margin-left: 50px">
              {{$dt->tendt}}
          </label><br><br>         
