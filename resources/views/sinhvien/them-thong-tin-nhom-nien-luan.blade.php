@@ -26,11 +26,11 @@
                             <input type="text" id="txtMaCB" name="txtMaCB" value="{{$thongtindt->macb}}" style="text-align: center;" class="form-control" readonly="true"/>
                         </td>
                         <th width="15%">Họ và tên cán bộ hướng dẫn:</th>
-                        <td>
+                        <td width="15%">
                             <input type="text" name="txtTen" value="{{$thongtindt->hoten}}" class="form-control" readonly="true"/>
                         </td>                        
                         <th width='15%' valign='middle'>Mã nhóm thực hiện:</th>
-                        <td align='center'>
+                        <td width='15%' align='center'>
                             <input type="text" name="txtMaNhomNL" value="{{$manth}}" style="text-align: center;" class="form-control" readonly=""/>
                         </td>
                     </tr>
@@ -112,6 +112,16 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Ngày bắt đầu (Kế hoạch):</th>
+                        <td colspan="2" width="30%">
+                            <input type="text" name="txtNgayBatDauThucTe" value="{{$nhom->ngaybatdau_kehoach}}" class="form-control" readonly=""/>                            
+                        </td>
+                        <th width="18%">Ngày kết thúc (Kế hoạch):</th>
+                        <td colspan="2" width="30%">
+                            <input type="text" name="txtNgayKTThucTe" value="{{$nhom->ngayketthuc_kehoach}}" class="form-control" readonly=""/>                           
+                        </td>
+                    </tr>
+                    <tr>
                         <th>Ngày bắt đầu (thực tế):</th>
                         <td colspan="2" width="30%">
                             <input type="text" id="txtNgayBatDauThucTe" name="txtNgayBatDauThucTe" value="{{$nhom->ngaybatdau_thucte}}" class="form-control"/>
@@ -124,13 +134,17 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Số tuần kế hoach:</th>
+                        <td width="15%">
+                            <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$nhom->sotuan_kehoach}}" class="form-control" readonly=""/>                            
+                        </td>
                         <th>Số tuần thực tế</th>
-                        <td colspan="2">
+                        <td width="15%">
                             <input type="text" id="txtGioThucTe" name="txtTuanThucTe" value="{{$nhom->sotuan_thucte}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtTuanThucTe')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
-                        <td colspan="2">
+                        <td width="15%">
                             <input type="text" name="txtTienDo" value="{{$nhom->tiendo}}" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
                         </td>

@@ -44,8 +44,8 @@ class SVthongtinnhomController extends Controller
                 ->where('chn.mssv',$mssv)->first();
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $thongtinNhom = DB::table('nhom_thuc_hien')
-                ->select('lichhop','tochucnhom','phamvi_detai','congnghethuchien','ngaybatdau_thucte',
-                        'ngayketthuc_thucte','sotuan_thucte','tiendo')
+                ->select('lichhop','tochucnhom','phamvi_detai','congnghethuchien','ngaybatdau_kehoach','ngayketthuc_kehoach','ngaybatdau_thucte',
+                        'ngayketthuc_thucte','sotuan_kehoach','sotuan_thucte','tiendo')
                 ->where('manhomthuchien',$manth)
                 ->first();
         return view('sinhvien.them-thong-tin-nhom-nien-luan')->with('thongtindt',$thongtindt)
@@ -57,8 +57,8 @@ class SVthongtinnhomController extends Controller
                     [
                         'chkBuoiHop'          => 'required',
                         'txtNgayBatDauThucTe' => 'required|date',
-                        'txtNgayKTThucTe'     => 'required|date',
-                        'txtTuanThucTe'       => 'required|numeric',
+//                        'txtNgayKTThucTe'     => 'required|date',
+//                        'txtTuanThucTe'       => 'required|numeric',
                         'txtTienDo'           => 'required|numeric'
                     ]
                 );
