@@ -14,7 +14,7 @@
 
     <div class="row">
         @if(Session::has('ThongBao') && count($sv) == 0)
-            <div class="alert alert-info" style="color: red;">
+            <div class="alert alert-info" style="color: red; font-weight: bold;">
                 {{ Session::get('ThongBao') }} <br>
                 <label style="color: black;">{{$hoten}}({{$mssv}}) - Của nhóm HP: {{$hp_sv}}</label>
             </div>
@@ -45,7 +45,7 @@
                             @if(count($sv_cv) == 0)
                                 <tr>
                                     <td colspan="10" align="center">
-                                        <label style="color: #e74c3c;"> Chưa có thông báo nào!</label> 
+                                        <label style="color: #e74c3c;"> Chưa có công việc nào!</label> 
                                     </td>
                                 </tr>
                             @elseif(count($sv_cv) != 0)

@@ -25,17 +25,31 @@ class TimkiemController extends Controller
     public function SVTimKiem(Request $req){
         $sv_dangnhap = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$sv_dangnhap)->value('manhomthuchien');
-        $ht = $req->txtTimKiem;
-        $mssv = DB::table('sinh_vien')->where('hoten','like',$ht)->value('mssv');
-        $manth_svdangtim = DB::table('chia_nhom')->where('mssv',$mssv)->where('manhomthuchien',$manth)
-                ->first(); 
-        if(count($manth_svdangtim) == 0){
-            \Session::flash('ThongBao','Không thể tìm sinh viên ở nhóm đề tài khác!');
-            return view('sinhvien.ket-qua-tim-kiem-sv')->with('ht',$ht)->with('manhom_sv',$manhom_sv)
-                    ->with('mssv',$mssv)->with('manth_svdangtim',$manth_svdangtim);
+        $hoten = $req->txtTimKiem;
+        $mssv = DB::table('sinh_vien')->where('hoten','like',$hoten)->value('mssv');
+        //Tìm sv cần tìm có trong nhóm của sinh viên đang đăng nhập không
+        $manth_sv = DB::table('chia_nhom')->where('mssv',$mssv)->where('manhomthuchien',$manth)
+                ->get(); 
+        //Lấy mã nhóm thực hiện đề tài của sv cần tìm
+        $sv_manhomdt = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        if(count($manth_sv) == 0){
+            \Session::flash('ThongBao','Không thể tìm sinh viên ở nhóm đề tài khác !');
+            return view('sinhvien.ket-qua-tim-kiem-sv')->with('hoten',$hoten)->with('mssv',$mssv)
+                    ->with('manth_sv',$manth_sv)->with('sv_manhomdt',$sv_manhomdt);
         }
-        else if(count($manth_svdangtim) != 0){
-            return count($manth_svdangtim);
+        else if(count($manth_sv) != 0){
+            $tendt = DB::table('de_tai as dt')
+                    ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                    ->where('radt.manhomthuchien',$manth)
+                    ->value('dt.tendt');
+            $sv_cv = DB::table('cong_viec as cv')->distinct()
+                    ->join('thuc_hien as th','cv.macv','=','th.macv')
+                    ->where('cv.giaocho','like',$hoten)
+                    ->where('th.manhomthuchien',$manth)
+                    ->get();
+            return view('sinhvien.ket-qua-tim-kiem-sv')->with('hoten',$hoten)->with('mssv',$mssv)
+                ->with('manth_sv',$manth_sv)->with('tendt',$tendt)->with('sv_cv',$sv_cv)
+                ->with('sv_manhomdt',$sv_manhomdt);
         }
 //        else{            
 //             $hoten = $req->txtTimKiem;
@@ -60,7 +74,7 @@ class TimkiemController extends Controller
             $hp_sv = DB::table('chia_nhom as chn')
                     ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
                     ->where('chn.mssv',$mssv)->value('hp.tennhomhp');
-            \Session::flash('ThongBao','Không thể tìm thông tin sinh viên thuộc nhóm HP của giảng viên khác! ');
+            \Session::flash('ThongBao','Không thể tìm thông tin sinh viên thuộc nhóm HP của giảng viên khác ! ');
             return view('giangvien.ket-qua-tim-kiem-gv')->with('hoten',$hoten)->with('hp_sv',$hp_sv)
                     ->with('mssv',$mssv)->with('sv',$sv);
         }
