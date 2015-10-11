@@ -43,11 +43,12 @@
                     <label for="inputPassword" >Mật khẩu:</label>
                     <input type="password" id="txtMatKhau" name="txtMatKhau" class="form-control" placeholder="Mật khẩu">
                     <!--<p style='color:red;'>{{$errors->first('txtMatKhau')}}</p>-->
-                    <div id="remember" class="checkbox">
+<!--                    <div id="remember" class="checkbox">
                         <label>
                             <input type="checkbox" value="remember-me"> Nhớ mật khẩu
                         </label>
-                    </div>
+                    </div>-->
+                    <br>
                     <button type="submit" name="btnDangNhap" class="btn btn-lg btn-primary btn-block btn-signin">Đăng nhập</button>
                 </form><!-- /form -->
 <!--                <a href="#" class="forgot-password">

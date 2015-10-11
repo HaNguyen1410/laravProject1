@@ -56,9 +56,10 @@ class SVthongtinnhomController extends Controller
         $v = \Validator::make($req->all(),
                     [
                         'chkBuoiHop'          => 'required',
-                        'txtNgayBatDauThucTe' => 'required|date',
+//                        'txtNgayBatDauThucTe' => 'required|date',
 //                        'txtNgayKTThucTe'     => 'required|date',
 //                        'txtTuanThucTe'       => 'required|numeric',
+                        'txtToChucNhom'       => 'required',   
                         'txtTienDo'           => 'required|numeric'
                     ]
                 );

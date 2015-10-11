@@ -171,6 +171,7 @@
                                             ['Style','FontFormat','FontName','FontSize']]
                                     });
                                 </script>
+                            <p style='color:red;'>{{$errors->first('txtToChucNhom')}}</p>
                         </td>
                     </tr>
                     <tr>
