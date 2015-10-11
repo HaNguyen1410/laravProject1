@@ -14,7 +14,7 @@
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/data.js')}}"></script>
     <script src="{{asset('public/scripts/Highcharts-4.1.7/js/modules/drilldown.js')}}"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function (transactiosn) {
             // Create the chart
             $('#container1').highcharts({
                 chart: {
@@ -93,11 +93,11 @@
         <h3 style="color: darkblue; font-weight: bold;" align="center">
             DANH SÁCH CÔNG VIỆC CHÍNH (GIAI ĐOẠN) (Mã nhóm: {{$manth}})
         </h3><br>         
-    <!-- Sơ đồ tiến độ công việc theo tuần -->    
-        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px;">
+    <!-- Sơ đồ tiến độ công việc chính-->    
+        <div class="col-md-12" style="border:1px solid tomato; margin-bottom: 20px; font-family: sans-serif">
             <div id="container1" style="min-width: 200px; max-width: 900px; height: 350px; margin: 0 auto"></div>
         </div>
-    <!---->
+    <!-- Thanh tiến trình thời gian và tiến độ công việc cả nhóm -->
         <div class="col-md-12"> 
             <h4 style="color: darkblue; font-weight: bold;">
                 Thanh tiến trình thể hiện tiến độ thời gian và công việc của cả nhóm
