@@ -24,7 +24,7 @@
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>
                  <tr>
                     <th width="1%">STT</th>
-                    <th width="6%">Mã công việc chính</th>
+                    <th width="8%">Tên công việc chính</th>
                     <th width="8%">Tên tập tin</th>
                     <th width="15%">Mô tả</th>                    
                     <th width="6%">Ngày đăng</th>

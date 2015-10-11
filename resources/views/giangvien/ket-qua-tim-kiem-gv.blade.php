@@ -67,7 +67,7 @@
                                             <?php
                                                 $tencvchinh = DB::table('cong_viec')->where('macv',$cv->phuthuoc_cv)->value('congviec');
                                             ?>
-                                            <a data-toggle="tooltip" data-placement="bottom" title="Tên công việc: {{$cv->phuthuoc_cv}}">
+                                            <a data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->phuthuoc_cv}}">
                                                  {{$tencvchinh}}
                                             </a>                                            
                                         </td>

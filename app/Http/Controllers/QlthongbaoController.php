@@ -76,6 +76,7 @@ class QlthongbaoController extends Controller
     }
 /*=================== Lưu Thêm thông báo ===============================*/  
     public function LuuThemThongBao(Request $req){
+        $macb = \Auth::user()->taikhoan;
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
@@ -101,7 +102,7 @@ class QlthongbaoController extends Controller
             $data = array(
                 [
                     'matb'        => $_POST['txtMaTB'],
-                    'macb'        => $_POST['txtMaCB'],
+                    'macb'        => $macb,
                     'noidungtb'   => $_POST['txtNoiDungTB'],
                     'dinhkemtb'   => $tenbandau,
                     'batdautb'    => $_POST['txtBatDauNop'],

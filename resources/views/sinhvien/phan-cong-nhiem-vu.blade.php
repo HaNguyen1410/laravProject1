@@ -83,7 +83,7 @@
                     </th>
                 </tr>
             </table>
-            <table class="table table-hover table-striped" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
+            <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="2%">STT</th>
                     <th rowspan="2" width="15%">Tên công việc</th>
@@ -148,8 +148,8 @@
                                 </a>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="9">
+                        <tr style="border-bottom: 2px solid;">
+                            <td colspan="10">
                                 <label style="color: darkblue;">Nội dung thực hiện:</label><br>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
                             </td>
