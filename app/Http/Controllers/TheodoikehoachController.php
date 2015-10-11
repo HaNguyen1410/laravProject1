@@ -79,9 +79,13 @@ class TheodoikehoachController extends Controller
                 ->where('cv.phuthuoc_cv','=',0)
                 ->where('th.manhomthuchien',$manth)
                 ->get();
+        $dscvphu = DB::table('cong_viec')->select('macv','congviec','tiendo','phuthuoc_cv')
+                ->where('phuthuoc_cv','<>',0)
+                ->get();
  
         return view('giangvien.ke-hoach-cv-chinh')->with('dstv',$dstv)->with('dstuan',$dstuan)
-            ->with('dscv',$dscv)->with('manth',$manth)->with('tendt',$tendt)->with('giolam',$giolam);
+            ->with('dscv',$dscv)->with('manth',$manth)->with('tendt',$tendt)->with('giolam',$giolam)
+                ->with('dscvphu',$dscvphu);
     }
 /*======================= Theo dõi các công việc phụ thuộc của 1 công việc chính ==========================*/
     public function CVPhuThuoc($manth,$macvchinh){ 
