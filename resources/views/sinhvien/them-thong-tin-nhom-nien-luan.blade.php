@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;" align='center'>THÊM THÔNG TIN ĐỀ TÀI NIÊN LUẬN</h3>   
+            <h3 style="color: darkblue; font-weight: bold;" align='center'>THÊM THÔNG TIN NHÓM ĐỀ TÀI NIÊN LUẬN</h3>   
             <form name="frmDangKyNL" action="{{action('SVthongtinnhomController@LuuThemThongTinNhom')}}" method="post">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" border="1" width="800px" cellpadding="15px" cellspacing="0px" align='center' id="dangky">

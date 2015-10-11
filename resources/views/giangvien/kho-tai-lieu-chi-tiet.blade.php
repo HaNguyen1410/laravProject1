@@ -43,8 +43,8 @@
                         <tr>
                             <td rowspan="2" align="center" style="vertical-align: middle;">{{$stt+1}}</td>
                             <td align="center">
-                                <a style="color: blue;" data-toggle="tooltip" data-placement="bottom" title="{{$tl->congviec}}">                                    
-                                    <label>{{$tl->macv}}</label>
+                                <a style="color: blue;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$tl->macv}}">                                    
+                                    <label>{{$tl->congviec}}</label>
                                 </a>
                             </td>
                             <td><!--#006400-->

@@ -36,7 +36,7 @@
                                 <th width="15%">Công việc</th>
                                 <th width="6%">Ngày bắt đầu</th>
                                 <th width="6%">Hạn hoàn tất</th>
-                                <th width="4%">Phụ thuộc</th>
+                                <th width="7%">Phụ thuộc</th>
                                 <th width="5%">Độ ưu tiên</th>
                                 <th width="5%">Trạng thái</th>
                                 <th width="8%">Tiến độ</th>
@@ -62,7 +62,14 @@
                                         </td>
                                         <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
                                         <td align='center'>{{$cv->ngayketthuc_kehoach}}</td>
-                                        <td align='center'>{{$cv->phuthuoc_cv}}</td>
+                                        <td align='center'>
+                                            <?php
+                                                $tencvchinh = DB::table('cong_viec')->where('macv',$cv->phuthuoc_cv)->value('congviec');
+                                            ?>
+                                            <a data-toggle="tooltip" data-placement="bottom" title="Tên công việc: {{$cv->phuthuoc_cv}}">
+                                                 {{$tencvchinh}}
+                                            </a> 
+                                        </td>
                                         <td align='center'>{{$cv->uutien}}</td>
                                         <td align='center'>{{$cv->trangthai}}</td>
                                         <td>
