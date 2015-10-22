@@ -37,11 +37,10 @@
             <table class="table table-hover table-striped" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="1%">STT</th>
+                    <th rowspan="2" width="4%">Tuần</th>
                     <th rowspan="2" width="15%%">Tên công việc</th>
                     <th rowspan="2" width="15%">Giao cho</th>
-                    <th rowspan="2" width="4%">Tuần</th>
-                    <th rowspan="2" width="4%">Tuần làm lại</th>
-                    <th colspan="3" width="23%">Kế hoach</th>
+                    <th colspan="2" width="15%">Kế hoach</th>
                     <th rowspan="2" width="20%">Chi tiết công việc</th>
                     <th rowspan="2" width="8%">Tiến độ</th>
                     <th rowspan="2" width="6%">Thao tác</th>
@@ -49,7 +48,7 @@
                 <tr>
                     <th>Bắt đầu</th>
                     <th>Kết thúc</th>
-                    <th>Số tuần</th>
+                    <!--<th>Số tuần</th>-->
                 </tr>
                 @if(count($dscvphu) == 0)
                     <tr>
@@ -61,17 +60,22 @@
                     @foreach($dscvphu as $stt => $cvphu)
                         <tr>
                             <td align="center">{{$stt+1}}</td>
+                            <td align="center">
+                                @if($cvphu->tuan != " ")
+                                    {{$cvphu->tuan}}
+                                @elseif($cvphu->tuan_lamlai != "")
+                                    {{$cvphu->tuan_lamlai}}
+                                @endif
+                            </td>
                             <td>
                                 <a href="" data-toggle="tooltip" data-placement="bottom" title="Mã công việc phụ: {{$cvphu->macv}}">
                                     {{$cvphu->congviec}}
                                 </a>                            
                             </td>
                             <td>{{$cvphu->giaocho}}</td>
-                            <td align="center">{{$cvphu->tuan}}</td>
-                            <td align="center">{{$cvphu->tuan_lamlai}}</td>
                             <td align="center">{{$cvphu->ngaybatdau_kehoach}}</td>
                             <td align="center">{{$cvphu->ngayketthuc_kehoach}}</td>
-                            <td align="center">{{$cvphu->sotuan_kehoach}}</td>
+                            <!--<td align="center">{{$cvphu->sotuan_kehoach}}</td>-->
                             <td>{{$cvphu->noidungthuchien}}</td>  
                             <td>
                                 <div class="progress">

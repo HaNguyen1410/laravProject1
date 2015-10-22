@@ -71,7 +71,7 @@
                     name: "Công việc chính",
                     colorByPoint: true,
                     data: [
-                        @foreach($dscv as $cv)
+                        @foreach($dscvchinh as $cv)
                             {
                                 name: "<?php echo $cv->congviec;?>",
                                 y: {{$cv->tiendo}},
@@ -92,7 +92,7 @@
                         fontFamily: 'Verdana, Arial, Helvetica, sans-serif'
                     },
                     series: [
-                        @foreach($dscv as $cv)
+                        @foreach($dscvchinh as $cv)
                             {
                                 name: "<?php echo $cv->congviec; ?>",
                                 id: "<?php echo $cv->congviec; ?>",

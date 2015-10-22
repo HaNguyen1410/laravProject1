@@ -32,7 +32,6 @@
                             <tr>
                                 <th width="1%">STT</th>
                                 <th width="1%">Tuần</th>
-                                <th width="4%">Tuần làm lại</th>
                                 <th width="15%">Công việc</th>
                                 <th width="6%">Ngày bắt đầu</th>
                                 <th width="6%">Hạn hoàn tất</th>
@@ -52,12 +51,15 @@
                                     <tr>
                                         <td align='center'>{{$stt+1}}</td>
                                         <td align='center'>
-                                             {{$cv->tuan}}                                            
+                                            @if($cv->tuan != " ")
+                                                {{$cv->tuan}}
+                                            @elseif($cv->tuan_lamlai != "")
+                                                {{$cv->tuan_lamlai}}
+                                            @endif                                             
                                         </td>
-                                        <td align='center'>{{$cv->tuan_lamlai}}</td>
                                         <td>
                                             <a data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
-                                                 {{$cv->congviec}}
+                                                <label>{{$cv->congviec}}</label>
                                             </a>
                                         </td>
                                         <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>

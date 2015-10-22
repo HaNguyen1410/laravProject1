@@ -42,14 +42,20 @@ class PhancvController extends Controller
                ->where('nth.manhomthuchien','=',$manth)
                ->where('cv.phuthuoc_cv','=',0)
                ->paginate(5);
-               //->get();
+               //->get();        
+       //Lấy thông tin để vẽ sơ đồ cột
+        $dscvchinh = DB::table('cong_viec as cv')
+               ->join('thuc_hien as th','cv.macv','=','th.macv')
+               ->where('th.manhomthuchien',$manth)
+               ->where('cv.phuthuoc_cv','=',0)
+               ->get();
         $dscvphu = DB::table('cong_viec')->select('macv','congviec','tiendo','phuthuoc_cv')
                 ->where('phuthuoc_cv','<>',0)
                 ->get();
         
         return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom)
             ->with('tiendonhom',$tiendonhom)->with('manth',$manth)->with('tuancv',$tuancv)
-            ->with('dscvphu',$dscvphu);
+            ->with('dscvchinh',$dscvchinh)->with('dscvphu',$dscvphu);
     }
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCV($macvphu){
@@ -133,9 +139,9 @@ class PhancvController extends Controller
                ->where('th.manhomthuchien',$manth)
                ->where('cv.phuthuoc_cv','=',0)->paginate(5);
                //->get();
-      // 
+
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
-               ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv);
+               ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv);           
    }
 /*========= Xóa công việc chính ==============*/    
     public function XoacvChinh($macv){

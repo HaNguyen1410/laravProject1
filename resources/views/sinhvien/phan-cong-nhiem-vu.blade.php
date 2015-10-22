@@ -86,20 +86,19 @@
             <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
                     <th rowspan="2" width="2%">STT</th>
-                    <th rowspan="2" width="15%">Tên công việc</th>
-                    <th rowspan="2" width="10%">Giao cho</th>
                     <th rowspan="2" width="4%">Tuần</th>
-                    <th rowspan="2" width="3%">Tuần làm lại</th>
+                    <th rowspan="2" width="15%">Tên công việc</th>
+                    <th rowspan="2" width="15%">Giao cho</th>
+                    <th colspan="2" width="18%">Kế hoạch</th>
                     <th rowspan="2" width="8%">Trạng thái</th>
-                    <th colspan="3" width="18%">Kế hoạch</th>
-                    <th rowspan="2" width="3%">Phụ thuộc</th>
+                    <th rowspan="2" width="8%">Nội dung thực hiện</th>
                     <th rowspan="2" width="6%">Tiến độ<br>(%)</th>
                     <th rowspan="2" width="6%">Thao tác</th>
                 </tr>
                 <tr>
                     <th>Bắt đầu</th>
                     <th>Kết thúc</th>
-                    <th>Số tuần</th>
+                    <!--<th>Số tuần</th>-->
                 </tr>
                 @if(count($dscvchinh) == 0)
                     <tr>
@@ -110,7 +109,7 @@
                 @elseif(count($dscvchinh) > 0)
                     @foreach($dscvchinh as $stt => $cv)
                         <tr>
-                            <td rowspan="2" style="vertical-align: middle;"  align="center">
+                            <td style="vertical-align: middle;"  align="center">
                                 <?php 
                                     if(isset($_GET['page'])){
                                         $p = 5*($_GET['page']-1);
@@ -119,19 +118,26 @@
                                         echo $stt+1;
                                 ?>
                             </td>
+                            <td align="center">
+                                @if($cv->tuan_lamlai == "")
+                                    {{$cv->tuan}}
+                                @else
+                                    {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
+                                @endif
+                            </td>
                             <td>
-                                <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
-                                    {{$cv->congviec}}
-                                </a>
+                                <label>{{$cv->congviec}}</label>
                             </td>
                             <td>{{$cv->giaocho}}</td>
-                            <td align="center">{{$cv->tuan}}</td>
-                            <td align="center">{{$cv->tuan_lamlai}}</td>
-                            <td align="center">{{$cv->trangthai}}</td>
                             <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
                             <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                            <td align="center">{{$cv->sotuan_kehoach}}</td>
-                            <td align="center">{{$cv->phuthuoc_cv}}</td>
+                            <!--<td align="center">{{$cv->sotuan_kehoach}}</td>-->
+                            <td align="center">{{$cv->trangthai}}</td>
+                            <td align="center">
+                                <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet; font-weight: bold;">
+                                     Chi tiết
+                                </a>
+                            </td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
@@ -139,19 +145,13 @@
                                     </div>
                                 </div> 
                             </td>
-                            <td rowspan="2" style="vertical-align: middle;" align='center'>
+                            <td style="vertical-align: middle;" align='center'>
                                 <a href="phancv/capnhatcvchinh/{{$cv->macv}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp &nbsp &nbsp
                                 <a onclick="return confirm('Công việc **{{$cv->macv}}** sẽ bị xóa?');" href="phancv/xoacvchinh/{{$cv->macv}}">
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 2px solid;">
-                            <td colspan="10">
-                                <label style="color: darkblue;">Nội dung thực hiện:</label><br>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
                             </td>
                         </tr>
                     @endforeach
