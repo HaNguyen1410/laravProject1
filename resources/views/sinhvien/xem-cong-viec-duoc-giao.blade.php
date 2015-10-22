@@ -25,7 +25,6 @@
                         <tr>
                             <th width="1%">STT</th>
                             <th width="1%">Tuần</th>
-                            <th width="2%">Tuần làm lại</th>
                             <th width="15%">Công việc</th>
                             <th width="10%">Giao cho</th>
                             <th width="6%">Ngày bắt đầu</th>
@@ -40,8 +39,13 @@
                                 @if($cv->phuthuoc_cv == "0")
                                     <tr style="background-color: #F0F8FF;">
                                         <td align="center">{{$stt + 1}}</td>
-                                        <td align="center">{{$cv->tuan}}</td>
-                                        <td align="center"></td>
+                                        <td align="center">
+                                            @if($cv->tuan_lamlai == "")
+                                                {{$cv->tuan}}
+                                            @else
+                                                {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
+                                            @endif
+                                        </td>
                                         <td>
                                             <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
                                                 {{$cv->congviec}}
@@ -65,8 +69,13 @@
                                 @elseif($cv->phuthuoc_cv != "0")
                                     <tr style="background-color: #FFFFFF;">
                                         <td align="center">{{$stt + 1}}</td>  
-                                        <td align="center">{{$cv->tuan}}</td>
-                                        <td align="center"></td>
+                                        <td align="center">
+                                            @if($cv->tuan_lamlai == "")
+                                                {{$cv->tuan}}
+                                            @else
+                                                {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
+                                            @endif
+                                        </td>
                                         <td>
                                             <a style="color: #006400; font-weight: bold;" data-toggle="tooltip" data-placement="bottom" title="Mã công việc: {{$cv->macv}}">
                                                 {{$cv->congviec}}

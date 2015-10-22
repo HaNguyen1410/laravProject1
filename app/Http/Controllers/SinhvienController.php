@@ -107,7 +107,7 @@ class SinhvienController extends Controller
        $dsDuocGiao = DB::table('cong_viec as cv')->distinct()
                ->select('cv.macv','cv.congviec','cv.giaocho','cv.ngaybatdau_kehoach','cv.ngayketthuc_kehoach'
                         ,'cv.sotuan_thucte','cv.phuthuoc_cv','cv.uutien','cv.trangthai','cv.tiendo'
-                       ,'cv.noidungthuchien','th.tuan')
+                       ,'cv.noidungthuchien','th.tuan','th.tuan_lamlai')
                ->join('thuc_hien as th','cv.macv','=','th.macv')
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')

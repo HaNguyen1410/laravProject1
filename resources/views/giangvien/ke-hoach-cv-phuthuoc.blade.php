@@ -31,8 +31,8 @@
             </div>
             <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
-                    <th rowspan="2" width="4%">Tuần làm lại</th>
-                    <th rowspan="2" width="3%">ID</th>
+                    <th rowspan="2" width="4%">Tuần</th>
+                    <!--<th rowspan="2" width="3%">ID</th>-->
                     <th rowspan="2" width="15%%">Tên công việc</th>
                     <th rowspan="2" width="15%">Giao cho</th>
                     <th rowspan="2" width="20%">Chi tiết công việc</th>
@@ -45,8 +45,14 @@
                 </tr>
                 @foreach($dscvphu as $stt => $cvphu)
                     <tr>
-                        <td align="center">{{$cvphu->tuan_lamlai}}</td>
-                        <td align="center">{{$cvphu->macv}}</td>
+                        <td align="center">
+                            @if($cvphu->tuan_lamlai == "")
+                                {{$cvphu->tuan}}
+                            @elseif($cvphu->tuan_lamlai != "")
+                                {{$cvphu->tuan_lamlai}}                                    
+                            @endif
+                        </td>
+                        <!--<td align="center">{{$cvphu->macv}}</td>-->
                         <td>
                             <a href="" data-toggle="tooltip" data-placement="bottom" title="Bắt đầu kế hoạch: {{$cvphu->ngaybatdau_kehoach}} -> Kết thúc kế hoạch: {{$cvphu->ngayketthuc_kehoach}}">                                
                                 {{$cvphu->congviec}}

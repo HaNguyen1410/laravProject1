@@ -159,62 +159,56 @@
         </div>
 
   <!-- Danh sách chi tiết các công việc -->      
-        <div class="col-md-12">            
-             @foreach($dstuan as $tuan)
-                <div class="col-md-12">
-                    <h4 style="color: #c7254e;">
-                        <img src="{{asset('public/images/box-icon1.png')}}"/>&nbsp; Tuần &nbsp;
-                        {{$tuan->tuan}}                        
-                    </h4>   
-                    <table class="table table-hover" width='800px' align='center'>
-                        <tr>
-                            <th rowspan='2' width='2%'>ID</th>
-                            <th rowspan='2' width='15%'>Công việc</th>
-                            <th rowspan='2' width='15%'>Giao cho</th>  
-                            <th rowspan='2' width='4%'>Tuần làm lại</th>
-                            <th rowspan='2' width='15%'>Ngày tạo</th>
-                            <th rowspan='2' width='8%'>Trạng thái</th>
-                            <th rowspan='2' width='8%'>Tiến độ</th>
-                            <th colspan='2' width='15%'>Kế hoạch</th>
-                        </tr>
-                        <tr>
-                           <th>Bắt đầu</th>
-                           <th>Kết thúc</th>
-                        </tr>
-                        @foreach($dscv as $cv)
-                            @if($cv->tuan == $tuan->tuan)  
-                                <tr>
-                                    <td rowspan="2" align='center' style="vertical-align: middle; font-weight: bold;">
-                                        {{$cv->macv}}
-                                    </td>
-                                    <td rowspan="2"  style="vertical-align: middle; font-weight: bold;">
-                                        <a href="{{$manth}}/cvphuthuoc/{{$cv->macv}}">{{$cv->congviec}}</a>                                        
-                                    </td>
-                                    <td>{{$cv->giaocho}}</td>
-                                    <td align='center'>{{$cv->tuan_lamlai}}</td>
-                                    <td align='center'>{{$cv->ngaytao}}</td>
-                                    <td align='center'>{{$cv->trangthai}}</td>
-                                    <td>
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                                <span style="color:brown;">{{$cv->tiendo}}%</span>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
-                                    <td align='center'>{{$cv->ngayketthuc_kehoach}}</td>   
-                                 </tr>
-                                 <tr>                                         
-                                     <td colspan='8'>
-                                       <h5 style='color: darkblue; font-weight:bold;'>Chi tiết công việc:</h5>
-                                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$cv->noidungthuchien}}
-                                     </td> 
-                                 </tr>
+        <div class="col-md-12">   
+            <table class="table table-hover" width='800px' align='center'>
+                <tr>
+                    <th rowspan='2' width='4%'>Tuần</th>
+                    <!--<th rowspan='2' width='2%'>ID</th>-->
+                    <th rowspan='2' width='15%'>Công việc</th>
+                    <th rowspan='2' width='10%'>Nội dung thực hiện</th>
+                    <th rowspan='2' width='15%'>Giao cho</th>  
+                    <th colspan='2' width='15%'>Kế hoạch</th>
+                    <th rowspan='2' width='8%'>Trạng thái</th>
+                    <th rowspan='2' width='8%'>Tiến độ</th>
+                    <th rowspan='2' width='15%'>Ngày tạo</th>
+                </tr>
+                <tr>
+                   <th>Bắt đầu</th>
+                   <th>Kết thúc</th>
+                </tr>
+                @foreach($dscv as $cv) 
+                    <tr>
+                        <td align='center'>
+                            @if($cv->tuan_lamlai == "")
+                                {{$cv->tuan}}
+                            @else
+                                {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
                             @endif
-                        @endforeach 
-                     </table>
-                </div>             
-             @endforeach             
+                        </td>
+<!--                        <td align='center' style="vertical-align: middle; font-weight: bold;">
+                            {{$cv->macv}}
+                        </td>-->
+                        <td style="vertical-align: middle; font-weight: bold;">
+                            {{$cv->congviec}}                                       
+                        </td>
+                        <td style="vertical-align: middle; font-weight: bold;" align="center">
+                            <a href="{{$manth}}/cvphuthuoc/{{$cv->macv}}" style="color: blueviolet;">Chi tiết</a>                                        
+                        </td>
+                        <td>{{$cv->giaocho}}</td>
+                        <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
+                        <td align='center'>{{$cv->ngayketthuc_kehoach}}</td> 
+                        <td align='center'>{{$cv->trangthai}}</td>
+                        <td>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                    <span style="color:brown;">{{$cv->tiendo}}%</span>
+                                </div>
+                            </div>
+                        </td>  
+                        <td align='center'>{{$cv->ngaytao}}</td>
+                     </tr>
+                @endforeach 
+             </table>           
         </div>
     </div>
 </div>
