@@ -48,7 +48,7 @@
                                 @endif
                             </td>
                             <td>
-                                {{$cv->congviec}}
+                                <label>{{$cv->congviec}}</label>
                             </td>
                             <td align="center">{{$cv->trangthai}}</td>
                             <td>{{$cv->giaocho}}</td>
