@@ -90,7 +90,7 @@
                             @elseif($mahp != null)
                                 <a href="{{asset('giangvien/chianhom/'.$mahp.'/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank">
                                     <button type="button" name="" class="btn btn-success">
-                                        <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                        <img src="{{asset('public/images/printer-icon.png')}}"> In danh sách
                                     </button>
                                 </a>
                             @endif
@@ -103,7 +103,7 @@
                 <table class="table table-bordered" id="tblChonTV">
                     <tr>
                         <th width='15%' valign='middle'>Chọn đề tài:</th>
-                        <td align="center" colspan="2">
+                        <td colspan="5" align="center">
                             <select class="form-control" id="cbDeTai" name="cbDeTai">
                                 <option value="">Chọn tên đề tài</option>
                                 @foreach($dsdetai as $dt)
@@ -111,27 +111,27 @@
                                 @endforeach
                             </select>
                             <p style='color:red;'>{{$errors->first('cbDeTai')}}</p>
+                        </td>                        
+                    </tr>  
+                    <tr>
+                        <th>Ngày bắt đầu (kế hoạch):</th>
+                        <td width="20%">
+                           <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
+                           <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
+                        </td>
+                        <th width="18%">Ngày kết thúc (kế hoạch):</th>
+                        <td width="20%">
+                            <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
                         <th width="18%">Số tuần theo kế hoạch:</th>
                         <td>
                             <input type='text' name="txtSoTuanKH" value="" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtSoTuanKH')}}</p>
                         </td>
-                    </tr>  
-                    <tr>
-                        <th>Ngày bắt đầu (kế hoạch):</th>
-                        <td width="30%">
-                           <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
-                           <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
-                        </td>
-                        <th width="18%">Ngày kết thúc (kế hoạch):</th>
-                        <td width="30%" colspan="2">
-                            <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
-                        </td>
                     </tr>
                     <tr>                   
-                        <td align="center" colspan="5">                                                  
+                        <td align="center" colspan="7">                                                  
                             @foreach($dstensv as $sv)
                                 <div style="padding: 2px 2px 2px 60px; display: block; float: left;">                                   
                                     <a href="" data-toggle="tooltip" data-placement="top" title="{{$sv->hoten}}">
@@ -144,7 +144,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" align='center'>
+                        <td colspan="7" align='center'>
                             <div style="display: block;">                                    
                                 <p style='color:red;'>{{$errors->first('chkThanhVien')}}</p>
                                 <p style='color:red;'>{{$errors->first('rdNhomTruong')}}</p>

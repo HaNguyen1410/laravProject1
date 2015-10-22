@@ -23,7 +23,26 @@ and open the template in the editor.
         </style>
     </head>
     
-    <body>       
+    <body>   
+        <table style="width:100%">
+            <tr>
+                <td width="10%" align="right">
+                    <img src="http://localhost/laravProject1/public/images/logo-ctu.jpg" width="70px" height="70px"/>
+                </td>
+                <td>
+                    <div>
+                        <label>Trường Đại Học Cần Thơ</label><br>
+                        <label>Khoa công nghệ thông tin & truyền thông</label>
+                    </div>
+                </td>
+                <td align="right" width="30%">                    
+                    <div style="text-align: left;">
+                        <label>Mẫu in M01</label><br>
+                        <label>Ngày in: {{$date}}</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <h2 align="center" style="margin-bottom: 1px;">DANH SÁCH SINH VIÊN</h2>
         <div align="center">
             (Học kỳ: <lable style="color: #00c; font-weight: bold;">{{$hkht}}</lable> - 

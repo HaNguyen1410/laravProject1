@@ -57,8 +57,8 @@ and open the template in the editor.
                 </td>
                 <td>
                     <div>
-                        <label>Bộ Giáo Dục Và Đào Tạo</label><br>
-                        <label>Trường Đại Học Cần Thơ</label>
+                        <label>Trường Đại Học Cần Thơ</label><br>
+                        <label>Khoa công nghệ thông tin & truyền thông</label>
                     </div>
                 </td>
                 <td align="right" width="30%">                    

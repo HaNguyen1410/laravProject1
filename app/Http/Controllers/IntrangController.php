@@ -21,6 +21,7 @@ class IntrangController extends Controller
 {
 /*====================== Sinh viên In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
     public function InChiTietDeTaiSV($madt){ 
+        $date = date('Y-m-d');//Carbon::now();
         $mssv = \Auth::user()->taikhoan;
         $tencb = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten')
                 ->join('nhom_hocphan as hp','gv.macb','=','hp.macb')
@@ -34,9 +35,9 @@ class IntrangController extends Controller
         $detai = DB::table('de_tai')->where('madt',$madt)->first();
         
         $view = \View::make('sinhvien.in-chi-tiet-de-tai', 
-                compact('tencb','nk','detai'));
+                compact('tencb','nk','detai','date'));
         $pdf = \App::make('dompdf.wrapper');
-        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
         
         $tendt = DB::table('de_tai')->select('tendt')
                 ->where('madt',$madt)
@@ -44,7 +45,8 @@ class IntrangController extends Controller
         return $pdf->stream($tendt.".pdf");
     }   
 /*====================== In chi tiết đề tài - mô tả, công nghệ thực hiện đề tài =============================*/   
-    public function InChiTietDeTai($macb,$madt){        
+    public function InChiTietDeTai($macb,$madt){ 
+        $date = date('Y-m-d');//Carbon::now();
         $tencb = DB::table('giang_vien')->select('macb','hoten')->where('macb',$macb)->first();
         $nk = DB::table('nien_khoa as nk')->select('nk.nam','nk.hocky')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
@@ -54,9 +56,9 @@ class IntrangController extends Controller
         $detai = DB::table('de_tai')->where('madt',$madt)->first();
         
         $view = \View::make('giangvien.in-chi-tiet-de-tai', 
-                compact('tencb','nk','detai'));
+                compact('tencb','nk','detai','date'));
         $pdf = \App::make('dompdf.wrapper');
-        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
         
         $tendt = DB::table('de_tai')->select('tendt')
                 ->where('madt',$madt)

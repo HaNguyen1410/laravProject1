@@ -73,7 +73,7 @@
                                 @elseif($mahp != null)
                                     <a href="{{asset('quantri/sinhvien/'.$mahp.'/indanhsachsinhvien/'.\Auth::user()->taikhoan)}}" target="_blank">
                                         <button type="button" name="" class="btn btn-success">
-                                            <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
+                                            <img src="{{asset('public/images/printer-icon.png')}}"> In danh sách
                                         </button>
                                     </a>
                                 @endif

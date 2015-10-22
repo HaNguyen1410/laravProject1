@@ -190,11 +190,12 @@
             </table> 
             <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>
-                    <td align="right">
+<!--                    <td align="right">
                         <button onclick="return kt_diem();" type="submit" class="btn btn-info" style="width: 50%;">
                             <img src="{{asset('public/images/excel-icon.png')}}"> Nhập từ Exel...
                         </button> 
-                    </td>          
+                    </td>          -->
+                    <td></td>
                     <td>
                         @if($mahp == null || $mahp == 0)                            
                                 <button onclick="return confirm('Vui lòng chọn nhóm HP!')" type="button" name="" class="btn btn-success" style="width: 50%;">

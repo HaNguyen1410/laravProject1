@@ -32,6 +32,11 @@ class QdtieuchiController extends Controller
     public function DSTieuChi(){
         $macb = \Auth::user()->taikhoan;
         $ma = $this->matc_tutang();
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
@@ -42,7 +47,7 @@ class QdtieuchiController extends Controller
                 ->get();
          
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)->with('namhoc',$namhoc)
-        ->with('hocky',$hocky)->with('ma',$ma);
+        ->with('hocky',$hocky)->with('ma',$ma)->with('hkht',$hkht)->with('namht',$namht);
     }
 /*========= Xóa Tiêu chí đánh giá ==============*/    
     public function XoaTieuChi($matc){

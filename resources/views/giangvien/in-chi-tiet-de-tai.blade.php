@@ -23,7 +23,26 @@ and open the template in the editor.
         </style>
     </head>
     
-    <body>       
+    <body>    
+        <table style="width:100%">
+            <tr>
+                <td width="10%" align="right">
+                    <img src="http://localhost/laravProject1/public/images/logo-ctu.jpg" width="70px" height="70px"/>
+                </td>
+                <td>
+                    <div>
+                        <label>Trường Đại Học Cần Thơ</label><br>
+                        <label>Khoa công nghệ thông tin & truyền thông</label>
+                    </div>
+                </td>
+                <td align="right" width="30%">                    
+                    <div style="text-align: left;">
+                        <label>Mẫu in M01</label><br>
+                        <label>Ngày in: {{$date}}</label>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <h2 align="center" style="margin-bottom: 1px;">CHI TIẾT ĐỀ TÀI</h2>
         <div align="center">
             (Học kỳ: <lable style="color: #00c;">{{$nk->hocky}}</lable> - Năm học: <lable style="color: #00c;">{{$nk->nam}})</lable>
@@ -56,7 +75,7 @@ and open the template in the editor.
             </tr>
         </table><br>
         <h3 style="text-align: center; font-weight: bold;">Thông tin chi tiết</h3>
-        <table border="0" style="width:800px;" cellpadding="4px 8px" cellspacing="0px 0px">            
+        <table border="0" style="width:650px; text-align: justify;" cellpadding="4px 8px" cellspacing="0px 0px">            
             <tr>
                 <td>
                     <label style="color: blue; font-weight: bold;">Mô tả đề tài:</label><br>

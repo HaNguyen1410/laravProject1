@@ -14,23 +14,25 @@
     <div class="row">
         <h4 style="display:block; float:left; color:blue; font-weight: bold;">BẢNG TIÊU CHÍ ĐÁNH GIÁ KẾT QUẢ NIÊN LUẬN</h4>    
         <div class="col-md-12" style="display:block; float:left;">
-            <table class="table table-bordered" style="width: 800px" align="center">
+            <table class="table table-bordered" style="width: 750px" align="center">
                 <tr>
                     <th align="right">Năm học:</th>
-                    <th>
-                        <select class="form-control" name='cbNamHoc'>
+                    <th width="20%">
+<!--                        <select class="form-control" name='cbNamHoc'>
                             @foreach($namhoc as $nk)
                             <option value="{{$nk->nam}}">{{$nk->nam}}</option>  
                             @endforeach
-                        </select>
+                        </select>-->
+                        <input type="text" value="{{$namht}}" style="width: 100%; text-align: center;" class="form-control" readonly=""/>
                     </th>
                     <th align="right">Học kỳ:</th>
-                    <th>
-                        <select class="form-control" name='cbHocKy'>
+                    <th width="20%">
+<!--                        <select class="form-control" name='cbHocKy'>
                             @foreach($hocky as $nk)
                             <option value="{{$nk->hocky}}">{{$nk->hocky}}</option>  
                             @endforeach
-                        </select>
+                        </select>-->
+                        <input type="text" value="{{$hkht}}" style="width: 60%; text-align: center;" class="form-control" readonly=""/>
                     </th>
                     <th>
                         <a href="dstieuchi/themtieuchi">

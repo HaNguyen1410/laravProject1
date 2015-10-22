@@ -443,6 +443,7 @@ class QuantriController extends Controller
     }
 /*======================== IN Danh sách sinh viên ==================================*/    
     public function InDanhSachSV($mahp,$macbqt){
+        $date = date('Y-m-d');
         $nguoiin = DB::table('giang_vien')->where('macb',$macbqt)->value('hoten');
         //Lấy giá trị năm học và học kỳ hiện tại      
         $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -465,7 +466,8 @@ class QuantriController extends Controller
                     ->orderBy('chn.manhomthuchien','asc')
                     ->get();
         }
-        $view = \View::make('quantri.in-danh-sach-sinh-vien',compact('macbqt','nguoiin','namht','hkht','gv_hp','dssv'));
+        $view = \View::make('quantri.in-danh-sach-sinh-vien',compact('macbqt','nguoiin','namht','hkht',
+                'gv_hp','dssv','date'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
        

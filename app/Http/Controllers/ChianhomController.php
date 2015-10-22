@@ -20,6 +20,7 @@ class ChianhomController extends Controller
 {
 /*======================== IN Danh sách sinh viên ==================================*/    
     public function InDanhSachDeTaiNhom($mahp,$macb){
+        $date = date('Y-m-d');
         $nguoiin = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
         //Lấy giá trị năm học và học kỳ hiện tại      
         $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
@@ -45,7 +46,7 @@ class ChianhomController extends Controller
                     ->get();
         }
         $view = \View::make('giangvien.in-danh-sach-de-tai-nhom',
-                compact('macb','nguoiin','namht','hkht','gv_hp','dssv'));
+                compact('macb','nguoiin','namht','hkht','gv_hp','dssv','date'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
        
