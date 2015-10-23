@@ -55,7 +55,7 @@
     <div class="col-md-12">  <br>      
         <form action="{{action('DiemController@LayMaNhomHP')}}" method="post">
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-            <table class="table table-bordered" style="width:900px" align='center'>
+            <table class="table table-bordered" style="max-width:900px" align='center'>
                 <tr>
                     <th width='8%'>Năm học:</th>                
                     <td width='15%'>

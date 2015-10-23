@@ -17,7 +17,7 @@
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
             <div class="col-md-12" align="center">
                 <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">Cập nhật tiêu chí đánh giá</h3>
-                <table class="table table-bordered" align="center" style="width:800px;">
+                <table class="table table-bordered" align="center" style="max-width:800px;">
                      <tr>
                         <th>Mã cán bộ:</th>
                         <td>

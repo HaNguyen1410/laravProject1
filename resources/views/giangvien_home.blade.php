@@ -46,15 +46,15 @@
     
     <body id="Haside">
         <div class="container body-content" id="Habody">
-            <div class="page-header" id="Haheader">  
+            <div class="page-header" id="Haheader">
                 <div id="Haimage">                    
-                    <img src="{{asset('public/images/Banner/logo_ctu.gif')}}"/>
+                    <img src="{{asset('public/images/Banner/logo_ctu.gif')}}" width="100px"/>
                 </div>
                 <div id="Haname">
                    HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
                    KỸ THUẬT PHẦN MỀM
                 </div>
-            </div> 
+            </div> <!-- /page-header -->  
             <!-- Static navbar -->  
             <nav class="navbar navbar-default">
                 <div class="container">                

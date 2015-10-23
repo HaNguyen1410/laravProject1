@@ -23,7 +23,6 @@ html,body{
     border: 1px solid #4396CA;
     border-radius: 30px;
     padding: 0px 0px;
-    text-align: center;
     margin-right: auto;
     margin-left: auto;
     margin-bottom: 10px;
@@ -37,14 +36,14 @@ html,body{
     border-top-right-radius: 5px;
     color: white;
     margin: 0px;
-    padding: 20px 10px; 
+    padding: 20px 10px;
+    max-width: 1280px;
 }
 #Haimage{
     display: block;
     float: left;
     text-align: center;
-    margin-left: 220px;
-    max-width: 100px;
+    margin-left: 220px;   
 }
 #Haname{
     font-size: 24px; 

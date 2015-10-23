@@ -83,7 +83,7 @@
                                 <button type="submit" name="" class="btn btn-primary">
                                     <img src="{{asset('public/images/add-icon.png')}}">Thêm thông báo
                                 </button>
-                                <a href="{{asset('giangvien/quanlythongbao')}}" class="btn btn-warning" style="margin-left: 10px; width:15%">
+                                <a href="{{asset('giangvien/quanlythongbao')}}" class="btn btn-warning" style="margin-left: 10px; min-width:15%">
                                     <img src="{{asset('public/images/delete-icon.png')}}">Hủy Bỏ
                                 </a>
                             </td>
