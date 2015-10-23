@@ -81,8 +81,8 @@
                                 ?>
                             </td>
                             <td width='15%'>
-                                <a href="" data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
-                                    {{$dt->tendt}}                                
+                                <a data-toggle="tooltip" data-placement="bottom" title="Ngày tạo: {{$dt->ngaytao}} - Ngày sửa: {{$dt->ngaysua}}">
+                                    <label>{{$dt->tendt}}</label>                                
                                 </a>
                             </td>
                             @if($dt->taptindinhkem != "")
@@ -100,7 +100,9 @@
                             @endif               
                             <td width='15%'>{{$dt->motadt}}</td> 
                             <td width='15%'>{{$dt->congnghe}}</td>
-                            <td align="center" style="vertical-align: middle;">{{$dt->songuoitoida}}</td>
+                            <td align="center" style="vertical-align: middle;">
+                                {{$dt->songuoitoida}}
+                            </td>
                             <td>{{$dt->ghichudt}}</td>
     <!--                        @foreach($nhomth as $nhom)      
                                 @if($nhom->tendt == $dt->tendt)
