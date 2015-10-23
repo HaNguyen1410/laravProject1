@@ -25,7 +25,7 @@
         </div><br>
         <div class="row">
                 <div class="col-md-9 col-md-push-3">
-                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
+                    <table class="table table-bordered" border="0" width="500px" cellpadding="25px" cellspacing="0px" align='center'>
                         <tr><th colspan="2" style="text-align: center">Thông tin giảng viên</th></tr>
                         <tr>
                             <td width="30%"><label>Mã số cán bộ:</label></td>
@@ -62,7 +62,7 @@
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
-                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
+                    <table class="table table-bordered" border="0" width="400px">
                         <tr>
                             <td align="center">
                                 @if($gv->hinhdaidien != "")

@@ -54,7 +54,7 @@
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
-                    <table class="table table-bordered" width="500px" >
+                    <table class="table table-bordered" width="400px" style="margin-left: 50px;">
                         <tr>
                             <td align="center">
                                 @if($gv->hinhdaidien != "")

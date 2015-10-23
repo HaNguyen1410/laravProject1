@@ -9,4 +9,36 @@
 root { 
     display: block;
 }
-
+html,body{
+    background-color: #4396CA;
+}
+#Haside{
+    background-color: #4396CA;
+}
+#Habody{
+    background-color: white;
+    border: 1px solid #4396CA;
+    border-radius: 30px;
+    padding: 0px 0px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    width: 1280px;
+}
+#Haheader{
+    background-image: url("../../public/images/Banner/cong-nghe-thong-tin-17.jpg");
+    height: 150px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    margin: 0px;
+    padding: 20px 10px;    
+}
+#Hafooter{
+    background-image: url("../../public/images/Banner/cong-nghe-thong-tin-17.jpg");
+    color: white;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    height: 30%;
+    padding-top: 7px;
+    padding-bottom: 7px
+}

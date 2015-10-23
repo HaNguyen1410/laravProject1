@@ -7,6 +7,7 @@
         <!-- Bootstrap -->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{Asset('public/css/style.css')}}">
         <link rel="stylesheet" href="{{Asset('bootstrap/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{Asset('public/scripts/jquery-ui-1.11.4/style.css')}}">
         <link rel="stylesheet" href="{{Asset('public/scripts/jquery-ui-1.11.4/jquery-ui.min.css')}}"> 
@@ -43,11 +44,13 @@
         </script>
     </head>
     
-    <body>
-        <div class="container body-content">
-            <div class="page-header">
-                <h2 style="color: darkblue;">
-                    HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN</h2>
+    <body id="Haside">
+        <div class="container body-content" id="Habody">
+            <div class="page-header" id="Haheader">
+                <h3 style="text-align: center; vertical-align: middle;">
+                    HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
+                    KỸ THUẬT PHẦN MỀM
+                </h3>
             </div> 
             <!-- Static navbar -->  
             <nav class="navbar navbar-default">
@@ -161,7 +164,7 @@
                             </li> 
                             <li style="margin-right: 15px;">                                
                                 <a href="{{asset('dangxuat')}}">
-                                    (Đăng xuất)
+                                    Đăng xuất <img src="../public/images/Action-exit-icon.png"/> 
                                 </a>
                             </li>
                         </ul>
@@ -172,10 +175,13 @@
             <div class="row">                                
                 @yield('content_gv')
             </div> <!-- /row -->
-            <hr>
-            <footer class="footer">
-                <p>&copy; Company 2015</p>
-            </footer>                     
+            <!--<hr>-->
+            <footer class="footer" id="Hafooter">
+                <p align="center">
+                    Khoa công nghệ thông tin và truyền thông <br> 
+                    Trường Đại Học Cần Thơ
+                </p>
+            </footer>                    
         </div>                   
     </body>
 </html>
