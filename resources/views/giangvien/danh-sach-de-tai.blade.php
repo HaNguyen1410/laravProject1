@@ -98,12 +98,22 @@
                                     </a>
                                 </td>
                             @endif               
-                            <td width='15%'>{{$dt->motadt}}</td> 
-                            <td width='15%'>{{$dt->congnghe}}</td>
+                            <td width='15%'>
+                                <?php 
+                                    echo substr($dt->motadt,0,100). "<br><label>....</label>";
+                                ?>
+                            </td> 
+                            <td width='15%'>
+                                <?php                                     
+                                    echo substr($dt->congnghe,0,200). "<br><label>....</label>";
+                                ?>
+                            </td>
                             <td align="center" style="vertical-align: middle;">
                                 {{$dt->songuoitoida}}
                             </td>
-                            <td>{{$dt->ghichudt}}</td>
+                            <td>
+                                {{$dt->ghichudt}}
+                            </td>
     <!--                        @foreach($nhomth as $nhom)      
                                 @if($nhom->tendt == $dt->tendt)
                                     <td align='center'>

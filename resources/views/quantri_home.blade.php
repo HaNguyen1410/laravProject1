@@ -123,7 +123,7 @@
                             </li> -->
                             <li style="margin-right: 15px;">                                
                                 <a href="{{asset('dangxuat')}}">
-                                    <img src="../public/images/Action-exit-icon.png"/> Đăng xuất
+                                    Đăng xuất <img src="{{asset('public/images/Action-exit-icon.png')}}"/> 
                                 </a>
                             </li>
                         </ul>
