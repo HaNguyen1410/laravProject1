@@ -230,6 +230,8 @@ class ChianhomController extends Controller
                 ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                 ->where('chn.mssv',$mssv)
                 ->value('chn.manhomthuchien');
+        $madt_chianhom = DB::table('ra_de_tai')->where('manhomthuchien',$manth)->value('madt');
+        $madt = DB::table('de_tai')->where('madt',$madt_chianhom)->value('madt');
         
         DB::table('chia_nhom')->where('mssv',$mssv)->update(
                     [
@@ -245,6 +247,9 @@ class ChianhomController extends Controller
         if(count($nhomsv) == 0){
             DB::table('nhom_thuc_hien')->where('manhomthuchien',$manth)->delete();
             DB::table('ra_de_tai')->where('manhomthuchien',$manth)->delete();
+        //Cập nhật trạng thái đề tài Chưa làm
+            $ch4 = DB::table('de_tai')->where('madt',$madt)
+                    ->update(['trangthai' => "Chưa làm"]);
         }
         
         $tensv = DB::table('sinh_vien')->where('mssv',$mssv)->value('hoten');
