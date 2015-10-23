@@ -33,10 +33,13 @@
     <body id="Haside">
         <div class="container body-content" id="Habody">
             <div class="page-header" id="Haheader">
-                <h3 style="text-align: center; vertical-align: middle;">
+                <div id="Haimage">                    
+                    <img src="{{asset('public/images/Banner/logo_ctu.gif')}}" width="100px"/>
+                </div>
+                <div id="Haname">
                     HỆ THỐNG QUẢN TRỊ WEBSITE<br>
                     QUẢN LÝ NHÓM LÀM NIÊN LUẬN KỸ THUẬT PHẦN MỀM
-                </h3>               
+                </div>               
             </div> 
             <!-- Static navbar -->  
             <nav class="navbar navbar-default">

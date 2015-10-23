@@ -6,8 +6,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-utf-8" />
         <title>Sinh viên</title>
         <!-- Bootstrap -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">        
         <link rel="stylesheet" href="{{Asset('public/css/style.css')}}">
         <link rel="stylesheet" href="{{Asset('bootstrap/css/bootstrap.min.css')}}">        
         <link rel="stylesheet" href="{{Asset('public/scripts/jquery-ui-1.11.4/style.css')}}">
@@ -61,10 +60,13 @@
     <body id="Haside">                        
         <div class="container body-content" id="Habody">  
             <div class="page-header" id="Haheader">
-                <h3 style="text-align: center; vertical-align: middle;">
-                    HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
-                    KỸ THUẬT PHẦN MỀM
-                </h3>
+                <div id="Haimage">                    
+                    <img src="{{asset('public/images/Banner/logo_ctu.gif')}}" width="100px"/>
+                </div>
+                <div id="Haname">
+                   HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
+                   KỸ THUẬT PHẦN MỀM
+                </div>
             </div> <!-- /page-header -->       
             <!-- Static navbar -->       
             <nav class="navbar navbar-default">

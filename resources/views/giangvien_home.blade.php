@@ -46,11 +46,14 @@
     
     <body id="Haside">
         <div class="container body-content" id="Habody">
-            <div class="page-header" id="Haheader">
-                <h3 style="text-align: center; vertical-align: middle;">
-                    HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
-                    KỸ THUẬT PHẦN MỀM
-                </h3>
+            <div class="page-header" id="Haheader">  
+                <div id="Haimage">                    
+                    <img src="{{asset('public/images/Banner/logo_ctu.gif')}}"/>
+                </div>
+                <div id="Haname">
+                   HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN<br>
+                   KỸ THUẬT PHẦN MỀM
+                </div>
             </div> 
             <!-- Static navbar -->  
             <nav class="navbar navbar-default">

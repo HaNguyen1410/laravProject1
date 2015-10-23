@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12" style="display:block; float:left;">
-                <table class="table table-bordered" style="width: 600px" align="center">
+                <table class="table table-bordered" style="max-width: 600px" align="center">
                     <tr>
                         <th align="right">Năm học:</th>
                         <th width="25%">
@@ -100,7 +100,7 @@
             </div>            
             <div class="col-md-12">
                 <p style="color:red;"><?php echo Session::get('ThongBaoRut'); ?></p>
-                <table class="table table-bordered table-striped" style="width: 700px" align="center">
+                <table class="table table-bordered table-striped" style="max-width: 700px" align="center">
                     <tr>
                         <th width="3%">STT</th>
                         <th>MACB</th>

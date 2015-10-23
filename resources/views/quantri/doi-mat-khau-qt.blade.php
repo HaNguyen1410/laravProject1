@@ -37,7 +37,7 @@
             <input type='hidden' name='_token' value="<?= csrf_token();?>"/>            
             <div class="col-md-8">
                 <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">ĐỔI MẬT KHẨU</h3>
-                <table class="table table-bordered" cellpadding="0px" cellspacing="0px" align="center" style="width:800px;">
+                <table class="table table-bordered" cellpadding="0px" cellspacing="0px" align="center" style="max-width:800px;">
                     <tr>
                         <th width="20%">Mã cán bộ:</th>
                         <td width="50%">

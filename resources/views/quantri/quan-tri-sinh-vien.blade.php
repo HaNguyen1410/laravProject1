@@ -16,7 +16,7 @@
             <div>
                 <form action="{{action('QuantriController@LayNhomHP')}}" method="post">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                    <table class="table table-bordered" style="width: 1000px" align="center">                    
+                    <table class="table table-bordered" style="max-width: 1000px" align="center">                    
                         <tr>
                             <th align="right" width="10%">Năm học:</th>
                             <th width="16%">
@@ -94,7 +94,7 @@
             </div> 
                   
             <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
-            <table class="table table-bordered table-striped" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
+            <table class="table table-bordered table-striped" max-width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="3%">STT</th>
                     <th width="6%">MSSV</th>

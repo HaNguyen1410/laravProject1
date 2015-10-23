@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: #006400; font-weight: bold;" align="center">THÔNG BÁO MỚI</h3><br>
-            <table class="table table-condensed" style="width:900px;" align="center">
+            <table class="table table-condensed" style="max-width:900px;" align="center">
                 @if(count($dsthongbao) == 0)
                     <tr>
                         <td colspan="9" align="center">
@@ -68,7 +68,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-9 col-md-push-3">
-                    <table class="table table-bordered" border="0" width="700px" cellpadding="25px" cellspacing="0px" align='center' id="bang1">
+                    <table class="table table-bordered" border="0" style="max-width: 700px;" cellpadding="25px" cellspacing="0px" align='center' id="bang1">
                         <tr><th colspan="4" style="text-align: center">Thông tin sinh viên</th></tr>
                         <tr>
                             <td><label>Mã số sinh viên:</label></td>
@@ -209,7 +209,7 @@
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->
                 <div class="col-md-3 col-md-pull-9">
                     <br><br><br>
-                    <table class="table table-bordered" border="0" width="800px" cellpadding="25px" cellspacing="0px" align='center'>
+                    <table class="table table-bordered" border="0" max-width="800px" cellpadding="25px" cellspacing="0px" align='center'>
                         <tr>
                             <td align="center">
                                  @if($sv->hinhdaidien != "")
