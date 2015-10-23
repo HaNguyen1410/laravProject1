@@ -88,10 +88,10 @@
                     <th rowspan="2" width="2%">STT</th>
                     <th rowspan="2" width="4%">Tuần</th>
                     <th rowspan="2" width="15%">Tên công việc</th>
+                    <th rowspan="2" width="8%">Nội dung thực hiện</th>
                     <th rowspan="2" width="15%">Giao cho</th>
                     <th colspan="2" width="18%">Kế hoạch</th>
                     <th rowspan="2" width="8%">Trạng thái</th>
-                    <th rowspan="2" width="8%">Nội dung thực hiện</th>
                     <th rowspan="2" width="6%">Tiến độ<br>(%)</th>
                     <th rowspan="2" width="6%">Thao tác</th>
                 </tr>
@@ -128,16 +128,16 @@
                             <td>
                                 <label>{{$cv->congviec}}</label>
                             </td>
-                            <td>{{$cv->giaocho}}</td>
-                            <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
-                            <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
-                            <!--<td align="center">{{$cv->sotuan_kehoach}}</td>-->
-                            <td align="center">{{$cv->trangthai}}</td>
                             <td align="center">
                                 <a href="phancv/phancongchitiet/{{$cv->macv}}" style="color: blueviolet; font-weight: bold;">
                                      Chi tiết
                                 </a>
                             </td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td align="center">{{$cv->ngaybatdau_kehoach}}</td>
+                            <td align="center">{{$cv->ngayketthuc_kehoach}}</td>
+                            <!--<td align="center">{{$cv->sotuan_kehoach}}</td>-->
+                            <td align="center">{{$cv->trangthai}}</td>
                             <td>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
