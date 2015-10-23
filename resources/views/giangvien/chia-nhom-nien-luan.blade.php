@@ -102,7 +102,7 @@
                <input type='hidden' name='_token' value='<?= csrf_token();?>'/>               
                 <table class="table table-bordered" id="tblChonTV">
                     <tr>
-                        <th width='15%' valign='middle'>Chọn đề tài:</th>
+                        <th width='18%' valign='middle'>Chọn đề tài:</th>
                         <td colspan="5" align="center">
                             <select class="form-control" id="cbDeTai" name="cbDeTai">
                                 <option value="">Chọn tên đề tài</option>
