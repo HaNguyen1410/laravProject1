@@ -30,34 +30,22 @@ html,body{
     max-width: 1280px;
 }
 #Haheader{
-    background-image: url("../../public/images/Banner/cong-nghe-thong-tin-17.jpg");
-    max-height: 150px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background:  url("../../public/images/Banner/Large_Banner_LV.jpg") center no-repeat #4396CA;
+    height: 150px;
+    overflow: no-content;
+    border: 1px solid;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     color: white;
     margin: 0px;
     padding: 20px 10px;
     max-width: 1280px;
 }
-#Haimage{
-    display: block;
-    float: left;
-    text-align: center;
-    margin-left: 220px;   
-}
-#Haname{
-    font-size: 24px; 
-    text-align: center; 
-    vertical-align: middle;
-    max-width: 800px;
-    margin-top: 15px;
-    margin-left: 120px;
-}
 #Hafooter{
     background-image: url("../../public/images/Banner/cong-nghe-thong-tin-17.jpg");
     color: white;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
     height: 30%;
     padding-top: 7px;
     padding-bottom: 7px;
