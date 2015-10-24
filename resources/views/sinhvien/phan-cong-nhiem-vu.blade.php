@@ -22,7 +22,9 @@
             <h3 style="color: darkblue; font-weight: bold;">Phân công thực hiện đề tài (Mã nhóm: {{$manth}})</h3> <br>
             <div class="col-md-12"> 
                 <!-- thanh tiến độ thời gian thực hiện -->
-                <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
+                <lable style="display: block; float: left; width: 27%;">
+                    Thời gian quy định ({{$tendt->ngaybatdau_kehoach}} - {{$tendt->ngayketthuc_kehoach}}): &nbsp;
+                </lable>
                 <div class="progress" style="width:70%">
                     <?php 
                         $tuancvchinh = $tuancv->tuan;
