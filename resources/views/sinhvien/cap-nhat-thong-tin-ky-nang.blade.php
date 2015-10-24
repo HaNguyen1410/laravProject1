@@ -19,7 +19,7 @@
             <div class="col-md-12" style="margin-bottom: 10px;">
                 <form action="{{action('SinhvienController@LuuCapNhatThongTin')}}" method="post">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                    <table class="table table-bordered" border="0" id="bang2" style="width:900px;" align="center">
+                    <table class="table table-bordered" border="0" id="bang2" style="max-width:900px;" align="center">
                         <tr>
                             <th width="20%">Mã số sinh viên:</th>
                             <td>                                
@@ -58,7 +58,7 @@
                                 <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 20%;">
                                     <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu 
                                 </button>&nbsp;&nbsp;
-                                <a href="../thongtinsv" class="btn btn-warning" style="width:20%;">
+                                <a href="../thongtinsv" class="btn btn-warning" style="width: 20%;">
                                     <img src="{{asset('public/images/delete-icon.png')}}"> Hủy bỏ
                                 </a>                                  
                             </td>                                  

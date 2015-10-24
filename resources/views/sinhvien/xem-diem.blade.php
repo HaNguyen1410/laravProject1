@@ -43,7 +43,7 @@
     <div class="row">       
     <div class="col-md-12">
         <h3 style="color: darkblue; font-weight: bold; text-align: center;">XEM ĐIỂM NIÊN LUẬN</h3>
-        <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
+        <table class="table" style="max-width: 100%" cellpadding="15px" cellspacing="0px" align='center'>
             <tr>
                 <th width='8%'>Năm học:</th>                
                 <td width='15%'>
@@ -70,7 +70,7 @@
             </tr>
          </table>
 
-        <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>            
+        <table style="max-width: 100%" class="table table-bordered" cellpadding="0px" cellspacing="0px">            
             <tr>
                 <th rowspan="2" width="1%">STT</th>
                 <th rowspan="2" width="8%">MSSV</th>
@@ -129,12 +129,12 @@
         </table>
         <div class="col-md-12" style="text-align: right;">
             <a href="xemdiem/inbangdiemsv" target="_blank">
-                <button type="button" name="" class="btn btn-success" style="width: 15%;">
+                <button type="button" name="" class="btn btn-success">
                     <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                 </button>
             </a><hr>
         </div>
-        <table class="table table-bordered" style="width: 600px;">
+        <table class="table table-bordered" style="max-width: 600px;">
             <tr>
                 <th width="2%">STT</th>
                 <th width="10%">Mã tiêu chí</th>

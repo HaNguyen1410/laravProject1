@@ -19,7 +19,7 @@
             <h3 style="color: darkblue; font-weight: bold;" align='center'>THÊM THÔNG TIN NHÓM ĐỀ TÀI NIÊN LUẬN</h3>   
             <form name="frmDangKyNL" action="{{action('SVthongtinnhomController@LuuThemThongTinNhom')}}" method="post">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-                <table class="table table-bordered" border="1" width="800px" cellpadding="15px" cellspacing="0px" align='center' id="dangky">
+                <table class="table table-bordered" border="1" style="max-with: 800px;" cellpadding="15px" cellspacing="0px" align='center' id="dangky">
                     <tr>
                         <th  width='15%'>Mã cán bộ:</th>
                         <td width="15%">
@@ -219,7 +219,7 @@
                     </tr>
                     <tr>
                         <td colspan="6" align='center'>
-                            <button type="submit" name="btnLuu" class="btn btn-success" style="width: 20%;">
+                            <button type="submit" name="btnLuu" class="btn btn-success">
                                 <img src="{{asset('public/images/save-as-icon.png')}}">&nbsp;
                                 Lưu thông tin
                             </button>
