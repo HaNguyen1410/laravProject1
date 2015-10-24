@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-md-12">                    
 <!-- Cập nhật chi tiết công sức làm dự án của mỗi thành viên -->
-            <h4 style="color: darkblue; font-weight: bold;">CHI TIẾT PHÂN CÔNG CHO MỖI THÀNH VIÊN</h4><br>
+            <h3 style="color: darkblue; font-weight: bold;">Chi tiết phân công cho mỗi thành viên</h3><br>
             <div class="col-md-12" style="background-color:#dff0d8; margin-bottom: 20px; padding: 8px;">
                 <label style="color: darkblue; font-size: 13pt;">Thuộc công việc:</label>
                 <label style="color: #F65D20;">
