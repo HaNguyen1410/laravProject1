@@ -35,7 +35,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <th width="10%">Ngày thực hiện:</th>
+                        <th width="10%">Ngày bắt đầu:</th>
                         <td width="30%">
                            <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
@@ -120,7 +120,6 @@
                         </td>
                     </tr>                    
                     <tr>
-                        <td></td>
                         <td colspan="4" align="center">
                             <button type="submit" name="btnThem" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Thêm công việc

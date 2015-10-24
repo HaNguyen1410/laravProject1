@@ -59,10 +59,10 @@
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
                         </td>
                         <th width="18%">Ngày kết thúc (kế hoạch):</th>
-                        <td colspan="2" width="30%">
+                        <td width="30%">
                             <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="{{$ndcv->ngayketthuc_kehoach}}" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
-                        </td>
+                        </td>  
                     </tr>
 <!--                    <tr>
                         <th width="10%">Ngày bắt đầu (thực tế):</th>
@@ -78,7 +78,7 @@
                     </tr>-->
                     <tr>
                         <th>Giao cho:</th>
-                        <td colspan="2">
+                        <td colspan="3">
                             @foreach($dstv as $tv)
                                 <div style="padding: 2px 2px 2px 20px; display: block; float: left;">
                                      <a href="" data-toggle="tooltip" data-placement="top" title="{{$tv->hoten}}">
@@ -92,17 +92,17 @@
                                        : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
                                 </div><br>
                             <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
-                        </td>
-                        <th>Tuần làm lại:</th>
-                        <td>
-                            <input type="text" id="txtGioThucTe" name="txtTuanLamLai" value="{{$ndcv->tuan_lamlai}}" class="form-control"/>
-                            <p style='color:red;'>{{$errors->first('txtTuanLamLai')}}</p>
                         </td>                        
                     </tr>
                     <tr>
                         <th>Được giao cho:</th>
-                        <td colspan="4">
+                        <td>
                             <label style="color: #006400; font-weight: bold;">{{$ndcv->giaocho}}</label>
+                        </td>                      
+                        <th>Tuần làm lại:</th>
+                        <td>
+                            <input type="text" id="txtGioThucTe" name="txtTuanLamLai" value="{{$ndcv->tuan_lamlai}}" class="form-control"/>
+                            <p style='color:red;'>{{$errors->first('txtTuanLamLai')}}</p>
                         </td>
                     </tr>
                     <tr>
@@ -117,7 +117,7 @@
 <!--                            <p style='color:red;'>{{$errors->first('cbTrangThai')}}</p>                        -->
                         </td>
                         <th width="13%">Độ ưu tiên:</th>
-                        <td colspan="2" >
+                        <td>
                             <select class="form-control" size="1" name="cbUuTien">
                                 <option value="{{$ndcv->uutien}}" selected="">{{$ndcv->uutien}}</option>
                                 <option value="Cao">Cao</option>
@@ -134,14 +134,14 @@
                             <p style='color:red;'>{{$errors->first('txtTuan')}}</p>
                         </td>
                         <th>Tiến độ (%):</th>
-                        <td colspan="2">
+                        <td>
                             <input type="text" name="txtTienDo" value="{{$ndcv->tiendo}}" class="form-control">
                             <p style='color:red;'>{{$errors->first('txtTienDo')}}</p>
                         </td>
                     </tr> 
                     <tr>
                         <th width="20%">Nội dung công việc:</th>
-                        <td colspan="4">
+                        <td colspan="3">
                             <textarea name="txtNoiDungViec" rows="2" cols="2" class="ckeditor">{{$ndcv->noidungthuchien}}</textarea>
                             <p style='color:red;'>{{$errors->first('txtNoiDungViec')}}</p>
                             <script language="javascript">
@@ -163,7 +163,7 @@
                         </td>
                     </tr>                    
                     <tr>
-                        <td colspan="5" align="center">
+                        <td colspan="4" align="center">
                             <button type="submit" name="btnCapNhat" class="btn btn-primary" style="width:20%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Cập nhật
                             </button>&nbsp;&nbsp;

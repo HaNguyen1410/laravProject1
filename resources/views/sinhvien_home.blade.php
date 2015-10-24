@@ -174,7 +174,7 @@
             <!--<hr>-->
             <footer class="footer" id="Hafooter">
                 <p align="center">
-                    Khoa công nghệ thông tin và truyền thông <br> 
+                    Khoa Công Nghệ Thông tin và Truyền Thông <br> 
                     Trường Đại Học Cần Thơ
                 </p>
             </footer>
