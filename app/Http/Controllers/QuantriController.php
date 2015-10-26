@@ -455,7 +455,24 @@ class QuantriController extends Controller
                 ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
                 ->value('nk.mank');
         $mahp = \Request::segment(3);
-        if($mahp != null){
+        if($mahp == "all"){
+           //Lấy tất cả các nhóm HP trong học kỳ năm học hiện tại
+            $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp','hp.manhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('hp.mank',$mank)                   
+                    ->get();
+            //Lấy mảng các mã nhóm HP của năm học - học kỳ hiện tại
+            $ds_hp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('hp.mank',$mank)                   
+                    ->lists('hp.manhomhp');
+            $dssv = DB::table('sinh_vien as sv')
+                    ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                    ->whereIn('chn.manhomhp',$ds_hp)
+                    ->orderBy('chn.manhomthuchien','asc')
+                    ->get();
+        }
+        else if($mahp != null || $mahp != 0){
             $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp')
                     ->join('giang_vien as gv','gv.macb','=','hp.macb')
                     ->where('hp.manhomhp',$mahp)                    
@@ -467,7 +484,7 @@ class QuantriController extends Controller
                     ->get();
         }
         $view = \View::make('quantri.in-danh-sach-sinh-vien',compact('macbqt','nguoiin','namht','hkht',
-                'gv_hp','dssv','date'));
+                'gv_hp','dssv','date','mahp'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('portrait');
        

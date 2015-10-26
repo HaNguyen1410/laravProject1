@@ -58,7 +58,7 @@
             </div><!-- /card-container -->
             <footer class="footer" id="Hafooter">
                 <p align="center">
-                    Khoa Công Nghệ Thông tin và Truyền Thông <br> 
+                    Khoa Công Nghệ Thông Tin và Truyền Thông <br> 
                     Trường Đại Học Cần Thơ
                 </p>
             </footer>
