@@ -150,7 +150,7 @@ class DiemController extends Controller
         return view('giangvien.nhap-diem')->with('tieuchi',$tieuchi)->with('dssv',$dssv)
                 ->with('dsdiem',$dsdiem)->with('dshp',$dshp)->with('nam',$nam)            
                 ->with('hk',$hk)->with('tendt',$tendt)->with('tongdiem',$tongdiem)
-                ->with('nhanxet',$nhanxet)->with('mahp',$mahp);
+                ->with('nhanxet',$nhanxet)->with('mahp',$mahp)->with('macb',$macb);
     }  
 /*================ LƯU ĐIỂM của sinh viên KHI GIẢNG VIÊN NHẬP ĐIỂM =================*/
     public function LuuNhapDiem(Request $req){

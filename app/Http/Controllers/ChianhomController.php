@@ -32,7 +32,28 @@ class ChianhomController extends Controller
                 ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
                 ->value('nk.mank');
         $mahp = \Request::segment(3);
-        if($mahp != null){
+        
+        if($mahp == "all"){
+            $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp','hp.manhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('gv.macb',$macb)
+                    ->where('hp.mank',$mank)
+                    ->get();
+            //Lấy mảng các mã nhóm HP của cán bộ này ở hk-nk hiện tại
+            $ds_hpgv = DB::table('nhom_hocphan as hp')->select('hp.manhomhp')
+                    ->join('giang_vien as gv','gv.macb','=','hp.macb')
+                    ->where('gv.macb',$macb)
+                    ->where('hp.mank',$mank)                    
+                    ->lists('hp.manhomhp');
+            $dssv = DB::table('sinh_vien as sv')
+                    ->leftjoin('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                    ->leftjoin('ra_de_tai as radt','chn.manhomthuchien','=','radt.manhomthuchien')
+                    ->leftjoin('de_tai as dt','radt.madt','=','dt.madt')
+                    ->whereIn('chn.manhomhp',$ds_hpgv)
+                    ->orderBy('chn.manhomthuchien','asc')
+                    ->get();
+        }
+        else if($mahp != null){
             $gv_hp = DB::table('nhom_hocphan as hp')->select('gv.macb','gv.hoten','hp.tennhomhp')
                     ->join('giang_vien as gv','gv.macb','=','hp.macb')
                     ->where('hp.manhomhp',$mahp)                    
@@ -45,8 +66,9 @@ class ChianhomController extends Controller
                     ->orderBy('chn.manhomthuchien','asc')
                     ->get();
         }
+        
         $view = \View::make('giangvien.in-danh-sach-de-tai-nhom',
-                compact('macb','nguoiin','namht','hkht','gv_hp','dssv','date'));
+                compact('macb','nguoiin','namht','hkht','gv_hp','dssv','date','mahp'));
         $pdf = \App::make('dompdf.wrapper');
         $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
        
@@ -92,7 +114,7 @@ class ChianhomController extends Controller
     //Lấy giá trị một đoạn của chuỗi url
         $var = \Request::segment(3);
         if($var == null){
-            //Lấy mã nhóm HP của năm hiện tại mà cán bộ phụ trách
+            //Lấy 1 mã nhóm HP nhỏ nhất của năm hiện tại mà cán bộ phụ trách
             $mahp = DB::table('nhom_hocphan as hp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('hp.macb',$macb)

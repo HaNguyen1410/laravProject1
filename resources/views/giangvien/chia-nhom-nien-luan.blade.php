@@ -78,22 +78,16 @@
                             </select>
                         </th>
                         <th style="text-align: center">
-                            <button type="submit" name="btnLưu" class="btn btn-success" style="width: 130px;">
+                            <button type="submit" name="btnLưu" class="btn btn-success" style="min-width: 130px;">
                                 Liệt kê
                             </button>
                         </th>
                         <th width="12%">  
-                            @if($mahp == null || $mahp == 0)
-                                <button onclick="return confirm('Vui lòng chọn nhóm HP muốn in!');" type="button" name="" class="btn btn-success">
+                            <a href="{{asset('giangvien/chianhom/'.$mahp.'/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank">
+                                <button type="button" name="" class="btn btn-success">
                                     <img src="{{asset('public/images/printer-icon.png')}}"> In danh sách
                                 </button>
-                            @elseif($mahp != null)
-                                <a href="{{asset('giangvien/chianhom/'.$mahp.'/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank">
-                                    <button type="button" name="" class="btn btn-success">
-                                        <img src="{{asset('public/images/printer-icon.png')}}"> In danh sách
-                                    </button>
-                                </a>
-                            @endif
+                            </a>
                         </th>
                     </tr>
                 </table>
@@ -149,7 +143,7 @@
                                 <p style='color:red;'>{{$errors->first('chkThanhVien')}}</p>
                                 <p style='color:red;'>{{$errors->first('rdNhomTruong')}}</p>
                             </div>
-                            <button onclick="return kt();" type="submit" name="btnLưu" class="btn btn-success" style="width: 20%;">
+                            <button onclick="return kt();" type="submit" name="btnLưu" class="btn btn-success" style="min-width: 13%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}">&nbsp;
                                 Lưu 
                             </button>
@@ -158,10 +152,17 @@
                 </table> 
             </form>            
         </div>   
-        <div class="col-md-12">
-            <h4 style="color: darkblue; font-weight: bold; text-align: center;">
-                Danh sách đề tài của mỗi nhóm trong các nhóm Học Phần
-            </h4>
+        <div class="col-md-12">    
+            <div>                
+                <h4 style="margin-left: 240px;color: darkblue; font-weight: bold; display: block; float: left;">
+                    Danh sách đề tài của mỗi nhóm trong các nhóm Học Phần
+                </h4> &nbsp;&nbsp;&nbsp;
+                <a href="{{asset('giangvien/chianhom/all/indanhsachdetainhom/'.\Auth::user()->taikhoan)}}" target="_blank" style="text-align: center;">
+                    <button type="button" name="" class="btn btn-primary" style="min-width: 13%;">
+                        <img src="{{asset('public/images/printer-icon.png')}}"> In tất cả
+                    </button>
+                </a>
+            </div>
             <table class="table table-bordered" style="max-width: 900px;" align='center' id="bang2">
                 <tr>
                     <th width="4%">STT</th>

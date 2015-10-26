@@ -1,5 +1,25 @@
-================================================================================
  
+================================================================================
+@foreach($dsdiem as $diem)
+                                            @if($diem->mssv == $sv->mssv)
+                                                <td align="center">{{$diem->diem}}</td>
+                                            @endif
+                                       @endforeach  
+                                       @foreach($tongdiem as $tong) 
+                                            @if($tong->mssv == $sv->mssv)
+                                                <td align="center" style="color: #FF0000; font-weight: bold"><?php echo round($tong->tongdiem,2);?></td>
+                                                @if($tong->tongdiem == null)
+                                                    <td></td>
+                                                @elseif($tong->tongdiem != null)
+                                                    <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                                @endif 
+                                            @endif                        
+                                        @endforeach 
+                                        @foreach($nhanxet as $nx)
+                                            @if($nx->mssv == $sv->mssv)
+                                                <td style="color: #00008b;">{{$nx->nhanxet}}</td>
+                                        @endif 
+                                    @endforeach
 ========================================
 <!--Hiển thị mảng tên nhóm HP {{var_dump($nhomhp)}}-->
 ================================================================

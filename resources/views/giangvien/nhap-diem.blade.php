@@ -198,11 +198,13 @@
                     <td></td>
                     <td>
                         @if($mahp == null || $mahp == 0)                            
-                                <button onclick="return confirm('Vui lòng chọn nhóm HP!')" type="button" name="" class="btn btn-success" style="width: 50%;">
+                            <a href="{{$macb}}/inbangdiemgv/all" target="_blank">
+                                <button type="button" name="" class="btn btn-success" style="width: 50%;">
                                     <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
-                                </button>                           
+                                </button>
+                            </a>                           
                         @elseif($mahp != null || $mahp != 0)
-                            <a href="2134/inbangdiemgv/{{$mahp}}" target="_blank">
+                            <a href="{{$macb}}/inbangdiemgv/{{$mahp}}" target="_blank">
                                 <button type="button" name="" class="btn btn-success" style="width: 50%;">
                                     <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                                 </button>
