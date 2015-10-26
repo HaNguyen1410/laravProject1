@@ -13,16 +13,18 @@
 <div class="container">         
 
     <div class="row">
+        <div class="col-md-12">            
+            <h3 style="color: darkblue; font-weight: bold;" align="center">
+                Kết quả tìm kiếm
+            </h3>         
+        </div> 
         @if(Session::has('ThongBao') && count($manth_sv) == 0)
             <div class="alert alert-info" style="color: red; font-weight: bold;">
                 {{ Session::get('ThongBao') }} <br>
                 <label style="color: black;">{{$hoten}}({{$mssv}}) - Của nhóm đề tài: {{$sv_manhomdt}}</label>
             </div>
         @elseif(count($manth_sv) != 0)
-            <div class="col-md-12">            
-                <h3 style="color: darkblue; font-weight: bold;" align="center">
-                    Kết quả tìm kiếm
-                </h3>   
+            <div class="col-md-12">    
                 <label style="color: blue">{{$hoten}} ({{$mssv}})</label> -  
                 <label>Mã nhóm thực hiện đề tài: </label>&nbsp;<label style="color: blue">{{$sv_manhomdt}}</label><br>
                 <label>Đề tài nhóm:</label>&nbsp;<label style="color: blue">{{$tendt}}</label>        

@@ -159,9 +159,15 @@
                                 @endif
                             </td>
                             @foreach($dsdiem as $diem)                                    
-                                @if($diem->mssv == $sv->mssv && $diem->diem != null)
-                                    <td align="center">
-                                        <input type="text" name="{{$sv->mssv}}_{{$diem->matc}}" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
+                                @if($diem->mssv == $sv->mssv && $diem->diem != null)                                
+                                    <td align="center">                                        
+                                        <!--Báo lỗi khi nhập lớn hơn điểm tiêu chí-->
+                                        @if(Session::has('Loi'.$sv->mssv.'_'.$diem->matc))
+                                            <input type="text" name="{{$sv->mssv}}_{{$diem->matc}}" value="" style="text-align:center; vertical-align: middle; border-color: red;" size="1" />                                        
+                                            <div style="color: red;">{{Session::get('Loi'.$sv->mssv.'_'.$diem->matc)}}</div>
+                                        @else
+                                            <input type="text" name="{{$sv->mssv}}_{{$diem->matc}}" value="{{$diem->diem}}" style="text-align:center; vertical-align: middle;" size="1" />
+                                        @endif
                                     </td> 
                                 @elseif($diem->mssv == $sv->mssv && $diem->diem == null)
                                     <td align="center">

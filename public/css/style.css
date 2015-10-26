@@ -35,15 +35,16 @@ html,body{
 #Haheader{
     background:  url("../../public/images/Banner/Large_Banner_LV.jpg") center no-repeat #4396CA;
     background-position: center;
-    height: 150px;
+    min-height: 150px;
     border: 1px solid;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     color: white;
     margin: 0px;
     padding: 0px 0px;
+    width: auto;
     max-width: 1280px;
-    min-width: 450px;    
+    min-width: 200px;    
 }
 #Hafooter{
     background-image: url("../../public/images/Banner/cong-nghe-thong-tin-17.jpg");

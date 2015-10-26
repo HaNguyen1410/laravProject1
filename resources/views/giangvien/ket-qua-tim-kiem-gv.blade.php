@@ -10,19 +10,20 @@
         }
     </style>
  
-<div class="container">         
-
+<div class="container">      
     <div class="row">
-        @if(Session::has('ThongBao') && count($sv) == 0)
+         <div class="col-md-12">            
+            <h3 style="color: darkblue; font-weight: bold;" align="center">
+                Kết quả tìm kiếm
+            </h3>           
+        </div> 
+        @if(Session::has('ThongBao') && count($sv) == 0)             
             <div class="alert alert-info" style="color: red; font-weight: bold;">
                 {{ Session::get('ThongBao') }} <br>
                 <label style="color: black;">{{$hoten}}({{$mssv}}) - Của nhóm HP: {{$hp_sv}}</label>
             </div>
         @elseif(count($sv) != 0)
-            <div class="col-md-12">            
-                <h3 style="color: darkblue; font-weight: bold;" align="center">
-                    Kết quả tìm kiếm
-                </h3>   
+            <div class="col-md-12">    
                 <label style="color: blue">{{$hoten}} ({{$mssv}})</label> - 
                 <label>Nhóm HP: </label>&nbsp;<label style="color: blue">{{$hp_sv}}</label> - 
                 <label>Mã nhóm thực hiện đề tài: </label>&nbsp;<label style="color: blue">{{$manth}}</label><br>

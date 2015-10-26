@@ -161,23 +161,33 @@ class DiemController extends Controller
         //Lấy mảng các giá trị trong bảng
         $masv = Input::get('txtMaSV');
         $matc = Input::get('txtMaTC');
-        $diem = Input::get('txtDiem');
-        $nhanxet = Input::get('txtNhanXet');
 //        return $dsmasv;
 //        return $_POST['txtDiem'];
 //        return $matc;          
 
         for($j = 0; $j < count($masv); $j++){           
-            for($i = 0; $i < count($matc); $i++){
+            for($i = 0; $i < count($matc); $i++){                
+                $diem = Input::get($masv[$j]."_".$matc[$i]);
 //                echo $matc[$i]."=".Input::get($masv[$j]."_".$matc[$i])."<br>";
-                $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
+                //Lấy điểm tối đa của mỗi tiêu chí
+                $diemtoida = DB::table('tieu_chi_danh_gia')->where('matc',$matc[$i])->value('heso');
+                if($diem > $diemtoida){
+                    //Báo lỗi điểm nhập vào lớn hơn điểm tiêu chí tối đa.
+                    \Session::flash('Loi'.$masv[$j]."_".$matc[$i], $diem.">".$diemtoida);
+                    return \Redirect::to('giangvien/nhapdiem');
+                    //     Hoặc có thể sử dụng: return redirect('giangvien/nhapdiem');
+                }
+                else{
+                    $ch1 = DB::table('chitiet_diem')->where('mssv',$masv[$j])->where('matc',$matc[$i])
                         ->update(
                                 ['diem' => Input::get($masv[$j]."_".$matc[$i])]
-                           );
+                           );                    
+                }
             }            
         }    
         
-        for($k = 0; $k < count($masv); $k++){
+        for($k = 0; $k < count($masv); $k++){            
+//            $nhanxet = Input::get($masv[$k]);
 //            echo $masv[$k]."=>".Input::get($masv[$k])."<br>";            
             $ch2 = DB::table('chia_nhom')->where('mssv',$masv[$k])->update(
                         ['nhanxet' => Input::get($masv[$k])]
