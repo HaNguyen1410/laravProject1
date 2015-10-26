@@ -83,7 +83,9 @@ and open the template in the editor.
                         <td>Họ và tên cán bộ:<label style="color: #00c; font-weight: bold"> {{$tencb->hoten}} ({{$tencb->macb}}) </label></td>
                         <td width="30%">Nhóm HP:
                             <label style="color: #00c; font-weight: bold">
-                                {{DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp')}}
+                                @foreach($gv_hp as $gvhp)
+                                    {{$gvhp->tennhomhp}} &nbsp;&nbsp; 
+                                @endforeach
                             </label>
                         </td>
                     </tr>
