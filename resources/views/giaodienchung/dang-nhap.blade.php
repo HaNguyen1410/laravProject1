@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Đăng nhập</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{Asset('public/css/style.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
         <link type="text/css" rel="stylesheet" href="{{asset('public/css/login-bootstrap.css')}}">
         <script src="{{asset('public/js/login-bootstrap.js')}}"></script>
@@ -12,14 +13,14 @@
         <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script> 
 </head>
 
-<body>
+<body id="Haside">
 	<!--
     you can substitue the span of reauth email for a input with the email and
     include the remember me checkbox
     -->        
-        <div class="container">
-            <div class="page-header">
-                <h2 style="color: darkblue;">HỆ THỐNG QUẢN LÝ NHÓM LÀM NIÊN LUẬN</h2>
+        <div class="container body-content" id="Habody">
+            <div class="page-header" id="Haheader">
+                <!-- Chỉ chèn hình nền của header -->
             </div> 
             @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -55,6 +56,12 @@
                     Quên mật khẩu?
                 </a>-->
             </div><!-- /card-container -->
+            <footer class="footer" id="Hafooter">
+                <p align="center">
+                    Khoa Công Nghệ Thông tin và Truyền Thông <br> 
+                    Trường Đại Học Cần Thơ
+                </p>
+            </footer>
         </div><!-- /container -->   
 </body>
 </html>
