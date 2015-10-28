@@ -51,6 +51,10 @@
                 <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 500px;">
                     {{Session::get('BaoLoi')}}
                 </div><br>
+            @elseif(Session::has('BaoLoiCapNhat'))
+                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 500px;">
+                    {{Session::get('BaoLoiCapNhat')}}
+                </div><br>
             @endif
             <div class="alert-info" style="color:red; font-weight: bold; max-width: 500px; text-align: center;">
                     <?php echo Session::get('ThongBaoXoa'); ?>

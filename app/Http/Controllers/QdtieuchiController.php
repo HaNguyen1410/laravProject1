@@ -177,10 +177,11 @@ class QdtieuchiController extends Controller
                     ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
                     ->where('qd.macb',$macb)
                     ->where('hp.mank',$mank)
+                    ->where('dg.matc','<>',$req->txtMaTC)
                     ->lists('dg.heso');
             $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
             if($tongdiemTC > 10){
-                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');               
+                \Session::flash('BaoLoiCapNhat','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');               
                 return \Redirect::to('giangvien/dstieuchi');
             }
             else{
