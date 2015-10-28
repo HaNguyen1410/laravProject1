@@ -173,7 +173,7 @@ class DiemController extends Controller
                 $diemtoida = DB::table('tieu_chi_danh_gia')->where('matc',$matc[$i])->value('heso');
                 if($diem > $diemtoida){
                     //Báo lỗi điểm nhập vào lớn hơn điểm tiêu chí tối đa.
-                    \Session::flash('Loi'.$masv[$j]."_".$matc[$i], $diem.">".$diemtoida);
+                    \Session::flash('Loi'.$masv[$j]."_".$matc[$i], $diem." > ".$diemtoida);
                     return \Redirect::to('giangvien/nhapdiem');
                     //     Hoặc có thể sử dụng: return redirect('giangvien/nhapdiem');
                 }

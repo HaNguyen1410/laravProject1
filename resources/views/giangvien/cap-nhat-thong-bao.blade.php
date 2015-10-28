@@ -26,6 +26,8 @@
     <div class="row">
         <div class="col-md-12">
             <h3 style="color: darkblue; font-weight: bold; margin-left: 20px;">
+                <a href="{{asset('giangvien/quanlythongbao')}}">Danh sách thông báo</a>  
+                    &Gt;
                 Cập nhật thông báo: 
                 <a href="../../{{$macb}}" style="border: 0px; color: #006400">{{$tb->matb}}</a>
             </h3>

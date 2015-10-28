@@ -14,7 +14,7 @@
     <div class="row">
         <h4 style="color:blue; font-weight: bold; margin-left: 20px;">
             BẢNG TIÊU CHÍ ĐÁNH GIÁ KẾT QUẢ NIÊN LUẬN
-        </h4>    
+        </h4>  
         <div class="col-md-12" style="display:block; float:left;">
             <table class="table table-bordered" style="max-width: 750px" align="center">
                 <tr>
@@ -46,8 +46,15 @@
                 </tr>
             </table>            
         </div>   
-        <div class="col-md-12">            
-            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+        <div class="col-md-12">                
+            @if(Session::has('BaoLoi'))
+                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 500px;">
+                    {{Session::get('BaoLoi')}}
+                </div><br>
+            @endif
+            <div class="alert-info" style="color:red; font-weight: bold; max-width: 500px; text-align: center;">
+                    <?php echo Session::get('ThongBaoXoa'); ?>
+            </div><br>
             <table class="table table-bordered" style="max-width: 900px" align='center'>
                 <tr>
                     <th width="5%">STT</th>

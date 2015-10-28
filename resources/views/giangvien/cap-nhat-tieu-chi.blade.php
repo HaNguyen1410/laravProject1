@@ -15,8 +15,12 @@
     <div class="row">
         <form action="{{action('QdtieuchiController@LuuCapNhatTieuChi')}}" method="post" name="frmDoiMatKhau" class="form-horizontal">
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
-            <div class="col-md-12" align="center">
-                <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">Cập nhật tiêu chí đánh giá</h3>
+            <div class="col-md-12">
+                <h3 style="color: darkblue; font-weight: bold; margin-left: 50px;">
+                    <a href="{{asset('giangvien/dstieuchi')}}">Danh sách tiêu chí đánh giá</a>  
+                       &Gt;
+                    Cập nhật tiêu chí đánh giá
+                </h3>                
                 <table class="table table-bordered" align="center" style="max-width:800px;">
                      <tr>
                         <th>Mã cán bộ:</th>

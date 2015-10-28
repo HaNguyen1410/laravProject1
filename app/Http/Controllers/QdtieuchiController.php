@@ -37,12 +37,18 @@ class QdtieuchiController extends Controller
         $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
                 ->where('nam',$namht)
                 ->value('hocky');
+        $mank = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
+                ->value('mank');
+        //Lấy mảng các năm học và hoc kỳ
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
                 ->get();
-        $dstc = DB::table('tieu_chi_danh_gia as dg')
+        $dstc = DB::table('tieu_chi_danh_gia as dg')->distinct()
+                ->select('dg.matc','dg.noidungtc','dg.heso','dg.ngaytao')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
+                ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
+                ->where('hp.mank',$mank)
                 ->where('qd.macb','=',$macb)
                 ->get();
          
@@ -56,7 +62,7 @@ class QdtieuchiController extends Controller
         $Xoad = DB::table('chitiet_diem')->where('matc',$matc)->delete();
         $Xoatc = DB::table('tieu_chi_danh_gia')->where('matc',$matc)->delete();
         
-        \Session::flash('ThongBao','Xóa thành công!');       
+        \Session::flash('ThongBaoXoa','Xóa thành công!');       
             
         return redirect('giangvien/dstieuchi');      
     }
@@ -68,7 +74,15 @@ class QdtieuchiController extends Controller
     }
     
     public function LuuThemTieuChi(Request $req){
+        $macb = \Auth::user()->taikhoan;
         $post = $req->all();
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
+                ->value('mank');
         //Lấy ds mssv do 1 cán bộ dạy
         $dsmasv = DB::table('nhom_hocphan as hp')->select('chn.mssv')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
@@ -78,39 +92,51 @@ class QdtieuchiController extends Controller
                 [
                     'txtMaTC'       => 'required',
                     'txtNoiDungTC'  => 'required',
-                    'txtMucDiem'    => 'required|numeric'
+                    'txtMucDiem'    => 'required|numeric|max:10' //Diểm không được lớn hơn 10
                 ]
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else
-        {            
-            $data1 = array(
+        {    //,DB::raw('SUM(dg.heso) as tong_heso')
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+                    ->select('dg.heso')
+                    ->join('quy_dinh as qd','dg.matc','=','qd.matc')
+                    ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
+                    ->where('qd.macb',$macb)
+                    ->where('hp.mank',$mank)
+                    ->lists('dg.heso');
+            $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
+            if($tongdiemTC > 10){
+                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');
+                return \Redirect::to('giangvien/dstieuchi');
+            }
+            else{
+                $data1 = array(
                     'matc'       => $_POST['txtMaTC'],
                     'noidungtc'  => $_POST['txtNoiDungTC'],
                     'heso'       => $_POST['txtMucDiem'],
                     'ngaytao'    => Carbon::now()   
-            );
-            $data2 = array(
-                    'macb'   => $_POST['txtMaCB'],
-                    'matc'   => $_POST['txtMaTC']
-            );
-            
-            $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
-            $ch2 = DB::table('quy_dinh')->insert($data2);
-            for($i = 0; $i < count($dsmasv); $i++){
-                //echo $dsmasv[$i]."<br>";                
-                $ch3 = DB::table('chitiet_diem')->insert(
-                        [   'matc' => $_POST['txtMaTC'],                          
-                            'mssv' => $dsmasv[$i]
-                        ]
-                    );
-            }
-            
-            
-            return redirect('giangvien/dstieuchi/'.$post['txtMaCB']);
-           
+                );
+                $data2 = array(
+                        'macb'   => $macb,
+                        'matc'   => $_POST['txtMaTC']
+                );
+
+                $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
+                $ch2 = DB::table('quy_dinh')->insert($data2);
+                for($i = 0; $i < count($dsmasv); $i++){
+                    //echo $dsmasv[$i]."<br>";                
+                    $ch3 = DB::table('chitiet_diem')->insert(
+                            [   'matc' => $_POST['txtMaTC'],                          
+                                'mssv' => $dsmasv[$i]
+                            ]
+                        );
+                }
+
+                return redirect('giangvien/dstieuchi');
+            }        
         }
     }
 /*========================= Cập nhật tiêu chí đánh giá ========================*/
@@ -124,28 +150,59 @@ class QdtieuchiController extends Controller
         return view('giangvien.cap-nhat-tieu-chi')->with('tc',$tc);
     }
     public function LuuCapNhatTieuChi(Request $req){
+        $macb = \Auth::user()->taikhoan;  
+         //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
+                ->value('mank');
         $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
                     'txtMaTC'       => 'required',
                     'txtNoiDungTC'  => 'required',
-                    'txtMucDiem'    => 'required|numeric'
+                    'txtMucDiem'    => 'required|numeric|max:10'
                 ]
              );
         if($v->fails()){
             return redirect()->back()->withErrors($v->errors());
         }
         else
-        {            
-            $data = array(
+        {    
+             $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+                    ->select('dg.heso')
+                    ->join('quy_dinh as qd','dg.matc','=','qd.matc')
+                    ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
+                    ->where('qd.macb',$macb)
+                    ->where('hp.mank',$mank)
+                    ->lists('dg.heso');
+            $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
+            if($tongdiemTC > 10){
+                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');               
+                return \Redirect::to('giangvien/dstieuchi');
+            }
+            else{
+                $data = array(
                     'noidungtc'  => $_POST['txtNoiDungTC'],
                     'heso'       => $_POST['txtMucDiem'],
                     'ngaytao'    => Carbon::now()   
-            );
-            $ch = DB::table('tieu_chi_danh_gia')->where('matc', $post['txtMaTC'])->update($data);
-//            if($ch > 0){
-                return redirect('giangvien/dstieuchi/2134');
-//            }
+                );
+                $ch = DB::table('tieu_chi_danh_gia')->where('matc', $post['txtMaTC'])->update($data);
+              //  if($ch > 0){
+                    return redirect('giangvien/dstieuchi');
+              //  }
+            }
+            
         }
     }
 }
+
+/*
+ * select DISTINCT tieu_chi_danh_gia.matc, tieu_chi_danh_gia.noidungtc
+FROM tieu_chi_danh_gia
+join quy_dinh on tieu_chi_danh_gia.matc = quy_dinh.matc
+join nhom_hocphan ON quy_dinh.macb = nhom_hocphan.macb
+where quy_dinh.macb = '2134' AND nhom_hocphan.mank = 5
+ */
