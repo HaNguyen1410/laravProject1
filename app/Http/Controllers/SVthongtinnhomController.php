@@ -33,7 +33,7 @@ class SVthongtinnhomController extends Controller
         else 
             return  $mamoi = $pre .=$so;        
     }   
-/*====================  ======================*/
+/*==================== Hiển thị trang Thêm thông tin nhóm ======================*/
     public function ThemThongTinNhom(){
         $mssv = \Auth::user()->taikhoan;
         $thongtindt = DB::table('chia_nhom as chn')
@@ -51,6 +51,7 @@ class SVthongtinnhomController extends Controller
         return view('sinhvien.them-thong-tin-nhom-nien-luan')->with('thongtindt',$thongtindt)
             ->with('manth',$manth)->with('nhom',$thongtinNhom);           
     }
+/*==================== Lưu trang khi Submit Thêm thông tin nhóm ======================*/
     public function LuuThemThongTinNhom(Request $req){
         $post = $req->all();
         $v = \Validator::make($req->all(),

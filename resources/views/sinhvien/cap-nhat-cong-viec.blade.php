@@ -79,19 +79,29 @@
                     <tr>
                         <th>Giao cho:</th>
                         <td colspan="3">
+                            <?php $tach_giaocho = explode(', ', $giaocho);?>
                             @foreach($dstv as $tv)
+                            @for($i = 0; $i < count($tach_giaocho); $i++)                                
                                 <div style="padding: 2px 2px 2px 20px; display: block; float: left;">
                                      <a href="" data-toggle="tooltip" data-placement="top" title="{{$tv->hoten}}">
                                            {{$tv->mssv}}
                                      </a>
                                        : <input type="checkbox" name="chkGiaoCho[]" value="{{$tv->hoten}}"/> 
-                                </div>   
+                                </div>  
+                            @endfor  
                             @endforeach
+                            @if($giaocho == "Cả nhóm")
+                                <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
+                                    <a>Cả nhóm</a>
+                                    : <input type="checkbox" name="chkGiaoCho[]" value="{{$giaocho}}" checked=""/> 
+                                </div><br>
+                            @else                                
                                 <div style="padding: 2px 2px 2px 20px; display: block; float: left;">  
                                     <a>Cả nhóm</a>
                                        : <input type="checkbox" name="chkGiaoCho[]" value="Cả nhóm"/> 
                                 </div><br>
-                            <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
+                                <p style='color:red;'>{{$errors->first('chkGiaoCho')}}</p>
+                            @endif
                         </td>                        
                     </tr>
                     <tr>

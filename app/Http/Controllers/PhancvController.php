@@ -234,8 +234,11 @@ class PhancvController extends Controller
          $ndcv = DB::table('cong_viec as cv')
                  ->join('thuc_hien as th','cv.macv','=','th.macv')
                  ->where('cv.macv',$macv)->first();
-         return view('sinhvien.cap-nhat-cong-viec')->with('dstv',$dstv)->with('ndcv',$ndcv);
+         $giaocho = DB::table('cong_viec')->where('macv',$macv)->value('giaocho');
+         return view('sinhvien.cap-nhat-cong-viec')->with('dstv',$dstv)->with('ndcv',$ndcv)
+             ->with('giaocho',$giaocho);
      }
+/*============= Lưu cập nhật cv chính ================*/
      public function LuuCapNhatcvChinh(Request $req){
          $post = $req->all();
          $v = \Validator::make($req->all(),
