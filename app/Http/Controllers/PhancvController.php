@@ -22,7 +22,8 @@ class PhancvController extends Controller
     public function DanhSachCVChinh(){
         $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');        
-        $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo')
+        $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo'
+                ,'ngaybatdau_kehoach','ngayketthuc_kehoach')
                ->where('manhomthuchien','=',$manth)->first();
     //lấy tuần hiện tại chính là tuần làm công việc có mã cv lớn nhất
         $tuancv = DB::table('cong_viec as cv')->select('th.tuan')
@@ -183,6 +184,7 @@ class PhancvController extends Controller
                 'txtNgayBatDauKH'   => 'required|date',
                 'txtNgayKetThucKH'  => 'required|date',
                 'chkGiaoCho'        => 'required',
+                'txtTuan'           => 'required',
                 'txtNoiDungViec'    => 'required',
                 'txtTienDo'         => 'required|numeric',
                 'cbTrangThai'       => 'required',
@@ -247,6 +249,7 @@ class PhancvController extends Controller
                     'txtNgayBatDauKH'       => 'required|date',
                     'txtNgayKetThucKH'      => 'required|date',                    
                     'chkGiaoCho'            => 'required',
+                    'txtTuan'               => 'required',
                     'txtNoiDungViec'        => 'required',
                     'txtTienDo'             => 'required|numeric',
                     'cbUuTien'              => 'required'
@@ -337,6 +340,7 @@ class PhancvController extends Controller
                      'txtNgayBatDauKH'  => 'required|date',
                      'txtNgayKetThucKH' => 'required|date',
                      'cbGiaoCho'        => 'required',
+                     'txtTuan'          => 'required',
                      'txtNoiDungViec'   => 'required',
                      'txtTienDo'        => 'required|numeric',
                      'cbTrangThai'      => 'required',
@@ -398,6 +402,7 @@ class PhancvController extends Controller
                     'txtNgayBatDauKH'       => 'required|date',
                     'txtNgayKetThucKH'      => 'required|date',                     
                     'cbGiaoCho'             => 'required',
+                    'txtTuan'               => 'required',
                     'txtNoiDungViec'        => 'required',
                     'txtTienDo'             => 'required|numeric',
                     'cbTrangThai'           => 'required',

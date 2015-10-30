@@ -127,7 +127,7 @@
                 Thanh tiến trình thể hiện tiến độ thời gian và công việc của cả nhóm
             </h4>
             <!-- thanh tiến độ thời gian thực hiện -->
-            <lable style="display: block; float: left; width: 27%;">Thời gian quy định (20/02/2014 - 30/06/2014): &nbsp;</lable>
+            <lable style="display: block; float: left; width: 27%;">Thời gian quy định ({{$tiendonhom->ngaybatdau_kehoach}} - {{$tiendonhom->ngayketthuc_kehoach}}): &nbsp;</lable>
             <div class="progress" style="width:70%">
                 <?php 
                     $tuancvchinh = $tuancv->tuan;
