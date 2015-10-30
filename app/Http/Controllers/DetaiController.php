@@ -99,7 +99,7 @@ class DetaiController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtTenDeTai'   => 'required',
-                    'txtSoNguoi'    => 'required|numeric',
+                    'txtSoNguoi'    => 'numeric',
                 ]
              );
         if($v->fails()){
@@ -155,7 +155,7 @@ class DetaiController extends Controller
         $v = \Validator::make($req->all(),
                 [
                     'txtTenDeTai'   => 'required',
-                    'txtSoNguoi'    => 'required|numeric',
+                    'txtSoNguoi'    => 'numeric',
                 ]
              );
         if($v->fails()){
