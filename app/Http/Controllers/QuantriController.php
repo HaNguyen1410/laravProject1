@@ -344,6 +344,15 @@ class QuantriController extends Controller
 /*=========================== Sửa thông tin Giảng viên ==============================================*/ 
     public function CapNhatGV($macb){
         $row = DB::table('giang_vien')->where('macb',$macb)->first();
+        //Lấy năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
+        $mankht = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
+                ->value('nk.mank');
         //Lấy năm học và học kỳ của giảng viên đang dạy      
         $nam = DB::table('nien_khoa as nk')
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
@@ -357,11 +366,10 @@ class QuantriController extends Controller
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->where('hp.macb',$macb)
                 ->value('nk.mank');
-        //Lấy ds nhóm học phần chưa có GV nào phụ trách giảng dạy
+        //Lấy tất cả các ds nhóm học phần
         $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
-                ->where('nk.mank',$mank)
-                ->where('hp.macb','=',"")
+                ->where('nk.mank',$mankht)
                 ->Orwhere('hp.macb',$macb)
                 ->get(); 
         $gv_hp = DB::table('nhom_hocphan')->where('mank',$mank)->value('manhomhp');
@@ -369,7 +377,7 @@ class QuantriController extends Controller
         return view('quantri.cap-nhat-giang-vien')->with('gv',$row)->with('dshp',$dshp)
                 ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank)->with('gv_hp',$gv_hp);
     } 
-    
+/*========================= Lưu cập nhật giảng viên =====================*/    
     public function LuuCapNhatGV(Request $req){
         $post = $req->all();       
         $v = \Validator::make($req->all(),
@@ -422,7 +430,7 @@ class QuantriController extends Controller
            
         }
     }
-/*=========================== Xóa thông tin Giảng viên ==============================================*/ 
+/*=========================== Khóa tài khoản thông tin Giảng viên ==============================================*/ 
     public function XoaGV($macb){        
         $khoa = DB::table('giang_vien')->where('macb',$macb)->update(['khoa' => 1]);
         $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
@@ -721,13 +729,13 @@ class QuantriController extends Controller
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaSV($masv){
-        $delete = DB::table('sinh_vien')->where('mssv',$masv)->delete();
-        $delUser = DB::table('users')->where('taikhoan',$masv)->delete();
+        $khoaTK = DB::table('sinh_vien')->where('mssv',$masv)->update(['khoa' => 1]);
+        //$delUser = DB::table('users')->where('taikhoan',$masv)->delete();
         $tensv = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
         \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
         
         return redirect('quantri/sinhvien');
-//        if($delete){
+//        if($khoaTK){
 //            //return $delete; $delete = 1 sau khi thuc hiện xóa
 //            return redirect('quantri/sinhvien');
 //        }

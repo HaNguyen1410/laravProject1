@@ -21,24 +21,18 @@ class QlthongbaoController extends Controller
 /*=================== Mã thông báo tự tăng ===============================*/
     public function MaTB_tutang(){
         $pre = "TB";
-        $macuoi = DB::table('thong_bao')->select('matb')->orderby('matb','desc')->lists('matb');
-        $i = 1;
-        for($j = 0; $j < count($macuoi); $j++){
-            if($i < (int)substr($macuoi[$j], 3)){
-                $i = (int)substr($macuoi[$j], 3);
-            }
-        }
+        $macuoi = DB::table('thong_bao')->orderby('matb','desc')->value('matb');        
         
         if(count($macuoi) == 0){
             return $mamoi = "TB01";
         }
-        else if(count($macuoi) > 0){
-            $so =  $i + 1;
-            if($so <= 9){
+        else if(count($macuoi) > 0){      
+            $so =  (int)substr($macuoi, 2) + 1;
+            if($so <= 9){                
                 $pre .="0";
                return  $mamoi = $pre .= $so;
             }
-            else if($so > 10) 
+            else if($so >= 10) 
                 $pre = "TB";
                 return  $mamoi = $pre .= $so;   
         }

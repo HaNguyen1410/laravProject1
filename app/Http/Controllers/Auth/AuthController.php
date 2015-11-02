@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator,
-    Session;
+
 use App\Http\Middleware;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -12,9 +10,13 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\DangnhapRequest;
-use App\Giangvien;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
+use App\Giangvien;
+use App\User;
+use Validator,
+    Session,
+    DB;
 
 class AuthController extends Controller
 {
@@ -90,17 +92,29 @@ class AuthController extends Controller
                 'email'    => $request->txtTenDangNhap,
                 'password' => $request->txtMatKhau,
             );   
-    // tim giao vien va chuyen ve giao dien giao vien neu can
+    // tim giao vien va chuyen ve giao dien giao vien neu can            
             if($this->auth->attempt($dangnhap)){
 //                echo "Thành công";
-//                return redirect()->intended();
+//                return redirect()->intended();                
                 if($this->auth->user()->quyen == 'qt'){
+                    $khoa = DB::table('giang_vien')->where('macb',$this->auth->user()->taikhoan)->value('khoa');
+                    if($khoa == 1){
+                        return redirect()->back()->withErrors('Tài khoản đã bị khóa!');
+                    }
                     return redirect('quantri/thongtinqt');
                 }
                 else if($this->auth->user()->quyen == 'gv'){
+                    $khoa = DB::table('giang_vien')->where('macb',$this->auth->user()->taikhoan)->value('khoa');
+                    if($khoa == 1){
+                        return redirect()->back()->withErrors('Tài khoản đã bị khóa!');
+                    }
                     return redirect('giangvien/thongtingv');
                 }
                 else if($this->auth->user()->quyen == 'sv'){
+                    $khoa = DB::table('sinh_vien')->where('mssv',$this->auth->user()->taikhoan)->value('khoa');
+                    if($khoa == 1){
+                        return redirect()->back()->withErrors('Tài khoản đã bị khóa!');
+                    }
                     return redirect('sinhvien/thongtinsv');
                 }
             }else{
