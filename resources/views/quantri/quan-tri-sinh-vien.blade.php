@@ -158,12 +158,8 @@
                                     @endif
                                 </td>
                                 <td align='center'>
-                                    @if($mahp == null)
-                                        <a href="sinhvien/0/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
-                                    @elseif($mahp != null)
-                                        <a href="../sinhvien/{{$mahp}}/capnhatsv/{{$rw->mssv}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
-                                    @endif
-                                    <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachsv/xoasv/{{$rw->mssv}}'>
+                                    <a href="{{asset('quantri/sinhvien/0/capnhatsv/'.$rw->mssv)}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                                    <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href="{{asset('quantri/sinhvien/xoasv/'.$rw->mssv)}}">
                                         <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                     </a>
                                 </td>

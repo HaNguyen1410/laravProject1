@@ -627,7 +627,7 @@ class QuantriController extends Controller
         }
     }
 /*=========================== Sửa thông tin sinh viên ==============================================*/ 
-    public function CapNhatSV($mahp,$masv){
+    public function CapNhatSV($masv){
         $sv = DB::table('sinh_vien')->where('mssv',$masv)->first();
         //Lấy năm học và học kỳ của sinh viên đang hoc
         $nam = DB::table('nien_khoa as nk')
@@ -714,12 +714,15 @@ class QuantriController extends Controller
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
     public function XoaSV($masv){
         $delete = DB::table('sinh_vien')->where('mssv',$masv)->delete();
+        $delUser = DB::table('users')->where('taikhoan',$masv)->delete();
         $tensv = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
         \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
-        if($delete){
-            //return $delete; $delete = 1 sau khi thuc hiện xóa
-            return redirect('quantri/sinhvien');
-        }
+        
+        return redirect('quantri/sinhvien');
+//        if($delete){
+//            //return $delete; $delete = 1 sau khi thuc hiện xóa
+//            return redirect('quantri/sinhvien');
+//        }
     }
     
 }// END Class QuantriController
