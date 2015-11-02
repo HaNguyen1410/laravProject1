@@ -77,13 +77,12 @@ class ChianhomController extends Controller
  /*====================== Mã nhóm thực hiện tự tăng ====================================*/
     function manth_tutang(){
         $pre = "NTH";
-        $macuoi = DB::table('nhom_thuc_hien')->orderby('manhomthuchien','desc')->first();
+        $macuoi = DB::table('nhom_thuc_hien')->orderby('manhomthuchien','desc')->value('manhomthuchien');
         if(count($macuoi) == 0){
             return $mamoi = "NTH01";
         }
-        else if(count($macuoi) > 0){
-            $ma = $macuoi->manhomthuchien;  //Lấy mã cuối cùng của nhóm thưc hiện
-            $so = (int)substr($ma, 3) + 1;
+        else if(count($macuoi) > 0){            
+            $so = (int)substr($macuoi, 3) + 1;
             if($so <= 9){
                 $pre .="0";
                return  $mamoi = $pre .=$so;

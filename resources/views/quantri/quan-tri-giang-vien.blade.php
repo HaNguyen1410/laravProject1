@@ -86,7 +86,7 @@
                             </td>
                             <td align='center'>
                                 <a href='giangvien/capnhatgv/{{$rw->macb}}'><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
-                                <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='danhsachgv/xoagv/{{$rw->macb}}'>
+                                <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='giangvien/xoagv/{{$rw->macb}}'>
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                 </a>
                             </td>

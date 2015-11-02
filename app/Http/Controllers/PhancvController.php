@@ -84,31 +84,48 @@ class PhancvController extends Controller
 /*====================== Mã công việc tự tăng ====================================*/
     function macv_tutang(){
         $pre = "CV";
-        $macuoi = DB::table('cong_viec')->orderBy('macv', 'desc')->first(); 
+        $macuoi = DB::table('cong_viec')->select('macv')->orderBy('macv', 'desc')->lists('macv'); 
+     //Lấy mã lớn nhất rồi ép kiểu về kiểu số nguyên và tăng 1   
+        $i = 1;
+        for($j = 0; $j < count($macuoi); $j++){
+            if($i < (int)substr($macuoi[$j], 2)){
+                $i = (int)substr($macuoi[$j], 2);
+            }
+        }
         if(count($macuoi)>0){
-            $ma = $macuoi->macv;  //Lấy mã cuối cùng của nhóm thưc hiện
-            $so = (int)substr($ma, 2) + 1;
+            $so = $i + 1;
         }
             return  $mamoi = $pre .=$so;     
     }
-/*====================== Mã công việc phụ thuộc tự tăng ====================================*/
+/*====================== Mã công việc phụ thuộc tự tăng ===================================*/
     function macvphuthuoc_tutang($macvchinh){
         $pre = $macvchinh;
-        $pre .=".";           
-        $macuoi = DB::table('cong_viec')->where('phuthuoc_cv','=',$macvchinh)
-                ->orderBy('macv', 'desc')->first();
-        
-        
+        $pre .="."; // cộng chuỗi $pre thêm dấu '.' phía sau => $pre($macvchinh = CV1) .= "." = CV1.1          
+        $macuoi = DB::table('cong_viec')->select('macv')->where('phuthuoc_cv','=',$macvchinh)
+                ->orderBy('macv', 'desc')->lists('macv'); 
+     
         if(count($macuoi) > 0){
-//            return $macuoi->macv;
-            $ma = $macuoi->macv;  //Lấy mã cuối cùng của nhóm thưc hiện
             if($macvchinh == "1"){
-                $so = (int)substr($ma, 2) + 1;
+                //Lấy mã lớn nhất rồi ép kiểu về kiểu số nguyên và tăng 1   
+                $i = 1;
+                for($j = 0; $j < count($macuoi); $j++){
+                    if($i < (int)substr($macuoi[$j], 2)){
+                        $i = (int)substr($macuoi[$j], 2);
+                    }
+                }
+                $so = $i + 1;
                 return  $mamoi = $pre .= $so;
             }
             else 
             {
-                $so = (int)substr($ma, 4) + 1;
+                //Lấy mã lớn nhất rồi ép kiểu về kiểu số nguyên và tăng 1   
+                $i = 1;
+                for($j = 0; $j < count($macuoi); $j++){
+                    if($i < (int)substr($macuoi[$j], 4)){
+                        $i = (int)substr($macuoi[$j], 4);
+                    }
+                }
+                $so = $i + 1;
                 return  $mamoi = $pre .= $so;                 
             }
         }
@@ -316,7 +333,7 @@ class PhancvController extends Controller
         \Session::flash('ThongBao','Xóa thành công '.$tencvphu.'!');
         if($Xoath && $Xoacv){
             //return $delete; $delete = 1 sau khi thuc hiện xóa
-            return redirect('sinhvien/phancongchitiet/'.$macv);
+            return redirect('sinhvien/phancv/phancongchitiet/'.$macv);
         }
     }
 /*========= Thêm công việc chi tiết (cv phụ) ==============*/ 

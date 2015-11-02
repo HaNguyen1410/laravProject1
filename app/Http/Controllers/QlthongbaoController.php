@@ -21,20 +21,26 @@ class QlthongbaoController extends Controller
 /*=================== Mã thông báo tự tăng ===============================*/
     public function MaTB_tutang(){
         $pre = "TB";
-        $macuoi = DB::table('thong_bao')->orderby('matb','desc')->first();
+        $macuoi = DB::table('thong_bao')->select('matb')->orderby('matb','desc')->lists('matb');
+        $i = 1;
+        for($j = 0; $j < count($macuoi); $j++){
+            if($i < (int)substr($macuoi[$j], 3)){
+                $i = (int)substr($macuoi[$j], 3);
+            }
+        }
         
         if(count($macuoi) == 0){
             return $mamoi = "TB01";
         }
         else if(count($macuoi) > 0){
-            $ma = $macuoi->matb;  //Lấy mã cuối cùng của nhóm thưc hiện
-            $so = (int)substr($ma, 3) + 1;
+            $so =  $i + 1;
             if($so <= 9){
                 $pre .="0";
-               return  $mamoi = $pre .=$so;
+               return  $mamoi = $pre .= $so;
             }
-            else 
-                return  $mamoi = $pre .=$so;   
+            else if($so > 10) 
+                $pre = "TB";
+                return  $mamoi = $pre .= $so;   
         }
     }
     /*=================== Quản lý thông báo ===============================*/    

@@ -160,6 +160,20 @@ and open the template in the editor.
                         </tr>
                     @endforeach                              
                 </table><br><br>
+                <table border="0" style="width:500px;" align="right" padding="1px 1px" cellspacing="0px 0px">
+                    <tr>
+                        <td align="center">
+                            <label style="font-weight: bold">Người in</label>
+                        </td>             
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <label style="color: #00c; font-weight: bold">
+                                {{$tencb->hoten}} ({{$tencb->macb}}) 
+                            </label>
+                        </td>                
+                    </tr>
+                </table>
             </div>                               
         @elseif($mahp != "all")
             <div>
@@ -265,6 +279,20 @@ and open the template in the editor.
                         </tr>
                     @endforeach                              
                 </table><br><br>
+                <table border="0" style="width:500px;" align="right" padding="1px 1px" cellspacing="0px 0px">
+                    <tr>
+                        <td align="center">
+                            <label style="font-weight: bold">Người in</label>
+                        </td>             
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <label style="color: #00c; font-weight: bold">
+                                {{$tencb->hoten}} ({{$tencb->macb}}) 
+                            </label>
+                        </td>                
+                    </tr>
+                </table>
             </div>
         @endif            
     </body>

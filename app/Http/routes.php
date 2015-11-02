@@ -238,7 +238,7 @@ Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
         Route::get('phancongchitiet/{macv}/capnhatcvphu/{macvphu}','PhancvController@CapNhatcvPhu');
         Route::post('luucapnhatcvphu','PhancvController@LuuCapNhatcvPhu');
         /* ------ Xóa công việc chi tiết (công việc phụ thuộc) -------- */
-        Route::get('phancongchitiet/{mssv}{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
+        Route::get('phancongchitiet/{macv}/xoacvphu/{macvphu}','PhancvController@XoacvPhu');
     });      
     /*======= danh sách NỘP TÀI LIỆU ==========*/
     route::get('danhsachnoptailieu','QltailieuController@DanhSachNopTaiLieu');

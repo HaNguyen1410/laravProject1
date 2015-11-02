@@ -21,11 +21,16 @@ class QdtieuchiController extends Controller
 /*====================== Mã tiêu chí tự tăng ====================================*/
     public function matc_tutang(){
 //Lấy mã cuối cùng của nhóm thưc hiện
-        $matc = DB::table('tieu_chi_danh_gia')->orderby('matc','desc')->first();
-        
-        if(count($matc)>0){
-            $ma = $matc->matc;  
-            return $so = (int)$ma + 1;
+        $matc = DB::table('tieu_chi_danh_gia')->select('matc')->orderby('matc','desc')->lists('matc');
+    //Lấy mã lớn nhất rồi ép kiểu về kiểu số nguyên và tăng 1    
+        $i = 1;
+        for($j = 0; $j < count($matc); $j++){
+            if($i < (int)$matc[$j]){
+                $i = (int)$matc[$j];
+            }
+        }
+        if(count($matc)>0){  
+            return $i + 1;
         }     
     }
 /*====================== Lấy danh sách các tiêu chí đánh giá của 1 cán bộ ====================================*/

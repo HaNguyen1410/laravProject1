@@ -27,27 +27,34 @@
                 </lable>
                 <div class="progress" style="width:70%">
                     <?php 
-                        $tuancvchinh = $tuancv->tuan;
-                        $tachtuan = explode('-', $tuancvchinh);
-                        $n = count($tachtuan);
-                        $tuanhientai = $tachtuan[$n-1];
-                        $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
-                        $t = round($tuankh,1);      
-                        if($t >= 0 && $t <= 70){
-                            $antoan = $t;
+                        if(count($tuancv) == 0){
+                            $antoan = 0;
                             $canhbao = 0;
                             $nguyhiem = 0;
                         }
-                        else if($t > 70 && $t <= 90){
-                            $antoan = 70;
-                            $canhbao = $t-70;
-                            $nguyhiem = 0;
-                        }
-                        else if($t > 90 && $t <= 100){
-                            $antoan = 70;
-                            $canhbao = 20;
-                            $nguyhiem = $t - 90;
-                        }
+                        else{
+                            $tuancvchinh = $tuancv->tuan;
+                            $tachtuan = explode('-', $tuancvchinh);
+                            $n = count($tachtuan);
+                            $tuanhientai = $tachtuan[$n-1];
+                            $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
+                            $t = round($tuankh,1);      
+                            if($t >= 0 && $t <= 70){
+                                $antoan = $t;
+                                $canhbao = 0;
+                                $nguyhiem = 0;
+                            }
+                            else if($t > 70 && $t <= 90){
+                                $antoan = 70;
+                                $canhbao = $t-70;
+                                $nguyhiem = 0;
+                            }
+                            else if($t > 90 && $t <= 100){
+                                $antoan = 70;
+                                $canhbao = 20;
+                                $nguyhiem = $t - 90;
+                            }           
+                        }                        
                     ?>
                     <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
                       {{$antoan}}% Complete (success)

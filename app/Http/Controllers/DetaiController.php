@@ -20,12 +20,20 @@ class DetaiController extends Controller
 {
 /*====================== Mã đề tài tự tăng ====================================*/
     function madt_tutang(){
-        $macuoi = DB::table('de_tai')->orderby('madt','desc')->first();
+        $macuoi = DB::table('de_tai')->select('madt')->orderby('madt','desc')->lists('madt');
+     //Lấy mã lớn nhất rồi ép kiểu về kiểu số nguyên và tăng 1   
+        $i = 1;
+        //return var_dump($macuoi);
+        for($j = 0; $j < count($macuoi); $j++){
+            if($i <= (int)$macuoi[$j]){
+                $i = (int)$macuoi[$j];
+            }
+        }
         
         if(count($macuoi) > 0)
         {
-            $ma = $macuoi->madt;  //Lấy mã cuối cùng của nhóm thưc hiện
-            return $so = (int)$ma + 1;
+            //$ma = $macuoi->madt;  //Lấy mã cuối cùng của nhóm thưc hiện
+            return $i + 1;
         }      
     }
 /*=========================== Lấy danh sách đề tài của 1 cán bộ =================================================*/

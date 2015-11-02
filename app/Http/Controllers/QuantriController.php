@@ -33,21 +33,29 @@ class QuantriController extends Controller
  /*====================== Mã Giảng viên tự tăng ====================================*/
     public function macb_tutang(){
 //Lấy mã cuối cùng của nhóm thưc hiện
-        $macuoi = DB::table('giang_vien')->orderby('macb','desc')->first();
-        
+        $macuoi = DB::table('giang_vien')->select('macb')->orderby('macb','desc')->lists('macb');
+        $i = 1;
+        for($j = 0; $j < count($macuoi); $j++){
+            if($i < (int)$macuoi[$j]){
+                $i = (int)$macuoi[$j];
+            }
+        }
         if(count($macuoi)>0){
-            $ma = $macuoi->macb;  
-            return $so = (int)$ma + 1;
+            return $i + 1;
         }     
     }   
  /*====================== Mã Sinh viên tự tăng ====================================*/
     public function masv_tutang(){
 //Lấy mã cuối cùng của nhóm thưc hiện
-        $macuoi = DB::table('sinh_vien')->orderby('mssv','desc')->first();
-        
+        $macuoi = DB::table('sinh_vien')->select('mssv')->orderby('mssv','desc')->lists('mssv');
+        $i = 1;
+        for($j = 0; $j < count($macuoi); $j++){
+            if($i < (int)$macuoi[$j]){
+                $i = (int)$macuoi[$j];
+            }
+        }
         if(count($macuoi)>0){
-            $ma = $macuoi->mssv;  
-            return $so = (int)$ma + 1;
+            return $i + 1;
         }     
     }   
 /*====================== SAO LƯU CSDL ====================================*/
@@ -415,11 +423,11 @@ class QuantriController extends Controller
         }
     }
 /*=========================== Xóa thông tin Giảng viên ==============================================*/ 
-    public function XoaGV($macb){
-        $delete = DB::table('giang_vien')->where('macb',$macb)->delete();
+    public function XoaGV($macb){        
+        $khoa = DB::table('giang_vien')->where('macb',$macb)->update(['khoa' => 1]);
         $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
         \Session::flash('ThongBao','Xóa '.$tencb.' thành công!');
-        if($delete){
+        if($khoa){
             //return $delete; $delete = 1 sau khi thuc hiện xóa            
             return redirect('quantri/giangvien');
         }
