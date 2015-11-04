@@ -127,21 +127,22 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li><a href="#">
-                                                <table class="table table-hover" width="500px" cellpadding="15px" cellspacing="0px">
+                                                <table class="table table-hover" style="max-width: 500px;">
                                                     <tr>
                                                         <th width="2%">STT</th>
                                                         <th width="4%">MSSV</th>
                                                         <th width="20%">Họ và tên</th>
-                                                        <th width="10%">Email</th>
                                                         <th width="10%">Điện thoại</th>
-                                                        <th width="5%">Trưởng nhóm</th>
+                                                        <th width="2%">Trưởng nhóm</th>
                                                     </tr>
                                                     @foreach($dstv as $stt => $tv)
                                                         <tr>
                                                             <td align='center'>{{$stt+1}}</td>
                                                             <td align='center'>{{$tv->mssv}}</td>
-                                                            <td>{{$tv->hoten}}</td>
-                                                            <td>{{$tv->email}}</td>
+                                                            <td>
+                                                                {{$tv->hoten}}<br>
+                                                                ({{$tv->email}})
+                                                            </td>
                                                             <td align='center'>{{$tv->sdt}}9876543212</td>
                                                             <td align='center'>
                                                                 @if($tv->nhomtruong == 1)
