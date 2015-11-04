@@ -159,9 +159,15 @@
                                 </td>
                                 <td align='center'>
                                     <a href="{{asset('quantri/sinhvien/0/capnhatsv/'.$rw->mssv)}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
-                                    <a onclick="return confirm('Tài khoản của **{{$rw->hoten}}** sẽ khóa?');" href="{{asset('quantri/sinhvien/khoasv/'.$rw->mssv)}}">
-                                        <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
-                                    </a>&nbsp;&nbsp;&nbsp;
+                                    @if($rw->khoa == 0)
+                                        <a onclick="return confirm('Khóa tài khoản của **{{$rw->hoten}}**?');" href="{{asset('quantri/sinhvien/khoasv/'.$rw->mssv)}}">
+                                            <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
+                                        </a>&nbsp;&nbsp;&nbsp;
+                                    @elseif($rw->khoa == 1)
+                                        <a onclick="return confirm('Mở tài khoản của **{{$rw->hoten}}**');" href="{{asset('quantri/sinhvien/khoasv/'.$rw->mssv)}}">
+                                            <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
+                                        </a>&nbsp;&nbsp;&nbsp;
+                                    @endif
                                     <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href="{{asset('quantri/sinhvien/xoasv/'.$rw->mssv)}}">
                                         <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                     </a>
