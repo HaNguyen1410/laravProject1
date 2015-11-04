@@ -73,7 +73,7 @@ class TheodoikehoachController extends Controller
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){
         $dstv = DB::table('sinh_vien as sv')
-                ->select('chn.manhomthuchien','sv.mssv','sv.hoten','nth.sotuan_thucte','chn.nhomtruong',
+                ->select('chn.manhomthuchien','sv.mssv','sv.hoten','sv.email','nth.sotuan_thucte','chn.nhomtruong',
                         'sv.kynangcongnghe','sv.kienthuclaptrinh','sv.kinhnghiem')
                 ->join('chia_nhom as chn', 'sv.mssv','=','chn.mssv')
                 ->join('nhom_thuc_hien as nth','chn.manhomthuchien','=','nth.manhomthuchien')

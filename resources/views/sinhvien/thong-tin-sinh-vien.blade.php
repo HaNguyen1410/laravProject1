@@ -132,6 +132,8 @@
                                                         <th width="2%">STT</th>
                                                         <th width="4%">MSSV</th>
                                                         <th width="20%">Họ và tên</th>
+                                                        <th width="10%">Email</th>
+                                                        <th width="10%">Điện thoại</th>
                                                         <th width="5%">Trưởng nhóm</th>
                                                     </tr>
                                                     @foreach($dstv as $stt => $tv)
@@ -139,6 +141,8 @@
                                                             <td align='center'>{{$stt+1}}</td>
                                                             <td align='center'>{{$tv->mssv}}</td>
                                                             <td>{{$tv->hoten}}</td>
+                                                            <td>{{$tv->email}}</td>
+                                                            <td align='center'>{{$tv->sdt}}9876543212</td>
                                                             <td align='center'>
                                                                 @if($tv->nhomtruong == 1)
                                                                     <img src="{{asset('public/images/check.png')}}"/>

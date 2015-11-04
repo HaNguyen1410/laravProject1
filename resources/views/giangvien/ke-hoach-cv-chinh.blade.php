@@ -134,7 +134,10 @@
                 <tr>
                     <td style="vertical-align: middle; text-align: center;" rowspan="2">{{$stt+1}}</td>
                     <td align='center'>{{$tv->mssv}}</td>
-                    <td align='center'>{{$tv->hoten}}</td>
+                    <td align='center'>
+                        {{$tv->hoten}}<br>
+                        ({{$tv->email}})
+                    </td>
                     <!--<td align='center'></td>-->
                     <td align='center'>
                         @if($tv->nhomtruong == 1)
@@ -176,38 +179,46 @@
                    <th>Bắt đầu</th>
                    <th>Kết thúc</th>
                 </tr>
-                @foreach($dscv as $cv) 
+                @if(count($dscv) == 0)
                     <tr>
-                        <td align='center'>
-                            @if($cv->tuan_lamlai == "")
-                                {{$cv->tuan}}
-                            @else
-                                {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
-                            @endif
+                        <td colspan="9" align="center">
+                            <label style="color: #e74c3c;"> Chưa có thông tin!</label> 
                         </td>
-<!--                        <td align='center' style="vertical-align: middle; font-weight: bold;">
-                            {{$cv->macv}}
-                        </td>-->
-                        <td style="vertical-align: middle; font-weight: bold;">
-                            {{$cv->congviec}}                                       
-                        </td>
-                        <td style="vertical-align: middle; font-weight: bold;" align="center">
-                            <a href="{{$manth}}/cvphuthuoc/{{$cv->macv}}" style="color: blueviolet;">Chi tiết</a>                                        
-                        </td>
-                        <td>{{$cv->giaocho}}</td>
-                        <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
-                        <td align='center'>{{$cv->ngayketthuc_kehoach}}</td> 
-                        <td align='center'>{{$cv->trangthai}}</td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
-                                    <span style="color:brown;">{{$cv->tiendo}}%</span>
+                    </tr>
+                @else
+                    @foreach($dscv as $cv) 
+                        <tr>
+                            <td align='center'>
+                                @if($cv->tuan_lamlai == "")
+                                    {{$cv->tuan}}
+                                @else
+                                    {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
+                                @endif
+                            </td>
+    <!--                        <td align='center' style="vertical-align: middle; font-weight: bold;">
+                                {{$cv->macv}}
+                            </td>-->
+                            <td style="vertical-align: middle; font-weight: bold;">
+                                {{$cv->congviec}}                                       
+                            </td>
+                            <td style="vertical-align: middle; font-weight: bold;" align="center">
+                                <a href="{{$manth}}/cvphuthuoc/{{$cv->macv}}" style="color: blueviolet;">Chi tiết</a>                                        
+                            </td>
+                            <td>{{$cv->giaocho}}</td>
+                            <td align='center'>{{$cv->ngaybatdau_kehoach}}</td>
+                            <td align='center'>{{$cv->ngayketthuc_kehoach}}</td> 
+                            <td align='center'>{{$cv->trangthai}}</td>
+                            <td>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{$cv->tiendo}}" aria-valuemin="0" aria-valuemax="100" style="width:<?= $cv->tiendo; ?>%">
+                                        <span style="color:brown;">{{$cv->tiendo}}%</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>  
-                        <td align='center'>{{$cv->ngaytao}}</td>
-                     </tr>
-                @endforeach 
+                            </td>  
+                            <td align='center'>{{$cv->ngaytao}}</td>
+                         </tr>
+                    @endforeach 
+                @endif                
              </table>           
         </div>
     </div>
