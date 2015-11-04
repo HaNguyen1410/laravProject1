@@ -10,7 +10,17 @@
                 vertical-align: middle;
             }       
     </style>
- 
+    
+    <script type="text/javascript">
+        function DoiGD(){
+            if(document.getElementById('rdCapNhatTapTin').checked == true){
+                return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/1?gd=tt';                    
+            }
+            else if(document.getElementById('rdCapNhatMoTa').checked == true){
+               return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/1?gd=mt';                    
+            }
+        }
+    </script>
 
 <div class="container">
     <div class="row">
@@ -20,7 +30,30 @@
                 &Gt;
                 Sửa đề tài
             </h3>  
-            <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
+            <div class="col-md-12" align="center">
+                <form action="" method="get">
+                    <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Cập nhật tập tin mô tả đính kèm</label> 
+                        &nbsp;<input type="radio" onclick="DoiGD()" id="rdCapNhatTapTin" name="rdCapNhat" 
+                                    <?php
+                                        if(!isset($_GET['gd']) || $_GET['gd'] == "tt")
+                                            echo 'checked';
+                                        else if($_GET['gd'] == "mt")
+                                            echo '';
+                                    ?>     
+                             /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Cập nhật mô tả đề tài</label>
+                        &nbsp;<input type="radio" onclick="DoiGD()" id="rdCapNhatMoTa" name="rdCapNhat"
+                                    <?php
+                                        if(!isset($_GET['gd']) || $_GET['gd'] == "tt")
+                                            echo '';
+                                        else if($_GET['gd'] == "mt")
+                                            echo 'checked';
+                                    ?>                                        
+                              />  
+                </form>                                
+            </div><br><br>
+            @if(!isset($_GET['gd']) || $_GET['gd'] == "tt" )
+                <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <p style="color: #e74c3c; font-weight: bold;" align="center">{!! Session::get('success') !!}</p>
                 <table class="table table-bordered"> 
@@ -52,7 +85,8 @@
                     </tr>
                 </table>
             </form>
-             <form action="{{action('DetaiController@LuuCapNhatDeTai')}}" method="post" id="formSuaDeTai" name="formSuaDeTai" > 
+            @elseif($_GET['gd'] == "mt")            
+                <form action="{{action('DetaiController@LuuCapNhatDeTai')}}" method="post" id="formSuaDeTai" name="formSuaDeTai" > 
                  <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                  <table class="table table-bordered" id="bang1">
                     <tr>
@@ -192,7 +226,8 @@
                         </td>
                     </tr>
                 </table>
-            </form>                                
+            </form>             
+            @endif
         </div>
     </div> <!-- /row -->
 
