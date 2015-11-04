@@ -108,7 +108,7 @@
                     <th>Ngày tạo</th>
                     <th>Nhóm trưởng</th>
                     <th>Khóa</th>
-                    <th width=6%>Chức năng</th>
+                    <th width=8%>Chức năng</th>
                 </tr>
                     @if(count($dssv) == 0)
                         <tr>
@@ -159,6 +159,9 @@
                                 </td>
                                 <td align='center'>
                                     <a href="{{asset('quantri/sinhvien/0/capnhatsv/'.$rw->mssv)}}"><img src="{{asset('public/images/edit-icon.png')}}" /></a>&nbsp;&nbsp;&nbsp;
+                                    <a onclick="return confirm('Tài khoản của **{{$rw->hoten}}** sẽ khóa?');" href="{{asset('quantri/sinhvien/khoasv/'.$rw->mssv)}}">
+                                        <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
+                                    </a>&nbsp;&nbsp;&nbsp;
                                     <a onclick="return confirm('Sinh viên **{{$rw->hoten}}** sẽ bị xóa?');" href="{{asset('quantri/sinhvien/xoasv/'.$rw->mssv)}}">
                                         <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                                     </a>

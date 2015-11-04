@@ -90,6 +90,7 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
             Route::get('0/capnhatsv/{masv}','QuantriController@CapNhatSV');
             Route::post('0/luucapnhatsv','QuantriController@LuuCapNhatSV');
         /*======= Xóa thông tin sinh viên ==========*/
+            Route::get('khoasv/{masv}','QuantriController@KhoaSV');
             Route::get('xoasv/{masv}','QuantriController@XoaSV');
         });        
 });

@@ -109,9 +109,9 @@
                         <td colspan="3">
                             @foreach($dshp as $hp)
                                 @if($gv_hp == $hp->manhomhp)
-                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP" value="{{$gv_hp}}" checked=""/> &nbsp;&nbsp;&nbsp;
+                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$gv_hp}}" checked=""/> &nbsp;&nbsp;&nbsp;
                                 @else
-                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
+                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
                                 @endif                                
                             @endforeach
                              <p style='color:red;'>{{$errors->first('rdNhomHP')}}</p>
