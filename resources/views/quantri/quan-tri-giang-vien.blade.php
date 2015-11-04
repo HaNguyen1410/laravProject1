@@ -86,9 +86,15 @@
                             </td>
                             <td align='center'>
                                 <a href='giangvien/capnhatgv/{{$rw->macb}}'><img src="{{asset('public/images/edit-icon.png')}}"/></a>&nbsp &nbsp &nbsp
-                                <a onclick="return confirm('Giảng viên **{{$rw->hoten}}** sẽ bị xóa?');" href='giangvien/xoagv/{{$rw->macb}}'>
-                                    <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
-                                </a>
+                                @if($rw->khoa == 0)
+                                    <a onclick="return confirm('Khóa tài khoản của giảng viên **{{$rw->hoten}}**?');" href='giangvien/khoagv/{{$rw->macb}}'>
+                                        <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
+                                    </a>
+                                @elseif($rw->khoa == 1)
+                                    <a onclick="return confirm('Mở tài khoản của giảng viên **{{$rw->hoten}}**?');" href='giangvien/mokhoagv/{{$rw->macb}}'>
+                                        <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

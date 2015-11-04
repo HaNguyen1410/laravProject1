@@ -164,7 +164,7 @@
                                             <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
                                         </a>&nbsp;&nbsp;&nbsp;
                                     @elseif($rw->khoa == 1)
-                                        <a onclick="return confirm('Mở tài khoản của **{{$rw->hoten}}**');" href="{{asset('quantri/sinhvien/khoasv/'.$rw->mssv)}}">
+                                        <a onclick="return confirm('Mở tài khoản của **{{$rw->hoten}}**');" href="{{asset('quantri/sinhvien/mokhoasv/'.$rw->mssv)}}">
                                             <img src="{{asset('public/images/key-icon_vuong.png')}}"/>
                                         </a>&nbsp;&nbsp;&nbsp;
                                     @endif

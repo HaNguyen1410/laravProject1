@@ -438,11 +438,23 @@ class QuantriController extends Controller
     public function KhoaGV($macb){        
         $khoa = DB::table('giang_vien')->where('macb',$macb)->update(['khoa' => 1]);
         $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
-        \Session::flash('ThongBao','Xóa '.$tencb.' thành công!');
-        if($khoa){
-            //return $delete; $delete = 1 sau khi thuc hiện xóa            
-            return redirect('quantri/giangvien');
-        }
+        \Session::flash('ThongBao','Khóa tài khoản của '.$tencb.' thành công!');       
+        
+        return redirect('quantri/giangvien');
+//        if($khoa){
+//            //return $delete; $delete = 1 sau khi thuc hiện xóa     
+//        }
+    }
+/*=========================== Mở tài khoản thông tin Giảng viên ==============================================*/ 
+    public function MoKhoaGV($macb){        
+        $khoa = DB::table('giang_vien')->where('macb',$macb)->update(['khoa' => 0]);
+        $tencb = DB::table('giang_vien')->where('macb',$macb)->value('hoten');
+        \Session::flash('ThongBao','Mở tài khoản của '.$tencb.' thành công!');       
+        
+        return redirect('quantri/giangvien');
+//        if($khoa){
+//            //return $delete; $delete = 1 sau khi thuc hiện xóa     
+//        }
     }
 /*** Xóa thông tin Sinh viên 
  * Xóa trong bảng users và giang_vien
@@ -739,13 +751,21 @@ class QuantriController extends Controller
     public function KhoaSV($masv){
         $khoaTK = DB::table('sinh_vien')->where('mssv',$masv)->update(['khoa' => 1]);
         $tensv = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
-        \Session::flash('ThongBao','Xóa '.$tensv.' thành công!');
+        \Session::flash('ThongBao','Khóa tài khoản của '.$tensv.' thành công!');
         
         return redirect('quantri/sinhvien');
 //        if($khoaTK){
 //            //return $delete; $delete = 1 sau khi thuc hiện xóa
 //            return redirect('quantri/sinhvien');
 //        }
+    }
+/*=========================== Khóa thông tin Sinh viên ==============================================*/ 
+    public function MoKhoaSV($masv){
+        $khoaTK = DB::table('sinh_vien')->where('mssv',$masv)->update(['khoa' => 0]);
+        $tensv = DB::table('sinh_vien')->where('mssv',$masv)->value('hoten');
+        \Session::flash('ThongBao','Mở tài khoản của '.$tensv.' thành công!');
+        
+        return redirect('quantri/sinhvien');
     }
 /*=========================== Xóa thông tin Sinh viên ==============================================*/ 
     public function XoaSV($masv){

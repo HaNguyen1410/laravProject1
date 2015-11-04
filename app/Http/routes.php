@@ -70,7 +70,8 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
         Route::get('capnhatgv/{macb}','QuantriController@CapNhatGV');
         Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
     /*======= Xóa thông tin Giảng viên ==========*/
-        Route::get('xoagv/{macb}','QuantriController@XoaGV');
+        Route::get('khoagv/{macb}','QuantriController@KhoaGV');
+         Route::get('mokhoagv/{macb}','QuantriController@MoKhoaGV');
         Route::get('xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
     });
  /*
@@ -91,6 +92,7 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
             Route::post('0/luucapnhatsv','QuantriController@LuuCapNhatSV');
         /*======= Xóa thông tin sinh viên ==========*/
             Route::get('khoasv/{masv}','QuantriController@KhoaSV');
+            Route::get('mokhoasv/{masv}','QuantriController@MoKhoaSV');
             Route::get('xoasv/{masv}','QuantriController@XoaSV');
         });        
 });
