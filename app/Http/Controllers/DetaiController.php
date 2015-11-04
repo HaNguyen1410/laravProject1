@@ -50,6 +50,14 @@ class DetaiController extends Controller
                 ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
                 ->where('hp.macb',$macb)
                 ->value('nk.hocky');
+        $mankcb = DB::table('nhom_hocphan')->where('macb',$macb)->value('mank');
+        if(count($mankcb) == 0){
+            //Lấy năm học và học kỳ hiện tại      
+            $namcb = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+            $hkcb = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                    ->where('nam',$namcb)
+                    ->value('hocky');
+        }
     //Mảng năm và học kỳ
         $namhoc = DB::table('nien_khoa')->distinct()->select('nam')
                 ->get();

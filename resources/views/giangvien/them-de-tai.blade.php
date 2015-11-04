@@ -21,6 +21,14 @@
                 &Gt;
                 Thêm đề tài mới
             </h3>  
+            <div class="col-md-12" align="center">
+                <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Thêm tập tin mô tả đính kèm</label> 
+                    &nbsp;<input type="radio" name="rdThemTapTin" value="TapTin"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Thêm mô tả đề tài</label>
+                    &nbsp;<input type="radio" name="rdThemMoTa" value="MoTa"/>    
+                
+            </div><br>
+           
             <form action="{{action('DetaiController@UploadMoTaDeTai')}}" method="post" enctype="multipart/form-data">
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <p style="color: #e74c3c; font-weight: bold;" align="center">{!! Session::get('success') !!}</p>
