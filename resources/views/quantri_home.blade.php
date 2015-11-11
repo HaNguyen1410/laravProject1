@@ -134,6 +134,7 @@
             <!--<hr>-->
             <footer class="footer" id="Hafooter">
                 <p align="center">
+                    Bộ môn Công Nghệ Phần Mềm <br>
                     Khoa Công Nghệ Thông Tin và Truyền Thông <br> 
                     Trường Đại Học Cần Thơ
                 </p>

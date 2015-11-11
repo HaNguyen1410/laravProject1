@@ -41,7 +41,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>Ngày họp nhóm:</th>
+                        <th>Ngày họp nhóm: <br>
+                            (Thời gian hành chính)
+                        </th>
                         <td colspan="5">                          
                             <div style="padding: 2px 2px 2px 40px; display: block; float: left;">  
                                 <label>Sáng thứ 2</label> &nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox" name="chkBuoiHop[]" value="S2"/>                            
