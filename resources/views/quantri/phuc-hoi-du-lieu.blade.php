@@ -23,7 +23,7 @@
                     <p>{{$kq}}</p>
                         <lable style="color: #006400; font-weight: bold;">
                             <img src="{{asset('public/images/accept-icon.png')}}"/>
-                            Phục hồi CSDL thành công!
+                            Phục hồi tập tin CSDL "{{$tenfile_dachon}}" thành công!
                         </lable>
 <!--                        <a href="../storage/dumps/">
                             <lable style="color: #860000; font-weight: bold;">Tải về</lable>

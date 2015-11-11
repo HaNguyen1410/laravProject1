@@ -142,7 +142,7 @@ class QuantriController extends Controller
                 $pathfile = $luuden.$tenfile_dachon;
                 File::delete($pathfile);
                 return view('quantri.phuc-hoi-du-lieu')->with('phuchoi',0)
-                        ->with('kq',$kq)->with('command',$command);
+                        ->with('kq',$kq)->with('command',$command)->with('tenfile_dachon',$tenfile_dachon);
             }        
         }      
     }
