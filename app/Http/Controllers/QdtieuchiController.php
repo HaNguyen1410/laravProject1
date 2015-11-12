@@ -51,10 +51,9 @@ class QdtieuchiController extends Controller
                 ->get();
         //Lấy danh sách tiêu chí ở năm - hk hiện tại
         $dstc = DB::table('tieu_chi_danh_gia as dg')->distinct()
-                ->select('dg.matc','dg.noidungtc','dg.heso','dg.ngaytao')
+                ->select('dg.matc','dg.noidungtc','dg.heso','dg.ngaytao','qd.mank')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
-                ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
-                ->where('hp.mank',$mank)
+                ->where('qd.mank',$mank)
                 ->where('qd.macb','=',$macb)
                 ->get();
          
@@ -127,7 +126,8 @@ class QdtieuchiController extends Controller
                 );
                 $data2 = array(
                         'macb'   => $macb,
-                        'matc'   => $_POST['txtMaTC']
+                        'matc'   => $_POST['txtMaTC'],
+                        'mank'   => $mank
                 );
 
                 $ch1 = DB::table('tieu_chi_danh_gia')->insert($data1);
