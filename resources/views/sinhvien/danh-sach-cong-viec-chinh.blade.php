@@ -160,13 +160,13 @@
                     }                    
                 ?>
                 <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">                  
-                    {{$antoan}}% Complete (success) 
+                    {{$antoan}}%
                 </div>
                 <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
-                  {{$canhbao}}% (warning)
+                  {{$canhbao}}%
                 </div>
                 <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
-                  {{$nguyhiem}}% (danger)
+                  {{$nguyhiem}}%
                 </div>
             </div>
             <!-- thanh tiến độ côg việc -->
@@ -176,6 +176,14 @@
                   {{$tiendonhom->tiendo}}% Complete (success)
                 </div>
             </div>
+        </div>
+        <div class="col-md-12" style="margin-bottom: 10px;">
+            <label style="display: block; float: left; width: 27%;">In danh sách kế hoạch thực hiện:</label>
+            <a href="" target="_blank">
+                <button type="button" name="" class="btn btn-success">
+                    <img src="{{asset('public/images/printer-icon.png')}}"> In kế hoạch
+                </button>
+            </a>
         </div>
         <div class="col-md-12">
             <table class="table table-bordered table-striped" border="0" width="800px" cellpadding="0px" cellspacing="0px" align='center'>

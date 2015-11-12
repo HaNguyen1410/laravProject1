@@ -57,13 +57,13 @@
                         }                        
                     ?>
                     <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
-                      {{$antoan}}% Complete (success)
+                      {{$antoan}}%
                     </div>
                     <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
-                      {{$canhbao}}% (warning)
+                      {{$canhbao}}%
                     </div>
                     <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
-                      {{$nguyhiem}}% (danger)
+                      {{$nguyhiem}}%
                     </div>
                 </div>
                 <!-- thanh tiến độ côg việc -->

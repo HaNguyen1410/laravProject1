@@ -145,11 +145,11 @@ and open the template in the editor.
                     @endforeach        
                 </table><br>
                 <table class="table table-bordered" style="width: 600px;">
-                    <tr>
-                        <th width="2%">STT</th>
-                        <th width="10%">Mã tiêu chí</th>
-                        <th width="50%">Nội dung đánh giá</th>
-                        <th width="10%">Mức điểm tối đa</th>                        
+                   <tr>
+                        <td style="text-align: center; font-weight: bold;" width="2%">STT</td>
+                        <td style="text-align: center; font-weight: bold;" width="20%">Mã tiêu chí</td>
+                        <td style="text-align: center; font-weight: bold;" width="50%">Nội dung đánh giá</td>
+                        <td style="text-align: center; font-weight: bold;" width="15%">Mức điểm tối đa</td>                        
                     </tr>
                     @foreach($tieuchi as $stt => $tc)
                         <tr>
@@ -263,12 +263,12 @@ and open the template in the editor.
                         </tr>
                     @endforeach        
                 </table><br>
-                <table class="table table-bordered" style="width: 600px;">
+                <table class="table" style="width: 600px;">
                     <tr>
-                        <th width="2%">STT</th>
-                        <th width="10%">Mã tiêu chí</th>
-                        <th width="50%">Nội dung đánh giá</th>
-                        <th width="10%">Mức điểm tối đa</th>                        
+                        <td style="text-align: center; font-weight: bold;" width="2%">STT</td>
+                        <td style="text-align: center; font-weight: bold;" width="20%">Mã tiêu chí</td>
+                        <td style="text-align: center; font-weight: bold;" width="50%">Nội dung đánh giá</td>
+                        <td style="text-align: center; font-weight: bold;" width="15%">Mức điểm tối đa</td>                        
                     </tr>
                     @foreach($tieuchi as $stt => $tc)
                         <tr>
