@@ -165,7 +165,10 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
         route::post('luuchianhomnienluan','ChianhomController@LuuChiaNhomNL');
         route::get('xoasvtrongnhom/{mssv}','ChianhomController@XoaSVTrongNhom');
         /*======== In danh sách nhóm đề tài của mỗi nhóm hp ===========*/
-        route::get('{mahp?}/indanhsachdetainhom/{macb}','ChianhomController@InDanhSachDeTaiNhom');        
+        route::get('{mahp?}/indanhsachdetainhom/{macb}','ChianhomController@InDanhSachDeTaiNhom');  
+        /*======== Chuyển thành viên sang nhóm khác ===========*/
+        route::get('chuyenthanhvien/{mssv}','ChianhomController@ChuyenThanhVien'); 
+        route::get('luuchuyenthanhvien/{mssv}','ChianhomController@LuuChuyenThanhVien');
     });
     /*======= THEO DÕI KẾ HOẠCH làm niên luận của sinh viên ==========*/
     route::get('theodoikehoach', 'TheodoikehoachController@TheoDoiKH');

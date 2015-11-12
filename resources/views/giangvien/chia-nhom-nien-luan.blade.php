@@ -208,6 +208,9 @@
                             @endif
                         </td>
                         <td align="center" >
+                            <a href="{{asset('giangvien/chianhom/chuyenthanhvien/'.$svnhom->mssv)}}">
+                                    <img src="{{asset('public/images/edit-icon.png')}}"/>
+                            </a>&nbsp
                             <a onclick="return confirm('Xóa sinh viên *{{$svnhom->hoten}} ra khỏi nhóm *{{$svnhom->manhomthuchien}}!');" href="{{asset('giangvien/chianhom/xoasvtrongnhom/'.$svnhom->mssv)}}">
                                 <img src="{{asset('public/images/Document-Delete-icon.png')}}"/>
                             </a>

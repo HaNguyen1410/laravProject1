@@ -244,6 +244,43 @@ class ChianhomController extends Controller
              return redirect('giangvien/chianhom');            
         }
     }
+/*====================== Chuyển sinh viên sang một nhóm đề tài khác =======================*/
+    public function ChuyenThanhVien($mssv){
+        $macb = $macb = \Auth::user()->taikhoan;
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');        
+        $mank = DB::table('nien_khoa as nk')
+                ->join('nhom_hocphan as hp','nk.mank','=','hp.mank')
+                ->where('nk.nam',$namht)->where('nk.hocky',$hkht)
+                ->value('nk.mank');
+        $sv_chuyen = DB::table('sinh_vien as sv')
+                ->select('sv.mssv','sv.hoten','chn.manhomthuchien','chn.nhomtruong')
+                ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')                
+                ->where('sv.mssv',$mssv)
+                ->where('hp.mank',$mank)
+                ->first();
+        //Mã nhóm HP mà sv đăng ký
+        $mahpsv = DB::table('chia_nhom as chn')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')                
+                ->where('chn.mssv',$mssv)
+                ->where('hp.mank',$mank)
+                ->value('chn.manhomhp');
+        $manhom = DB::table('chia_nhom as chn')->distinct()
+                ->select('chn.manhomthuchien')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('hp.manhomhp',$mahpsv)
+                ->get();
+        
+        return view('giangvien.chuyen-thanh-vien-nhom')->with('namht',$namht)->with('hkht',$hkht)
+            ->with('sv_chuyen',$sv_chuyen)->with('manhom',$manhom);
+    }
+    public function LuuChuyenThanhVien(Request $req){
+        
+    }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/
     public function XoaSVTrongNhom($mssv){
         $macb = \Auth::user()->taikhoan;
