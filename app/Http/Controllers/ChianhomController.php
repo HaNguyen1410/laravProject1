@@ -283,18 +283,23 @@ class ChianhomController extends Controller
     public function LuuChuyenThanhVien(Request $req){
         //Xem nhóm đã chuyển đã có nhóm trưởng chưa
         $mssv = $req->txtMaSV;
-        $manhom = $req->cbNhomThucHien;
-        $nhomtruong = Input::has($req->chkNhomTruong) == false ? 1 : 0;   
-        $truong = DB::table('chia_nhom')->select('mssv','nhomtruong')
+        $nhomtruong = Input::has($req->chkNhomTruong) == false ? 1 : 0;
+        $manhom = $req->cbNhomThucHien;   
+        $truong = DB::table('chia_nhom')
                 ->where('manhomthuchien',$manhom)
                 ->where('nhomtruong',1)
-                ->get();
+                ->value('mssv');
         $dem = count($truong);
-        if($dem >= 1){
-            //\Session::flash('NhieuNhomTruong','Phải xóa nhóm trưởng cũ đã chọn trước đó!');
-            return \Redirect::back()->with('NhieuNhomTruong','Phải xóa nhóm trưởng cũ đã chọn trước đó!');
-        }
-        else if($dem == 0){
+        if($dem != 0){
+            //Bỏ nhóm trưởng cũ đã chọn trước đó
+            $botruong  = DB::table('chia_nhom')->where('mssv',$truong)
+                        ->update(
+                            [
+                                'manhomthuchien' => $req->cbNhomThucHien,
+                                'nhomtruong'     => 0
+                            ]
+                        );
+            //Chọn nhóm trưởng mới
             $chuyennhom = DB::table('chia_nhom')->where('mssv',$req->txtMaSV)
                     ->update(
                         [
@@ -302,12 +307,22 @@ class ChianhomController extends Controller
                             'nhomtruong'     => $nhomtruong
                         ]
                     );
-
-            $tensv = DB::table('sinh_vien')->where('mssv',$req->txtMaSV)->value('hoten');
-            \Session::flash('ThongBaoChuyen','Chuyển nhóm cho --'.$tensv.'-- thành công!');
-
-            return redirect('giangvien/chianhom');
+            //return \Redirect::back()->with('NhieuNhomTruong','Phải xóa nhóm trưởng cũ đã chọn trước đó!');
         }
+        else if($dem == 0)
+        {
+            $chuyennhom = DB::table('chia_nhom')->where('mssv',$req->txtMaSV)
+                    ->update(
+                        [
+                            'manhomthuchien' => $req->cbNhomThucHien,
+                            'nhomtruong'     => 1
+                        ]
+                    );
+        }
+        $tensv = DB::table('sinh_vien')->where('mssv',$req->txtMaSV)->value('hoten');
+        \Session::flash('ThongBaoChuyen','Chuyển nhóm cho --'.$tensv.'-- thành công!');
+
+        return redirect('giangvien/chianhom');
             
     }
 /*====================== Xóa sinh viên ra khỏi nhóm =======================*/

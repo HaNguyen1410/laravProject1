@@ -18,7 +18,11 @@ use App\Http\Controllers\Auth;
 
 class PhancvController extends Controller
 {
-/*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
+ /*=========================== In Danh sách phân công việc của cả nhóm ==============================================*/   
+    public function InDanhSachPhanCV($manth){
+        
+    }
+    /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
     public function DanhSachCVChinh(){
         $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');        
