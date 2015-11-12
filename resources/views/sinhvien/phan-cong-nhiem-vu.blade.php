@@ -19,7 +19,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3 style="color: darkblue; font-weight: bold;">Phân công thực hiện đề tài (Mã nhóm: {{$manth}})</h3> <br>
+            <h3 style="color: darkblue; font-weight: bold; text-align: center;">
+                PHÂN CÔNG THỰC HIỆN ĐỀ TÀI (Mã nhóm: {{$manth}})
+            </h3> <br>
             <div class="col-md-12"> 
                 <!-- thanh tiến độ thời gian thực hiện -->
                 <lable style="display: block; float: left; width: 27%;">

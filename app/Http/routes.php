@@ -175,6 +175,8 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     Route::group(['prefix'=>'theodoikehoach'],function(){
         route::get('cvchinh/{manth}', 'TheodoikehoachController@CVChinh');
         route::get('cvchinh/{manth}/cvphuthuoc/{macvchinh}', 'TheodoikehoachController@CVPhuThuoc');
+        //In danh sách kế hoạch của nhóm đang xem
+        route::get('cvchinh/{manth}/indanhsachphancv', 'TheodoikehoachController@InDSPhanCV');
     });
     //route::post('giangvien/theodoikehoach/{macb}/{mahp}', 'TheodoikehoachController@TheoDoiKH');
     /*======= QUẢN LÝ THÔNG BÁO ==========*/
@@ -220,7 +222,10 @@ Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
     Route::post('luuthemthongtinnhom','SVthongtinnhomController@LuuThemThongTinNhom');
     /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
     Route::get('danhsachcvchinh','PhancvController@DanhSachCVChinh');
-    Route::get('danhsachcvchinh/danhsachcv/{macvphu}','PhancvController@DanhSachCV');
+    Route::group(['prefix'=>'danhsachcvchinh'], function(){
+        Route::get('danhsachcvchinh/danhsachcv/{macvphu}','PhancvController@DanhSachCV');
+        Route::get('indanhsachphancv/{manth}','PhancvController@InDanhSachPhanCV');        
+    });
     
 /*====##### Chức năng của NHÓM TRƯỞNG #####====*/
     /*======= PHÂN CÔNG NHIỆM VỤ ==========*/

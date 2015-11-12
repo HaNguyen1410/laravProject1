@@ -177,10 +177,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12" style="margin-bottom: 10px;">
-            <label style="display: block; float: left; width: 27%;">In danh sách kế hoạch thực hiện:</label>
-            <a href="" target="_blank">
-                <button type="button" name="" class="btn btn-success">
+        <div class="col-md-12" style="margin-bottom: 10px; text-align: right;">
+            <a href="{{asset('sinhvien/danhsachcvchinh/indanhsachphancv/'.$manth)}}" target="_blank">
+                <button type="button" name="" class="btn btn-success" title="In danh sách kế hoạch thực hiện">
                     <img src="{{asset('public/images/printer-icon.png')}}"> In kế hoạch
                 </button>
             </a>

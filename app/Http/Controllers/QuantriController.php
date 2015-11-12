@@ -242,7 +242,7 @@ class QuantriController extends Controller
         $ds = DB::table('giang_vien as gv')->skip($n)->take(5)->paginate(5);
         //Lấy năm học và học kỳ hiện tại      
         $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
-        $hkht = DB::table('nien_khoa')->where('nam',$namht)->value('hocky');
+        $hkht = DB::table('nien_khoa')->where('nam',$namht)->orderBy('hocky','desc')->value('hocky');
         //Lấy danh sách năm học năm lớn nhất ở trên cùng
         $namhoc = DB::table('nien_khoa as nk')->distinct()->select('nam')->orderBy('nam','desc')->get(); 
         $hocky = DB::table('nien_khoa')->select('hocky')->orderBy('hocky','desc')

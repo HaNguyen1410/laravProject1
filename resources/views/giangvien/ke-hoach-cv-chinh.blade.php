@@ -161,7 +161,14 @@
             <div id="container1" style="min-width: 310px; max-width: 600px; height: 400px; margin: 0 auto; "></div>                        
         </div>
 
-  <!-- Danh sách chi tiết các công việc -->      
+  <!-- Danh sách chi tiết các công việc -->  
+        <div class="col-md-12" style="margin-bottom: 10px; text-align: right;">
+            <a href="{{asset('giangvien/theodoikehoach/cvchinh/'.$manth."/indanhsachphancv")}}" target="_blank">
+                <button type="button" name="" class="btn btn-success" title="In danh sách kế hoạch thực hiện">
+                    <img src="{{asset('public/images/printer-icon.png')}}"> In kế hoạch
+                </button>
+            </a>
+        </div>
         <div class="col-md-12">   
             <table class="table table-hover" width='800px' align='center'>
                 <tr>

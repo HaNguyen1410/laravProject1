@@ -60,7 +60,8 @@ and open the template in the editor.
                 </td>
                 <td>
                     <div>
-                        <label>Bộ Giáo Dục Và Đào Tạo</label><br>
+                        <label>Bộ môn Công Nghệ Phần Mềm</label><br>
+                        <label>Khoa Công Nghệ Thông Tin và Truyền Thông</label><br>
                         <label>Trường Đại Học Cần Thơ</label>
                     </div>
                 </td>

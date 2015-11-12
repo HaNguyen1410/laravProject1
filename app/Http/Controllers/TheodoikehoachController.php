@@ -70,6 +70,38 @@ class TheodoikehoachController extends Controller
                  ->with('namcb',$namcb)->with('hkcb',$hkcb)
                     ->with('namhoc',$namhoc)->with('hocky',$hocky);
     }
+/*=========================== In Danh sách phân công việc của cả nhóm ==============================================*/   
+    public function InDSPhanCV($manth){
+        $date = date('Y-m-d');//Carbon::now();
+        //Lấy năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->where('nam',$namht)->orderBy('hocky','desc')->value('hocky');
+        $gv = DB::table('giang_vien as gv')->select('gv.macb','gv.hoten','gv.email')
+                ->join('de_tai as dt','gv.macb','=','dt.macb')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->where('radt.manhomthuchien',$manth)
+                ->first();
+        $thongtin = DB::table('de_tai as dt')
+                ->select('dt.tendt','sv.hoten','sv.mssv','sv.email','hp.tennhomhp')
+                ->join('ra_de_tai as radt','dt.madt','=','radt.madt')
+                ->join('chia_nhom as chn','radt.manhomthuchien','=','chn.manhomthuchien')
+                ->join('sinh_vien as sv','chn.mssv','=','sv.mssv')
+                ->join('nhom_hocphan as hp','chn.manhomhp','=','hp.manhomhp')
+                ->where('chn.nhomtruong',1)
+                ->where('chn.manhomthuchien',$manth)
+                ->first();
+        $dscv = DB::table('cong_viec as cv')
+                ->join('thuc_hien as th','cv.macv','=','th.macv')
+                ->where('th.manhomthuchien',$manth)
+                ->get();
+        
+        $view = \View::make('giangvien.in-ke-hoach-phan-cong-nhomsv',
+                compact('manth','date','thongtin','namht','hkht','dscv','gv'));
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf = \PDF::loadHTML($view)->setPaper('a4')->setOrientation('landscape');
+        
+        return $pdf->stream("KeHoach_".$manth.".pdf");
+    }
 /*======================= Theo dõi các công việc chính của 1 nhóm ==========================*/
     public function CVChinh($manth){
         $dstv = DB::table('sinh_vien as sv')
