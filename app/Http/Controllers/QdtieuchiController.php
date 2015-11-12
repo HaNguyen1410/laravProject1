@@ -49,6 +49,7 @@ class QdtieuchiController extends Controller
                 ->get();
         $hocky = DB::table('nien_khoa')->distinct()->select('hocky')
                 ->get();
+        //Lấy danh sách tiêu chí ở năm - hk hiện tại
         $dstc = DB::table('tieu_chi_danh_gia as dg')->distinct()
                 ->select('dg.matc','dg.noidungtc','dg.heso','dg.ngaytao')
                 ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')

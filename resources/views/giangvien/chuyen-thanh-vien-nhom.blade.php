@@ -20,10 +20,13 @@
                     <a href="{{asset('giangvien/chianhom')}}">Chia nhóm</a>  
                        &Gt;
                     Chuyển nhóm
-                </h3>                
+                </h3>    
+                <!-- Thông báo lỗi nhiều nhóm trưởng ở 1 nhóm -->
+                <p style="color: red; font-weight: bold; text-align: center">{{ Session::get('NhieuNhomTruong') }}</p>
+                
                 <table class="table table-bordered" align="center" style="max-width:800px;">
                     <tr>
-                        <th>Học kỳ:</th>
+                        <th>Học kỳ: </th>
                         <td width="20%">
                             <input type="text" name="txtMaSV" value="{{$hkht}}" style="text-align: center;" class="form-control" readonly=""/>
                         </td>
@@ -58,9 +61,9 @@
                         <th>Nhóm trưởng:</th>
                         <td>  
                             @if($sv_chuyen->nhomtruong == 1)
-                            <input type="checkbox" name="txtNhomTruong" value="1" checked=""/> 
+                            <input type="checkbox" name="chkNhomTruong" checked=""/> 
                             @else
-                                <input type="checkbox" name="txtNhomTruong" value="0"/> 
+                                <input type="checkbox" name="chkNhomTruong"/> 
                             @endif                                
                         </td>
                     </tr>

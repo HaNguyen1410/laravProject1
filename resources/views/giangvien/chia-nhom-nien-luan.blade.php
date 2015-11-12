@@ -183,6 +183,7 @@
                  Danh sách các nhóm đã chia của nhóm HP: {{$tenhp = DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp')}}
              </h4>
              <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+             <p style="color:red;"><?php echo Session::get('ThongBaoChuyen'); ?></p>
             <table class="table table-bordered" style="max-width:900px" align='center' id="bang2">
                 <tr>
                     <th width="4%">STT</th>
