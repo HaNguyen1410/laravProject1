@@ -79,11 +79,11 @@
                         <tr>
                             <td align='center'>{{$stt+1}}</td>
                             <td align='center'>
-                                <label style="color: brown; font-weight: bold;">[{{$tc->matc}}]</label>
+                                <label style="color: brown;">[{{$tc->matc}}]</label>
                             </td>
                             <td>{{$tc->noidungtc}}</td>
                             <td align='center'>
-                                <label style="color: red; font-weight: bold;">{{$tc->heso}}</label>                                
+                                <label style="color: red;">{{$tc->heso}}</label>                                
                             </td>
                             <td align='center'>{{$tc->ngaytao}}</td>
                             <td align='center'>
@@ -94,8 +94,15 @@
                             </td>    
                         </tr>                    
                     @endforeach    
-                @endif
+                @endif  
+                <tr>
+                    
+                </tr>
             </table>
+            <div class="col-md-offset-4">
+                <label>Tổng mức điểm của các tiêu chí:</label>
+                <label style="color: red; font-weight: bold;">{{$tongdiemtc}}</label>
+            </div><br>
         </div>
         <div class="col-md-12">
             

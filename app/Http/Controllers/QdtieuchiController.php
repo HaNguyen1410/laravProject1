@@ -56,9 +56,16 @@ class QdtieuchiController extends Controller
                 ->where('qd.mank',$mank)
                 ->where('qd.macb','=',$macb)
                 ->get();
+        //Tính tổng điểm của các tiêu chí:
+        $tongdiemtc = DB::table('tieu_chi_danh_gia as dg')
+                ->join('quy_dinh as qd', 'dg.matc','=','qd.matc')
+                ->where('qd.mank',$mank)
+                ->where('qd.macb','=',$macb)
+                ->sum('dg.heso');
         
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)->with('namhoc',$namhoc)
-        ->with('hocky',$hocky)->with('ma',$ma)->with('hkht',$hkht)->with('namht',$namht);
+        ->with('hocky',$hocky)->with('ma',$ma)->with('hkht',$hkht)->with('namht',$namht)
+            ->with('tongdiemtc',$tongdiemtc);
     }
 /*========= Xóa Tiêu chí đánh giá ==============*/    
     public function XoaTieuChi($matc){
@@ -125,12 +132,11 @@ class QdtieuchiController extends Controller
             $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
                     ->select('dg.heso')
                     ->join('quy_dinh as qd','dg.matc','=','qd.matc')
-                    ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
                     ->where('qd.macb',$macb)
-                    ->where('hp.mank',$mank)
+                    ->where('qd.mank',$mank)
                     ->lists('dg.heso');
             $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
-            if($tongdiemTC > 10){
+            if($tongdiemTC >= 10){
                 \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');
                 return \Redirect::to('giangvien/dstieuchi');
             }
@@ -186,33 +192,47 @@ class QdtieuchiController extends Controller
             return redirect()->back()->withErrors($v->errors());
         }
         else{
-            $matc_chon = $req->cbNoiDungTC;
-            $ndtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('noidungtc');
-            $hesotc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('heso');
-            $themtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->insert(
-                        [
-                            'matc'      => $_POST['txtMaTC'],
-                            'noidungtc' => $ndtc,
-                            'heso'      => $hesotc,
-                            'ngaytao'   => Carbon::now()
-                        ]                  
-                    );
-            $quydinh = DB::table('quy_dinh')->where('matc',$matc_chon)->insert(
-                        [
-                            'macb'      => $macb,
-                            'matc'      => $_POST['txtMaTC'],
-                            'mank'      => $mank_ht
-                        ]                  
-                    );
-            for($i = 0; $i < count($dsmasv); $i++){
-                    //echo $dsmasv[$i]."<br>";                
-                    $ch3 = DB::table('chitiet_diem')->insert(
-                            [   'matc' => $_POST['txtMaTC'],                          
-                                'mssv' => $dsmasv[$i]
-                            ]
-                        );
+            //,DB::raw('SUM(dg.heso) as tong_heso')
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+                    ->select('dg.heso')
+                    ->join('quy_dinh as qd','dg.matc','=','qd.matc')
+                    ->where('qd.macb',$macb)
+                    ->where('qd.mank',$mank_ht)
+                    ->lists('dg.heso');
+            $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
+            if($tongdiemTC >= 10){
+                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');
+                return \Redirect::to('giangvien/dstieuchi');
             }
-            return redirect('giangvien/dstieuchi');
+            else{
+                $matc_chon = $req->cbNoiDungTC;
+                $ndtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('noidungtc');
+                $hesotc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('heso');
+                $themtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->insert(
+                            [
+                                'matc'      => $_POST['txtMaTC'],
+                                'noidungtc' => $ndtc,
+                                'heso'      => $hesotc,
+                                'ngaytao'   => Carbon::now()
+                            ]                  
+                        );
+                $quydinh = DB::table('quy_dinh')->where('matc',$matc_chon)->insert(
+                            [
+                                'macb'      => $macb,
+                                'matc'      => $_POST['txtMaTC'],
+                                'mank'      => $mank_ht
+                            ]                  
+                        );
+                for($i = 0; $i < count($dsmasv); $i++){
+                        //echo $dsmasv[$i]."<br>";                
+                        $ch3 = DB::table('chitiet_diem')->insert(
+                                [   'matc' => $_POST['txtMaTC'],                          
+                                    'mssv' => $dsmasv[$i]
+                                ]
+                            );
+                }
+                return redirect('giangvien/dstieuchi');
+            }            
         }
     }
     /*========================= Cập nhật tiêu chí đánh giá ========================*/
@@ -247,12 +267,11 @@ class QdtieuchiController extends Controller
         }
         else
         {    
-             $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
                     ->select('dg.heso')
                     ->join('quy_dinh as qd','dg.matc','=','qd.matc')
-                    ->join('nhom_hocphan as hp','qd.macb','=','hp.macb')
                     ->where('qd.macb',$macb)
-                    ->where('hp.mank',$mank)
+                    ->where('qd.mank',$mank)
                     ->where('dg.matc','<>',$req->txtMaTC)
                     ->lists('dg.heso');
             $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
