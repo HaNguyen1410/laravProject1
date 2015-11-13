@@ -32,7 +32,7 @@
             <div class="col-md-12" align="center">
                 <form action="" method="get">
                     <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Thêm mới</label> 
-                        &nbsp;<input type="radio" onclick="DoiGDThemTC()" id="rdThemMoi" name="rdThemMoi"
+                        &nbsp;<input type="radio" onclick="DoiGDThemTC()" id="rdThemMoi" name="rdThem"
                                     <?php
                                         if(!isset($_GET['gd']) || $_GET['gd'] == "moi")
                                             echo 'checked';
@@ -41,7 +41,7 @@
                                     ?>
                                 /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <label style="font-size: 13pt; color: darkblue; font-weight: bold;">Thêm tiêu chí đã có</label>
-                        &nbsp;<input type="radio" onclick="DoiGDThemTC()" id="rdThemDaCo" name="rdThemDaCo"
+                        &nbsp;<input type="radio" onclick="DoiGDThemTC()" id="rdThemDaCo" name="rdThem"
                                     <?php
                                         if(!isset($_GET['gd']) || $_GET['gd'] == "moi")
                                             echo '';
@@ -104,6 +104,10 @@
                                 <td>                                 
                                     <input style="width:35%; text-align: center;" type="text" name="txtMaTC" value="{{$ma}}" class="form-control" readonly=""/> 
                                 </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td colspan="4" align="center">
