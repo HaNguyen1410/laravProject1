@@ -119,7 +119,8 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     Route::group(['prefix'=>'dstieuchi'],function(){
         /*  * Thêm tiêu chí đánh giá * */
         route::get('themtieuchi','QdtieuchiController@ThemTieuChi');
-        route::post('luuthemttc','QdtieuchiController@LuuThemTieuChi');
+        route::post('luuthemtc','QdtieuchiController@LuuThemTieuChi');
+        route::post('luuthemtcdaco','QdtieuchiController@LuuThemTCDaCo');
          /*  * Cập nhật tiêu chí đánh giá * */
         route::get('capnhattieuchi/{matc}','QdtieuchiController@CapNhatTieuChi');
         route::post('luucapnhattc','QdtieuchiController@LuuCapNhatTieuChi');

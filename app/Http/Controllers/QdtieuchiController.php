@@ -56,7 +56,7 @@ class QdtieuchiController extends Controller
                 ->where('qd.mank',$mank)
                 ->where('qd.macb','=',$macb)
                 ->get();
-         
+        
         return view('giangvien.quy-dinh-tieu-chi')->with('dstc',$dstc)->with('namhoc',$namhoc)
         ->with('hocky',$hocky)->with('ma',$ma)->with('hkht',$hkht)->with('namht',$namht);
     }
@@ -74,10 +74,26 @@ class QdtieuchiController extends Controller
 /*========================= Thêm tiêu chí đánh giá ========================*/
     public function ThemTieuChi(){
         $macb = \Auth::user()->taikhoan;
-        $ma = $this->matc_tutang();
-        return view('giangvien.them-tieu-chi')->with('ma',$ma);
+        $ma = $this->matc_tutang();     
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
+        $mankht = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
+                ->value('mank');
+        //Lấy danh sách tiêu chí ở năm trước đó của gv
+        $dstc_cu = DB::table('tieu_chi_danh_gia as dg')->distinct()
+                ->select('dg.matc','dg.noidungtc','dg.heso')
+                ->join('quy_dinh as qd','dg.matc','=','qd.matc')
+                ->where('qd.mank','<>',$mankht)
+                ->where('qd.macb',$macb)
+                ->get();
+        
+        return view('giangvien.them-tieu-chi')->with('ma',$ma)            
+                    ->with('dstc_cu',$dstc_cu);
     }
-    
+/*========================= Lưu Thêm MỚI tiêu chí đánh giá ========================*/    
     public function LuuThemTieuChi(Request $req){
         $macb = \Auth::user()->taikhoan;
         $post = $req->all();
@@ -145,7 +161,32 @@ class QdtieuchiController extends Controller
             }        
         }
     }
-/*========================= Cập nhật tiêu chí đánh giá ========================*/
+/*========================= Lưu Thêm tiêu chí ĐÃ CÓ đánh giá ========================*/  
+    public function LuuThemTCDaCo(Request $req){
+        $macb = \Auth::user()->taikhoan;
+        //Lấy giá trị năm học và học kỳ hiện tại      
+        $namht = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hkht = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$namht)
+                ->value('hocky');
+        $mank_ht = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
+                ->value('mank');
+        $v = \Validator::make($req->all(),
+                [
+                    'cbNoiDungTC' => 'required'
+                ]
+            );
+        if($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
+        else{
+            $matc_chon = $req->cbNoiDungTC;
+            $ndtc = DB::table('tieu_chi_danh_gia')->select('noidungtc')->where('matc',$matc_chon)->lists('noidungtc');
+            $hesotc = DB::table('tieu_chi_danh_gia')->select('heso')->where('matc',$matc_chon)->lists('heso');
+            
+        }
+    }
+    /*========================= Cập nhật tiêu chí đánh giá ========================*/
     public function CapNhatTieuChi($matc){
         $macb = \Auth::user()->taikhoan;
       //Hiển thị thông tin của 1 tiêu chí nào đó     

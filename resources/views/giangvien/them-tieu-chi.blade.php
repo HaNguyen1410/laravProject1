@@ -92,11 +92,11 @@
                         </table>       
                 </form>        
             @elseif($_GET['gd'] == "daco") 
-                <form action="" method="post" class="form-horizontal"> 
+                <form action="{{action('QdtieuchiController@LuuThemTCDaCo')}}" method="post" class="form-horizontal"> 
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>                                      
-                        <table class="table table-bordered" align="center" style="max-width:800px;">
+                        <table class="table table-bordered" align="center" style="max-width:1200px;">
                             <tr>
-                                <th>Mã cán bộ:</th>
+                                <th width="15%">Mã cán bộ:</th>
                                 <td>
                                     <input type="text" name="txtMaCB" value="2134" style="width: 60%; text-align: center;" class="form-control" readonly=""/>
                                 </td>
@@ -106,8 +106,16 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th></th>
-                                <td></td>
+                                <th>Nội dung tiêu chí:</th>
+                                <td colspan="3">
+                                    <select class="form-control" name="cbNoiDungTC">
+                                        <option value="">-- Chọn nội dung tiêu chí muốn thêm --</option>
+                                        @foreach($dstc_cu as $tc)
+                                            <option value="{{$tc->matc}}">{{$tc->noidungtc}} - (Điểm tối đa: {{$tc->heso}})</option>
+                                        @endforeach
+                                    </select>
+                                    <p style='color:red;'>{{$errors->first('cbNoiDungTC')}}</p>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="4" align="center">
