@@ -156,7 +156,6 @@ class QdtieuchiController extends Controller
                             ]
                         );
                 }
-
                 return redirect('giangvien/dstieuchi');
             }        
         }
@@ -181,9 +180,24 @@ class QdtieuchiController extends Controller
         }
         else{
             $matc_chon = $req->cbNoiDungTC;
-            $ndtc = DB::table('tieu_chi_danh_gia')->select('noidungtc')->where('matc',$matc_chon)->lists('noidungtc');
-            $hesotc = DB::table('tieu_chi_danh_gia')->select('heso')->where('matc',$matc_chon)->lists('heso');
-            
+            $ndtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('noidungtc');
+            $hesotc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('heso');
+            $themtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->insert(
+                        [
+                            'matc'      => $_POST['txtMaTC'],
+                            'noidungtc' => $ndtc,
+                            'heso'      => $hesotc,
+                            'ngaytao'   => Carbon::now()
+                        ]                  
+                    );
+            $quydinh = DB::table('quy_dinh')->where('matc',$matc_chon)->insert(
+                        [
+                            'macb'      => $macb,
+                            'matc'      => $_POST['txtMaTC'],
+                            'mank'      => $mank_ht
+                        ]                  
+                    );
+            return redirect('giangvien/dstieuchi');
         }
     }
     /*========================= Cập nhật tiêu chí đánh giá ========================*/
