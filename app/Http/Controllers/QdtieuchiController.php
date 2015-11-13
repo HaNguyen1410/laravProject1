@@ -108,6 +108,7 @@ class QdtieuchiController extends Controller
         $dsmasv = DB::table('nhom_hocphan as hp')->select('chn.mssv')
                 ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
                 ->where('hp.macb',$post['txtMaCB'])
+                ->where('hp.mank',$mank)
                 ->lists('chn.mssv');
         $v = \Validator::make($req->all(),
                 [
@@ -170,6 +171,12 @@ class QdtieuchiController extends Controller
                 ->value('hocky');
         $mank_ht = DB::table('nien_khoa')->where('nam',$namht)->where('hocky',$hkht)
                 ->value('mank');
+        //Lấy ds mssv do 1 cán bộ dạy
+        $dsmasv = DB::table('nhom_hocphan as hp')->select('chn.mssv')
+                ->join('chia_nhom as chn','hp.manhomhp','=','chn.manhomhp')
+                ->where('hp.macb',$macb)
+                ->where('hp.mank',$mank_ht)
+                ->lists('chn.mssv');
         $v = \Validator::make($req->all(),
                 [
                     'cbNoiDungTC' => 'required'
@@ -197,6 +204,14 @@ class QdtieuchiController extends Controller
                             'mank'      => $mank_ht
                         ]                  
                     );
+            for($i = 0; $i < count($dsmasv); $i++){
+                    //echo $dsmasv[$i]."<br>";                
+                    $ch3 = DB::table('chitiet_diem')->insert(
+                            [   'matc' => $_POST['txtMaTC'],                          
+                                'mssv' => $dsmasv[$i]
+                            ]
+                        );
+            }
             return redirect('giangvien/dstieuchi');
         }
     }
