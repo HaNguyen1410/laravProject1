@@ -31,7 +31,7 @@
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table" cellpadding="0px" cellspacing="0px" align='center' style="width:700px;">
                     <tr>
-                        <th>Năm học:</th>
+                        <th width="25%">Năm học:</th>
                         <td>
 <!--                            <input type="text" name="txtNamHoc" value="{{$mank}}" class="form-control" readonly=""/>-->
                             <input type="text" name="txtNamHoc" value="{{$nam}}" class="form-control" readonly="" style="text-align: center;"/>
@@ -107,16 +107,21 @@
                     <tr>
                         <th>Nhóm học phần:</th>
                         <td colspan="3">
-                            @foreach($dshp as $hp)
-                                @if($gv_hp == $hp->manhomhp)
-                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$gv_hp}}" checked=""/> &nbsp;&nbsp;&nbsp;
-                                @else
-                                    {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}" /> &nbsp;&nbsp;&nbsp;
-                                @endif                                
-                            @endforeach
+                            @foreach($dshp as $hp) 
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->tennhomhp}}"/> &nbsp;&nbsp;&nbsp; 
+                            @endforeach 
+                            <br>
+                            (
+                                <label>Đang dạy nhóm học phần:</label>
+                                @for($i = 0; $i < count($gv_hp); $i++) 
+                                    <label style="color: #860000; font-weight: bold; padding-left: 20px;">
+                                        {{$gv_hp[$i]}}
+                                    </label>
+                                @endfor
+                            )
                              <p style='color:red;'>{{$errors->first('rdNhomHP')}}</p>
                         </td>                          
-                    </tr>  
+                    </tr> 
                     <tr>
                         <th>Mật khẩu mới:</th>
                         <td colspan="3">

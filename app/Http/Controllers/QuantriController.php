@@ -286,8 +286,8 @@ class QuantriController extends Controller
                     'rdGioiTinh'  => 'required',
                     'txtNgaySinh' => 'required|date',
                     'txtEmail'    => 'required|email|max:255',
-                    'txtSDT'      => 'required|numeric|min:10',
-//                    'chkNhomHP'   => 'required',
+//                    'txtSDT'      => 'required|numeric|min:10',
+                    'chkNhomHP'   => 'required',
                     'txtMatKhau1' => 'required|min:6',
                     'txtMatKhau2' => 'required|min:6|same:txtMatKhau1'                    
                 ]
@@ -374,9 +374,10 @@ class QuantriController extends Controller
         $dshp = DB::table('nhom_hocphan as hp')->select('hp.manhomhp','hp.tennhomhp')
                 ->join('nien_khoa as nk','hp.mank','=','nk.mank')
                 ->where('nk.mank',$mankht)
-                ->Orwhere('hp.macb',$macb)
                 ->get(); 
-        $gv_hp = DB::table('nhom_hocphan')->where('mank',$mank)->value('manhomhp');
+        $gv_hp = DB::table('nhom_hocphan')->select('tennhomhp')
+                ->where('macb',$macb)->where('mank',$mankht)
+                ->lists('tennhomhp');
         
         return view('quantri.cap-nhat-giang-vien')->with('gv',$row)->with('dshp',$dshp)
                 ->with('nam',$nam)->with('hk',$hk)->with('mank',$mank)->with('gv_hp',$gv_hp);
@@ -390,7 +391,7 @@ class QuantriController extends Controller
                     'txtHoTen'          => 'required',
                     'txtNgaySinh'       => 'required|date',
                     'txtEmail'          => 'required|email',
-                    'txtSDT'            => 'required|numeric|min:10',
+//                    'txtSDT'            => 'required|numeric|min:10',
                     //md5('txtMatKhauCu') => 'required|confirmed',
 //                    'txtMatKhauCu'      => 'required',
 //                    'txtMatKhauMoi1'    => 'required|min:6|different:txtMatKhauCu',
@@ -428,9 +429,12 @@ class QuantriController extends Controller
             
             //Lấy mảng giá trị kho chọn nhiều checkbox Nhóm HP
             $nhomhp_checked = Input::get('chkNhomHP');
-            $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)
-                    ->update(['macb' => $_POST['txtMaCB']]);
-            return redirect('quantri/giangvien');
+            $ch2 = DB::table('nhom_hocphan')->whereIn('manhomhp',$nhomhp_checked)->update(                    
+                            [
+                                'macb' => $_POST['txtMaCB']
+                            ]
+                    );
+            return redirect('quantri/giangvien'); //$nhomhp_checked; 
            
         }
     }
