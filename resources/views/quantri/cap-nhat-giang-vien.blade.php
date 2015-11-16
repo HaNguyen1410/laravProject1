@@ -108,7 +108,7 @@
                         <th>Nhóm học phần:</th>
                         <td colspan="3">
                             @foreach($dshp as $hp) 
-                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->tennhomhp}}"/> &nbsp;&nbsp;&nbsp; 
+                                {{$hp->tennhomhp}}: <input type="checkbox" name="chkNhomHP[]" value="{{$hp->manhomhp}}"/> &nbsp;&nbsp;&nbsp; 
                             @endforeach 
                             <br>
                             (

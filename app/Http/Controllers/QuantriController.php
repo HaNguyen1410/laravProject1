@@ -434,8 +434,7 @@ class QuantriController extends Controller
                                 'macb' => $_POST['txtMaCB']
                             ]
                     );
-            return redirect('quantri/giangvien'); //$nhomhp_checked; 
-           
+            return redirect('quantri/giangvien'); //$nhomhp_checked;            
         }
     }
 /*=========================== Khóa tài khoản thông tin Giảng viên ==============================================*/ 
