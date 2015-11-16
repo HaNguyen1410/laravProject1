@@ -235,24 +235,37 @@ class QltailieuController extends Controller
         else{
             $luuden = public_path() . '/tailieu/';
             $taptin = Input::file('fTaiLieu');
-            $kichthuoc= $taptin->getClientSize();
-            //Đổi kích thước file từ bytes sang Kb
-            $kichthuoc_mb = $kichthuoc/(1024);
-            //$extension = Input::file('fTaiLieu')->getClientOriginalExtension();
-            $tenbandau = Input::file('fTaiLieu')->getClientOriginalName(); 
-            DB::table('tai_lieu')->where('matl',$req->txtMaTL)->update(
-                            [
-                                'tentl'       => $tenbandau,
-                                'mssv'        => $mssv,
-                                'kichthuoc'   => $kichthuoc_mb,
-                                'mota'        => $_POST['txtMoTa'],
-                                'ngaycapnhat' => Carbon::now()
-                            ]
-                    );
-            $upload_success = $taptin->move($luuden, $tenbandau);
+            if(!isset($taptin)){
+                DB::table('tai_lieu')->where('matl',$req->txtMaTL)->update(
+                                [
+                                    'mssv'        => $mssv,
+                                    'mota'        => $_POST['txtMoTa'],
+                                    'ngaycapnhat' => Carbon::now()
+                                ]
+                        );
+                return Redirect::to('sinhvien/danhsachnoptailieu')
+                        ->with('BaoCapNhat', 'Gửi cập nhật tài liệu thành công!'); 
+            }
+            else{
+                $kichthuoc= $taptin->getClientSize();
+                //Đổi kích thước file từ bytes sang Kb
+                $kichthuoc_mb = $kichthuoc/(1024);
+                //$extension = Input::file('fTaiLieu')->getClientOriginalExtension();
+                $tenbandau = Input::file('fTaiLieu')->getClientOriginalName(); 
+                DB::table('tai_lieu')->where('matl',$req->txtMaTL)->update(
+                                [
+                                    'tentl'       => $tenbandau,
+                                    'mssv'        => $mssv,
+                                    'kichthuoc'   => $kichthuoc_mb,
+                                    'mota'        => $_POST['txtMoTa'],
+                                    'ngaycapnhat' => Carbon::now()
+                                ]
+                        );
+                $upload_success = $taptin->move($luuden, $tenbandau);
 
-            return Redirect::to('sinhvien/danhsachnoptailieu')
-                    ->with('BaoCapNhat', 'Gửi cập nhật tài liệu thành công!');
+                return Redirect::to('sinhvien/danhsachnoptailieu')
+                        ->with('BaoCapNhat', 'Gửi cập nhật tài liệu thành công!'); 
+            }           
         } 
     }
 /*======================== Xóa tài liệu nào đó ========================*/
