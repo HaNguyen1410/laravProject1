@@ -94,6 +94,7 @@ class DiemController extends Controller
                 ->select('tc.matc','tc.heso','tc.noidungtc')
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
+                ->where('qd.mank',$mank)
                 ->get();
     //Lấy mã hp trên url khi chọn liệt kê    
         $mahp = \Request::segment(3);
