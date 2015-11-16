@@ -226,7 +226,7 @@ class QltailieuController extends Controller
 //        $post = $req->all();
         $v = \Validator::make($req->all(),
                 [
-                    'fTaiLieu' => 'required|mimes:pdf,doc,docx,ppt,pptm,zip,rar'
+                    'fTaiLieu' => 'mimes:pdf,doc,docx,ppt,pptm,zip,rar'
                 ]
             );
         if($v->fails()){
