@@ -21,6 +21,14 @@ class DiemController extends Controller
     public function XemDiem(){
         $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa as nk')
+                ->where('nk.nam',$nam)->where('nk.hocky',$hk)
+                ->value('nk.mank');
         $macb = DB::table('ra_de_tai as radt')
                 ->join('de_tai as dt','radt.madt','=','dt.madt')
                 ->where('radt.manhomthuchien',$manth)
@@ -38,6 +46,7 @@ class DiemController extends Controller
         $tieuchi = DB::table('tieu_chi_danh_gia as tc')
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
+                ->where('qd.mank',$mank)
                 ->get();
         $dssv = DB::table('sinh_vien as sv')
                 ->join('chia_nhom as chn','sv.mssv','=','chn.mssv')

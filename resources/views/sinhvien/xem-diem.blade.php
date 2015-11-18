@@ -13,30 +13,30 @@
     
     <?php 
         /*========================== Quy điểm số ra điểm chữ ====================*/ 
-                function diemchu($d){
-                    if($d<=0 && $d<4){
-                        return 'F';
-                    }
-                    else if($d<=4 || $d<=4.4){
-                        return 'D';
-                    }
-                    else if($d<=4.5 || $d<=4.9){
-                        return 'D+';
-                    }
-                    else if($d<=5.0 || $d<=5.9){
-                        return 'C';
-                    }
-                    else if($d<=6 || $d<=6.9){
-                        return 'C+';
-                    }
-                    else if($d<=7 || $d<=7.9){
-                        return 'B';
-                    }
-                    else if($d<=8 || $d<=8.9){
+                function DiemChu($d){
+                    if($d >= 9 && $d <= 10)    
+                        return 'A';
+                    else if($d >= 8 && $d <= 8.9){
                         return 'B+';
                     }
-                    else     
-                        return 'A';
+                    else if($d >= 7 && $d <= 7.9){
+                        return 'B';
+                    }
+                    else if($d >= 6 && $d <= 6.9){
+                        return 'C+';
+                    }
+                    else if($d >= 5.0 && $d <= 5.9){
+                        return 'C';
+                    }
+                    else if($d >= 4.5 && $d <= 4.9){
+                        return 'D+';
+                    }
+                    else if($d >= 4 && $d <= 4.4){
+                        return 'D';
+                    }
+                    else if($d >= 0 && $d < 4){
+                        return 'F';
+                    }
                 }    
     ?>
 <div class="container">
@@ -115,7 +115,7 @@
                         @foreach($tongdiem as $tong) 
                             @if($tong->mssv == $sv->mssv)
                                 <td align="center" style="color: #FF0000; font-weight: bold"><?php echo round($tong->tongdiem,2);?></td>                                
-                                <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>                                                                 
+                                <td align="center" style="color: #FF0000; font-weight: bold">{{DiemChu($tong->tongdiem)}}</td>                                                                 
                             @endif                        
                         @endforeach
                     @endif   

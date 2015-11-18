@@ -149,6 +149,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
 	Witty\LaravelDbBackup\DBBackupServiceProvider::class,
         Bestmomo\Scafold\ScafoldServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
     ],
 
@@ -198,6 +199,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
+        'Excel'     => Maatwebsite\Excel\Facades\Excel::class,
 //        'Form'      => Illuminate\Html\FormFacade::class,
 //        'Html'      => Illuminate\Html\HtmlFacade::class,
 //         'Form' => 'Collective\Html\FormFacade::class',

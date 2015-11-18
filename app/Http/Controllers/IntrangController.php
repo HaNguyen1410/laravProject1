@@ -178,9 +178,16 @@ class IntrangController extends Controller
     }
 /*====================== Lấy dữ danh sách tiêu chí =============================*/   
     public function LayDSTieuChi($macb){
+        //Lấy năm học và học kỳ hiện tại      
+        $nam = DB::table('nien_khoa')->distinct()->orderBy('nam','desc')->value('nam');
+        $hk = DB::table('nien_khoa')->distinct()->orderBy('hocky','desc')
+                ->where('nam',$nam)
+                ->value('hocky');
+        $mank = DB::table('nien_khoa')->where('nam',$nam)->where('hocky',$hk)->value('mank');
         $tieuchi = DB::table('tieu_chi_danh_gia as tc')
                 ->join('quy_dinh as qd','tc.matc','=','qd.matc')
                 ->where('qd.macb',$macb)
+                ->where('qd.mank',$mank)
                 ->get();        
         return $tieuchi;
     }
