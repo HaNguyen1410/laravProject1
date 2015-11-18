@@ -133,7 +133,7 @@ and open the template in the editor.
                                     @if($tong->tongdiem == null)
                                         <td></td>
                                     @elseif($tong->tongdiem != null)
-                                        <td align="center" style="color: #FF0000; font-weight: bold">{{diemchu($tong->tongdiem)}}</td>
+                                        <td align="center" style="color: #FF0000; font-weight: bold">{{DiemChu($tong->tongdiem)}}</td>
                                     @endif 
                                 @endif                        
                             @endforeach 
