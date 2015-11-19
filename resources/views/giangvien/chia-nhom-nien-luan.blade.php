@@ -30,7 +30,30 @@
                 
             }
         </script>-->
-        
+        <script type="text/javascript">
+            //Hàm tính số tuần dựa vào ngày bắt đầu và kết thúc kế hoạch 
+            //từ 2 ô input 
+            function tinhsotuan_kehoach(){
+                //Tính số tuần
+                var ngaybd = new Date(document.getElementById("txtNgayBatDauKH").value);
+                var ngaykt = new Date(document.getElementById("txtNgayKetThucKH").value);
+                var result = document.getElementById("result");
+                var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                var songay =  parseInt((ngaykt.getTime() - ngaybd.getTime())/oneDay);
+                // Gán giá trị vào ô thứ ba
+                // Phải kiểm tra phép trừ 2 ngày có bị lỗi hay không
+                if (!isNaN(songay)){
+                    var sotuan = parseInt(songay/7);
+                    var du = songay%7;
+                    if(du > 0){
+                        result.value = sotuan + 1;
+                    }
+                    else if(du == 0){
+                        result.value = sotuan;                        
+                    }
+                }                     
+            }
+        </script>    
        
 <div class="container">
 
@@ -111,17 +134,17 @@
                     <tr>
                         <th>Ngày bắt đầu (kế hoạch):</th>
                         <td width="20%">
-                           <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" class="form-control"/>
+                            <input type="text" id="txtNgayBatDauKH" name="txtNgayBatDauKH" value="" onchange="tinhsotuan_kehoach()" class="form-control"/>
                            <p style='color:red;'>{{$errors->first('txtNgayBatDauKH')}}</p>
                         </td>
                         <th width="18%">Ngày kết thúc (kế hoạch):</th>
                         <td width="20%">
-                            <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" class="form-control"/>
+                            <input type="text" id="txtNgayKetThucKH" name="txtNgayKetThucKH" value="" onchange="tinhsotuan_kehoach()" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtNgayKetThucKH')}}</p>
                         </td>
                         <th width="18%">Số tuần theo kế hoạch:</th>
                         <td>
-                            <input type='text' name="txtSoTuanKH" value="" class="form-control"/>
+                            <input type='text' name="txtSoTuanKH" value="" id="result" class="form-control"/>
                             <p style='color:red;'>{{$errors->first('txtSoTuanKH')}}</p>
                         </td>
                     </tr>
