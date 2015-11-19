@@ -224,7 +224,7 @@ Route::group(['prefix'=>'sinhvien','middleware'=>'auth'],function(){
     /*======= XEM DANH SÁCH CÔNG VIỆC của cả nhóm ==========*/
     Route::get('danhsachcvchinh','PhancvController@DanhSachCVChinh');
     Route::group(['prefix'=>'danhsachcvchinh'], function(){
-        Route::get('danhsachcvchinh/danhsachcv/{macvphu}','PhancvController@DanhSachCV');
+        Route::get('danhsachcv/{macvphu}','PhancvController@DanhSachCV');
         Route::get('indanhsachphancv/{manth}','PhancvController@InDanhSachPhanCV');        
     });
     

@@ -85,7 +85,7 @@ class PhancvController extends Controller
         $dscvphu = DB::table('cong_viec')->select('macv','congviec','tiendo','phuthuoc_cv')
                 ->where('phuthuoc_cv','<>',0)
                 ->get();
-        
+
         return view('sinhvien.danh-sach-cong-viec-chinh')->with('dscv',$dscvnhom)
             ->with('tiendonhom',$tiendonhom)->with('manth',$manth)->with('tuancv',$tuancv)
             ->with('dscvchinh',$dscvchinh)->with('dscvphu',$dscvphu);
@@ -169,7 +169,8 @@ class PhancvController extends Controller
    public function DSPhanCV(){
        $mssv = \Auth::user()->taikhoan;
        $manth = DB::table('chia_nhom')->where('mssv','=',$mssv)->value('manhomthuchien');
-       $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo')
+       $tiendonhom = DB::table('nhom_thuc_hien')->select('sotuan_kehoach','sotuan_thucte','tiendo'
+                ,'ngaybatdau_kehoach','ngayketthuc_kehoach')
                ->where('manhomthuchien','=',$manth)->first();
        //lấy tuần hiện tại chính là tuần làm công việc có mã cv lớn nhất
         $tuancv = DB::table('cong_viec as cv')->select('th.tuan')

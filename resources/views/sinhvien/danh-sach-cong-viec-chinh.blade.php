@@ -130,19 +130,23 @@
             <lable style="display: block; float: left; width: 27%;">Thời gian quy định ({{$tiendonhom->ngaybatdau_kehoach}} - {{$tiendonhom->ngayketthuc_kehoach}}): &nbsp;</lable>
             <div class="progress" style="width:70%">
                 <?php 
-                    if(count($tuancv) == 0){
-                        $antoan = 0;
-                        $canhbao = 0;
-                        $nguyhiem = 0;
+                    $ngayht = date('Y-m-d');
+                    $ngaybd = $tiendonhom->ngaybatdau_kehoach;
+                    $ngayhientai = date_create($ngayht);
+                    $ngaybatdau_duan = date_create($ngaybd);
+                    $tuanht = date_diff($ngayhientai,$ngaybatdau_duan);
+                    $ngaylam = (int)$tuanht->format("%a");
+                    $tuan = (int)($ngaylam/7);
+                    $phandu = $ngaylam%7;
+                    if($phandu > 0){
+                        $tuanhientai = $tuan + 1;
+                        $t = round(($tuanhientai*100)/$tiendonhom->sotuan_kehoach,2);
+                    } 
+                    else if($phandu = 0){
+                        $tuanhientai = $tuan;
                     }
-                    else{
-                        $tuancvchinh = $tuancv->tuan;
-                        $tachtuan = explode('-', $tuancvchinh);
-                        $n = count($tachtuan);
-                        $tuanhientai = $tachtuan[$n-1];
-                        $tuankh = ($tuanhientai*100)/$tiendonhom->sotuan_kehoach; 
-                        $t = round($tuankh,1);      
-                        if($t >= 0 && $t <= 70){
+                    //Tính phần trăm ngày làm
+                    if($t >= 0 && $t <= 70){
                             $antoan = $t;
                             $canhbao = 0;
                             $nguyhiem = 0;
@@ -157,16 +161,15 @@
                             $canhbao = 20;
                             $nguyhiem = $t-90;
                         }
-                    }                    
                 ?>
-                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">                  
+                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
                     {{$antoan}}%
                 </div>
                 <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
-                  {{$canhbao}}%
+                    {{$canhbao}}%
                 </div>
                 <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
-                  {{$nguyhiem}}%
+                    {{$nguyhiem}}%
                 </div>
             </div>
             <!-- thanh tiến độ côg việc -->
