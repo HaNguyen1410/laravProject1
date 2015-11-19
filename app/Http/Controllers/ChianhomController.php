@@ -320,7 +320,7 @@ class ChianhomController extends Controller
                     );
         }
         $tensv = DB::table('sinh_vien')->where('mssv',$req->txtMaSV)->value('hoten');
-        \Session::flash('ThongBaoChuyen','Chuyển nhóm cho --'.$tensv.'-- thành công!');
+        \Session::flash('ThongBaoChuyen','Cập nhật cho --'.$tensv.'-- thành công!');
 
         return redirect('giangvien/chianhom');
             
