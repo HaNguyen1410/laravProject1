@@ -1,13 +1,4 @@
  
-<!--                <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">                  
-                    {{$antoan}}%
-                </div>
-                <div class="progress-bar progress-bar-warning progress-bar-striped" style="width: {{$canhbao}}%">
-                  {{$canhbao}}%
-                </div>
-                <div class="progress-bar progress-bar-danger" style="width: {{$nguyhiem}}%">
-                  {{$nguyhiem}}%
-                </div>-->
 ================================================================================
 Tính tuần cuối của công việc sau cùng chia tổng tuần làm dự án gv đưa ra
 <?php

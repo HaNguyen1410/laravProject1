@@ -181,7 +181,7 @@ class ChianhomController extends Controller
                     'cbDeTai'          =>'required',
                     'txtNgayBatDauKH'  =>'required|date',
                     'txtNgayKetThucKH' =>'required|date',
-                    'txtSoTuanKH'      =>'required|numeric', 
+                    'txtSoTuanKH'      =>'required|numeric|max:18', 
                     'chkThanhVien'     =>'required',
                     'rdNhomTruong'     =>'required'
                 ]

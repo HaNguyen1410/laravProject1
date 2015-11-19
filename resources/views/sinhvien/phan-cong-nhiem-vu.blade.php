@@ -34,15 +34,22 @@
                         $ngayhientai = date_create($ngayht);
                         $ngaybatdau_duan = date_create($ngaybd);
                         $tuanht = date_diff($ngayhientai,$ngaybatdau_duan);
+                        //Tính số tuần thực hiện dự án mà giảng viên quy định
+                        $ngaykt = $tiendonhom->ngayketthuc_kehoach;
+                        $ngayketthuc_duan = date_create($ngaykt);
+                        $sotuan_duan = date_diff($ngaybatdau_duan,$ngayketthuc_duan);
+                        $songay_duan = (int)$sotuan_duan->format("%a");
+                        $sotuan_duan = (int)($songay_duan/7);
                         $ngaylam = (int)$tuanht->format("%a");
                         $tuan = (int)($ngaylam/7);
                         $phandu = $ngaylam%7;
                         if($phandu > 0){
                             $tuanhientai = $tuan + 1;
-                            $t = round(($tuanhientai*100)/$tiendonhom->sotuan_kehoach,2);
+                            $t = round(($tuanhientai*100)/$sotuan_duan,2);
                         } 
                         else if($phandu = 0){
                             $tuanhientai = $tuan;
+                            $t = round(($tuanhientai*100)/$sotuan_duan,2);
                         }
                         //Tính phần trăm ngày làm
                         if($t >= 0 && $t <= 70){
