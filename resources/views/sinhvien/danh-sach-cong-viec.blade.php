@@ -41,10 +41,10 @@
                         <tr>
                             <!--<td align="center">{{$cv->macv}}</td>-->
                             <td align="center">
-                                @if($cv->tuan != " ")
+                                @if($cv->tuan_lamlai == "")
                                     {{$cv->tuan}}
-                                @elseif($cv->tuan_lamlai != "")
-                                    {{$cv->tuan_lamlai}}
+                                @else
+                                    {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
                                 @endif
                             </td>
                             <td>

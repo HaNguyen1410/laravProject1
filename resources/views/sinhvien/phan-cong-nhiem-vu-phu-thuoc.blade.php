@@ -61,10 +61,10 @@
                         <tr>
                             <td align="center">{{$stt+1}}</td>
                             <td align="center">
-                                @if($cvphu->tuan != " ")
+                                @if($cvphu->tuan_lamlai == "")
                                     {{$cvphu->tuan}}
-                                @elseif($cvphu->tuan_lamlai != "")
-                                    {{$cvphu->tuan_lamlai}}
+                                @else
+                                    {{$cvphu->tuan}}, {{$cvphu->tuan_lamlai}}                                    
                                 @endif
                             </td>
                             <td>

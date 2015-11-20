@@ -76,7 +76,7 @@
                                 <a href="{{asset('sinhvien/danhsachnoptailieu/capnhatnoptailieu/'.$tl->matl)}}">
                                     <img src="{{asset('public/images/edit-icon.png')}}"/>
                                 </a>&nbsp
-                                <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="{{$mssv}}/xoatailieu/{{$tl->matl}}">
+                                <a onclick="return confirm('Tài liệu --{{$tl->tentl}}-- sẽ bị xóa?')" href="danhsachnoptailieu/xoatailieu/{{$tl->matl}}">
                                     <img src="{{asset('public/images/Document-Delete-icon.png')}}">
                                 </a>
                             </td>

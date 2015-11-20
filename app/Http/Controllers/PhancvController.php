@@ -190,6 +190,8 @@ class PhancvController extends Controller
                ->where('th.manhomthuchien',$manth)
                ->where('cv.phuthuoc_cv','=',0)->paginate(5);
                //->get();
+       //Lấy tuần làm lại của công việc phụ thuộc
+       
 
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
                ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv);           

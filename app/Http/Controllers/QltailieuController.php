@@ -274,7 +274,7 @@ class QltailieuController extends Controller
         $del1 = DB::table('tai_lieu')->where('matl',$matl)->delete();
         $del2 = DB::table('danh_gia')->where('matl',$matl)->delete();
         
-        return Redirect('sinhvien/noptailieu/1111317');
+        return Redirect('sinhvien/danhsachnoptailieu');
     }
     
 }//END Class QltailieuController
