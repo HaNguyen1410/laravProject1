@@ -139,12 +139,22 @@
                                         echo $stt+1;
                                 ?>
                             </td>
-                            <td align="center">
-                                @if($cv->tuan_lamlai == "")
-                                    {{$cv->tuan}}
-                                @else
-                                    {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
-                                @endif
+                            <td align="center">                                
+                                    @if($cv->tuan_lamlai == "")
+                                        {{$cv->tuan}}
+                                        @foreach($tuanlamlai_cvphu as $lamlai_cvphu) 
+                                            @if(($cv->macv == $lamlai_cvphu->phuthuoc_cv) && ($lamlai_cvphu->tuan_lamlai != "") && ($lamlai_cvphu->tuan_lamlai != $cv->tuan_lamlai))
+                                               , {{$lamlai_cvphu->tuan_lamlai}}                                                
+                                            @endif                                            
+                                        @endforeach 
+                                    @elseif($cv->tuan_lamlai != "")
+                                        {{$cv->tuan}} , {{$cv->tuan_lamlai}}  
+                                        @foreach($tuanlamlai_cvphu as $lamlai_cvphu) 
+                                            @if(($cv->macv == $lamlai_cvphu->phuthuoc_cv) && ($lamlai_cvphu->tuan_lamlai != "") && ($lamlai_cvphu->tuan_lamlai != $cv->tuan_lamlai))
+                                                , {{$lamlai_cvphu->tuan_lamlai}}                                                
+                                            @endif                                            
+                                        @endforeach 
+                                    @endif
                             </td>
                             <td>
                                 <label>{{$cv->congviec}}</label>

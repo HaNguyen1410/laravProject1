@@ -191,10 +191,16 @@ class PhancvController extends Controller
                ->where('cv.phuthuoc_cv','=',0)->paginate(5);
                //->get();
        //Lấy tuần làm lại của công việc phụ thuộc
-       
+       $tuanlamlai_cvphu = DB::table('cong_viec as cv')
+               ->select('cv.phuthuoc_cv','th.macv','th.tuan','th.tuan_lamlai')
+               ->join('thuc_hien as th','cv.macv','=','th.macv')
+               ->where('th.tuan_lamlai','<>',"")
+               ->where('cv.phuthuoc_cv','<>',0)
+               ->get();
 
        return view('sinhvien.phan-cong-nhiem-vu')->with('tendt',$tendt)->with('tiendonhom',$tiendonhom)
-               ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv);           
+               ->with('dscvchinh',$dscvchinh)->with('manth',$manth)->with('tuancv',$tuancv)
+           ->with('tuanlamlai_cvphu',$tuanlamlai_cvphu);           
    }
 /*========= Xóa công việc chính ==============*/    
     public function XoacvChinh($macv){
