@@ -21,12 +21,22 @@
 <!-- Cập nhật chi tiết công sức làm dự án của mỗi thành viên -->
             <h3 style="color: darkblue; font-weight: bold;">Chi tiết phân công cho mỗi thành viên</h3><br>
             <div class="col-md-12" style="background-color:#dff0d8; margin-bottom: 20px; padding: 8px;">
-                <label style="color: darkblue; font-size: 13pt;">Thuộc công việc:</label>
-                <label style="color: #F65D20;">
-                    <a href="{{asset('sinhvien/phancv')}}">
-                        <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
-                    </a>
-                </label>
+                <div class="col-md-6">
+                    <label style="color: darkblue;">Thuộc công việc:</label>
+                    <label style="color: #F65D20;">
+                        <a href="{{asset('sinhvien/phancv')}}">
+                            <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
+                        </a>
+                    </label>
+                </div>
+                @if($cvchinh->noidungthuchien != "")
+                    <div class="col-md-6">
+                        (<label style="color: darkblue;">Nội dung chính thực hiện:</label>
+                        {{$cvchinh->noidungthuchien}})                    
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-12" style="text-align: right; margin-bottom: 10px;">
                  <a href="{{$cvchinh->macv}}/themcvphu" style="margin-left: 40%;">
                     <button type="button" name="btnThem" class="btn btn-primary" style="width:15%;">
                     <img src="{{asset('public/images/add-icon.png')}}">Thêm công việc

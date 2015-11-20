@@ -91,7 +91,7 @@ class PhancvController extends Controller
             ->with('dscvchinh',$dscvchinh)->with('dscvphu',$dscvphu);
     }
 /*=========================== Danh sách phân công việc của cả nhóm ==============================================*/
-    public function DanhSachCV($macvphu){
+    public function DanhSachCV($macvchinh){
         $mssv = \Auth::user()->taikhoan;
         $manth = DB::table('chia_nhom')->where('mssv',$mssv)->value('manhomthuchien');
         $dscvnhom = DB::table('cong_viec as cv')->distinct()
@@ -102,12 +102,15 @@ class PhancvController extends Controller
                ->join('nhom_thuc_hien as nth','th.manhomthuchien','=','nth.manhomthuchien')
                ->join('chia_nhom as chn','nth.manhomthuchien','=','chn.manhomthuchien')
                ->where('chn.mssv','=',$mssv)
-               ->where('cv.phuthuoc_cv',$macvphu)
+               ->where('cv.phuthuoc_cv',$macvchinh)
                ->where('nth.manhomthuchien','=',$manth)
                ->get();
                //->paginate(5);
+        $cvchinh = DB::table('cong_viec')->where('macv','=',$macvchinh)
+                ->first();
         
-        return view('sinhvien.danh-sach-cong-viec')->with('dscv',$dscvnhom);
+        return view('sinhvien.danh-sach-cong-viec')->with('dscv',$dscvnhom)
+            ->with('cvchinh',$cvchinh);
     }
 /**********
  * ########## CÔNG VIỆC CHÍNH #############

@@ -20,14 +20,22 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">                    
-            <h3 style="color: darkblue; font-weight: bold;">KẾ HOẠCH CÔNG VIỆC PHỤ THUỘC</h3><br>
-            <div class="col-md-12">
-                <label style="color: darkblue; font-size: 14pt;">Thuộc công việc:</label>
-                <label style="color: #F65D20; font-size: 14pt;">
-                    <a href="{{asset('giangvien/theodoikehoach/cvchinh/'.$tencvchinh->manhomthuchien)}}">
-                        {{$tencvchinh->macv}} - {{$tencvchinh->congviec}}
-                    </a>                     
-                </label>
+            <h3 style="color: darkblue; font-weight: bold;">KẾ HOẠCH CÔNG VIỆC PHỤ THUỘC</h3><br>            
+            <div class="col-md-12" style="margin-bottom: 20px; padding: 8px;">
+                <div class="col-md-6">
+                    <label style="color: darkblue;">Thuộc công việc:</label>
+                    <label style="color: #F65D20;">
+                        <a href="{{asset('giangvien/theodoikehoach/cvchinh/'.$cvchinh->manhomthuchien)}}">
+                            <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
+                        </a>
+                    </label>
+                </div>
+                @if($cvchinh->noidungthuchien != "")
+                    <div class="col-md-6">
+                        (<label style="color: darkblue;">Nội dung chính thực hiện:</label>
+                        {{$cvchinh->noidungthuchien}})                    
+                    </div>
+                @endif
             </div>
             <table class="table table-hover" width="800px" cellpadding="15px" cellspacing="0px" align='center'>
                 <tr>

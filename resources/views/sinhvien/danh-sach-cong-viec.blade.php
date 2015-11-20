@@ -17,6 +17,20 @@
             <a href="{{asset('sinhvien/danhsachcvchinh')}}">DANH SÁCH CÔNG VIỆC CHÍNH</a>  
                     &Gt;
             DANH SÁCH CÔNG VIỆC PHỤ THUỘC</h3><br> 
+        <div class="col-md-12" style="margin-bottom: 20px; padding: 8px;">
+            <div class="col-md-6">
+                <label style="color: darkblue;">Thuộc công việc:</label>
+                <label style="color: #860000;">
+                        <?= $cvchinh->macv ?> - <?= $cvchinh->congviec ?>
+                </label>
+            </div>
+            @if($cvchinh->noidungthuchien != "")
+                <div class="col-md-6">
+                    (<label style="color: darkblue;">Nội dung chính thực hiện:</label>
+                    {{$cvchinh->noidungthuchien}})                    
+                </div>
+            @endif
+        </div>
         <div class="col-md-12">
             <table class="table table-bordered table-striped" border="0" width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
