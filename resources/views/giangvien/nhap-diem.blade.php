@@ -52,7 +52,27 @@
     ?>
 <div class="container">
     <div class="row">
-    <div class="col-md-12">  <br>      
+    <div class="col-md-12">  <br> 
+<!--        <div class="col-md-8 col-md-offset-2" style="margin-top: 10px;" align="center">
+            <form action="" method="post" enctype="multipart/form-data">
+                <label style="display: block; float: left; margin-right: 10px; color: darkblue;">
+                    Chọn tập bảng điểm excel:
+                </label>&nbsp;
+                <input type="file" name="fDiemExcel" id="fDiemExcel" style="display: block; float: left;">
+                <button type="submit" class="btn btn-primary">
+                    <img src="{{asset('public/images/excel-icon.png')}}"/>Tập tin Excel
+                </button>
+            </form>
+        </div>  <br>   -->
+        <h3 style="color: darkblue; font-weight: bold; display: block; float: left;">
+            BẢNG GHI ĐIỂM NIÊN LUẬN 
+            (Nhóm HP: <?php 
+                            if($mahp == 0 || $mahp == NULL)
+                                echo "Tất cả";
+                            else if($mahp != 0 || $mahp != NULL)
+                                echo DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp');
+                      ?>)
+        </h3>
         <form action="{{action('DiemController@LayMaNhomHP')}}" method="post">
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
             <table class="table table-bordered" style="max-width:900px" align='center'>
@@ -92,16 +112,7 @@
                     </th>
                 </tr>   
              </table>
-        </form>
-        <h3 style="color: darkblue; font-weight: bold;">
-            BẢNG GHI ĐIỂM NIÊN LUẬN 
-            (Nhóm HP: <?php 
-                            if($mahp == 0 || $mahp == NULL)
-                                echo "Tất cả";
-                            else if($mahp != 0 || $mahp != NULL)
-                                echo DB::table('nhom_hocphan')->where('manhomhp',$mahp)->value('tennhomhp');
-                      ?>)
-        </h3> 
+        </form> 
         <form name="frmNhapDiem" action="{{action('DiemController@LuuNhapDiem')}}" method="post"> 
             <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
             <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>

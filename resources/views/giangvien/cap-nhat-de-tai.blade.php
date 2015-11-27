@@ -14,10 +14,10 @@
     <script type="text/javascript">
         function DoiGD(){
             if(document.getElementById('rdCapNhatTapTin').checked == true){
-                return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/1?gd=tt';                    
+                return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/{{$dt->madt}}?gd=tt';                    
             }
             else if(document.getElementById('rdCapNhatMoTa').checked == true){
-               return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/1?gd=mt';                    
+               return window.location.href = 'http://localhost/laravProject1/giangvien/danhsachdetai/capnhatdetai/{{$dt->madt}}?gd=mt';                    
             }
         }
     </script>

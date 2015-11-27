@@ -71,7 +71,7 @@ Route::group(['prefix'=>'quantri','middleware'=>'auth'],function(){
         Route::post('luucapnhatgv','QuantriController@LuuCapNhatGV');
     /*======= Xóa thông tin Giảng viên ==========*/
         Route::get('khoagv/{macb}','QuantriController@KhoaGV');
-         Route::get('mokhoagv/{macb}','QuantriController@MoKhoaGV');
+        Route::get('mokhoagv/{macb}','QuantriController@MoKhoaGV');
         Route::get('xoagvkhoihocphan/{mahp}','QuantriController@RutGVTrongHP');
     });
  /*
