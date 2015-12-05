@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <td><label>Điện thoại:</label></td>
-                            <td style="color:blue;">{{$gv->sdt}}</td>
+                            <td style="color:blue;">0{{$gv->sdt}}</td>
                         </tr>
                         <tr>
                             <td><label>Hướng dẫn nhóm học phần:</label></td>

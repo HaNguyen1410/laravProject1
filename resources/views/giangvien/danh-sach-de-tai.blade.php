@@ -100,8 +100,15 @@
                             @endif               
                             <td width='15%'>
                                 <?php 
-                                    echo substr($dt->motadt,0,100). "<br><label>....</label>";
+                                    echo substr($dt->motadt,0,100). "<br><label>....</label>";    
                                 ?>
+                                @if($dt->taptindinhkem == "")
+                                    &nbsp;
+                                @elseif($dt->motadt != "NULL" || $dt->congnghe != "NULL" || $dt->motadt != "" || $dt->congnghe != "")
+                                    <a href="danhsachdetai/{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
+                                        Xem tiếp
+                                    </a>
+                                @endif
                             </td> 
                             <td width='15%'>
                                 <?php                                     

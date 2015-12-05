@@ -133,6 +133,7 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
     Route::group(['prefix'=>'nhapdiem'],function(){       
         Route::post('luunhapdiem','DiemController@LuuNhapDiem');
         route::get('{macb}/inbangdiemgv/{mahp}','IntrangController@InBangDiemGV');
+        route::post('luuimportexcel','ImportExcelController@LuuImportExcel');
     });
     /*======= Quản lý TÀI LIỆU ==========*/
     route::get('khotailieu','QltailieuController@KhoTaiLieu');

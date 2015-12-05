@@ -12,6 +12,8 @@ CKEDITOR.editorConfig = function( config )
         config.language = 'vi';
         // bỏ thẻ p mỗi khi nhập liệu ckeditor
         config.enterMode = CKEDITOR.ENTER_BR;
+//        config.enterMode = CKEDITOR.ENTER_DIV;
+//        config.enterMode = CKEDITOR.ENTER_P;
         config.allowedContent = true;
        //config.allowedContent = 'div(nd)';
 };

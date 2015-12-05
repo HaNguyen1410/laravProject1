@@ -11,6 +11,7 @@ class Quydinh extends Model
     protected $primaryKey = array('macb','matc');
     protected $fillable = [     
         'macb',
-        'matc'
+        'matc',
+        'mank'
     ];
 }

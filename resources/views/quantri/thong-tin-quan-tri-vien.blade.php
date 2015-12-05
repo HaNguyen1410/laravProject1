@@ -49,7 +49,7 @@
                         </tr>
                         <tr>
                             <td><label>Điện thoại:</label></td>
-                            <td style="color:blue;">{{$gv->sdt}}</td>
+                            <td style="color:blue;">0{{$gv->sdt}}</td>
                         </tr>
                     </table>
                 </div> <!-- /class="col-md-9 col-md-pull-3" -->

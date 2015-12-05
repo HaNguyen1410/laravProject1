@@ -16,7 +16,7 @@
         <script src="{{Asset('public/scripts/jquery-ui-1.11.4/jquery-ui.min.js')}}"></script>
         <script src="{{Asset('bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{Asset('public/scripts/datetimepicker/jquery.datetimepicker.js')}}"></script>
-        <script src="{{Asset('public/scripts/ckeditor/ckeditor.js')}}"></script>
+        <script src="{{Asset('public/scripts/ckeditor/ckeditor.js')}}"></script>        
                 
         <script type="text/javascript">
             $(document).ready(function(){

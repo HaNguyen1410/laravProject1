@@ -79,8 +79,8 @@
                         <tr>
                             <td><label>Ngày sinh:</label></td>
                             <td style="color:blue;">{{$sv->ngaysinh}}</td>                            
-                            <td><label>Điện thoại sinh viên:</label></td>
-                            <td style="color:blue;">{{$sv->sdt}}</td>
+                            <td><label>Số điện thoại sinh viên:</label></td>
+                            <td style="color:blue;">0{{$sv->sdt}}</td>
                         </tr>
                         <tr>
                             <td><label>Khóa:</label></td>
@@ -96,7 +96,7 @@
                         </tr>
                         <tr>
                             <td><label>Số điện thoại giảng viên:</label></td>
-                            <td style="color:blue;">{{$ttgv->sdt}}</td>
+                            <td style="color:blue;">0{{$ttgv->sdt}}</td>
                             <td><label>Email giảng viên:</label></td>
                             <td style="color:blue;">{{$ttgv->email}}</td>
                         </tr>
@@ -143,7 +143,7 @@
                                                                 {{$tv->hoten}}<br>
                                                                 ({{$tv->email}})
                                                             </td>
-                                                            <td align='center'>{{$tv->sdt}}9876543212</td>
+                                                            <td align='center'>0{{$tv->sdt}}</td>
                                                             <td align='center'>
                                                                 @if($tv->nhomtruong == 1)
                                                                     <img src="{{asset('public/images/check.png')}}"/>
