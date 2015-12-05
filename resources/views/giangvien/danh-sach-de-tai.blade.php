@@ -50,7 +50,7 @@
                 <tr>
                     <th width="2%">STT</th>
                     <th width="20%">Tên đề tài</th>
-                    <th width="5%">Chi tiết</th>
+                    <th width="5%">Tập tin mô tả</th>
                     <th width="15%">Mô tả đề tài</th>
                     <th width="15%">Công nghệ</th>
                     <th width="4%">Tối đa</th>
@@ -93,18 +93,14 @@
                                 </td>
                             @elseif($dt->taptindinhkem == "")
                                 <td style="vertical-align: middle;">
-                                    <a href="danhsachdetai/{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
-                                        Chi tiết
-                                    </a>
+                                    &nbsp;
                                 </td>
                             @endif               
                             <td width='15%'>
                                 <?php 
                                     echo substr($dt->motadt,0,100). "<br><label>....</label>";    
                                 ?>
-                                @if($dt->taptindinhkem == "")
-                                    &nbsp;
-                                @elseif($dt->motadt != "NULL" || $dt->congnghe != "NULL" || $dt->motadt != "" || $dt->congnghe != "")
+                                @if($dt->motadt != "NULL" || $dt->congnghe != "NULL" || $dt->motadt != "" || $dt->congnghe != "")
                                     <a href="danhsachdetai/{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
                                         Xem tiếp
                                     </a>
