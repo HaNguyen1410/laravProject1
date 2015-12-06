@@ -144,7 +144,7 @@
                         <th rowspan="2" width="1%">Mã số sinh viên</th>
                         <th rowspan="2" width="12%">Họ và tên</th>
                         <th rowspan="2" width="2%">Nhóm trưởng</th>
-                        <th colspan="{{count($tieuchi)}}" width="30%">Tiêu chí - [Điểm tối đa]</th> 
+                        <th colspan="{{count($tieuchi)}}" width="30%">Mã tiêu chí - [Điểm tối đa]</th> 
                         <th rowspan="2" width="20%">Nhận xét</th>
                         <th rowspan="2" width="3%">Tổng điểm</th>
                         <th rowspan="2" width="3%">Điểm chữ</th>   
