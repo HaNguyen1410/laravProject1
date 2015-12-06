@@ -49,7 +49,11 @@
             </div>
                             
             <div class="col-md-12">
-                <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+                <div style="background-color: #B0E0E6;">
+                    <p style="color:#006400; font-weight: bold; text-align: center;">
+                        <?php echo Session::get('ThongBao'); ?>
+                    </p>
+                </div>                
                 <table class="table table-bordered table-striped" >
                     <tr>
                         <th>STT</th>

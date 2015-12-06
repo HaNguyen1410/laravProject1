@@ -135,7 +135,11 @@
                     </tr>   
                  </table>
             </form> 
-            <p style="color:red;"><?php echo Session::get('BaoUpload'); ?></p>
+            <div style="background-color: #B0E0E6;">                
+                <p style="color:#006400; font-weight: bold; text-align: center;">
+                    <?php echo Session::get('BaoUpload'); ?>
+                </p>
+            </div>
             <form name="frmNhapDiem" action="{{action('DiemController@LuuNhapDiem')}}" method="post"> 
                 <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                 <table class="table table-bordered" cellpadding="15px" cellspacing="0px" align='center'>

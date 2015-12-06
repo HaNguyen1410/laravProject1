@@ -94,8 +94,11 @@
                    </button>
                 </a>
             </div> 
-                  
-            <p style="color:red;"><?php echo Session::get('ThongBao'); ?></p>
+            <div style="background-color: #B0E0E6;">
+                <p style="color:#006400; font-weight: bold; text-align: center;">
+                    <?php echo Session::get('ThongBao'); ?>
+                </p>
+            </div>      
             <table class="table table-bordered table-striped" max-width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="3%">STT</th>
