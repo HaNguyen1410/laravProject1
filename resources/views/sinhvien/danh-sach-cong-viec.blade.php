@@ -55,7 +55,7 @@
                         <tr>
                             <!--<td align="center">{{$cv->macv}}</td>-->
                             <td align="center">
-                                @if($cv->tuan_lamlai == "")
+                                @if($cv->tuan_lamlai == "" || $cv->tuan == $cv->tuan_lamlai)
                                     {{$cv->tuan}}
                                 @else
                                     {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    

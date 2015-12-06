@@ -134,6 +134,7 @@ Route::group(['prefix'=>'giangvien','middleware'=>'auth'], function(){
         Route::post('luunhapdiem','DiemController@LuuNhapDiem');
         route::get('{macb}/inbangdiemgv/{mahp}','IntrangController@InBangDiemGV');
         route::post('luuimportexcel','ImportExcelController@LuuImportExcel');
+        //route::get('{macb}/xuatexcel','ImportExcelController@XuatExecl');
     });
     /*======= Quản lý TÀI LIỆU ==========*/
     route::get('khotailieu','QltailieuController@KhoTaiLieu');

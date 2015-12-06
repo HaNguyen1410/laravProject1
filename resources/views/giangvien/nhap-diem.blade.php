@@ -234,29 +234,30 @@
                 </table> 
                 <table class="table" cellpadding="15px" cellspacing="0px" align='center'>
                     <tr>
-    <!--                    <td align="right">
-                            <button onclick="return kt_diem();" type="submit" class="btn btn-info" style="width: 50%;">
-                                <img src="{{asset('public/images/excel-icon.png')}}"> Nhập từ Exel...
-                            </button> 
+<!--                        <td align="right">
+                            <a href="{{asset('giangvien/nhapdiem/'.$macb.'/xuatexcel')}}">
+                                <button type="submit" class="btn btn-info" style="width: 45%;">
+                                    <img src="{{asset('public/images/excel-icon.png')}}"> Xuất tập tin Excel
+                                </button> 
+                            </a>                             
                         </td>          -->
-                        <td></td>
-                        <td>
+                        <td align="right">
                             @if($mahp == null || $mahp == 0)                            
                                 <a href="{{asset('giangvien/nhapdiem/'.$macb.'/inbangdiemgv/all')}}" target="_blank">
-                                    <button type="button" name="" class="btn btn-success" style="width: 50%;">
+                                    <button type="button" name="" class="btn btn-success" style="min-width: 35%;">
                                         <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                                     </button>
                                 </a>                           
                             @elseif($mahp != null || $mahp != 0)
                                 <a href="{{asset('giangvien/nhapdiem/'.$macb.'/inbangdiemgv/'.$mahp)}}" target="_blank">
-                                    <button type="button" name="" class="btn btn-success" style="width: 50%;">
+                                    <button type="button" name="" class="btn btn-success" style="min-width: 35%;">
                                         <img src="{{asset('public/images/printer-icon.png')}}"> In bảng điểm
                                     </button>
                                 </a>
                             @endif
                         </td>
                         <td>
-                            <button type="submit" name="btnLuu" class="btn btn-primary" style="width: 55%;">
+                            <button type="submit" name="btnLuu" class="btn btn-primary" style="min-width: 40%;">
                                 <img src="{{asset('public/images/save-as-icon.png')}}"> Lưu dữ liệu
                             </button>                            
                         </td>

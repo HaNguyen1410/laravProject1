@@ -36,37 +36,43 @@
                         $tuanht = date_diff($ngayhientai,$ngaybatdau_duan);
                         //Tính số tuần thực hiện dự án mà giảng viên quy định
                         $ngaykt = $tiendonhom->ngayketthuc_kehoach;
-                        $ngayketthuc_duan = date_create($ngaykt);
-                        $sotuan_duan = date_diff($ngaybatdau_duan,$ngayketthuc_duan);
-                        $songay_duan = (int)$sotuan_duan->format("%a");
-                        $sotuan_duan = (int)($songay_duan/7);
-                        $ngaylam = (int)$tuanht->format("%a");
-                        $tuan = (int)($ngaylam/7);
-                        $phandu = $ngaylam%7;
-                        if($phandu > 0){
-                            $tuanhientai = $tuan + 1;
-                            $t = round(($tuanhientai*100)/$sotuan_duan,2);
-                        } 
-                        else if($phandu = 0){
-                            $tuanhientai = $tuan;
-                            $t = round(($tuanhientai*100)/$sotuan_duan,2);
+                        if($ngayhientai <= $ngaykt){
+                            $ngayketthuc_duan = date_create($ngaykt);
+                            $sotuan_duan = date_diff($ngaybatdau_duan,$ngayketthuc_duan);
+                            $songay_duan = (int)$sotuan_duan->format("%a");
+                            $sotuan_duan = (int)($songay_duan/7);
+                            $ngaylam = (int)$tuanht->format("%a");
+                            $tuan = (int)($ngaylam/7);
+                            $phandu = $ngaylam%7;
+                            if($phandu > 0){
+                                $tuanhientai = $tuan + 1;
+                                $t = round(($tuanhientai*100)/$sotuan_duan,2);
+                            } 
+                            else if($phandu = 0){
+                                $tuanhientai = $tuan;
+                                $t = round(($tuanhientai*100)/$sotuan_duan,2);
+                            }
+                            //Tính phần trăm ngày làm
+                            if($t >= 0 && $t <= 70){
+                                    $antoan = $t;
+                                    $canhbao = 0;
+                                    $nguyhiem = 0;
+                                }
+                                else if($t > 70 && $t <= 90){
+                                    $antoan = 70;
+                                    $canhbao = $t-70;
+                                    $nguyhiem = 0;
+                                }
+                                else if($t > 90 && $t <= 100){
+                                    $antoan = 70;
+                                    $canhbao = 20;
+                                    $nguyhiem = $t-90;
+                                }
+                        }else{
+                            $antoan = 70;
+                            $canhbao = 20;
+                            $nguyhiem = 10;
                         }
-                        //Tính phần trăm ngày làm
-                        if($t >= 0 && $t <= 70){
-                                $antoan = $t;
-                                $canhbao = 0;
-                                $nguyhiem = 0;
-                            }
-                            else if($t > 70 && $t <= 90){
-                                $antoan = 70;
-                                $canhbao = $t-70;
-                                $nguyhiem = 0;
-                            }
-                            else if($t > 90 && $t <= 100){
-                                $antoan = 70;
-                                $canhbao = 20;
-                                $nguyhiem = $t-90;
-                            }
                     ?>
                     <div class="progress-bar progress-bar-success" style="width: {{$antoan}}%">
                       {{$antoan}}%

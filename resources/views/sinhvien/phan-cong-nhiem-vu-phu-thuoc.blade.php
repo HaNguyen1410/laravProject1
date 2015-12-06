@@ -71,11 +71,12 @@
                         <tr>
                             <td align="center">{{$stt+1}}</td>
                             <td align="center">
-                                @if($cvphu->tuan_lamlai == "")
+                                @if($cvphu->tuan_lamlai == "" || $cvphu->tuan == $cvphu->tuan_lamlai)
                                     {{$cvphu->tuan}}
                                 @else
                                     {{$cvphu->tuan}}, {{$cvphu->tuan_lamlai}}                                    
                                 @endif
+                                
                             </td>
                             <td>
                                 <a href="" data-toggle="tooltip" data-placement="bottom" title="Mã công việc phụ: {{$cvphu->macv}}">
