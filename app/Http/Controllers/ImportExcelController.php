@@ -55,14 +55,30 @@ class ImportExcelController extends Controller
 //                   echo $col." :Số cột<br>".$row.": Số dòng<br>";
 //                   echo $n." Số Phần tử của mảng 2 chiều (Gồm số phần tử của hàng và số phần tử của cột)";
                    for($i = 1; $i < $row; $i++){
-                       for($j = 1; $j < $col; $j++){
-                            echo dump($results[$i]);                           
-                       }
+                       for($j = 2; $j < $col-2; $j++){
+                            //echo $j.">";                           
+                            //echo $results[$i][$j] . "  "; 
+                           if($j >= 4 && $j < $col-2){
+                                //echo $results[$i][2]."-".$results[$i][$j]."<br>";
+                                //Lưu điểm
+                              DB::table('chitiet_diem')->where('mssv',$results[$i][2])->update(
+                                       ['diem' => $results[$i][$j]]
+                                   );     
+                               
+                           }   
+                       }                      
+                       echo "<br>";
+                   }
+                   //Lưu nhận xét
+                   for($i = 1; $i < $row; $i++){
+                        DB::table('chia_nhom')->where('mssv',$results[$i][2])->update(
+                                       ['nhanxet' => $results[$i][$col-2]]
+                                   );   
+                       echo $results[$i][2]." => ".$results[$i][$col-2]."<br>";
                    }
                    
-                   
                 });
-                //return Redirect::to('giangvien/nhapdiem')->with('BaoUpload', 'Import thành công!');
+                return Redirect::to('giangvien/nhapdiem')->with('BaoUpload', 'Import điểm từ tập tin Excel thành công!');
             }
             else
                 return $upload_success;
