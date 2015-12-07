@@ -36,9 +36,9 @@
                         $tuanht = date_diff($ngayhientai,$ngaybatdau_duan);
                         //Tính số tuần thực hiện dự án mà giảng viên quy định
                         $ngaykt = $tiendonhom->ngayketthuc_kehoach;
-                        if($ngayhientai <= $ngaykt){
-                            $ngayketthuc_duan = date_create($ngaykt);
-                            $sotuan_duan = date_diff($ngaybatdau_duan,$ngayketthuc_duan);
+                        $ngayketthuc_duan = date_create($ngaykt);
+                        $sotuan_duan = date_diff($ngaybatdau_duan,$ngayketthuc_duan);
+                        if($tuanht <= $sotuan_duan){
                             $songay_duan = (int)$sotuan_duan->format("%a");
                             $sotuan_duan = (int)($songay_duan/7);
                             $ngaylam = (int)$tuanht->format("%a");
@@ -68,7 +68,7 @@
                                     $canhbao = 20;
                                     $nguyhiem = $t-90;
                                 }
-                        }else{
+                        }else if($tuanht > $sotuan_duan){
                             $antoan = 70;
                             $canhbao = 20;
                             $nguyhiem = 10;

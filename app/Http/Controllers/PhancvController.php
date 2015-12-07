@@ -82,7 +82,8 @@ class PhancvController extends Controller
                ->where('th.manhomthuchien',$manth)
                ->where('cv.phuthuoc_cv','=',0)
                ->get();
-        $dscvphu = DB::table('cong_viec')->select('macv','congviec','tiendo','phuthuoc_cv')
+        $dscvphu = DB::table('cong_viec')
+                ->select('macv','congviec','tiendo','phuthuoc_cv')
                 ->where('phuthuoc_cv','<>',0)
                 ->get();
 

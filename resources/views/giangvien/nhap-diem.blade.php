@@ -275,7 +275,7 @@
                 <form action="{{action('ImportExcelController@LuuImportExcel')}}" method="post" enctype="multipart/form-data">
                     <input type='hidden' name='_token' value='<?= csrf_token();?>'/>
                     <label style="display: block; float: left; color: darkblue; margin-top: 25px;">
-                        Chọn tập bảng điểm excel:
+                        Chọn tập tin excel:
                     </label>&nbsp;
                     <input type="file" name="fDiemExcel" id="fileDiemExcel" class="form-control" style="max-width: 400px; margin-left: -90px;">
                     <p style='color:red;'>{{$errors->first('fDiemExcel')}}</p>
