@@ -76,7 +76,7 @@ class SinhvienController extends Controller
                 [
                     'txtDienThoai'  => 'required|numeric',
                     'txtLapTrinh'   => 'required',
-                    'txtKinhNghiem' => 'required'
+                    //'txtKinhNghiem' => 'required'
                 ]
            );
         if($v->fails()){
