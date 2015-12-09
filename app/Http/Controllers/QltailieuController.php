@@ -56,7 +56,7 @@ class QltailieuController extends Controller
                 ->lists('chn.manhomthuchien');
         $tailieu = DB::table('tai_lieu as tl')                
                 ->select('th.manhomthuchien','tl.mota','tl.ngaycapnhat')
-                ->leftjoin('thuc_hien as th','tl.macv','=','th.macv')
+                ->rightjoin('thuc_hien as th','tl.macv','=','th.macv')
                 ->whereIn('th.manhomthuchien',$dsnhom)
                 ->orderBy('tl.ngaycapnhat','desc')
                 ->groupBy('th.manhomthuchien')

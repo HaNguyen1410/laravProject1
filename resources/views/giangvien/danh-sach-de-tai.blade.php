@@ -96,11 +96,11 @@
                                     &nbsp;
                                 </td>
                             @endif               
-                            <td width='15%'>
-                                <?php 
-                                    echo substr($dt->motadt,0,100). "<br><label>....</label>";    
-                                ?>
-                                @if($dt->motadt != "NULL" || $dt->congnghe != "NULL" || $dt->motadt != "" || $dt->congnghe != "")
+                            <td width='15%'>                                
+                                @if($dt->motadt != NULL || $dt->congnghe != NULL)
+                                    <?php 
+                                        echo substr($dt->motadt,0,100). "<br><label>....</label>";    
+                                    ?>
                                     <a href="danhsachdetai/{{$dt->macb}}/inchitietdetai/{{$dt->madt}}" target="_blank" style="color: #008000; font-weight: bold;">
                                         Xem tiếp
                                     </a>

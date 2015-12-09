@@ -47,13 +47,15 @@
                                 </a> 
                             </td>
                             <td align="center">{{$dt->manhomthuchien}}</td>
-                            <td>{{$dt->hoten}}</td>                             
-                            @foreach($tailieu as $tl) 
-                                @if($dt->manhomthuchien == $tl->manhomthuchien)
+                            <td>{{$dt->hoten}}</td> 
+                            @foreach($tailieu as $tl)                                
+                                @if(count($tailieu) == 0 && $dt->manhomthuchien == $tl->manhomthuchien)
+                                    <td colspan="2">Chưa có tài liệu nào!</td>
+                                @elseif($dt->manhomthuchien == $tl->manhomthuchien)
                                     <td>{{$tl->ngaycapnhat}}</td>
                                     <td>{{$tl->mota}}</td>
                                 @endif
-                            @endforeach   
+                            @endforeach 
                         </tr>
                     @endforeach
                 @endif
