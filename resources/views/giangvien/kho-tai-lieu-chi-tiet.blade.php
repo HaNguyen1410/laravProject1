@@ -75,11 +75,11 @@
                          <tr>
                              <td colspan="5">
                                  <label style="color: darkblue;">Nhận xét của giảng viên:</label><br>
-                                <p style="color: black;">{{$tl->nd_danhgia}}</p>
+                                 <p style="color: black; margin-left: 30px;">{{$tl->nd_danhgia}}</p>
                             </td>
                             <td colspan="2" style="color: darkblue;">
                                 <label>Ngày nhận xét:</label><br>
-                                <label style="color: black;">{{$tl->ngaydanhgia}}</label>                                                               
+                                <label style="color: black; margin-left: 30px;">{{$tl->ngaydanhgia}}</label>                                                               
                             </td>
                          </tr>
                     @endforeach

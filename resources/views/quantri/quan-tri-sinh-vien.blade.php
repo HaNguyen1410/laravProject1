@@ -94,11 +94,9 @@
                    </button>
                 </a>
             </div> 
-            <div style="background-color: #B0E0E6;">
-                <p style="color:#006400; font-weight: bold; text-align: center;">
-                    <?php echo Session::get('ThongBao'); ?>
-                </p>
-            </div>      
+            <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 600px;">
+                {{Session::get('ThongBao')}}
+            </div><br>    
             <table class="table table-bordered table-striped" max-width="800px" cellpadding="0px" cellspacing="0px" align='center'>
                 <tr>
                     <th width="3%">STT</th>

@@ -49,11 +49,9 @@
             </div>
                             
             <div class="col-md-12">
-                <div style="background-color: #B0E0E6;">
-                    <p style="color:#006400; font-weight: bold; text-align: center;">
-                        <?php echo Session::get('ThongBao'); ?>
-                    </p>
-                </div>                
+                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 600px;">
+                    {{Session::get('ThongBao')}}
+                </div><br>                              
                 <table class="table table-bordered table-striped" >
                     <tr>
                         <th>STT</th>
