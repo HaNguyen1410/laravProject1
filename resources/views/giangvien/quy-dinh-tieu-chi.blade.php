@@ -48,11 +48,11 @@
         </div>   
         <div class="col-md-12">                
             @if(Session::has('BaoLoi'))
-                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 500px;">
+                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 600px;">
                     {{Session::get('BaoLoi')}}
                 </div><br>
             @elseif(Session::has('BaoLoiCapNhat'))
-                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 500px;">
+                <div class="alert-info" align='center' style="color:red; font-weight: bold; max-width: 600px;">
                     {{Session::get('BaoLoiCapNhat')}}
                 </div><br>
             @endif

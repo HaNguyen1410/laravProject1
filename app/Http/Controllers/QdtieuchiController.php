@@ -129,7 +129,7 @@ class QdtieuchiController extends Controller
         }
         else
         {    //,DB::raw('SUM(dg.heso) as tong_heso')
-            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')
                     ->select('dg.heso')
                     ->join('quy_dinh as qd','dg.matc','=','qd.matc')
                     ->where('qd.macb',$macb)
@@ -137,7 +137,7 @@ class QdtieuchiController extends Controller
                     ->lists('dg.heso');
             $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
             if($tongdiemTC >= 10){
-                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');
+                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10. (Điểm mới thêm: '.$req->txtMucDiem.')');
                 return \Redirect::to('giangvien/dstieuchi');
             }
             else{
@@ -193,18 +193,19 @@ class QdtieuchiController extends Controller
         }
         else{
             //,DB::raw('SUM(dg.heso) as tong_heso')
-            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')
                     ->select('dg.heso')
                     ->join('quy_dinh as qd','dg.matc','=','qd.matc')
                     ->where('qd.macb',$macb)
                     ->where('qd.mank',$mank_ht)
                     ->lists('dg.heso');
-            $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
-            if($tongdiemTC >= 10){
-                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');
+            $diemtc_them = DB::table('tieu_chi_danh_gia')->where('matc',$req->cbNoiDungTC)->value('heso');
+            $tongdiemTC = array_sum($diemTC) + $diemtc_them;
+            if($tongdiemTC > 10){
+                \Session::flash('BaoLoi','Tổng hệ số điểm của các tiêu chí không được vượt quá 10. (Điểm mới thêm: '.$diemtc_them.')');
                 return \Redirect::to('giangvien/dstieuchi');
             }
-            else{
+            elseif($tongdiemTC <= 10){
                 $matc_chon = $req->cbNoiDungTC;
                 $ndtc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('noidungtc');
                 $hesotc = DB::table('tieu_chi_danh_gia')->where('matc',$matc_chon)->value('heso');
@@ -267,7 +268,7 @@ class QdtieuchiController extends Controller
         }
         else
         {    
-            $diemTC = DB::table('tieu_chi_danh_gia as dg')->distinct()
+            $diemTC = DB::table('tieu_chi_danh_gia as dg')
                     ->select('dg.heso')
                     ->join('quy_dinh as qd','dg.matc','=','qd.matc')
                     ->where('qd.macb',$macb)
@@ -276,10 +277,14 @@ class QdtieuchiController extends Controller
                     ->lists('dg.heso');
             $tongdiemTC = array_sum($diemTC) + $req->txtMucDiem;
             if($tongdiemTC > 10){
-                \Session::flash('BaoLoiCapNhat','Tổng hệ số điểm của các tiêu chí không được vượt quá 10.');               
+//                echo $req->txtMaTC ."<br>";
+//                echo var_dump($diemTC) ."<br>";
+//                echo $req->txtMucDiem . "<br>";
+//                echo array_sum($diemTC);
+                \Session::flash('BaoLoiCapNhat','Tổng hệ số điểm của các tiêu chí không được vượt quá 10. (Điểm mới cập nhật: '.$req->txtMucDiem.')');               
                 return \Redirect::to('giangvien/dstieuchi');
             }
-            else{
+            elseif($tongdiemTC <= 10){
                 $data = array(
                     'noidungtc'  => $_POST['txtNoiDungTC'],
                     'heso'       => $_POST['txtMucDiem'],

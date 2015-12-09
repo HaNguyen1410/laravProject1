@@ -40,7 +40,7 @@
                                     <tr style="background-color: #F0F8FF;">
                                         <td align="center">{{$stt + 1}}</td>
                                         <td align="center">
-                                            @if($cv->tuan_lamlai == "")
+                                            @if($cv->tuan_lamlai == "" || $cv->tuan == $cv->tuan_lamlai)
                                                 {{$cv->tuan}}
                                             @else
                                                 {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
@@ -70,7 +70,7 @@
                                     <tr style="background-color: #FFFFFF;">
                                         <td align="center">{{$stt + 1}}</td>  
                                         <td align="center">
-                                            @if($cv->tuan_lamlai == "")
+                                            @if($cv->tuan_lamlai == "" || $cv->tuan == $cv->tuan_lamlai)
                                                 {{$cv->tuan}}
                                             @else
                                                 {{$cv->tuan}}, {{$cv->tuan_lamlai}}                                    
