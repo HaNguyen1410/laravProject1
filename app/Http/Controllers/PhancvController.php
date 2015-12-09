@@ -210,8 +210,13 @@ class PhancvController extends Controller
     public function XoacvChinh($macv){
         $mssv = \Auth::user()->taikhoan;
         $dscvphu = DB::table('cong_viec')->where('phuthuoc_cv',$macv)->get();
+        $tailieu = DB::table('tai_lieu')->where('macv',$macv)->get();
         if(count($dscvphu) > 0){
             \Session::flash('ThongBao','Phải xóa công việc phụ thuộc trước!');
+            return redirect('sinhvien/phancv');
+        }
+        else if(count($tailieu) > 0){
+             \Session::flash('ThongBao','Công việc này còn tài liệu!');
             return redirect('sinhvien/phancv');
         }
         else{
